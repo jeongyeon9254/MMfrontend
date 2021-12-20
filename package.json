@@ -70,5 +70,9 @@
     "npm": "^8.3.0",
     "prettier": "^2.5.1",
     "react-snap": "^1.23.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/MBTI-matching/MMfrontend.git",
+  "author": "jooyoung <cwd3469@naver.com>",
+  "license": "MIT"
 }
