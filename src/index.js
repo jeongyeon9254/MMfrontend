@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './styles/index.css';
+import App from './shared/App';
 import reportWebVitals from './reportWebVitals';
 
 // Redux 관련 불러오기
