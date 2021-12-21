@@ -1,12 +1,11 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import { createBrowserHistory } from "history";
-import { connectRouter } from "connected-react-router";
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { createBrowserHistory } from 'history';
+import { connectRouter } from 'connected-react-router';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-
   router: connectRouter(history),
 });
 
@@ -16,13 +15,13 @@ const middlewares = [thunk.withExtraArgument({ history: history })];
 const env = process.env.NODE_ENV;
 
 // 로거
-if (env === "development") {
-  const { logger } = require("redux-logger");
+if (env === 'development') {
+  const { logger } = require('redux-logger');
   middlewares.push(logger);
 }
 
 const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
       })
@@ -30,6 +29,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+let store = initialStore => createStore(rootReducer, enhancer);
 
 export default store();

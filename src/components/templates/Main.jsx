@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const Main = () =>{
-    return <div>main</div>
-}
+const Main = () => {
+  return <div>main</div>;
+};
 
-export default Main 
+export default Main;
