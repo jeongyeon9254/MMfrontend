@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Redux 관련 불러오기
+import { Provider } from "react-redux"
+import store from "./redux/configureStore"
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store ={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
