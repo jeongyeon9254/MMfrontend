@@ -2,20 +2,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = (props) => {
-
-  const {
-    width,
-    children,
-    _onClick
-  } = props
+const Button = props => {
+  const { width, children, _onClick } = props;
 
   const styles = {
     width: width,
-  }
+  };
 
   return (
-    <ButtonStyle onClick={_onClick} {...styles}>
+    <ButtonStyle {...styles} onClick={_onClick}>
       {children}
     </ButtonStyle>
   );
@@ -23,11 +18,10 @@ const Button = (props) => {
 
 Button.defaultProps = {
   width: '100%',
-  _onClick:()=>{},
-}
+};
 
 const ButtonStyle = styled.button`
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   background-color: red;
 `;
 

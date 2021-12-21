@@ -21,50 +21,29 @@ export const KakaoLogin = history => {
     },
   });
 };
+
 // 내 정보 가져오기 기능
 export const getMyinfoDB = () => {
-  return function (dispatch, getState, { history }) {
-    instance({
-      method: 'get',
-      url: '/user/profile',
-    });
-  };
+  instance({
+    method: 'get',
+    url: '/user/profile',
+  });
 };
 
 //내정보 추가기입 기능
-export const addMyinfoDB = () => {
-  return function (dispatch, getState, { history }) {
-    instance({
-      method: 'put',
-      url: '/user/profile',
-      data: {
-        nickname: nickname,
-        profile_image: profile_image,
-        intro: intro,
-        location: location,
-        longitude: longitude,
-        latitude: latitude,
-        Interest: Interest,
-        mbti: mbti,
-      },
-    });
-  };
+export const addMyinfoDB = data => {
+  instance({
+    method: 'put',
+    url: '/user/profile',
+    data: data,
+  });
 };
 
 // 내 정보 수정 기능
-export const editMyinfoDB = () => {
-  return function (dispatch, getState, { history }) {
-    instance({
-      method: 'put',
-      url: '/api/profile/edit',
-      data: {
-        nickname: nickname,
-        profile_image: profile_image,
-        intro: intro,
-        location: location,
-        Interest: Interest,
-        mbti: mbti,
-      },
-    });
-  };
+export const editMyinfoDB = data => {
+  instance({
+    method: 'put',
+    url: '/api/profile/edit',
+    data: data,
+  });
 };
