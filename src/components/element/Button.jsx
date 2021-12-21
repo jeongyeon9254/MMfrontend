@@ -6,15 +6,16 @@ const Button = (props) => {
 
   const {
     width,
-    children
+    children,
+    _onClick
   } = props
 
   const styles = {
-    width: width
+    width: width,
   }
 
   return (
-    <ButtonStyle {...styles}>
+    <ButtonStyle onClick={_onClick} {...styles}>
       {children}
     </ButtonStyle>
   );
@@ -22,6 +23,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   width: '100%',
+  _onClick:()=>{},
 }
 
 const ButtonStyle = styled.button`

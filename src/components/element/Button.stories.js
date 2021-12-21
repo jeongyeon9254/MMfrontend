@@ -6,7 +6,9 @@ export default {
   title: 'Button',
 };
 
-export const whiteButton = () => <Button>ssss</Button>;
+const width = '30%';
+
+export const whiteButton = () => <Button width={width}>ssss</Button>;
 
 export const redButton = () => <Button>가나다</Button>;
 
