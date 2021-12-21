@@ -1,3 +1,4 @@
+import React from 'react';
 import '../styles/reset.css';
 import { Main } from '../components/templates';
 // import { ConnectedRouter } from 'connected-react-router'
