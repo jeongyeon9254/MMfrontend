@@ -17,7 +17,7 @@ const getCommentFB = (post_id = null) => {
 
 export default handleActions(
   {
-      [SET_COMMENT]: (state, action) => produce(state, (draft) => {
+      [LOG_IN]: (state, action) => produce(state, (draft) => {
         
       }),
 
