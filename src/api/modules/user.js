@@ -21,7 +21,6 @@ export const KakaoLogin = history => {
     },
   });
 };
-
 // 내 정보 가져오기 기능
 export const getMyinfoDB = () => {
   return function (dispatch, getState, { history }) {
