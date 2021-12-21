@@ -1,8 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './shared/App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme";
+import "./styles/index.css";
+import App from "./shared/App";
+import reportWebVitals from "./reportWebVitals";
 
 // Redux 관련 불러오기
 import { Provider } from "react-redux"

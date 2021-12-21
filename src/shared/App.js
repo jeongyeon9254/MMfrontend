@@ -1,4 +1,6 @@
 import '../styles/reset.css';
+import {Main} from '../components/templates'
+// import { ConnectedRouter } from 'connected-react-router'
 
 // Redux 불러오기
 import { ConnectedRouter } from "connected-react-router"
