@@ -11,11 +11,11 @@ import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
       <App />
-    </Provider>
-  </ThemeProvider>,
+    </ThemeProvider>
+  </Provider>,
   document.getElementById('root'),
 );
 
