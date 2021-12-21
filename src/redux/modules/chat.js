@@ -1,27 +1,27 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-const GET_LIST = 'GET_LIST';
+const SET_CHAT = 'SET_CHAT';
 
-const getList = createAction(GET_LIST, () => ({}));
+const setChatRoom = createAction(SET_CHAT, () => ({}));
 
 const initialState = {
   list: [],
 };
 
-const getListDB = (post_id = null) => {
+const setChatRoomDB = (post_id = null) => {
   return function (dispatch, getState, { history }) {};
 };
 
 export default handleActions(
   {
-    [GET_LIST]: (state, action) => produce(state, draft => {}),
+    [SET_CHAT]: (state, action) => produce(state, draft => {}),
   },
   initialState,
 );
 
 const actionCreators = {
-  getListDB,
+  setChatRoomDB,
 };
 
 export { actionCreators };
