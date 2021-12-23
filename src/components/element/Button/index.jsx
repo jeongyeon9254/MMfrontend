@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { RedButtonStyle } from './module';
 
 const Button = props => {
-  const { width, children, _onClick, _class, color, padding, greenBtn } = props;
+  const { width, children, _onClick, color, padding, greenBtn } = props;
 
   const styles = {
     width,
