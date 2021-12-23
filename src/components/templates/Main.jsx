@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from '../element/Button/';
 const Main = () => {
   return (
     <div>
       <TestWeb>
         <TestWindow>
-          <button>사람</button>
+          <Button _class="newBtn2">sss</Button>
         </TestWindow>
       </TestWeb>
     </div>
