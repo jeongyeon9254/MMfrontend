@@ -5,7 +5,7 @@ const instance = axios.create({
 
   // 헤더에 넣을 정보
   headers: {
-    Authorization: 토큰,
+    Authorization: '토큰',
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
   },
