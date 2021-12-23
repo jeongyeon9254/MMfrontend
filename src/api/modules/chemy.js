@@ -17,7 +17,7 @@ export const getMatchingDB = () => {
 };
 
 // 캐미유저 정보 가져오기 기능
-export const getchemyDB = () => {
+export const getchemyDB = userId => {
   instance({
     method: 'get',
     url: `/api/chemy/${userId}`,
