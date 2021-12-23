@@ -3,13 +3,21 @@ import styled from 'styled-components';
 import './Index.css';
 
 const Button = props => {
-  const { width, children, _onClick, _class, color, padding } = props;
+  const { width, children, _onClick, _class, color, padding, greenBtn } = props;
 
   const styles = {
     width,
     color,
     padding,
   };
+
+  if (greenBtn) {
+    return (
+      <RedButtonStyle className={_class} {...styles} onClick={_onClick}>
+        {children}
+      </RedButtonStyle>
+    );
+  }
 
   return (
     <ButtonStyle className={_class} {...styles} onClick={_onClick}>
@@ -24,9 +32,15 @@ Button.defaultProps = {
   padding: null,
 };
 
+const RedButtonStyle = styled.button`
+  width: ${props => props.width};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.green_1)};
+  padding: ${props => props.padding};
+`;
+
 const ButtonStyle = styled.button`
   width: ${props => props.width};
-  background-color: ${props => props.color};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.black)};
   padding: ${props => props.padding};
 `;
 
