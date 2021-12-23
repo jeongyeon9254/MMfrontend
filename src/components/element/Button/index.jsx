@@ -1,13 +1,15 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import './index.module.css';
+import './Index.css';
 
 const Button = props => {
-  const { width, children, _onClick, _class } = props;
+  const { width, children, _onClick, _class, color, padding } = props;
 
   const styles = {
-    width: width,
+    width,
+    color,
+    padding,
   };
 
   return (
@@ -18,13 +20,15 @@ const Button = props => {
 };
 
 Button.defaultProps = {
-  width: '100px',
+  width: null,
+  color: null,
+  padding: null,
 };
 
 const ButtonStyle = styled.button`
   width: ${props => props.width};
-  background-color: red;
-  padding: 10px;
+  background-color: ${props => props.color};
+  padding: ${props => props.padding};
 `;
 
 export default Button;
