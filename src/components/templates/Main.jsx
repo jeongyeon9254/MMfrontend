@@ -9,6 +9,8 @@ const Main = props => {
       <div></div>
       <div></div>
       <div></div>
+      <div></div>
+      <div></div>
     </div>
   );
 };
