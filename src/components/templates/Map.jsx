@@ -1,7 +1,12 @@
 import React from 'react';
+import MapContainer from '../modules/map/MapContainer';
 
 const Map = () => {
-  return <div>Map</div>;
+  return (
+    <React.Fragment>
+      <MapContainer></MapContainer>
+    </React.Fragment>
+  );
 };
 
 export default Map;
