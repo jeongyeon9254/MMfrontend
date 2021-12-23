@@ -11,14 +11,12 @@ import { history } from '../redux/configureStore';
 function App() {
   return (
     <ConnectedRouter history={history}>
-      <div className="App">
-        <PublicRoute exact restricted={true} path="/" Component={Main} />
-        <PublicRoute exact restricted={true} path="/map" Component={Map} />
-        <PublicRoute exact restricted={true} path="/choice" Component={Choice} />
-        <PublicRoute exact restricted={true} path="/chat" Component={Chat} />
-        <PublicRoute exact restricted={true} path="/myinfo" Component={Myinfo} />
-        <PublicRoute exact restricted={true} path="/login" Component={Login} />
-      </div>
+      <PublicRoute exact restricted={true} path="/" Component={Main} />
+      <PublicRoute exact restricted={true} path="/map" Component={Map} />
+      <PublicRoute exact restricted={true} path="/choice" Component={Choice} />
+      <PublicRoute exact restricted={true} path="/chat" Component={Chat} />
+      <PublicRoute exact restricted={true} path="/myinfo" Component={Myinfo} />
+      <PublicRoute exact restricted={true} path="/login" Component={Login} />
     </ConnectedRouter>
   );
 }

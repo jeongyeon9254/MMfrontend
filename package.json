@@ -26,8 +26,7 @@
     "react-modal": "^3.14.4",
     "react-redux": "^7.2.6",
     "react-router-dom": "5.2.1",
-    "react-scripts": "^4.0.3",
-    "reactstrap": "^9.0.1",
+    "react-scripts": "^5.0.0",
     "redux": "^4.1.2",
     "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
@@ -40,22 +39,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   },
   "browserslist": {
     "production": [
@@ -77,13 +60,9 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "i": "^0.3.7",
     "npm": "^8.3.0",
     "prettier": "^2.5.1",
     "react-snap": "^1.23.0"
-  },
-  "resolutions": {
-    "babel-loader": "8.1.0"
   },
   "main": "index.js",
   "repository": "https://github.com/MBTI-matching/MMfrontend.git",
