@@ -1,15 +1,14 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../element/Button/Index';
+import Button from '../element/Button/index';
 const Main = () => {
   return (
     <div>
       <TestWeb>
         <TestWindow>
-          <Button _class='newBtn'>버튼</Button>
-          <Button _class='newBtn2'>버튼</Button>
-          <Button padding='20px'>버튼입니다</Button>
+          <Button _class="newBtn">버튼</Button>
+          <Button _class="newBtn2">버튼</Button>
+          <Button padding="20px">버튼입니다</Button>
         </TestWindow>
       </TestWeb>
     </div>
