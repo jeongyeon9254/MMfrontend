@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './Index.css';
+import { RedButtonStyle } from './module';
 
 const Button = props => {
   const { width, children, _onClick, _class, color, padding, greenBtn } = props;
@@ -13,14 +13,14 @@ const Button = props => {
 
   if (greenBtn) {
     return (
-      <RedButtonStyle className={_class} {...styles} onClick={_onClick}>
+      <RedButtonStyle {...styles} onClick={_onClick}>
         {children}
       </RedButtonStyle>
     );
   }
 
   return (
-    <ButtonStyle className={_class} {...styles} onClick={_onClick}>
+    <ButtonStyle {...styles} onClick={_onClick}>
       {children}
     </ButtonStyle>
   );
@@ -31,12 +31,6 @@ Button.defaultProps = {
   color: null,
   padding: null,
 };
-
-const RedButtonStyle = styled.button`
-  width: ${props => props.width};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.green_1)};
-  padding: ${props => props.padding};
-`;
 
 const ButtonStyle = styled.button`
   width: ${props => props.width};
