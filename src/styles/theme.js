@@ -1,6 +1,7 @@
 const calcRem = size => `${size / 16}rem`;
 
 const fontSizes = {
+  maxSmall: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),
   lg: calcRem(18),
@@ -55,6 +56,10 @@ const colors = {
   green_1: '#3cb46e',
 };
 
+const radius = {
+  tag: '60px',
+};
+
 const device = {
   mobileS: `only screen and (max-width: ${deviceSizes.mobileS})`,
   mobileM: `only screen and (max-width: ${deviceSizes.mobileM})`,
@@ -72,6 +77,7 @@ const theme = {
   margins,
   interval,
   verticalInterval,
+  radius,
 };
 
 export default theme;

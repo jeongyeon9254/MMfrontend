@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
+  line-height: 1;
 }
 /* HTML5 display-role reset for older browsers */
 article,

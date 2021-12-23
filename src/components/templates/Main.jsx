@@ -1,11 +1,16 @@
 import React from 'react';
-import Grid from '../element/Grid/index';
+import Input from '../element/Input/';
 
 const Main = props => {
   console.log(props);
   return (
     <div>
-      <Grid>ss</Grid>
+      <Input />
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   );
 };
