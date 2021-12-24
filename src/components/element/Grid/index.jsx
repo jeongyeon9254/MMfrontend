@@ -49,7 +49,7 @@ const GridStyle = styled.div`
   flex-direction: column;
   width: ${props => props.width};
   height: ${props => props.height};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.width)};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   justify-content: ${props => (props.justify ? props.justify : 'flex-start')};
