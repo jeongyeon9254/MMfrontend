@@ -33,11 +33,11 @@ const Grid = props => {
 Grid.defaultProps = {
   width: '100%',
   height: 'auto',
-  color: false,
+  color: null,
   padding: '0',
   margin: '0',
-  justify: false,
-  align: false,
+  justify: null,
+  align: null,
 };
 
 const GridStyle = styled.div`
