@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { InputTextarea, InputNum, InputPw, InputDate } from './module';
 const Input = props => {
-  const { _type, _padding, _border, _radius, _size, _onChange, _value } = props;
+  const { _type, _padding, _border, _radius, _size, _onChange, _value, _bg } = props;
 
   const styles = {
     _padding,
     _border,
     _radius,
     _size,
+    _bg,
   };
   const MaxNum = el => {
     if (el.target.value.length > 6) {
@@ -18,6 +19,7 @@ const Input = props => {
   switch (_type) {
     case 'textarea':
       return <InputTextarea {...styles} value={_value} onChange={_onChange}></InputTextarea>;
+
     case 'date':
       return (
         <InputNum
@@ -31,10 +33,13 @@ const Input = props => {
           {...styles}
         ></InputNum>
       );
+
     case 'password':
       return <InputPw type={_type} {...styles} value={_value} onChange={_onChange}></InputPw>;
+
     case 'number':
       return <InputNum type={_type} {...styles} value={_value} onChange={_onChange}></InputNum>;
+
     default:
       return <InputStyle {...styles} value={_value} onChange={_onChange}></InputStyle>;
   }
@@ -46,6 +51,7 @@ Input.defaultProps = {
   _radius: '7px',
   _size: props => props.theme.fontSizes.small,
   _outline: '0px',
+  _bg: false,
 };
 
 const InputStyle = styled.input`
@@ -53,6 +59,7 @@ const InputStyle = styled.input`
   border: ${props => props._border};
   border-radius: ${props => props._radius};
   font-size: ${props => props._size};
+  background-color: ${props => props._bg};
   ontline: ${props => props._outline};
   &: focus {
     outline: none;

@@ -4,7 +4,7 @@ import Grid from '../element/Grid';
 import Container from '../element/Container';
 const Main = props => {
   return (
-    <Grid width="768px" gap="20px">
+    <Grid gap="20px">
       <Input />
       <Input _type="textarea" />
       <Input _type="number" />

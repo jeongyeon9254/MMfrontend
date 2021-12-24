@@ -7,11 +7,12 @@ const Container = props => {
   return <ContainerStyle>{children}</ContainerStyle>;
 };
 
-const ContainerStyle = styled.button`
+const ContainerStyle = styled.div`
   box-sizing: border-box;
   width: 100%;
-  max-width: 768px;
+  max-width: ${props => props.theme.deviceSizes.mobileL};
   margin: 0 auto;
+  padding: 16px;
 `;
 
 export default Container;
