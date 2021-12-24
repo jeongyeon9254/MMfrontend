@@ -1,17 +1,16 @@
 import React from 'react';
 import Input from '../element/Input/';
-
+import Grid from '../element/Grid';
+import Container from '../element/Container';
 const Main = props => {
-  console.log(props);
   return (
-    <div>
+    <Grid width="768px" gap="20px">
       <Input />
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+      <Input _type="textarea" />
+      <Input _type="number" />
+      <Input _type="password" />
+      <Input _type="date" />
+    </Grid>
   );
 };
 

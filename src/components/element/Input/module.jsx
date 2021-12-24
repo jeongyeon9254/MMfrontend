@@ -1,13 +1,36 @@
 import styled from 'styled-components';
 
-export const InputBig = styled.p`
-  font-size: ${props => props.theme.fontSizes.titleSize};
-  text-align: ${props => props.align};
-  font-weight: ${props => props.weight};
+export const InputTextarea = styled.textarea`
+  padding: ${props => props._padding};
+  border: ${props => props._border};
+  border-radius: ${props => props._radius};
+  font-size: ${props => props._size};
+  resize: none;
+  &: focus {
+    outline: none;
+  }
 `;
 
-export const InputMiddle = styled.p`
-  font-size: ${props => props.theme.fontSizes.xxxl};
-  text-align: ${props => props.align};
-  font-weight: ${props => props.weight};
+export const InputPw = styled.input`
+  padding: ${props => props._padding};
+  border: ${props => props._border};
+  border-radius: ${props => props._radius};
+  font-size: ${props => props._size};
+  &: focus {
+    outline: none;
+  }
+`;
+
+export const InputNum = styled.input`
+  padding: ${props => props._padding};
+  border: ${props => props._border};
+  border-radius: ${props => props._radius};
+  font-size: ${props => props._size};
+  &: focus {
+    outline: none;
+  }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
