@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 import { actionCreators as listActions } from '../../../redux/modules/main';
@@ -9,46 +9,38 @@ const { kakao } = window;
 
 const MapContainer = () => {
   const dispatch = useDispatch();
+  const container = useRef();
+  const [kakaoMap, setKakaoMap] = useState(null);
   const list = useSelector(state => state.main.list);
-
+  console.log(list);
   // kakao map 불러오기
-  useEffect(async () => {
+  useEffect(() => {
     // 첫 요청
     if (list.gps === null) {
-      await axios
-        .get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae')
-        .then(response => {
-          dispatch(listActions.getListDB(response.data));
-        });
+      axios.get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae').then(response => {
+        dispatch(listActions.getListDB(response.data));
+      });
     }
-
-    const container = document.getElementById('myMap');
 
     // 처음 맵 중앙 위치와 지도 레벨 옵션
     const options = {
-      center: new kakao.maps.LatLng(list.lat, list.lng),
-      level: 7,
+      center: new kakao.maps.LatLng(37.50802, 127.062835),
+      level: 5,
     };
 
     // 해당 컨테이너와 옵션을 담아 지도를 불러옵니다.
-    const map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container.current, options);
+    setKakaoMap(map);
+  }, [container]);
 
-    // 마커 생성 좌표
-    let markerPosition = new kakao.maps.LatLng(list.lat, list.lng);
-
-    // 해당좌표와 이미지정보를 담아 마커를 만듭니다.
-    let marker = new kakao.maps.Marker({
-      position: markerPosition,
-    });
-
-    // set marker
-    marker.setMap(map);
-  }, [list]);
-
-  const _map_1 = () => {
-    axios.get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae').then(response => {
-      dispatch(listActions.getListDB(response.data));
-    });
+  const _map_1 = async () => {
+    await axios
+      .get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae')
+      .then(response => {
+        dispatch(listActions.getListDB(response.data));
+      });
+    const moveLatLon = new kakao.maps.LatLng(list.lat, list.lng);
+    kakaoMap.panTo(moveLatLon);
   };
 
   const _map_2 = () => {
@@ -66,10 +58,11 @@ const MapContainer = () => {
   return (
     <>
       <div
-        id="myMap"
+        ref={container}
         style={{
-          width: '500px',
-          height: '500px',
+          width: '768px',
+          height: '1000px',
+          margin: '0 auto',
         }}
       ></div>
       <button onClick={_map_1}>중랑구</button>

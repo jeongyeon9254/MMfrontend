@@ -15,8 +15,8 @@ const initialState = {
 };
 
 const getListDB = (data = null) => {
-  return function (dispatch, getState, { history }) {
-    dispatch(getList({ ...data }));
+  return async function (dispatch, getState, { history }) {
+    await dispatch(getList({ ...data }));
   };
 };
 
