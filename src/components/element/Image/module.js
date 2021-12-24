@@ -20,5 +20,4 @@ export const ImageStyle = styled.image`
   transform: translate(-50%, -50%);
   scale: 1.2;
   width: 100%;
-  im
 `;
