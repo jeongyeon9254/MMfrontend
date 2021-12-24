@@ -18,8 +18,6 @@ const Button = props => {
     BtnText,
   } = props;
 
-  const { width, children, _onClick, color, padding } = props;
-
   const styles = {
     width,
     color,
