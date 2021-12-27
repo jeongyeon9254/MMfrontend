@@ -9,44 +9,90 @@ const { kakao } = window;
 
 const MapContainer = () => {
   const dispatch = useDispatch();
-  const container = useRef();
+  // const container = useRef();
   const [kakaoMap, setKakaoMap] = useState(null);
+  const [make, setMake] = useState(null);
+  const [makes, setMakes] = useState(null);
   const list = useSelector(state => state.main.list);
-  console.log(list);
-  // kakao map 불러오기
+
   useEffect(() => {
-    // 첫 요청
-    if (list.gps === null) {
-      axios.get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae').then(response => {
-        dispatch(listActions.getListDB(response.data));
+    axios
+      .get('https://run.mocky.io/v3/1446df68-c599-44ba-bf43-7558e5f8761b')
+      .then(response => {
+        const data = response.data;
+        let container = document.getElementById('map');
+
+        let options = {
+          center: new window.kakao.maps.LatLng(data.lat, data.lng),
+          level: 5,
+        };
+
+        let map = new window.kakao.maps.Map(container, options);
+        setKakaoMap(map);
+
+        let markerPosition = new kakao.maps.LatLng(data.lat, data.lng);
+
+        // 마커를 생성
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
+        setMake(marker);
+        // 마커를 지도 위에 표시
+        marker.setMap(map);
+      })
+      .catch(err => {
+        console.log(err);
       });
-    }
+  }, []);
 
-    // 처음 맵 중앙 위치와 지도 레벨 옵션
-    const options = {
-      center: new kakao.maps.LatLng(37.50802, 127.062835),
-      level: 5,
-    };
-
-    // 해당 컨테이너와 옵션을 담아 지도를 불러옵니다.
-    const map = new kakao.maps.Map(container.current, options);
-    setKakaoMap(map);
-  }, [container]);
+  // kakao map 불러오기
 
   const _map_1 = async () => {
     await axios
       .get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae')
       .then(response => {
-        dispatch(listActions.getListDB(response.data));
+        const data = response.data;
+
+        dispatch(listActions.getListDB(data));
+
+        const moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
+        let markerPosition = new kakao.maps.LatLng(data.lat, data.lng);
+
+        // 마커를 생성
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
+        setMakes(marker);
+        // 마커를 지도 위에 표시
+        make.setMap(null);
+        marker.setMap(kakaoMap);
+        kakaoMap.panTo(moveLatLon);
       });
-    const moveLatLon = new kakao.maps.LatLng(list.lat, list.lng);
-    kakaoMap.panTo(moveLatLon);
   };
 
-  const _map_2 = () => {
-    axios.get('https://run.mocky.io/v3/1446df68-c599-44ba-bf43-7558e5f8761b').then(response => {
-      dispatch(listActions.getListDB(response.data));
-    });
+  const _map_2 = async () => {
+    await axios
+      .get('https://run.mocky.io/v3/1446df68-c599-44ba-bf43-7558e5f8761b')
+      .then(response => {
+        const data = response.data;
+
+        dispatch(listActions.getListDB(data));
+
+        const moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
+        let markerPosition = new kakao.maps.LatLng(data.lat, data.lng);
+
+        // 마커를 생성
+        let marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
+
+        setMakes(marker);
+        // 마커를 지도 위에 표시
+        make.setMap(null);
+        makes.setMap(null);
+        marker.setMap(kakaoMap);
+        kakaoMap.panTo(moveLatLon);
+      });
   };
 
   const _map_3 = () => {
@@ -58,28 +104,16 @@ const MapContainer = () => {
   return (
     <>
       <div
-        ref={container}
+        id="map"
+        // ref={container}
         style={{
-          width: '768px',
-          height: '1000px',
-          margin: '0 auto',
+          width: '100%',
+          height: '500px',
         }}
       ></div>
       <button onClick={_map_1}>중랑구</button>
       <button onClick={_map_2}>동대문구</button>
       <button onClick={_map_3}>중구</button>
-      <div>
-        {list.gps !== null
-          ? list.result.map((ls, idx) => {
-              return (
-                <div key={idx}>
-                  <div>{ls.title}</div>
-                  <div>{ls.content}</div>
-                </div>
-              );
-            })
-          : null}
-      </div>
     </>
   );
 };
