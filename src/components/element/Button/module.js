@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const BtnTextStyle = styled.button`
+export const BtnGenderStyle = styled.button`
+  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors)};
   box-sizing: border-box;
-  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 149px;
+  height: 42px;
   text-align: center;
-  background-color: ${props => (props.color ? props.color : props.theme.colors)};
+  border: none;
+  cursor: pointer;
+  background-color: ${props => (props.color ? props.color : props.theme.colors.btnTag)};
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   border-radius: 10px;
@@ -16,10 +21,11 @@ export const BtnBottomStyle = styled.button`
   box-sizing: border-box;
   box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.14);
   border: none;
+  cursor: pointer;
   width: 315px;
   height: 50px;
   text-align: center;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.btnBottom)};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   border-radius: 52px;
@@ -30,6 +36,7 @@ export const BtnIconStyle = styled.button`
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
+  cursor: pointer;
   width: 62px;
   height: 62px;
   text-align: center;
@@ -43,12 +50,13 @@ export const BtnIconStyle = styled.button`
 export const BtnRoundStyle = styled.button`
   color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
   box-sizing: border-box;
-  width: 87px;
-  height: 87px;
+  cursor: pointer;
+  width: ${props => props.width};
+  height: ${props => props.height};
   text-align: center;
   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.33);
   border: none;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.btnBottom)};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   border-radius: 45px;
@@ -57,6 +65,7 @@ export const BtnRoundStyle = styled.button`
 
 export const BtnTagStyle = styled.button`
   box-sizing: border-box;
+  cursor: pointer;
   width: 63px;
   height: 27px;
   line-height: 8px;

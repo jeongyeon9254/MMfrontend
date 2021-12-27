@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BtnTextStyle, BtnBottomStyle, BtnIconStyle, BtnRoundStyle, BtnTagStyle } from './module';
+import { BtnGenderStyle, BtnBottomStyle, BtnIconStyle, BtnRoundStyle, BtnTagStyle } from './module';
 
 const Button = props => {
   const {
+    height,
     width,
     children,
     _onClick,
@@ -15,7 +16,7 @@ const Button = props => {
     BtnIcon,
     BtnRound,
     BtnTag,
-    BtnText,
+    BtnGender,
   } = props;
 
   const styles = {
@@ -24,13 +25,14 @@ const Button = props => {
     padding,
     margin,
     size,
+    height,
   };
 
-  if (BtnText) {
+  if (BtnGender) {
     return (
-      <BtnTextStyle {...styles} onClick={_onClick}>
+      <BtnGenderStyle {...styles} onClick={_onClick}>
         {children}
-      </BtnTextStyle>
+      </BtnGenderStyle>
     );
   }
 
