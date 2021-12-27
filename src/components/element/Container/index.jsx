@@ -16,6 +16,7 @@ const ContainerStyle = styled.div`
   padding: 16px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 18px;
+  overflow-y: scroll;
   position: absolute;
   left: 50%;
   top: 50%;
