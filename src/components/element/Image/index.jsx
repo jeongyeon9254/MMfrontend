@@ -1,46 +1,61 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImageStyle, ImageRoundBigStyle, ImageRoundSmallStyle } from './module';
+import { ImageRoundStyle, BorderSquare } from './module';
 
 const Image = props => {
-  const { width, children, _onClick, ImageRoundBig, ImageRoundSmall } = props;
+  const { width, margin, _onClick, round, border, src } = props;
 
   const styles = {
-    width: width,
+    width,
+    margin,
+    src,
   };
 
-  if (ImageRoundBig) {
+  if (round) {
     return (
-      <ImageRoundBigStyle {...styles} onClick={_onClick}>
-        <ImageStyle> {children}</ImageStyle>
-      </ImageRoundBigStyle>
+      <ImageRoundStyle {...styles} onClick={_onClick}>
+        <ImageStyle src={src}></ImageStyle>
+      </ImageRoundStyle>
     );
   }
 
-  if (ImageRoundSmall) {
+  if (border) {
     return (
-      <ImageRoundSmallStyle {...styles}>
-        <ImageStyle> {children}</ImageStyle>
-      </ImageRoundSmallStyle>
+      <BorderSquare {...styles} onClick={_onClick}>
+        <ImageStyle src={src}></ImageStyle>
+      </BorderSquare>
     );
   }
+
   return (
-    <NomalStyle {...styles}>
-      <ImageStyle> {children}</ImageStyle>
-    </NomalStyle>
+    <Square {...styles}>
+      <ImageStyle src={src}></ImageStyle>
+    </Square>
   );
 };
 
 Image.defaultProps = {
   width: '100%',
+  margin: '0 auto',
+  src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
 };
 
-const NomalStyle = styled.div`
+const Square = styled.div`
   width: ${props => props.width};
-  background-color: #dfd4d4;
+  margin: ${props => props.margin};
   position: relative;
-  scale: 1.2;
-  border-radius: 30px;
+  overflow: hidden;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+`;
+
+const ImageStyle = styled.img`
+  position: absolute;
+  transform: scale(1.05);
+  width: 100%;
 `;
 
 export default Image;

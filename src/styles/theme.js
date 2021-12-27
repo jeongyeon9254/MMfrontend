@@ -54,7 +54,6 @@ const colors = {
   gray_1: '#E3E3E3',
   gray_2: '#3F3F41',
   green_1: '#3cb46e',
-  btnBottom: '#3F3F41',
   btnTag: '#F9F9F9',
   input_gray1: '#E1E1E1',
   input_gray2: '#ececec',
