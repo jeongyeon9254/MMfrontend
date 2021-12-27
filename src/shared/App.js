@@ -36,7 +36,6 @@ function App() {
         <PublicRoute exact restricted={true} path="/PostWrite" Component={PostWrite} />
         <PublicRoute exact restricted={true} path="/PostWrite/postId" Component={PostEdit} />
       </Switch>
-
       <Route exact path="/hidden" component={Hidden} />
     </ConnectedRouter>
   );

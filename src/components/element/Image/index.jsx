@@ -41,7 +41,7 @@ const Image = props => {
 Image.defaultProps = {
   width: '100%',
   margin: '0 auto',
-  src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
+  // src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
 };
 
 const Square = styled.div`
