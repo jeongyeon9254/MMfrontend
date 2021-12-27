@@ -1,4 +1,4 @@
-const gpsLsit = [
+export const gpsLsit = [
   {
     location: '종로구',
     latitude: 37.59708565258199,

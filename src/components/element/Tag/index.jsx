@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { TagBlack, TagStyle } from './module';
 import Bit from '../../modules/Bit';
 import Grid from '../Grid';
-const iscolor = null;
 const Tag = props => {
   const { children, color, mbti, _type, icon } = props;
   const styles = { color, mbti };

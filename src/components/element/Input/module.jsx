@@ -5,6 +5,8 @@ const common = `
   border: 1px solid #E1E1E1;
   border-radius: 7px;
   background-color: #fff;
+  width:100%;
+  box-sizing: border-box;
   &: focus {
     outline: none;
   }
