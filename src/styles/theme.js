@@ -52,7 +52,7 @@ const colors = {
   black: '#000000',
   white: '#FFFFFF',
   gray_1: '#E3E3E3',
-  gray_2: '#767676',
+  gray_2: '#3F3F41',
   green_1: '#3cb46e',
 };
 

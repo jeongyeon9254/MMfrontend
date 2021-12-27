@@ -11,7 +11,8 @@ const ContainerStyle = styled.div`
   box-sizing: border-box;
   width: 100%;
   max-width: ${props => props.theme.deviceSizes.mobileM};
-  height: 812px;
+  max-height: 812px;
+  height: 100%;
   margin: 0 auto;
   padding: 16px;
   background-color: ${props => props.theme.colors.white};
