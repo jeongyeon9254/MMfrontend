@@ -66,7 +66,7 @@ const Box = props => {
 
   if (comment) {
     return (
-      <Grid row>
+      <Grid row justify="flex-end">
         <CommentBox {...styles} onClick={_onClick}>
           {children}
         </CommentBox>

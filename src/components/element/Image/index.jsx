@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { ImageRoundStyle, BorderSquare } from './module';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
+import Bit from '../../modules/Bit';
 
 const Image = props => {
-  const { width, margin, _onClick, round, border, src } = props;
+  const { width, margin, _onClick, round, border, src, mbti } = props;
+
+  const select = Bit.find(x => x.name === mbti);
 
   const styles = {
     width,
@@ -16,7 +19,7 @@ const Image = props => {
     return (
       <ImageRoundStyle {...styles} onClick={_onClick}>
         <ImageStyle src={src}></ImageStyle>
-        {src ? null : <Default src={icon_photo} />}
+        {src ? null : <DefaultCircle src={select.image} />}
       </ImageRoundStyle>
     );
   }
@@ -41,6 +44,7 @@ const Image = props => {
 Image.defaultProps = {
   width: '100%',
   margin: '0 auto',
+  mbti: 'INFJ',
   // src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
 };
 
@@ -67,6 +71,12 @@ const Default = styled.img`
   position: absolute;
   width: 100%;
   transform: scale(0.35);
+`;
+
+const DefaultCircle = styled.img`
+  position: absolute;
+  width: 100%;
+  transform: scale(0.6);
 `;
 
 export default Image;

@@ -4,10 +4,11 @@ import { RowGridStyle } from './module';
 
 const Grid = props => {
   const {
-    width,
-    height,
     children,
     _onClick,
+    // props Css
+    width,
+    height,
     color,
     padding,
     margin,
