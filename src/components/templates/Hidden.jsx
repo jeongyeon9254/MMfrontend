@@ -24,7 +24,8 @@ const Hidden = () => {
           <p>Comment input</p>
           <Input _type="comment" />
         </Grid>
-        <Grid gap="20px" width="320px" margin="0 0 50px 0">
+        <Grid gap="20px" width="320px" margin="50px 0 50px 0">
+          <p style={{ fontSize: 30 }}>Tag Element</p>
           <Tag mbti="INFJ">INFJ</Tag>
         </Grid>
         <Grid gap="20px" margin="0 0 50px 0">
