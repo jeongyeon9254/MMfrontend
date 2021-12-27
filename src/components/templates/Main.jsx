@@ -12,12 +12,12 @@ const Main = props => {
       <Input _type="password" />
       <Input _type="date" />
       <p>버튼</p>
-      <Button BtnText />
-      <Button BtnBottom />
-      <Button BtnIcon />
-      <Button BtnRound />
-      <Button BtnTag />
-      <Button />
+      <Button BtnText>BtnText</Button>
+      <Button BtnBottom>BtnBottom</Button>
+      <Button BtnIcon>BtnIcon</Button>
+      <Button BtnRound>BtnRound</Button>
+      <Button BtnTag>BtnTag</Button>
+      <Button>Button</Button>
     </Grid>
   );
 };
