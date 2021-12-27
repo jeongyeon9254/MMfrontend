@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
+import axios from 'axios';
 
 const GET_LIST = 'GET_LIST';
 
@@ -16,7 +17,15 @@ const initialState = {
 
 const getListDB = (data = null) => {
   return async function (dispatch, getState, { history }) {
-    await dispatch(getList({ ...data }));
+    // 첫 요청
+    await axios
+      .get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae')
+      .then(response => {
+        dispatch(getList({ ...response.data }));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
