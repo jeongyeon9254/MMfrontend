@@ -21,6 +21,15 @@ const Tag = props => {
           </Grid>
         </TagBlack>
       );
+    case 'myDefult':
+      return (
+        <TagBlack {...styles} color={MyBit.color}>
+          <Grid row color="transparent !important" gap="5px">
+            {icon ? <Iconimg src={MyBit.image} /> : ''}
+            <p>{children}</p>
+          </Grid>
+        </TagBlack>
+      );
     default:
       return (
         <TagStyle {...styles} color={MyBit.color}>
@@ -36,7 +45,6 @@ const Tag = props => {
 Tag.defaultProps = {
   color: false,
 };
-
 const Iconimg = styled.img`
   width: 11px;
 `;
