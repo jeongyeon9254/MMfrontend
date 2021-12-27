@@ -1,5 +1,4 @@
 import React from 'react';
-import MapContainer from '../modules/map/MapContainer';
 import Image from '../../components/element/Image';
 
 const Main = () => {
