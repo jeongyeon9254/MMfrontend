@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TagBlack = styled.p`
+export const TagBlack = styled.div`
   display: inline-block;
   padding: 4px 9px;
   background-color: #000;
@@ -10,7 +10,7 @@ export const TagBlack = styled.p`
   border-radius: ${props => props.theme.radius.tag};
 `;
 
-export const TagStyle = styled.p`
+export const TagStyle = styled.div`
   display: inline-block;
   padding: 7px 20px;
   border: 1px solid #000;
