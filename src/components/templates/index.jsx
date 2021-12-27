@@ -8,5 +8,18 @@ import PostMain from './PostMain';
 import PostDetail from './PostDetail';
 import PostWrite from './PostWrite';
 import PostEdit from './PostEdit';
+import Hidden from './Hidden';
 
-export { Main, Chat, Choice, Myinfo, Login, AddMyinfo, PostMain, PostDetail, PostWrite, PostEdit };
+export {
+  Main,
+  Chat,
+  Choice,
+  Myinfo,
+  Login,
+  AddMyinfo,
+  PostMain,
+  PostDetail,
+  PostWrite,
+  PostEdit,
+  Hidden,
+};

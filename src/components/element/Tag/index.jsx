@@ -36,7 +36,6 @@ const Tag = props => {
 Tag.defaultProps = {
   color: false,
 };
-
 const Iconimg = styled.img`
   width: 11px;
 `;

@@ -17,6 +17,9 @@ const Choice = () => {
       <Input _type="textarea" />
       <Input _type="password" />
       <Input _type="number" />
+      <Input _type="posting" />
+      <Input _type="chat" />
+      <Input _type="comment" />
     </div>
   );
 };

@@ -11,19 +11,20 @@ import {
   PostWrite,
   PostEdit,
   AddMyinfo,
+  Hidden,
 } from '../components/templates';
-import Container from '../components/element/Container';
 import PrivateRoute from '../components/modules/PrivateRoute';
 import PublicRoute from '../components/modules/PublicRoute';
 
 // Redux 불러오기
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <ConnectedRouter history={history}>
-      <Container>
+      <Switch>
         <PublicRoute exact restricted={true} path="/" Component={Main} />
         <PublicRoute exact restricted={true} path="/choice" Component={Choice} />
         <PublicRoute exact restricted={true} path="/chat" Component={Chat} />
@@ -34,7 +35,8 @@ function App() {
         <PublicRoute exact restricted={true} path="/PostMain/:postId" Component={PostDetail} />
         <PublicRoute exact restricted={true} path="/PostWrite" Component={PostWrite} />
         <PublicRoute exact restricted={true} path="/PostWrite/postId" Component={PostEdit} />
-      </Container>
+      </Switch>
+      <Route exact path="/hidden" component={Hidden} />
     </ConnectedRouter>
   );
 }

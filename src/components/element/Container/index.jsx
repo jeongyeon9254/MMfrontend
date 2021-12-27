@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 const Container = props => {
   const { children } = props;
 
-  return <ContainerStyle>{children}</ContainerStyle>;
+  return (
+    <ContainerStyle>
+      <PerfectScrollbar component="div">{children}</PerfectScrollbar>
+    </ContainerStyle>
+  );
+  // return <ContainerStyle>{children}</ContainerStyle>
 };
 
 const ContainerStyle = styled.div`
@@ -14,10 +20,10 @@ const ContainerStyle = styled.div`
   max-height: 812px;
   height: 100%;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 0px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 18px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   position: absolute;
   left: 50%;
   top: 50%;

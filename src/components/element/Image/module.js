@@ -1,23 +1,29 @@
 import styled from 'styled-components';
 
-export const ImageRoundBigStyle = styled.div`
+export const ImageRoundStyle = styled.div`
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  background: ${props => props.theme.colors.gray_1};
   position: relative;
-  scale: 1.2;
-  border-radius: 30px;
-  width: ${props => (props.width ? props.width : props.theme.interval.xl)};
+  overflow: hidden;
+  border-radius: 50%;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
 `;
 
-export const ImageRoundSmallStyle = styled.div`
+export const BorderSquare = styled.div`
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  background: ${props => props.theme.colors.gray_1};
   position: relative;
-  scale: 1.2;
-  border-radius: 30px;
-`;
-
-export const ImageStyle = styled.image`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  scale: 1.2;
-  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
 `;
