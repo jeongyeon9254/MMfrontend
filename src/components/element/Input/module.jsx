@@ -1,37 +1,32 @@
 import styled from 'styled-components';
 
-export const InputTextarea = styled.textarea`
-  padding: ${props => props._padding};
-  border: ${props => props._border};
-  border-radius: ${props => props._radius};
-  background-color: ${props => props._bg};
-  font-size: ${props => props._size};
-  resize: none;
+const common = `
+  padding: 12px 16px;
+  border: 1px solid #000;
+  border-radius: 7px;
+  background-color: #fff;
   &: focus {
     outline: none;
   }
+`;
+
+export const InputStyle = styled.input`
+  font-size: ${props => props._size};
+  ${common}
+`;
+
+export const InputTextarea = styled.textarea`
+  font-size: ${props => props._size};
+  resize: none;
+  ${common}
 `;
 
 export const InputPw = styled.input`
-  padding: ${props => props._padding};
-  border: ${props => props._border};
-  border-radius: ${props => props._radius};
-  background-color: ${props => props._bg};
-  font-size: ${props => props._size};
-  &: focus {
-    outline: none;
-  }
+  ${common}
 `;
 
 export const InputNum = styled.input`
-  padding: ${props => props._padding};
-  border: ${props => props._border};
-  border-radius: ${props => props._radius};
-  background-color: ${props => props._bg};
-  font-size: ${props => props._size};
-  &: focus {
-    outline: none;
-  }
+  ${common}
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
