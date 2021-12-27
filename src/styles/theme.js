@@ -54,6 +54,8 @@ const colors = {
   gray_1: '#222222',
   gray_2: '#767676',
   green_1: '#3cb46e',
+  btnBottom: '#3F3F41',
+  btnTag: '#F9F9F9',
 };
 
 const radius = {
