@@ -1,11 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '../Grid';
-import { MyChatBox, UserChatBox, ProfileBox, CommentBox } from './module';
+
+import { MyChatBox, UserChatBox, ProfileBox, CommentBox, BlackBox } from './module';
 
 const Box = props => {
-  const { width, children, _onClick, color, margin, padding, myChat, userChat, profile, comment } =
-    props;
+  const {
+    children,
+    _onClick,
+    // css props
+    width,
+    color,
+    margin,
+    padding,
+    // 분기name
+    myChat,
+    userChat,
+    profile,
+    comment,
+    black,
+  } = props;
 
   const styles = {
     width,
@@ -13,6 +27,14 @@ const Box = props => {
     margin,
     padding,
   };
+
+  if (black) {
+    return (
+      <BlackBox {...styles} onClick={_onClick}>
+        {children}
+      </BlackBox>
+    );
+  }
 
   if (myChat) {
     return (
@@ -63,20 +85,20 @@ Box.defaultProps = {
   width: '100%',
   color: null,
   margin: '0',
-  padding: '12px 17px',
+  padding: '15px',
 };
 
 const BoxStyle = styled.div`
   width: ${props => props.width};
   box-sizing: border-box;
   padding: ${props => props.padding};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_1)};
+  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
   margin: ${props => props.margin};
-  word-break: keep-all;
-  word-wrap: break-word;
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
+  word-break: keep-all;
+  word-wrap: break-word;
   font-weight: 400;
 `;
 

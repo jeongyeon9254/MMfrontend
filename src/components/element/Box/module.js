@@ -1,12 +1,27 @@
 import styled from 'styled-components';
 
+export const BlackBox = styled.div`
+  width: ${props => props.width};
+  box-sizing: border-box;
+  padding: ${props => props.padding};
+  background-color: ${props => props.theme.colors.gray_2};
+  color: ${props => props.theme.colors.white};
+  border-radius: 9px;
+  margin: ${props => props.margin};
+  word-break: keep-all;
+  word-wrap: break-word;
+  font-weight: 500;
+  font-size: ${props => props.theme.fontSizes.small};
+  line-height: ${props => props.theme.fontSizes.xl};
+`;
+
 export const MyChatBox = styled.div`
   display: inline-block;
   width: auto;
   max-width: 70%;
   box-sizing: border-box;
   padding: 8px 10px;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_1)};
+  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
   margin: ${props => props.margin};
   word-break: keep-all;
@@ -22,7 +37,7 @@ export const UserChatBox = styled.div`
   max-width: 70%;
   box-sizing: border-box;
   padding: 8px 10px;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
+  background-color: ${props => props.theme.colors.gray_2};
   color: ${props => props.theme.colors.white};
   border-radius: 9px;
   margin: ${props => props.margin};
@@ -38,7 +53,7 @@ export const ProfileBox = styled.div`
   width: ${props => props.width};
   box-sizing: border-box;
   padding: 35px 30px;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_1)};
+  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
   margin: ${props => props.margin};
   margin-top: 20px;
@@ -65,7 +80,7 @@ export const CommentBox = styled.div`
   width: calc(100% - 8px);
   box-sizing: border-box;
   padding: 8px 14px;
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_1)};
+  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
   margin: ${props => props.margin};
   margin-left: 10px;

@@ -7,6 +7,8 @@ const Main = () => {
     <React.Fragment>
       <Box>안녕하세요 같이 재밌게 재밌게 재밌게 재밌게 얘기해요~</Box>
 
+      <Box black>안녕하세요 같이 재밌게 재밌게 재밌게 재밌게 얘기해요~</Box>
+
       <Box profile>안녕하세요 같이 재밌게 재밌게 재밌게 재밌게 얘기해요~</Box>
       <Box comment>댓글이에요</Box>
 
