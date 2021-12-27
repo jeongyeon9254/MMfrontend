@@ -1,17 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
-import { TextBig, TextMiddle } from './module';
+import { TextStyle, TextBig, TextMiddle, TextSmall } from './module';
 
 const Text = props => {
-  const { children, Big, middle, align, weight } = props;
+  const { children, Size, align, weight } = props;
 
   const styles = { align, weight };
 
-  if (Big) {
-    return <TextBig {...styles}>{children}</TextBig>;
+  switch (Size) {
+    case 'Big':
+      return <TextBig {...styles}>{children}</TextBig>;
+    case 'Middle':
+      return <TextMiddle {...styles}>{children}</TextMiddle>;
+    case 'Small':
+      return <TextSmall {...styles}>{children}</TextSmall>;
+    default:
+      return <TextStyle {...styles}>{children}</TextStyle>;
   }
-
-  return <TextStyle {...styles}>{children}</TextStyle>;
 };
 
 Text.defaultProps = {
@@ -19,11 +23,5 @@ Text.defaultProps = {
   align: 'left',
   weight: 'normal',
 };
-
-const TextStyle = styled.p`
-  font-size: ${props => props.theme.fontSizes.xxl};
-  text-align: ${props => props.align};
-  font-weight: ${props => props.weight};
-`;
 
 export default Text;

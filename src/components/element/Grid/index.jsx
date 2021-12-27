@@ -3,8 +3,20 @@ import styled from 'styled-components';
 import { RowGridStyle } from './module';
 
 const Grid = props => {
-  const { width, height, children, _onClick, color, padding, margin, row, justify, align, gap } =
-    props;
+  const {
+    width,
+    height,
+    children,
+    _onClick,
+    color,
+    padding,
+    margin,
+    row,
+    justify,
+    align,
+    gap,
+    border,
+  } = props;
 
   const styles = {
     width,
@@ -15,6 +27,7 @@ const Grid = props => {
     justify,
     align,
     gap,
+    border,
   };
 
   if (row) {
@@ -41,12 +54,14 @@ Grid.defaultProps = {
   justify: null,
   align: null,
   gap: null,
+  border: '0',
 };
 
 const GridStyle = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  border: ${props => props.border};
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};

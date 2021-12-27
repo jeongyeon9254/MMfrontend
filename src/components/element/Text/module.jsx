@@ -11,3 +11,15 @@ export const TextMiddle = styled.p`
   text-align: ${props => props.align};
   font-weight: ${props => props.weight};
 `;
+
+export const TextStyle = styled.p`
+  font-size: ${props => props.theme.fontSizes.xxl};
+  text-align: ${props => props.align};
+  font-weight: ${props => props.weight};
+`;
+
+export const TextSmall = styled.p`
+  font-size: ${props => props.theme.fontSizes.maxSmall};
+  text-align: ${props => props.align};
+  font-weight: ${props => props.weight};
+`;
