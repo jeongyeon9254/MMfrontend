@@ -20,7 +20,6 @@ const ContainerStyle = styled.div`
   max-height: 812px;
   height: 100%;
   margin: 0 auto;
-  padding: 16px 0px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 18px;
   overflow-y: hidden;
