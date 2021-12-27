@@ -21,7 +21,7 @@ const ContainerStyle = styled.div`
   height: 100%;
   margin: 0 auto;
   background-color: ${props => props.theme.colors.white};
-  border-radius: 18px;
+  border-radius: 0 0 18px 18px;
   overflow-y: hidden;
   position: absolute;
   left: 50%;
