@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BtnGenderStyle, BtnBottomStyle, BtnIconStyle, BtnRoundStyle, BtnTagStyle } from './module';
+import { BtnAddStyle, BtnBottomStyle, BtnIconStyle, BtnRoundStyle, BtnTagStyle } from './module';
+import Grid from '../Grid';
 
 const Button = props => {
   const {
+    fontcolor,
     height,
     width,
     children,
@@ -16,7 +18,7 @@ const Button = props => {
     BtnIcon,
     BtnRound,
     BtnTag,
-    BtnGender,
+    BtnAdd,
   } = props;
 
   const styles = {
@@ -26,13 +28,14 @@ const Button = props => {
     margin,
     size,
     height,
+    fontcolor,
   };
 
-  if (BtnGender) {
+  if (BtnAdd) {
     return (
-      <BtnGenderStyle {...styles} onClick={_onClick}>
+      <BtnAddStyle {...styles} onClick={_onClick}>
         {children}
-      </BtnGenderStyle>
+      </BtnAddStyle>
     );
   }
 
@@ -47,7 +50,9 @@ const Button = props => {
   if (BtnIcon) {
     return (
       <BtnIconStyle {...styles} onClick={_onClick}>
-        {children}
+        <Grid justify="center" color="#313131" row align="center">
+          {children}
+        </Grid>
       </BtnIconStyle>
     );
   }
