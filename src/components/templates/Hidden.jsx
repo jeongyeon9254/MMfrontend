@@ -4,8 +4,8 @@ import { Box, Image, Tag } from '../element/index';
 const Hidden = () => {
   return (
     <div>
-      <Grid border="1px solid #000" width="768px" height="100%" padding="30px" margin="0 auto">
-        <Grid gap="20px" width="320px">
+      <Grid border="1px solid #000" height="100%" padding="30px" row gap="20px">
+        <Grid gap="20px" width="320px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>
           <p>normal input</p>
           <Input />
@@ -24,8 +24,27 @@ const Hidden = () => {
           <p>Comment input</p>
           <Input _type="comment" />
         </Grid>
-        <Grid gap="20px" width="320px" margin="0 0 50px 0">
+        <Grid gap="20px" width="320px">
           <Tag mbti="INFJ">INFJ</Tag>
+          <Tag mbti="INFJ" icon>
+            INFJ
+          </Tag>
+          <Tag mbti="INFJ" _type="black">
+            INFJ
+          </Tag>
+          <Tag mbti="INFJ" _type="black" icon>
+            INFJ
+          </Tag>
+          <Tag mbti="INTJ">INTJ</Tag>
+          <Tag mbti="INTJ" icon>
+            INTJ
+          </Tag>
+          <Tag mbti="INTJ" _type="black">
+            INTJ
+          </Tag>
+          <Tag mbti="INTJ" _type="black" icon>
+            INTJ
+          </Tag>
         </Grid>
         <Grid gap="20px" margin="0 0 50px 0">
           <p style={{ fontSize: 30 }}>Box Element</p>
