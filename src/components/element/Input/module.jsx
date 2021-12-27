@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const common = `
   padding: 12px 16px;
-  border: 1px solid #000;
+  border: 1px solid #E1E1E1;
   border-radius: 7px;
   background-color: #fff;
   &: focus {

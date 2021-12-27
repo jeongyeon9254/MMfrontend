@@ -57,12 +57,7 @@ const Input = props => {
 };
 
 Input.defaultProps = {
-  _padding: '12px 16px',
-  _border: '1px solid #E1E1E1',
-  _radius: '7px',
   _size: props => props.theme.fontSizes.small,
-  _outline: '0px',
-  _bg: false,
 };
 
 export default Input;
