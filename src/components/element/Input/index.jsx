@@ -2,7 +2,7 @@ import React from 'react';
 import { InputTextarea, InputNum, InputPw, InputDate, InputStyle } from './module';
 
 const Input = props => {
-  const { _type, _padding, _border, _radius, _size, _onChange, _value, _bg } = props;
+  const { _type, _padding, _border, _radius, _size, _onChange, _value, _bg, _borderColor } = props;
 
   const styles = {
     _padding,
@@ -10,6 +10,7 @@ const Input = props => {
     _radius,
     _size,
     _bg,
+    _borderColor,
   };
 
   const MaxNum = el => {
@@ -28,7 +29,14 @@ const Input = props => {
 
   switch (_type) {
     case 'textarea':
-      return <InputTextarea {...styles} value={_value} onChange={_onChange}></InputTextarea>;
+      return (
+        <InputTextarea
+          placeholder="한줄소개를 작성해주세요!"
+          {...styles}
+          value={_value}
+          onChange={_onChange}
+        ></InputTextarea>
+      );
 
     case 'date':
       return (
@@ -64,6 +72,8 @@ const Input = props => {
 
 Input.defaultProps = {
   _size: props => props.theme.fontSizes.small,
+  _bg: props => props.theme.colors.white,
+  _borderColor: props => props.theme.colors.input_gray1,
 };
 
 export default Input;
