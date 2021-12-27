@@ -1,19 +1,22 @@
 import React from 'react';
-import Bit from '../modules/Bit';
-import Tag from '../element/Tag';
+import Selects from '../modules/addInfo/LoSelct';
+import { Input } from '../element';
+import Select from '../modules/addInfo/LoSelct';
 const Choice = () => {
   return (
-    <div>
-      <Tag mbti="ENTJ">ENTJ</Tag>
-      <Tag mbti="ENTJ" icon>
-        ENTJ
-      </Tag>
-      <Tag mbti="ENTJ" _type="black">
-        ENTJ
-      </Tag>
-      <Tag mbti="ENTJ" _type="black" icon>
-        ENTJ
-      </Tag>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'baseline',
+        flexDirection: 'column',
+        gap: '20px',
+      }}
+    >
+      <Input />
+      <Input _type="date" />
+      <Input _type="textarea" />
+      <Input _type="password" />
+      <Input _type="number" />
     </div>
   );
 };

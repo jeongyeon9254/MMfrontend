@@ -18,6 +18,12 @@ const Input = props => {
     }
   };
 
+  const Edelete = evt => {
+    if ((evt.which != 8 && evt.which != 0 && evt.which < 48) || evt.which > 57) {
+      evt.preventDefault();
+    }
+  };
+
   const TagSouces = {};
 
   switch (_type) {
@@ -27,7 +33,7 @@ const Input = props => {
     case 'date':
       return (
         <InputNum
-          onkeydown="javascript: return event.keyCode == 69 ? false : true"
+          onKeyPress={Edelete}
           placeholder="생년월일 6자리 ex)910504"
           value={_value}
           onInput={MaxNum}
@@ -43,7 +49,7 @@ const Input = props => {
     case 'number':
       return (
         <InputNum
-          onkeydown="javascript: return event.keyCode == 69 ? false : true"
+          onKeyPress={Edelete}
           type={_type}
           {...styles}
           value={_value}
