@@ -10,7 +10,7 @@ const Tag = props => {
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
-  console.log(MyBit);
+
   switch (_type) {
     case 'black':
       return (
