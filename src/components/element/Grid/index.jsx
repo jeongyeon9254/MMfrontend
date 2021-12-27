@@ -54,7 +54,7 @@ Grid.defaultProps = {
   justify: null,
   align: null,
   gap: null,
-  border: '0',
+  border: 'none',
 };
 
 const GridStyle = styled.div`
