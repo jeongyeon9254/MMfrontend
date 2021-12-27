@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TagBlack = styled.p`
   display: inline-block;
-  padding: 3px 9px;
+  padding: 4px 9px;
   background-color: #000;
   border: ${props => props.border};
   color: ${props => props.color};
