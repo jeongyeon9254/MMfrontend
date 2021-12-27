@@ -5,8 +5,16 @@ import Header from '../../components/modules/layout/Header';
 const Main = () => {
   return (
     <React.Fragment>
-      <Header>메인</Header>
-      <Grid padding="50px 0">ss</Grid>
+      <Header post>메인</Header>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid padding="0 0 100px 0">ss</Grid>
     </React.Fragment>
   );
 };
