@@ -10,6 +10,7 @@ import {
   PostDetail,
   PostWrite,
   PostEdit,
+  AddMyinfo,
 } from '../components/templates';
 import Container from '../components/element/Container';
 import PrivateRoute from '../components/modules/PrivateRoute';
@@ -26,6 +27,7 @@ function App() {
         <PublicRoute exact restricted={true} path="/" Component={Main} />
         <PublicRoute exact restricted={true} path="/choice" Component={Choice} />
         <PublicRoute exact restricted={true} path="/chat" Component={Chat} />
+        <PublicRoute exact restricted={true} path="/AddMyinfo" Component={AddMyinfo} />
         <PublicRoute exact restricted={true} path="/myinfo" Component={Myinfo} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PublicRoute exact restricted={true} path="/PostMain" Component={PostMain} />
