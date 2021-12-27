@@ -1,67 +1,76 @@
 import styled from 'styled-components';
 
 export const BlackBox = styled.div`
-  width: ${props => props.width};
   box-sizing: border-box;
-  padding: ${props => props.padding};
-  background-color: ${props => props.theme.colors.gray_2};
-  color: ${props => props.theme.colors.white};
-  border-radius: 9px;
-  margin: ${props => props.margin};
   word-break: keep-all;
   word-wrap: break-word;
+  border-radius: 9px;
   font-weight: 500;
+  // props Css
+  width: ${props => props.width};
+  padding: ${props => props.padding};
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_2};
+  color: ${props => props.theme.colors.white};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
 `;
 
 export const MyChatBox = styled.div`
   display: inline-block;
+  box-sizing: border-box;
   width: auto;
   max-width: 70%;
-  box-sizing: border-box;
   padding: 8px 10px;
-  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
-  margin: ${props => props.margin};
+  font-weight: 500;
   word-break: keep-all;
   word-wrap: break-word;
-  font-weight: 500;
+  // props Css
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_1};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
 `;
 
 export const UserChatBox = styled.div`
   display: inline-block;
+  box-sizing: border-box;
   width: auto;
   max-width: 70%;
-  box-sizing: border-box;
   padding: 8px 10px;
-  background-color: ${props => props.theme.colors.gray_2};
-  color: ${props => props.theme.colors.white};
   border-radius: 9px;
-  margin: ${props => props.margin};
+  font-weight: 500;
   word-break: keep-all;
   word-wrap: break-word;
-  font-weight: 500;
+  // props Css
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_2};
+  color: ${props => props.theme.colors.white};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
 `;
 
 export const ProfileBox = styled.div`
-  position: relative;
-  width: ${props => props.width};
   box-sizing: border-box;
+  position: relative;
   padding: 35px 30px;
-  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
-  margin: ${props => props.margin};
   margin-top: 20px;
+  font-weight: 400;
   word-break: keep-all;
   word-wrap: break-word;
+  // props Css
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_1};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
-  font-weight: 400;
+
   &:after {
     border-top: 0px solid transparent;
     border-left: 10px solid transparent;
@@ -76,19 +85,22 @@ export const ProfileBox = styled.div`
 `;
 
 export const CommentBox = styled.div`
-  position: relative;
-  width: calc(100% - 8px);
   box-sizing: border-box;
+  width: calc(100% - 8px);
+  position: relative;
   padding: 8px 14px;
-  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
-  margin: ${props => props.margin};
   margin-left: 10px;
   word-break: keep-all;
   word-wrap: break-word;
+  // props Css
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_1};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
   font-weight: 400;
+
   &:after {
     border-top: 15px solid #e3e3e3;
     border-left: 12px solid transparent;

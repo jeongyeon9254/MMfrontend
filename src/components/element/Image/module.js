@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const ImageRoundStyle = styled.div`
-  position: relative;
-  border-radius: 50%;
   width: ${props => props.width};
   margin: ${props => props.margin};
+  background: ${props => props.theme.colors.gray_1};
   position: relative;
   overflow: hidden;
+  border-radius: 50%;
   &:after {
     content: '';
     display: block;
@@ -17,6 +17,7 @@ export const ImageRoundStyle = styled.div`
 export const BorderSquare = styled.div`
   width: ${props => props.width};
   margin: ${props => props.margin};
+  background: ${props => props.theme.colors.gray_1};
   position: relative;
   overflow: hidden;
   border-radius: 20px;

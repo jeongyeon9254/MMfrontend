@@ -89,17 +89,19 @@ Box.defaultProps = {
 };
 
 const BoxStyle = styled.div`
-  width: ${props => props.width};
   box-sizing: border-box;
-  padding: ${props => props.padding};
-  background-color: ${props => props.theme.colors.gray_1};
   border-radius: 9px;
-  margin: ${props => props.margin};
-  font-size: ${props => props.theme.fontSizes.small};
-  line-height: ${props => props.theme.fontSizes.xl};
+  font-weight: 400;
   word-break: keep-all;
   word-wrap: break-word;
-  font-weight: 400;
+  // props Css
+  width: ${props => props.width};
+  padding: ${props => props.padding};
+  margin: ${props => props.margin};
+  // theme Css
+  background-color: ${props => props.theme.colors.gray_1};
+  font-size: ${props => props.theme.fontSizes.small};
+  line-height: ${props => props.theme.fontSizes.xl};
 `;
 
 export default Box;
