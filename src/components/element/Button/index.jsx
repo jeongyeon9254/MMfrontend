@@ -80,9 +80,9 @@ Button.defaultProps = {
 };
 
 const ButtonStyle = styled.button`
-  padding: ${props => (props.padding ? props.padding : props.theme.colors.paddings)};
+  padding: ${props => props.padding};
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.colors.margins)};
+  margin: ${props => props.margin};
   width: 100%;
   box-sizing: border-box;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};

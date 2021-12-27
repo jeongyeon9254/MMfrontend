@@ -5,8 +5,8 @@ export const BtnTextStyle = styled.button`
   width: 100%;
   text-align: center;
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.margins.base)};
-  padding: ${props => (props.padding ? props.padding : props.theme.paddings.base)};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
   border-radius: 10px;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;
@@ -16,8 +16,8 @@ export const BtnBottomStyle = styled.button`
   width: 100%;
   text-align: center;
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.margins.base)};
-  padding: ${props => (props.padding ? props.padding : props.theme.paddings.base)};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
   border-radius: 10px;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;
@@ -27,8 +27,8 @@ export const BtnIconStyle = styled.button`
   width: 100%;
   text-align: center;
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.margins.base)};
-  padding: ${props => (props.padding ? props.padding : props.theme.paddings.base)};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
   border-radius: 10px;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;
@@ -38,8 +38,8 @@ export const BtnRoundStyle = styled.button`
   width: 100%;
   text-align: center;
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.margins.base)};
-  padding: ${props => (props.padding ? props.padding : props.theme.paddings.base)};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
   border-radius: 10px;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;
@@ -49,8 +49,8 @@ export const BtnTagStyle = styled.button`
   width: 100%;
   text-align: center;
   background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => (props.margin ? props.margin : props.theme.margins.base)};
-  padding: ${props => (props.padding ? props.padding : props.theme.paddings.base)};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
   border-radius: 10px;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;

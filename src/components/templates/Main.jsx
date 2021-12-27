@@ -6,12 +6,6 @@ import Button from '../element/Button';
 const Main = props => {
   return (
     <Grid gap="20px">
-      <Input />
-      <Input _type="textarea" />
-      <Input _type="number" />
-      <Input _type="password" />
-      <Input _type="date" />
-      <p>버튼</p>
       <Button BtnText>BtnText</Button>
       <Button BtnBottom>BtnBottom</Button>
       <Button BtnIcon>BtnIcon</Button>
