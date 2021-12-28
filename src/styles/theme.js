@@ -1,6 +1,7 @@
 const calcRem = size => `${size / 16}rem`;
 
 const fontSizes = {
+  extraSmall: calcRem(10),
   maxSmall: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),

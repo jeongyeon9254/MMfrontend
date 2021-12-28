@@ -1,75 +1,79 @@
 import React from 'react';
 import styled from 'styled-components';
-import arrow_left from '../../../img/Icon/arrow_left.svg';
-import icon_search from '../../../img/Icon/icon_search.svg';
+import person from '../../../img/Icon/icon_person.svg';
+import home from '../../../img/Icon/icon_home.svg';
+import sns from '../../../img/Icon/icon_sms.svg';
+import feed from '../../../img/Icon/icon_feed.svg';
+
+// Component
+import { Grid } from '../../element';
+
 // JS
 import { history } from '../../../redux/configureStore';
 
 const Footer = props => {
-  const { children, main, chat, post } = props;
-
-  const styles = {
-    main,
-  };
-
-  const goBack = () => {
-    history.goBack();
-  };
-
   return (
-    <HeaderStyle {...styles} height="50px">
-      {main ? null : (
-        <div className="backBtn" onClick={goBack}>
-          <img alt="뒤로가기 버튼" src={arrow_left}></img>
-        </div>
-      )}
-      <TiTle>{children}</TiTle>
-      {chat ? <Search src={icon_search} /> : ''}
-      {post ? <Exit>방 나가기</Exit> : chat ? '' : <Null></Null>}
-    </HeaderStyle>
+    <FooterStyle>
+      <Grid row>
+        <FooterBtn
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          <img alt="홈" src={home}></img>
+          <p>홈</p>
+        </FooterBtn>
+        <FooterBtn
+          onClick={() => {
+            history.push('/PostMain');
+          }}
+        >
+          <img alt="커뮤니티" src={feed}></img>
+          <p>커뮤니티</p>
+        </FooterBtn>
+        <FooterBtn
+          onClick={() => {
+            history.push('/chat');
+          }}
+        >
+          <img alt="채팅" src={sns}></img>
+          <p>채팅</p>
+        </FooterBtn>
+        <FooterBtn
+          onClick={() => {
+            history.push('/myinfo');
+          }}
+        >
+          <img alt="내정보" src={person}></img>
+          <p>내정보</p>
+        </FooterBtn>
+      </Grid>
+    </FooterStyle>
   );
 };
 
-const HeaderStyle = styled.header`
+const FooterStyle = styled.header`
+  height: 88px;
   width: 100%;
-  max-width: 375px;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  display: flex;
-  box-sizing: border-box;
-  align-items: center;
-  justify-items: center;
-  justify-content: space-between;
-  padding: 15px 23px;
-  border-bottom: 1px solid #eee;
-  background-color: ${props => props.theme.colors.white};
-  .backBtn {
-    height: 24px;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-  }
-`;
-const TiTle = styled.h2`
-  font-size: ${props => props.theme.fontSizes.xxl};
-  color: ${props => props.theme.colors.gray_2};
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  border-radius: 50px 50px 0 0;
+  box-sizing: border-box;
+  bottom: 0;
+  background-color: ${props => props.theme.colors.gray_2};
+  z-index: 3;
+  padding: 20px 25px;
 `;
 
-const Null = styled.div`
-  height: 24px;
-  width: 24px;
+const FooterBtn = styled.button`
+  width: 21%;
+  margin: 0 2%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  p {
+    font-size: ${props => props.theme.fontSizes.extraSmall};
+  }
 `;
-const Exit = styled.div`
-  font-size: 14px;
-  color: #4e4e4e;
-`;
-const Search = styled.img`
-  height: 24px;
-  width: 24px;
-`;
+
 export default Footer;
