@@ -1,9 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { BtnAddStyle, BtnBottomStyle, BtnIconStyle, BtnRoundStyle, BtnTagStyle } from './module';
-import Grid from '../Grid';
+import { BtnAddStyle, BtnBottomStyle, BtnRoundStyle, BtnTagStyle, ButtonStyle } from './module';
+import { getCookie } from '../../../shared/Cookie.js';
+import Bit from '../../modules/Bit';
 
 const Button = props => {
+  // const userInfo = getCookie('');
+  const userInfo = { mbti: 'ENTJ' };
+  const myMbti = Bit.find(x => {
+    return x.name === userInfo.mbti;
+  });
   const {
     fontcolor,
     height,
@@ -15,10 +20,11 @@ const Button = props => {
     margin,
     size,
     BtnBottom,
-    BtnIcon,
     BtnRound,
     BtnTag,
     BtnAdd,
+    state,
+    main,
   } = props;
 
   const styles = {
@@ -32,29 +38,54 @@ const Button = props => {
   };
 
   if (BtnAdd) {
-    return (
-      <BtnAddStyle {...styles} onClick={_onClick}>
-        {children}
-      </BtnAddStyle>
-    );
+    switch (state) {
+      case 'active':
+        return (
+          <BtnAddStyle
+            style={{ backgroundColor: '#fff', color: '#000' }}
+            {...styles}
+            onClick={_onClick}
+          >
+            {children}
+          </BtnAddStyle>
+        );
+
+      default:
+        return (
+          <BtnAddStyle {...styles} onClick={_onClick}>
+            {children}
+          </BtnAddStyle>
+        );
+    }
   }
 
   if (BtnBottom) {
-    return (
-      <BtnBottomStyle {...styles} onClick={_onClick}>
-        {children}
-      </BtnBottomStyle>
-    );
-  }
-
-  if (BtnIcon) {
-    return (
-      <BtnIconStyle {...styles} onClick={_onClick}>
-        <Grid justify="center" color="#313131" row align="center">
-          {children}
-        </Grid>
-      </BtnIconStyle>
-    );
+    switch (state) {
+      case 'Inactive':
+        return (
+          <BtnBottomStyle
+            style={{ backgroundColor: '#A7A7A7' }}
+            {...styles}
+            onClick={() => {
+              alert('아직 사용하지 못합니다.');
+            }}
+          >
+            {children}
+          </BtnBottomStyle>
+        );
+      case 'Wait':
+        return (
+          <BtnBottomStyle style={{ backgroundColor: '#EC6464' }} {...styles} onClick={_onClick}>
+            {children}
+          </BtnBottomStyle>
+        );
+      default:
+        return (
+          <BtnBottomStyle {...styles} onClick={_onClick}>
+            {children}
+          </BtnBottomStyle>
+        );
+    }
   }
 
   if (BtnRound) {
@@ -66,11 +97,31 @@ const Button = props => {
   }
 
   if (BtnTag) {
-    return (
-      <BtnTagStyle {...styles} onClick={_onClick}>
-        {children}
-      </BtnTagStyle>
-    );
+    switch (state) {
+      case 'active':
+        return (
+          <BtnTagStyle {...styles} onClick={_onClick}>
+            {children}
+          </BtnTagStyle>
+        );
+      case 'In':
+        return (
+          <BtnTagStyle {...styles} onClick={_onClick}>
+            <img style={{ width: '15px', marginRight: '12px' }} src={myMbti.image} alt="" />
+            {children}
+          </BtnTagStyle>
+        );
+      default:
+        return (
+          <BtnTagStyle
+            style={{ backgroundColor: '#F9F9F9', color: '#313131' }}
+            {...styles}
+            onClick={_onClick}
+          >
+            {children}
+          </BtnTagStyle>
+        );
+    }
   }
 
   return (
@@ -83,16 +134,7 @@ const Button = props => {
 Button.defaultProps = {
   width: null,
   color: null,
-  padding: '10px',
+  padding: null,
 };
-
-const ButtonStyle = styled.button`
-  padding: ${props => props.padding};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
-  margin: ${props => props.margin};
-  width: 100%;
-  box-sizing: border-box;
-  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
-`;
 
 export default Button;

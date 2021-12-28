@@ -4,9 +4,8 @@ import { TagBlack, TagStyle } from './module';
 import Bit from '../../modules/Bit';
 import Grid from '../Grid';
 const Tag = props => {
-  const { children, color, mbti, _type, icon } = props;
-  const styles = { color, mbti };
-
+  const { children, color, mbti, _type, icon, bg, _src, state, size, small } = props;
+  const styles = { color, mbti, bg, state };
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
@@ -30,6 +29,47 @@ const Tag = props => {
           </Grid>
         </TagBlack>
       );
+    case 'Btn':
+      switch (state) {
+        case 'active':
+          return (
+            <TagBtn {...styles} style={{ backgroundColor: '#3F3F41' }}>
+              <div>
+                {small ? (
+                  <>
+                    <img style={{ transform: 'scale(0.87)' }} src={_src} alt={children} />
+                    <p style={{ marginTop: '6px' }}>{children}</p>
+                  </>
+                ) : (
+                  <>
+                    <img src={_src} alt={children} />
+                    <p style={{ marginTop: '3px' }}>{children}</p>
+                  </>
+                )}
+              </div>
+            </TagBtn>
+          );
+
+        default:
+          return (
+            <TagBtn {...styles}>
+              <div>
+                {small ? (
+                  <>
+                    <img style={{ transform: 'scale(0.87)' }} src={_src} alt={children} />
+                    <p style={{ marginTop: '6px' }}>{children}</p>
+                  </>
+                ) : (
+                  <>
+                    <img src={_src} alt={children} />
+                    <p style={{ marginTop: '3px' }}>{children}</p>
+                  </>
+                )}
+              </div>
+            </TagBtn>
+          );
+      }
+
     default:
       return (
         <TagStyle {...styles} color={MyBit.color}>
@@ -43,9 +83,28 @@ const Tag = props => {
 };
 
 Tag.defaultProps = {
-  color: false,
+  color: '#000',
+  bg: false,
+  size: '0px',
+  state: '',
 };
 const Iconimg = styled.img`
   width: 11px;
+`;
+
+const TagBtn = styled.button`
+  color: ${props => (props.state === 'active' ? props.color : props.theme.colors.gray_2)};
+  background-color: ${props => (props.bg ? props.bg : props.theme.colors.Tagbg)};
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
+  width: ${props => (props.small ? '56px' : '62px')};
+  height: ${props => (props.small ? '56px' : '62px')};
+  text-align: center;
+  line-height: 1px;
+  font-weight: 600;
+  position: relative;
+  border: 0px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 export default Tag;

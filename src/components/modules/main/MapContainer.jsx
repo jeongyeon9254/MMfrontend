@@ -6,6 +6,7 @@ import axios from 'axios';
 // Js
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as listActions } from '../../../redux/modules/main';
+import Grid from '../../element/Grid';
 
 const { kakao } = window;
 
@@ -58,7 +59,7 @@ const MapContainer = () => {
 
 const Map = styled.div`
   width: 100%;
-  height: calc(100% - 110px);
+  height: calc(100% - 60px);
 `;
 
 export default MapContainer;

@@ -1,6 +1,7 @@
 const calcRem = size => `${size / 16}rem`;
 
 const fontSizes = {
+  extraSmall: calcRem(10),
   maxSmall: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),
@@ -49,7 +50,7 @@ const deviceSizes = {
 };
 
 const colors = {
-  black: '#000000',
+  black: '#313131',
   white: '#FFFFFF',
   gray_1: '#E3E3E3',
   gray_2: '#3F3F41',
@@ -57,6 +58,7 @@ const colors = {
   btnTag: '#F9F9F9',
   btnChange: '#A7A7A7',
   Icon: '#F3F3F3',
+  Tagbg: '#ececec',
 };
 
 const radius = {

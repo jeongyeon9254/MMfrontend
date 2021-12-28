@@ -17,6 +17,8 @@ const Grid = props => {
     align,
     gap,
     border,
+    borderTop,
+    borderBot,
   } = props;
 
   const styles = {
@@ -29,6 +31,8 @@ const Grid = props => {
     align,
     gap,
     border,
+    borderTop,
+    borderBot,
   };
 
   if (row) {
@@ -56,6 +60,8 @@ Grid.defaultProps = {
   align: null,
   gap: null,
   border: 'none',
+  borderTop: '0px',
+  borderBot: '0px',
 };
 
 const GridStyle = styled.div`
@@ -65,7 +71,7 @@ const GridStyle = styled.div`
   border: ${props => props.border};
   width: ${props => props.width};
   height: ${props => props.height};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
+  background-color: ${props => (props.color ? props.color : 'transparent')};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   justify-content: ${props => (props.justify ? props.justify : 'flex-start')};
