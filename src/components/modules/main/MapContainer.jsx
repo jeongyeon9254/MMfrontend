@@ -59,7 +59,7 @@ const MapContainer = () => {
 
 const Map = styled.div`
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 110px);
 `;
 
 export default MapContainer;
