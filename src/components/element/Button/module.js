@@ -16,6 +16,7 @@ export const BtnAddStyle = styled.button`
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   border-radius: 7px;
+  padding: 14px;
   ${common};
   border-top: 1px solid #eee;
 `;
@@ -61,7 +62,7 @@ export const BtnTagStyle = styled.button`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
   margin: ${props => props.margin};
-  padding: ${props => (props.padding ? props.padding : '6px 20px')};
+  padding: 7px 20px;
   border-radius: 61px;
   cursor: pointer;
   display: flex;

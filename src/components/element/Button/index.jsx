@@ -1,16 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import {
-  BtnAddStyle,
-  BtnBottomStyle,
-  BtnIconStyle,
-  BtnRoundStyle,
-  BtnTagStyle,
-  ButtonStyle,
-} from './module';
-import Grid from '../Grid';
+import { BtnAddStyle, BtnBottomStyle, BtnRoundStyle, BtnTagStyle, ButtonStyle } from './module';
 import { getCookie } from '../../../shared/Cookie.js';
 import Bit from '../../modules/Bit';
+
 const Button = props => {
   // const userInfo = getCookie('');
   const userInfo = { mbti: 'ENTJ' };
@@ -28,12 +20,10 @@ const Button = props => {
     margin,
     size,
     BtnBottom,
-    BtnIcon,
     BtnRound,
     BtnTag,
     BtnAdd,
     state,
-    _src,
     main,
   } = props;
 
@@ -111,16 +101,16 @@ const Button = props => {
       case 'active':
         return (
           <BtnTagStyle {...styles} onClick={_onClick}>
-            {main ? (
-              <img style={{ width: '15px', marginRight: '12px' }} src={myMbti.image} alt="" />
-            ) : (
-              ''
-            )}
-
             {children}
           </BtnTagStyle>
         );
-
+      case 'In':
+        return (
+          <BtnTagStyle {...styles} onClick={_onClick}>
+            <img style={{ width: '15px', marginRight: '12px' }} src={myMbti.image} alt="" />
+            {children}
+          </BtnTagStyle>
+        );
       default:
         return (
           <BtnTagStyle
