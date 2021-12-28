@@ -1,12 +1,12 @@
 import React from 'react';
 import { Input, Grid } from '../element';
 import { Box, Image, Tag, Button } from '../element/index';
-import Pen from '../../img/Icon/icon_pen.svg';
-import ENFJ from '../../img/MBTI/ENFJ.svg';
+import Pen from '../../img/Icon/icon_create.svg';
+
 const Hidden = () => {
   return (
     <div>
-      <Grid border="1px solid #000" height="100%" padding="30px" gap="40px">
+      <Grid border="1px solid #000" height="100%" padding="30px" gap="40px" align="flex-start">
         <h4 style={{ fontSize: '50px' }}> Element 정리 페이지</h4>
         <Grid gap="20px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>
@@ -53,6 +53,7 @@ const Hidden = () => {
           <Tag mbti="INTJ" _type="black" icon>
             INTJ
           </Tag>
+          <Tag _type="Btn">ENTJ</Tag>
         </Grid>
         <Grid gap="20px" margin="0 0 50px 0">
           <p style={{ fontSize: 30 }}>Box Element</p>
@@ -81,47 +82,35 @@ const Hidden = () => {
           <Image border width="50%" margin="0 auto"></Image>
         </Grid>
       </Grid>
-      <Grid gap="30px">
+      <Grid gap="30px" align="flex-start">
         <Button BtnBottom>다음으로</Button>
-        <Button BtnBottom>매칭신청</Button>
-        <Button BtnBottom>내 정보 수정하기</Button>
-        <Button BtnBottom>게시글 올리기</Button>
-        <Button BtnBottom color="#A7A7A7">
+        <Button BtnBottom state="Inactive">
           다음으로
         </Button>
-        <Button BtnBottom color="#EC6464">
+        <Button BtnBottom state="Wait">
           매칭 친구 끊기
         </Button>
-        <Button width="81px" BtnTag fontcolor="black" color="#F9F9F9">
-          운동
-        </Button>
-        <Button BtnTag width="81px">
-          운동
-        </Button>
-        <Button BtnTag width="81px">
-          재테크
-        </Button>
+
         <Button BtnRound width="87px">
           자동 매칭
         </Button>
         <Button BtnRound width="68px">
           <img src={Pen} alt="" />
         </Button>
-        <Button BtnIcon width="56px" color="#313131" fontcolor="#316811">
-          <img src={ENFJ} alt="" />
-          ENTJ
+        <Button BtnTag>운동</Button>
+        <Button BtnTag state="active">
+          운동
         </Button>
-        <Button BtnIcon width="102px" color="#313131" fontcolor="#316811">
-          <img style={{ width: '25px' }} src={ENFJ} alt="" />
-          <p>전체보기</p>
+        <Button BtnTag state="active" main>
+          전체 보기
         </Button>
-        <Button BtnAdd fontcolor="black" width="149px">
+        <Button BtnAdd width="149px">
           남성
         </Button>
-        <Button BtnAdd color="#3F3F41" width="149px">
+        <Button BtnAdd width="149px" state="active">
           여성
         </Button>
-        <Button BtnAdd width="78px" color="btnChange">
+        <Button BtnAdd width="78px" color="#A7A7A7">
           변경
         </Button>
       </Grid>

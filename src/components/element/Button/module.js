@@ -1,67 +1,39 @@
 import styled from 'styled-components';
 
+const common = `
+text-align: center;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border: none;
+cursor: pointer;
+font-weight: 500;
+`;
+
 export const BtnAddStyle = styled.button`
-  //색 조정
   color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.btnTag)};
-  // font 설정
+  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
-  text-align: center;
-  // 박스 설정
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: ${props => props.width};
-  border: none;
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   border-radius: 7px;
-  // 마우스 설정
-  cursor: pointer;
+  ${common};
+  border-top: 1px solid #eee;
 `;
 
 export const BtnBottomStyle = styled.button`
-  //색 조정
   color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
-  // font 설정
-  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.lg)};
-  text-align: center;
-  // 박스 설정
-  box-sizing: border-box;
-  box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.14);
-  width: ${props => props.width};
-  border: none;
+  background-color: ${props => props.theme.colors.gray_2};
+  font-size: ${props => props.theme.fontSizes.lg};
   margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  border-radius: 52px;
-  // 마우스 설정
-  cursor: pointer;
-`;
-
-export const BtnIconStyle = styled.button`
-  //색 조정
-  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.black)};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.Icon)};
-  // font 설정
-  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
-  text-align: center;
-  line-height: 1px;
-  font-weight: 600;
-  // 박스 설정
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width: ${props => props.width};
-  border: none;
-  margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  border-radius: 6px;
-  // 마우스 설정
-  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  border-radius: 30px;
+  ${common};
 `;
 
 export const BtnRoundStyle = styled.button`
   //색 조정
-  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
+  color: ${props => props.theme.colors.white};
   background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
   // font 설정
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.small)};
@@ -70,7 +42,7 @@ export const BtnRoundStyle = styled.button`
   box-sizing: border-box;
   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.33);
   width: ${props => props.width};
-  height: ${props => props.height};
+  height: ${props => props.width};
   border: none;
   margin: ${props => props.margin};
   padding: ${props => props.padding};
@@ -80,15 +52,10 @@ export const BtnRoundStyle = styled.button`
 `;
 
 export const BtnTagStyle = styled.button`
-  //색 조정
-  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.black)};
-  background-color: ${props => (props.color ? props.color : '#F9F9F9')};
-  // font 설정
-  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
+  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
+  background-color: ${props => props.theme.colors.gray_2};
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.small)};
   text-align: center;
-  font-weight: 700;
-  line-height: 1;
-  // 박스 설정
   width: ${props => props.width};
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -96,6 +63,17 @@ export const BtnTagStyle = styled.button`
   margin: ${props => props.margin};
   padding: ${props => (props.padding ? props.padding : '6px 20px')};
   border-radius: 61px;
-  // 마우스 설정
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+`;
+
+export const ButtonStyle = styled.button`
+  padding: ${props => props.padding};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.white)};
+  margin: ${props => props.margin};
+  width: 100%;
+  box-sizing: border-box;
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
 `;

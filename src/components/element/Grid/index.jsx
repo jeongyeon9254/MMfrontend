@@ -17,6 +17,8 @@ const Grid = props => {
     align,
     gap,
     border,
+    borderTop,
+    borderBot,
   } = props;
 
   const styles = {
@@ -29,6 +31,8 @@ const Grid = props => {
     align,
     gap,
     border,
+    borderTop,
+    borderBot,
   };
 
   if (row) {
@@ -56,6 +60,8 @@ Grid.defaultProps = {
   align: null,
   gap: null,
   border: 'none',
+  borderTop: '0px',
+  borderBot: '0px',
 };
 
 const GridStyle = styled.div`
