@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Grid } from '../element';
 import { Box, Image, Tag, Button } from '../element/index';
 import Pen from '../../img/Icon/icon_create.svg';
-
+import Bit from '../modules/Bit';
 const Hidden = () => {
   return (
     <div>
@@ -53,7 +53,33 @@ const Hidden = () => {
           <Tag mbti="INTJ" _type="black" icon>
             INTJ
           </Tag>
-          <Tag _type="Btn">ENTJ</Tag>
+          <Grid row gap="20px">
+            {Bit.map((x, idx) => {
+              return (
+                <Tag small _type="Btn" key={idx} _src={x.image} color={x.color}>
+                  {x.name}
+                </Tag>
+              );
+            })}
+          </Grid>
+          <Grid row gap="20px">
+            {Bit.map((x, idx) => {
+              return (
+                <Tag _type="Btn" key={idx} _src={x.image} color={x.color}>
+                  {x.name}
+                </Tag>
+              );
+            })}
+          </Grid>
+          <Grid row gap="20px">
+            {Bit.map((x, idx) => {
+              return (
+                <Tag _type="Btn" key={idx} state="active" _src={x.image} color={x.color}>
+                  {x.name}
+                </Tag>
+              );
+            })}
+          </Grid>
         </Grid>
         <Grid gap="20px" margin="0 0 50px 0">
           <p style={{ fontSize: 30 }}>Box Element</p>

@@ -57,6 +57,7 @@ const colors = {
   btnTag: '#F9F9F9',
   btnChange: '#A7A7A7',
   Icon: '#F3F3F3',
+  Tagbg: '#ececec',
 };
 
 const radius = {
