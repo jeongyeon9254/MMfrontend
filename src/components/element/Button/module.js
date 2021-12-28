@@ -81,12 +81,13 @@ export const BtnRoundStyle = styled.button`
 
 export const BtnTagStyle = styled.button`
   //색 조정
-  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
-  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
+  color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.black)};
+  background-color: ${props => (props.color ? props.color : '#F9F9F9')};
   // font 설정
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
   text-align: center;
-  line-height: 8px;
+  font-weight: 700;
+  line-height: 1;
   // 박스 설정
   width: ${props => props.width};
   box-sizing: border-box;

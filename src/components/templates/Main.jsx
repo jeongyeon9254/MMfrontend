@@ -1,5 +1,4 @@
 import React from 'react';
-import Grid from '../../components/element/Grid';
 import Header from '../../components/modules/layout/Header';
 import MapContainer from '../modules/main/MapContainer';
 import MapKategorieNav from '../modules/main/MapKategorieNav';
