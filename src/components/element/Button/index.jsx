@@ -83,7 +83,7 @@ const Button = props => {
 Button.defaultProps = {
   width: null,
   color: null,
-  padding: '10px',
+  padding: null,
 };
 
 const ButtonStyle = styled.button`
