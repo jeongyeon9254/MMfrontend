@@ -61,7 +61,7 @@ export const BtnTagStyle = styled.button`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
   margin: ${props => props.margin};
-  padding: 7px 20px;
+  padding: ${props => (props.padding ? props.padding : '6px 20px')};
   border-radius: 61px;
   cursor: pointer;
   display: flex;
