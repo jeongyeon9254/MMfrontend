@@ -12,4 +12,5 @@ export const RowGridStyle = styled.div`
   justify-content: ${props => (props.justify ? props.justify : 'flex-start')};
   align-items: ${props => (props.align ? props.align : 'stretch ')};
   gap: ${props => (props.gap ? props.gap : '0')};
+  position: relative;
 `;

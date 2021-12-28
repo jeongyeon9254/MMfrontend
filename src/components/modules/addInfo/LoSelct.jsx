@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { makeStyles } from '@mui/styles';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { gpsLsit } from '../map/gpsList';
+import { gpsLsit } from '../main/gpsList';
 
 const useStyles = makeStyles({
   select: {
