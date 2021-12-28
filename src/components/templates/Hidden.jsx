@@ -101,7 +101,7 @@ const Hidden = () => {
         <Button BtnTag state="active">
           운동
         </Button>
-        <Button BtnTag state="active" main>
+        <Button BtnTag state="In">
           전체 보기
         </Button>
         <Button BtnAdd width="149px">
