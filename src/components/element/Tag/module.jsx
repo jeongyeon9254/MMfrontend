@@ -20,3 +20,15 @@ export const TagStyle = styled.div`
   font-size: ${props => props.theme.fontSizes.small};
   border-radius: ${props => props.theme.radius.tag};
 `;
+
+export const TagBtn = styled.button`
+  text-align: center;
+  line-height: 1px;
+  font-weight: 600;
+  color: ${props => (props.color ? props.fontcolor : props.theme.colors.gray_2)};
+  background-color: ${props => props.theme.colors.Icon};
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  position: relative;
+`;

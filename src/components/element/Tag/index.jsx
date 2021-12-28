@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TagBlack, TagStyle } from './module';
+import { TagBlack, TagStyle, TagBtn } from './module';
 import Bit from '../../modules/Bit';
 import Grid from '../Grid';
 const Tag = props => {
@@ -30,6 +30,8 @@ const Tag = props => {
           </Grid>
         </TagBlack>
       );
+    case 'Btn':
+      return <TagBtn>{children}</TagBtn>;
     default:
       return (
         <TagStyle {...styles} color={MyBit.color}>

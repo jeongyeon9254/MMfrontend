@@ -6,15 +6,9 @@ const Main = () => {
   return (
     <React.Fragment>
       <Header post>메인</Header>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
-      <Grid padding="0 0 100px 0">ss</Grid>
+      <Grid height="100%" align>
+        ss
+      </Grid>
     </React.Fragment>
   );
 };
