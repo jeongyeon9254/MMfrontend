@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 });
 
 const Selects = props => {
+  const { sele } = props;
   const classes = useStyles();
 
   const { data, _onChange } = props;
@@ -46,6 +47,7 @@ const Selects = props => {
   const handleChange = event => {
     setArea(event.target.value);
   };
+  sele(Area);
   console.log(Area);
   return (
     <FormControl

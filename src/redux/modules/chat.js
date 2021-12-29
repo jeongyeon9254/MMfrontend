@@ -26,6 +26,42 @@ const initialState = {
       roomId: '2',
       date: '오전 4:30',
     },
+    {
+      nickname: '줄줄줄',
+      intro:
+        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
+      mbti: 'ENFJ',
+      profileImg: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_960_720.jpg',
+      roomId: '2',
+      date: '오전 4:30',
+    },
+    {
+      nickname: '줄줄줄',
+      intro:
+        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
+      mbti: 'ENFJ',
+      profileImg: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_960_720.jpg',
+      roomId: '2',
+      date: '오전 4:30',
+    },
+    {
+      nickname: '줄줄줄',
+      intro:
+        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
+      mbti: 'ENFJ',
+      profileImg: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_960_720.jpg',
+      roomId: '2',
+      date: '오전 4:30',
+    },
+    {
+      nickname: '줄줄줄',
+      intro:
+        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
+      mbti: 'ENFJ',
+      profileImg: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_960_720.jpg',
+      roomId: '2',
+      date: '오전 4:30',
+    },
   ],
   roomPost: [
     {
