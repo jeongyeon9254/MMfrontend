@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImageRoundStyle, BorderSquare } from './module';
+import { ImageRoundStyle, BorderSquare, ImagePhotoRoundStyle } from './module';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import Bit from '../../modules/Bit';
 
 const Image = props => {
-  const { width, margin, _onClick, round, border, src, mbti } = props;
+  const { width, margin, _onClick, round, border, src, photoRound, mbti } = props;
 
   const select = Bit.find(x => x.name === mbti);
 
@@ -21,6 +21,15 @@ const Image = props => {
         <ImageStyle src={src}></ImageStyle>
         {src ? null : <DefaultCircle src={select.image} />}
       </ImageRoundStyle>
+    );
+  }
+
+  if (photoRound) {
+    return (
+      <ImagePhotoRoundStyle {...styles} onClick={_onClick}>
+        <ImageStyle src={src}></ImageStyle>
+        {src ? null : <DefaultCircle src={icon_photo} />}
+      </ImagePhotoRoundStyle>
     );
   }
 

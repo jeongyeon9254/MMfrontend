@@ -20,7 +20,7 @@ const AddInfo = props => {
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
-          <Image round src={icon_photo} width="188px" height="188px"></Image>
+          <Image photoRound width="188px" height="188px"></Image>
         </Grid>
         <Grid row gap="20px">
           <Grid margin=" 0px 30px">

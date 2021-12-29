@@ -14,6 +14,20 @@ export const ImageRoundStyle = styled.div`
   }
 `;
 
+export const ImagePhotoRoundStyle = styled.div`
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  background: ${props => props.theme.colors.gray_1};
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+`;
+
 export const BorderSquare = styled.div`
   width: ${props => props.width};
   margin: ${props => props.margin};
