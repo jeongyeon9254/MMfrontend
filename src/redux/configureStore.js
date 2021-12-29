@@ -5,10 +5,12 @@ import { connectRouter } from 'connected-react-router';
 
 import main from './modules/main';
 import chat from './modules/chat';
+import list from './modules/list';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  list: list,
   main: main,
   chat: chat,
   router: connectRouter(history),

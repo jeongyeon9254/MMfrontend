@@ -100,8 +100,8 @@ const BoxStyle = styled.div`
   margin: ${props => props.margin};
   // theme Css
   background-color: ${props => props.theme.colors.gray_1};
-  font-size: ${props => props.theme.fontSizes.small};
-  line-height: ${props => props.theme.fontSizes.xl};
+  font-size: ${props => props.theme.fontSizes.maxSmall};
+  line-height: ${props => props.theme.fontSizes.base};
 `;
 
 export default Box;

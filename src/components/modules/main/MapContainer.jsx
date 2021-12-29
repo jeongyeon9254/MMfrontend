@@ -1,12 +1,11 @@
 /* eslint-disable */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
 // Js
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as listActions } from '../../../redux/modules/main';
-import Grid from '../../element/Grid';
+import { actionCreators as listActions } from '../../../redux/modules/list';
 
 const { kakao } = window;
 
@@ -44,6 +43,11 @@ const MapContainer = () => {
 
         // 마커를 지도 위에 표시
         marker.setMap(map);
+
+        kakao.maps.event.addListener(marker, 'click', function () {
+          // 마커 위에 인포윈도우를 표시합니다
+          dispatch(listActions.upList());
+        });
       })
       .catch(err => {
         console.log(err);
