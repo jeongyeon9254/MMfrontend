@@ -15,7 +15,9 @@ const AddAdress = () => {
       </>
     );
   }
-
+  const sele = local => {
+    console.log(local);
+  };
   return (
     <>
       <Header>추가정보 입력하기</Header>
@@ -39,7 +41,7 @@ const AddAdress = () => {
             </Box>
           </Grid>
           <Grid width="183px">
-            <LoSelect />
+            <LoSelect sele={sele} />
           </Grid>
         </Grid>
       </Grid>
