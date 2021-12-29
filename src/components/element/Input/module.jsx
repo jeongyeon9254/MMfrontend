@@ -26,7 +26,7 @@ export const InputTextarea = styled.textarea`
   border: 0px;
   line-height: 1.5;
   max-width: ${props => props._maxWidth};
-  background-color: ${props => props.theme.colors.input_gray2};
+  background-color: ${props => props.theme.colors.Tagbg};
   color: ${props => props.theme.colors.input_gray3};
 `;
 export const InputPostText = styled.textarea`
