@@ -3,17 +3,25 @@ import styled from 'styled-components';
 import { Grid } from '../../element';
 import arrUp from '../../../img/Icon/arrow_up.svg';
 const ListHead = props => {
-  const { Text } = props;
+  const { Text, OnClick, boo } = props;
 
   return (
-    <Grid list>
+    <Grid list _onClick={OnClick}>
       <ListText>{Text}</ListText>
-      <img src={arrUp} alt="받은 매칭 2개" />
+      <Arr className={boo ? 'Open' : ''} src={arrUp} alt="보낸 매칭 2개" />
     </Grid>
   );
 };
 const ListText = styled.p`
   font-size: 10px;
   color: #9b9b9b;
+  z-index: 2;
+  background-color: ${props => props.theme.colors.white};
+`;
+const Arr = styled.img`
+  transition: all ease 0.3s;
+  &.Open {
+    transform: rotate(180deg);
+  }
 `;
 export default ListHead;

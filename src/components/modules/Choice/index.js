@@ -1,3 +1,5 @@
 import Listfrom from './Listfrom';
 import ListHead from './ListHead';
-export { Listfrom, ListHead };
+import PageShadow from './PageShadow';
+
+export { Listfrom, ListHead, PageShadow };

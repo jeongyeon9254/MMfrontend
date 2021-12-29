@@ -20,6 +20,7 @@ const Grid = props => {
     borderTop,
     borderBot,
     list,
+    page,
   } = props;
 
   const styles = {
@@ -52,6 +53,7 @@ const Grid = props => {
       </RowGridList>
     );
   }
+
   return (
     <GridStyle {...styles} onClick={_onClick}>
       {children}

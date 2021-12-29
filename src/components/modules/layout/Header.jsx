@@ -6,10 +6,11 @@ import icon_search from '../../../img/Icon/icon_search.svg';
 import { history } from '../../../redux/configureStore';
 
 const Header = props => {
-  const { children, main, chat, post } = props;
+  const { children, main, chat, post, point, _on } = props;
 
   const styles = {
     main,
+    point,
   };
 
   const goBack = () => {
@@ -19,7 +20,12 @@ const Header = props => {
   return (
     <HeaderStyle {...styles} height="50px">
       {main ? null : (
-        <div className="backBtn" onClick={goBack}>
+        <div
+          className="backBtn"
+          onClick={() => {
+            _on ? _on() : goBack();
+          }}
+        >
           <img alt="뒤로가기 버튼" src={arrow_left}></img>
         </div>
       )}
@@ -33,7 +39,7 @@ const Header = props => {
 const HeaderStyle = styled.header`
   width: 100%;
   max-width: 375px;
-  position: fixed;
+  position: ${props => (props.point ? props.point : 'fixed')};
   left: 0px;
   top: 0px;
   display: flex;

@@ -1,12 +1,9 @@
 import React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import { ImgBg, ContainerStyle, ScrollBox } from './module';
+import { ImgBg, ContainerStyle } from './module';
 const Container = props => {
-  const { children, scroll } = props;
-  if (scroll) {
-    return <ScrollBox></ScrollBox>;
-  }
+  const { children } = props;
   return (
     <ImgBg>
       <ContainerStyle>
@@ -14,7 +11,6 @@ const Container = props => {
       </ContainerStyle>
     </ImgBg>
   );
-  // return <ContainerStyle>{children}</ContainerStyle>
 };
 
 export default Container;
