@@ -95,6 +95,7 @@ const MapListStyle = styled.div`
   }
   .card {
     display: flex;
+    align-items: center;
     gap: 15px;
     padding: 22.5px 30px;
     border-bottom: 1px solid #eee;
