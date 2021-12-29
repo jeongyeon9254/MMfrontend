@@ -20,7 +20,7 @@ const Image = props => {
     return (
       <ImageRoundStyle {...styles} onClick={_onClick}>
         <ImageStyle src={src}></ImageStyle>
-        {src ? null : <DefaultCircle src={select.image} />}
+        {src ? null : <DefaultMbti src={select.image} />}
       </ImageRoundStyle>
     );
   }
@@ -87,6 +87,14 @@ const Default = styled.img`
 `;
 
 const DefaultCircle = styled.img`
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+`;
+
+const DefaultMbti = styled.img`
   position: absolute;
   width: 100%;
   left: 50%;

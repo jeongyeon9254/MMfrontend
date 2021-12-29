@@ -47,7 +47,7 @@ const MapList = props => {
                     </Grid>
                   </Grid>
                   <Box width="43%" padding="6px">
-                    안녕하세요 같이 즐겁게 보낼 친구 찾아요
+                    안녕하세요 친구 찾아요
                   </Box>
                 </div>
               );
