@@ -12,6 +12,9 @@ const Main = props => {
   return (
     <React.Fragment>
       <Header main>메인화면</Header>
+      <LocationBox>
+        <Button BtnTag>서울 특별시 서대문구</Button>
+      </LocationBox>
       <MapKategorieNav />
       <MapContainer />
       <CenterBtn>
@@ -26,9 +29,18 @@ const Main = props => {
 
 const CenterBtn = styled.div`
   position: absolute;
-  bottom: 110px;
+  bottom: 22px;
   left: 50%;
   margin-left: -43.5px;
+  z-index: 1;
+`;
+
+const LocationBox = styled.div`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  top: 78px;
   z-index: 1;
 `;
 

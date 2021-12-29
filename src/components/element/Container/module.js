@@ -20,6 +20,7 @@ export const ContainerStyle = styled.div`
   max-height: 774px;
   height: 100%;
   padding-top: 55px;
+  padding-bottom: 89px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 0px 0px 32px 32px;
   overflow: hidden;
@@ -27,6 +28,4 @@ export const ContainerStyle = styled.div`
   left: 50%;
   top: 63px;
   transform: translateX(-50%);
-  padding-bottom: 89px;
 `;
-export const ScrollBox = styled.div``;

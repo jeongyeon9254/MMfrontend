@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import ScrollContainer from 'react-indiana-drag-scroll';
+
+// Swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.min.css';
 
 // Component
 import Button from '../../element/Button';
@@ -9,31 +12,44 @@ import Button from '../../element/Button';
 import Bit from '../Bit';
 
 const MapKategorieNav = props => {
+  const navList = [
+    <>
+      <img alt="MBTI 이미지" src={Bit[0].image} />
+      전체보기
+    </>,
+    '일상',
+    '운동',
+    '공부',
+    '게임',
+    '제테크',
+  ];
+
+  const [active, setActive] = useState(0);
+
   return (
     <RowDiv>
-      <ScrollContainer className="scroll-container">
-        <Button BtnTag state="active">
-          <img alt="MBTI 이미지" src={Bit[8].image} />
-          전체보기
-        </Button>
-        <Button BtnTag>일상</Button>
-        <Button BtnTag>운동</Button>
-        <Button BtnTag>공부</Button>
-        <Button BtnTag>게임</Button>
-        <Button BtnTag>제테크</Button>
-      </ScrollContainer>
+      <Swiper spaceBetween={10} slidesPerView={4} className="scroll-container">
+        {navList.map((list, index) => {
+          return (
+            <SwiperSlide className="slide" key={index}>
+              <Button
+                BtnTag
+                state={active === index ? 'active' : false}
+                _onClick={idx => {
+                  setActive(index);
+                }}
+              >
+                {list}
+              </Button>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </RowDiv>
   );
 };
 
 const RowDiv = styled.div`
-  height: 60px;
-  white-space: nowrap;
-  overflow-x: scroll;
-  touch-action: auto;
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
   img {
     height: ${props => props.theme.fontSizes.base};
     margin-right: 10px;
@@ -42,9 +58,11 @@ const RowDiv = styled.div`
   .scroll-container {
     height: 100%;
     display: flex;
-    gap: 10px;
     padding: 16px 20px;
     box-sizing: border-box;
+  }
+  .slide {
+    width: auto !important;
   }
 `;
 

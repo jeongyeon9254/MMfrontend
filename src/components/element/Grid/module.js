@@ -22,4 +22,6 @@ export const RowGridList = styled.div`
   padding: 12px 33px;
   justify-content: space-between;
   cursor: pointer;
+  z-index: 33;
+  background-color: ${props => props.theme.colors.white};
 `;
