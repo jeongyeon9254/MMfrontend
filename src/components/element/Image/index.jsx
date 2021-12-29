@@ -5,7 +5,7 @@ import icon_photo from '../../../img/Icon/icon_photo.svg';
 import Bit from '../../modules/Bit';
 
 const Image = props => {
-  const { width, margin, _onClick, round, border, src, mbti } = props;
+  const { width, margin, _onClick, round, border, src, mbti, _border } = props;
 
   const select = Bit.find(x => x.name === mbti);
 
@@ -13,6 +13,7 @@ const Image = props => {
     width,
     margin,
     src,
+    _border,
   };
 
   if (round) {
@@ -45,6 +46,7 @@ Image.defaultProps = {
   width: '100%',
   margin: '0 auto',
   mbti: 'INFJ',
+  _border: '0px',
   // src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
 };
 
