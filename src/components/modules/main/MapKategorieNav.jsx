@@ -12,7 +12,7 @@ const MapKategorieNav = props => {
   return (
     <RowDiv>
       <ScrollContainer className="scroll-container">
-        <Button BtnTag>
+        <Button BtnTag state="active">
           <img alt="MBTI 이미지" src={Bit[8].image} />
           전체보기
         </Button>
