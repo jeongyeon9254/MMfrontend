@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const ImageRoundStyle = styled.div`
   width: ${props => props.width};
+  height: ${props => props.width};
   margin: ${props => props.margin};
   background: ${props => props.theme.colors.gray_2};
+  border: ${props => props._border};
   position: relative;
   overflow: hidden;
   border-radius: 50%;

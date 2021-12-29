@@ -13,6 +13,7 @@ const Image = props => {
     width,
     margin,
     src,
+    _border,
   };
 
   if (round) {
@@ -54,6 +55,7 @@ Image.defaultProps = {
   width: '100%',
   margin: '0 auto',
   mbti: 'INFJ',
+  _border: '0px',
   // src: 'https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png',
 };
 

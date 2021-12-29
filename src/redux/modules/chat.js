@@ -13,42 +13,7 @@ const initialState = {
         '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
       mbti: 'INFJ',
       profileImg: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
-      roomId: '1',
-      date: '오후 7:36',
-    },
-    {
-      nickname: '인텁',
-      intro:
-        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
-      mbti: 'INFJ',
-      profileImg: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
-      roomId: '1',
-      date: '오후 7:36',
-    },
-    {
-      nickname: '인텁',
-      intro:
-        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
-      mbti: 'INFJ',
-      profileImg: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
-      roomId: '1',
-      date: '오후 7:36',
-    },
-    {
-      nickname: '인텁',
-      intro:
-        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
-      mbti: 'INFJ',
-      profileImg: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
-      roomId: '1',
-      date: '오후 7:36',
-    },
-    {
-      nickname: '인텁',
-      intro:
-        '소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다 소개글입니다',
-      mbti: 'INFJ',
-      profileImg: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
+      userId: '1',
       roomId: '1',
       date: '오후 7:36',
     },

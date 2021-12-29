@@ -19,6 +19,8 @@ const Box = props => {
     profile,
     comment,
     black,
+    fontColor,
+    fontSize,
   } = props;
 
   const styles = {
@@ -26,6 +28,8 @@ const Box = props => {
     color,
     margin,
     padding,
+    fontColor,
+    fontSize,
   };
 
   if (black) {
@@ -86,6 +90,8 @@ Box.defaultProps = {
   color: null,
   margin: '0',
   padding: '15px',
+  fontColor: '#000',
+  fontSize: '14px',
 };
 
 const BoxStyle = styled.div`
@@ -94,14 +100,15 @@ const BoxStyle = styled.div`
   font-weight: 400;
   word-break: keep-all;
   word-wrap: break-word;
+  color: ${props => props.fontColor};
   // props Css
   width: ${props => props.width};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   // theme Css
   background-color: ${props => props.theme.colors.gray_1};
-  font-size: ${props => props.theme.fontSizes.maxSmall};
-  line-height: ${props => props.theme.fontSizes.base};
+  font-size: ${props => (props.fontSize ? props.fontSize : props.theme.fontSizes.small)};
+  line-height: ${props => props.theme.fontSizes.xl};
 `;
 
 export default Box;

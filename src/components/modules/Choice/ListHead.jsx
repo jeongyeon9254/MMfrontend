@@ -17,6 +17,7 @@ const ListText = styled.p`
   color: #9b9b9b;
   z-index: 2;
   background-color: ${props => props.theme.colors.white};
+  transition: all ease 0.3s;
 `;
 const Arr = styled.img`
   transition: all ease 0.3s;
