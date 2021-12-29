@@ -64,7 +64,9 @@ const Square = styled.div`
 const ImageStyle = styled.img`
   position: absolute;
   width: 100%;
-  transform: scale(1.05);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.6);
 `;
 
 const Default = styled.img`
@@ -76,7 +78,9 @@ const Default = styled.img`
 const DefaultCircle = styled.img`
   position: absolute;
   width: 100%;
-  transform: scale(0.6);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
 `;
 
 export default Image;

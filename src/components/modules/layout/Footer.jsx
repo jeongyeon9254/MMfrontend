@@ -55,7 +55,7 @@ const Footer = props => {
 const FooterStyle = styled.header`
   height: 88px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   border-radius: 50px 50px 0 0;
   box-sizing: border-box;
   bottom: 0;

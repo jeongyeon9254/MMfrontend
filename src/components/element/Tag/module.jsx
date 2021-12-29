@@ -6,7 +6,7 @@ export const TagBlack = styled.div`
   background-color: #000;
   border: ${props => props.border};
   color: ${props => props.color};
-  font-size: ${props => props.theme.fontSizes.small};
+  font-size: ${props => props.theme.fontSizes.extraSmall};
   border-radius: ${props => props.theme.radius.tag};
 `;
 
@@ -17,6 +17,6 @@ export const TagStyle = styled.div`
   text-align: center;
   border-color: ${props => props.color};
   color: ${props => props.color};
-  font-size: ${props => props.theme.fontSizes.small};
+  font-size: ${props => props.theme.fontSizes.extraSmall};
   border-radius: ${props => props.theme.radius.tag};
 `;

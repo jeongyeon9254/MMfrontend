@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RowGridStyle } from './module';
+import { RowGridStyle, RowGridList } from './module';
 
 const Grid = props => {
   const {
@@ -19,6 +19,7 @@ const Grid = props => {
     border,
     borderTop,
     borderBot,
+    list,
   } = props;
 
   const styles = {
@@ -33,6 +34,7 @@ const Grid = props => {
     border,
     borderTop,
     borderBot,
+    _onClick,
   };
 
   if (row) {
@@ -42,7 +44,14 @@ const Grid = props => {
       </RowGridStyle>
     );
   }
-
+  if (list) {
+    return (
+      <RowGridList onClick={_onClick} {...styles}>
+        {' '}
+        {children}
+      </RowGridList>
+    );
+  }
   return (
     <GridStyle {...styles} onClick={_onClick}>
       {children}
