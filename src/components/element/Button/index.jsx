@@ -15,6 +15,7 @@ const Button = props => {
     width,
     children,
     _onClick,
+    _value,
     color,
     padding,
     margin,
@@ -100,13 +101,13 @@ const Button = props => {
     switch (state) {
       case 'active':
         return (
-          <BtnTagStyle {...styles} onClick={_onClick}>
+          <BtnTagStyle value={_value} {...styles} onClick={_onClick}>
             {children}
           </BtnTagStyle>
         );
       case 'In':
         return (
-          <BtnTagStyle {...styles} onClick={_onClick}>
+          <BtnTagStyle value={_value} {...styles} onClick={_onClick}>
             <img style={{ width: '15px', marginRight: '12px' }} src={myMbti.image} alt="" />
             {children}
           </BtnTagStyle>
@@ -114,6 +115,7 @@ const Button = props => {
       default:
         return (
           <BtnTagStyle
+            value={_value}
             style={{ backgroundColor: '#F9F9F9', color: '#313131' }}
             {...styles}
             onClick={_onClick}
