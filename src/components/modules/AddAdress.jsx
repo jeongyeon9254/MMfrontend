@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './layout/Header';
-import { Grid, Box } from '../element/index';
+import { Grid, Box, Button } from '../element/index';
 import LoSelect from '../modules/addInfo/LoSelct';
+import AddMBTI from '../modules/AddMBTI';
 
 const AddAdress = () => {
+  const [selecMBTI, setSelectMBIT] = useState(false);
+
+  if (selecMBTI === true) {
+    return (
+      <>
+        <AddMBTI />
+      </>
+    );
+  }
+
   return (
     <>
       <Header>추가정보 입력하기</Header>
@@ -18,7 +29,7 @@ const AddAdress = () => {
             <AddressCommet>궁합이 맞는 MBTI유저를 추천해줍니다. </AddressCommet>
           </Grid>
         </Grid>
-        <Grid margin="51px 283px 7px 36px">
+        <Grid margin="51px 283px 0px 36px">
           <p style={({ fontSize: '15px' }, { fontWeight: '400' })}>주소설정</p>
         </Grid>
         <Grid margin="0px 0px 0px 36px" row align="center">
@@ -30,6 +41,16 @@ const AddAdress = () => {
           <Grid width="183px">
             <LoSelect />
           </Grid>
+        </Grid>
+        <Grid width="315px" margin="312px 30px 44px 30px">
+          <Button
+            BtnBottom
+            _onClick={() => {
+              setSelectMBIT(true);
+            }}
+          >
+            다음으로
+          </Button>
         </Grid>
       </AddAdressBox>
     </>
@@ -51,8 +72,9 @@ const AddAdressBox = styled.div`
   flex-direction: column;
   position: absolute;
   left: 50%;
-  top: 122px;
+  top: 100px;
   transform: translateX(-50%);
+  width: 100%;
 `;
 
 export default AddAdress;
