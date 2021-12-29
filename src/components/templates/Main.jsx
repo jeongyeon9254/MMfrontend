@@ -26,7 +26,7 @@ const Main = props => {
 
 const CenterBtn = styled.div`
   position: absolute;
-  bottom: 110px;
+  bottom: 22px;
   left: 50%;
   margin-left: -43.5px;
   z-index: 1;
