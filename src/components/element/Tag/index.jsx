@@ -5,7 +5,7 @@ import Bit from '../../modules/Bit';
 import Grid from '../Grid';
 const Tag = props => {
   const { children, color, mbti, _type, icon, bg, _src, state, size, small, padding } = props;
-  const styles = { color, mbti, bg, state, padding };
+  const styles = { color, mbti, bg, state, padding, size };
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
@@ -85,7 +85,7 @@ const Tag = props => {
 Tag.defaultProps = {
   color: '#000',
   bg: false,
-  size: '0px',
+  size: null,
   state: '',
 };
 const Iconimg = styled.img`

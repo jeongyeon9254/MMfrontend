@@ -9,6 +9,7 @@ import { actionCreators as listActions } from '../../../redux/modules/list';
 import { Box, Grid, Image, Tag } from '../../element';
 import arrow_bottom from '../../../img/Icon/arrow_bottom.svg';
 import icon_location from '../../../img/Icon/icon_location.svg';
+import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
   // api연결후 변경
@@ -32,12 +33,19 @@ const MapList = props => {
           <div className="inner">
             {testArr.map((list, idx) => {
               return (
-                <div className="card" key={idx}>
+                <div
+                  className="card"
+                  key={idx}
+                  onClick={() => {
+                    history.push(`/profile/${idx}`);
+                    dispatch(listActions.downList());
+                  }}
+                >
                   <Image round width="45px" margin="0"></Image>
                   <Grid width="auto" justify="center" gap="4px">
                     <Grid row gap="5px">
                       <p className="name">홍길동</p>
-                      <Tag mbti="INFJ" _type="black" icon>
+                      <Tag mbti="INFJ" _type="black" size="11px" icon>
                         INFJ
                       </Tag>
                     </Grid>
@@ -46,8 +54,8 @@ const MapList = props => {
                       <p className="location">서울특별시 강서구</p>
                     </Grid>
                   </Grid>
-                  <Box width="43%" padding="6px">
-                    안녕하세요 친구 찾아요
+                  <Box width="43%" padding="6px 9px">
+                    <div className="textBox">안녕하세요 함께 재밌게 놀 친구를 찾아요</div>
                   </Box>
                 </div>
               );
@@ -102,6 +110,7 @@ const MapListStyle = styled.div`
     cursor: pointer;
   }
   .card .name {
+    margin-top: 1px;
     font-weight: 700;
   }
   .card .location {
@@ -109,6 +118,21 @@ const MapListStyle = styled.div`
     font-size: 10px;
     color: #9b9b9b;
     line-height: 1.3;
+  }
+  .textBox {
+    font-size: ${props => props.theme.fontSizes.maxSmall};
+    font-weight: 500;
+    margin: 0;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1rem;
+    height: 2rem;
+    color: #3f3f41;
+    text-decoration: none;
   }
 `;
 

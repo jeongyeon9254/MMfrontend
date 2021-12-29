@@ -6,7 +6,7 @@ export const TagBlack = styled.div`
   background-color: #000;
   border: ${props => props.border};
   color: ${props => props.color};
-  font-size: ${props => props.theme.fontSizes.extraSmall};
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
   border-radius: ${props => props.theme.radius.tag};
 `;
 
