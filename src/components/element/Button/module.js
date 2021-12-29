@@ -27,9 +27,11 @@ export const BtnBottomStyle = styled.button`
   font-size: ${props => props.theme.fontSizes.lg};
   margin: ${props => props.margin};
   padding: 16px;
-  width: 100%;
+  width: ${props => props.width};
   border-radius: 30px;
   ${common};
+  position: fixed;
+  bottom: 44px;
 `;
 
 export const BtnRoundStyle = styled.button`

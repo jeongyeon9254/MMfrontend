@@ -6,16 +6,6 @@ import icon_photo from '../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 
 const AddInfo = props => {
-  const [Address, setAddress] = useState(false);
-
-  if (Address === true) {
-    return (
-      <>
-        <AddAdress />
-      </>
-    );
-  }
-
   return (
     <Grid>
       <Header>추가정보 입력하기</Header>
@@ -46,16 +36,6 @@ const AddInfo = props => {
             </Button>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid width="315px" margin="51px 30px 44px 30px">
-        <Button
-          BtnBottom
-          _onClick={() => {
-            setAddress(true);
-          }}
-        >
-          다음으로
-        </Button>
       </Grid>
     </Grid>
   );

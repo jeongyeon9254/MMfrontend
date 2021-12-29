@@ -6,16 +6,6 @@ import LoSelect from '../modules/addInfo/LoSelct';
 import AddMBTI from '../modules/AddMBTI';
 
 const AddAdress = () => {
-  const [selecMBTI, setSelectMBIT] = useState(false);
-
-  if (selecMBTI === true) {
-    return (
-      <>
-        <AddMBTI />
-      </>
-    );
-  }
-
   return (
     <>
       <Header>추가정보 입력하기</Header>
@@ -42,16 +32,6 @@ const AddAdress = () => {
             <LoSelect />
           </Grid>
         </Grid>
-        <Grid width="315px" margin="312px 30px 44px 30px">
-          <Button
-            BtnBottom
-            _onClick={() => {
-              setSelectMBIT(true);
-            }}
-          >
-            다음으로
-          </Button>
-        </Grid>
       </AddAdressBox>
     </>
   );
@@ -59,7 +39,7 @@ const AddAdress = () => {
 
 const AddressTitle = styled.p`
   font-weight: 400;
-  font-size: 24px;
+  font-size: ${props => props.theme.fontSizes.xxxl};
 `;
 
 const AddressCommet = styled.p`
@@ -72,7 +52,7 @@ const AddAdressBox = styled.div`
   flex-direction: column;
   position: absolute;
   left: 50%;
-  top: 100px;
+  top: 122px;
   transform: translateX(-50%);
   width: 100%;
 `;
