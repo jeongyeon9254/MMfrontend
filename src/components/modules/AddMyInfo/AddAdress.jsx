@@ -4,14 +4,22 @@ import Header from '../layout/Header';
 import { Grid, Box, Button } from '../../element/index';
 import LoSelect from '../addInfo/LoSelct';
 import AddMBTI from './AddMBTI';
+import AddInfo from './AddInfo';
 
 const AddAdress = () => {
   const [selecMBTI, setSelectMBIT] = useState(false);
+  const [BackAddinfo, BacksetAddinfo] = useState(false);
 
   if (selecMBTI === true) {
     return (
       <>
         <AddMBTI />
+      </>
+    );
+  } else if (BackAddinfo === true) {
+    return (
+      <>
+        <AddInfo />
       </>
     );
   }
@@ -20,7 +28,13 @@ const AddAdress = () => {
   };
   return (
     <>
-      <Header>추가정보 입력하기</Header>
+      <Header
+        _on={() => {
+          BacksetAddinfo(true);
+        }}
+      >
+        추가정보 입력하기
+      </Header>
       <Grid>
         <Grid gap="10px" padding="122px 30px 0px 30px">
           <AddressTitle>

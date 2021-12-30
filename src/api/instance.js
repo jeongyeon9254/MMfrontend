@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '',
+  baseURL: 'http://13.209.76.178',
 
   // 헤더에 넣을 정보
   headers: {
-    Authorization: '토큰',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
   },

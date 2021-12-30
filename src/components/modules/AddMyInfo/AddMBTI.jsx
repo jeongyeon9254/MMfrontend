@@ -4,14 +4,23 @@ import Header from '../layout/Header';
 import Bit from '../Bit';
 import { Grid, Tag, Button } from '../../element/index';
 import AddInterest from './AddInterest';
+import AddAdress from './AddAdress';
 
 const AddMBTI = () => {
   const [seleteInterest, setSeleteInterest] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const [Backaddress, setBackaddress] = useState(false);
 
   if (seleteInterest === true) {
     return (
       <>
         <AddInterest />
+      </>
+    );
+  } else if (Backaddress === true) {
+    return (
+      <>
+        <AddAdress />
       </>
     );
   }
@@ -22,7 +31,13 @@ const AddMBTI = () => {
 
   return (
     <>
-      <Header>MBTI 입력하기</Header>
+      <Header
+        _on={() => {
+          setBackaddress(true);
+        }}
+      >
+        MBTI 입력하기
+      </Header>
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">
           <MBTITitle>
@@ -36,7 +51,17 @@ const AddMBTI = () => {
         <Grid row gap="20px" margin="23px 0px 0px 0px">
           {Bit.map((x, idx) => {
             return (
-              <Tag small _type="Btn" key={idx} _src={x.image} color={x.color}>
+              <Tag
+                small
+                _type="Btn"
+                key={idx}
+                _src={x.image}
+                color={x.color}
+                _onClick={i => {
+                  setSelected(idx);
+                }}
+                state={selected === idx ? 'active' : false}
+              >
                 {x.name}
               </Tag>
             );
@@ -47,6 +72,7 @@ const AddMBTI = () => {
         <Button
           width="315px"
           BtnBottom
+          state={setSelected === true ? 'Inactive' : false}
           _onClick={() => {
             setSeleteInterest(true);
           }}
