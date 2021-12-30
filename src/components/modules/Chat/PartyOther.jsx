@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Grid, Image, Box } from '../../element';
 function PartyOther(props) {
   const { children } = props;
+  const { profileImage } = props.data;
   return (
     <Grid row width="100%" gap="7px">
-      <Image round src="" width="40px" margin="0" />
+      <Image round src={profileImage} width="40px" margin="0" />
       <Grid width="80%" row gap="4px" align="flex-end">
         <Box width="80%" padding="7px 10px">
           {children}

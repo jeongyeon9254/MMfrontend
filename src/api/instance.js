@@ -2,8 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: 'http://13.124.242.158',
-
-  // 헤더에 넣을 정보
+  timeout: 3000,
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json;charset=UTF-8',

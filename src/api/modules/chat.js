@@ -2,7 +2,7 @@ import instance from '../instance';
 
 // 승인 버튼
 export const getApproveDB = userId => {
-  instance({
+  return instance({
     method: 'get',
     url: `/api/chemy/${userId}`,
   });
