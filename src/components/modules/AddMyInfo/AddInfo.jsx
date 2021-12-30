@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 const AddInfo = props => {
   const [Address, setAddress] = useState(false);
+  const [selectgender, setSelectgender] = useState(false);
 
   if (Address === true) {
     return (
@@ -15,6 +16,7 @@ const AddInfo = props => {
       </>
     );
   }
+  const Gender = ['남자', '여자'];
   return (
     <>
       <Grid>
@@ -38,12 +40,21 @@ const AddInfo = props => {
           <Grid margin="0px 25px">
             <AddText>성별</AddText>
             <Grid row gap="17px" justify="center">
-              <Button BtnAdd fontcolor="black" width="149px">
-                남성
-              </Button>
-              <Button BtnAdd fontcolor="black" width="149px">
-                여성
-              </Button>
+              {Gender.map((gender, idx) => {
+                return (
+                  <Button
+                    key={idx}
+                    BtnAdd
+                    state={selectgender === idx ? false : 'active'}
+                    _onClick={() => {
+                      setSelectgender(idx);
+                    }}
+                    width="149px"
+                  >
+                    {gender}
+                  </Button>
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>

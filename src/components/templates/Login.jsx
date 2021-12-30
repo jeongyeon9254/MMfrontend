@@ -7,7 +7,7 @@ import Header from '../modules/layout/Header';
 const Login = () => {
   const kakaoclick = () => {
     window.location.href =
-      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:8080/user/kakao/callback&response_type=code';
+      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://13.209.76.178/user/kakao/callback&response_type=code';
   };
 
   return (

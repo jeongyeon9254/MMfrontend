@@ -4,9 +4,12 @@ import Header from '../layout/Header';
 import Bit from '../Bit';
 import { Grid, Button } from '../../element/index';
 import AddIntro from './AddIntro';
+import AddMBTI from './AddMBTI';
 
 const AddInterest = () => {
   const [Intro, setIntro] = useState(false);
+  const [BackMBTI, setBackMBTI] = useState(false);
+  const [selected, setSeleted] = useState(false);
 
   if (Intro === true) {
     return (
@@ -14,11 +17,24 @@ const AddInterest = () => {
         <AddIntro />
       </>
     );
+  } else if (BackMBTI === true) {
+    return (
+      <>
+        <AddMBTI />
+      </>
+    );
   }
 
+  const InterestList = ['일상', '운동', '공부', '게임', '재테크'];
   return (
     <>
-      <Header>관심사 설정하기</Header>
+      <Header
+        _on={() => {
+          setBackMBTI(true);
+        }}
+      >
+        관심사 설정하기
+      </Header>
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">
           <InterestTitle>
@@ -29,11 +45,20 @@ const AddInterest = () => {
           </Grid>
         </Grid>
         <Grid row gap="8px" margin="48px 0px 0px 0px">
-          <Button BtnTag>일상</Button>
-          <Button BtnTag>운동</Button>
-          <Button BtnTag>공부</Button>
-          <Button BtnTag>게임</Button>
-          <Button BtnTag>재테크</Button>
+          {InterestList.map((interest, idx) => {
+            return (
+              <Button
+                key={idx}
+                BtnTag
+                state={selected === idx ? 'active' : false}
+                _onClick={() => {
+                  setSeleted(idx);
+                }}
+              >
+                {interest}
+              </Button>
+            );
+          })}
         </Grid>
       </Grid>
       <Grid margin="0px 30px">

@@ -1,6 +1,13 @@
 import instance from '../instance';
 import axios from 'axios';
 
+export const getMyinfoDB = () => {
+  instance({
+    method: 'get',
+    url: '/user/profile',
+  });
+};
+
 // 내 정보 가져오기 기능
 export const getMyinfoDB = () => {
   instance({
