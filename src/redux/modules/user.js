@@ -1,9 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
+import { kakaoLogin } from '../../api/modules/user';
 
 const LOG_IN = 'LOG_IN';
 
-const logIn = createAction(LOG_IN, () => ({}));
+const logIn = createAction(LOG_IN, user => ({ user }));
 
 const initialState = {
   list: [],
@@ -20,8 +21,10 @@ const initialState = {
   },
 };
 
-const logInDB = (post_id = null) => {
-  return function (dispatch, getState, { history }) {};
+const logInDB = code => {
+  return function (dispatch, getState, { history }) {
+    // dispatch(kakaoLogin(logIn()));
+  };
 };
 
 export default handleActions(
@@ -33,6 +36,7 @@ export default handleActions(
 
 const actionCreators = {
   logInDB,
+  logIn,
 };
 
 export { actionCreators };

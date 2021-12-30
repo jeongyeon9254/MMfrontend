@@ -8,6 +8,7 @@ import PostMain from './PostMain';
 import PostDetail from './PostDetail';
 import PostWrite from './PostWrite';
 import PostEdit from './PostEdit';
+import KakaoCallback from './KakaoCallback';
 import Hidden from './Hidden';
 
 export {
@@ -22,4 +23,5 @@ export {
   PostWrite,
   PostEdit,
   Hidden,
+  KakaoCallback,
 };

@@ -12,6 +12,7 @@ import {
   PostEdit,
   AddMyinfo,
   Hidden,
+  KakaoCallback,
 } from '../components/templates';
 import Profile from '../components/templates/Profile';
 import PrivateRoute from '../components/modules/PrivateRoute';
@@ -35,7 +36,13 @@ function App() {
         <PublicRoute exact restricted={true} path="/profile/:userId" Component={Profile} />/
         <PublicRoute exact restricted={true} path="/postMain" Component={PostMain} />
         <PublicRoute exact restricted={true} path="/postMain/:postId" Component={PostDetail} />
-        <PublicRoute exact restricted={true} path="/p ostWrite" Component={PostWrite} />
+        <PublicRoute exact restricted={true} path="/postWrite" Component={PostWrite} />
+        <PublicRoute
+          exact
+          restricted={true}
+          path="/user/kakao/callback"
+          Component={KakaoCallback}
+        />
       </Switch>
       <Route exact path="/hidden" component={Hidden} />
     </ConnectedRouter>
