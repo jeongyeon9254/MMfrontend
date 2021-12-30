@@ -61,6 +61,8 @@ const ProfileStyle = styled.div`
     width: 20%;
     bottom: -10%;
     left: 60%;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   .icon {
     width: 18px;
