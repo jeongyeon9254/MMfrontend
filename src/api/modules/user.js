@@ -4,7 +4,7 @@ import axios from 'axios';
 export const kakaoLogin = code => {
   instance({
     method: 'GET',
-    url: `/user/kakao/callback`,
+    url: `/user/kakao/callback?code=${code}`,
   });
 };
 

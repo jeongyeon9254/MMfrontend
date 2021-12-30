@@ -22,14 +22,8 @@ const initialState = {
 
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
-    try {
-      const res = await kakaoLogin();
-      console.log(res);
-      history.push('/AddMyinfo');
-    } catch (error) {
-      console.log(error);
-      history.push('/login');
-    }
+    const res = await kakaoLogin(code);
+    console.log(res);
   };
 };
 

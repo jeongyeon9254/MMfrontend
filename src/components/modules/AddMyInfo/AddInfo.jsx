@@ -8,6 +8,23 @@ import styled from 'styled-components';
 const AddInfo = props => {
   const [Address, setAddress] = useState(false);
   const [selectgender, setSelectgender] = useState(false);
+  const Info = {
+    nickname: '닉네임',
+    profileImage: 'https://.png',
+    gender: 'unchecked',
+    ageRange: '30대',
+    intro: '',
+    location: '',
+    longitude: '',
+    latitude: '',
+    mbti: '',
+    Interest: '',
+    signStatus: false,
+  };
+  //닉네임{nickname} 연령대(ageRange)  성별(male)
+  const [age, setage] = useState(Info.ageRange);
+  const [nickname, setnickname] = useState(Info.nickname);
+  const [gender, setgender] = useState(Info.gender);
 
   if (Address === true) {
     return (
@@ -16,7 +33,24 @@ const AddInfo = props => {
       </>
     );
   }
-  const Gender = ['남자', '여자'];
+  const Info2 = {
+    nickname: '닉네임',
+    profileImage: 'https://.png',
+    gender: gender,
+    ageRange: '30대',
+    intro: '',
+    location: '',
+    longitude: '',
+    latitude: '',
+    mbti: '',
+    Interest: '',
+    signStatus: false,
+  };
+  console.log(Info2);
+  const Gender = [
+    { en: 'male', ko: '남자' },
+    { en: 'female', ko: '여자' },
+  ];
   return (
     <>
       <Grid>
@@ -40,18 +74,18 @@ const AddInfo = props => {
           <Grid margin="0px 25px">
             <AddText>성별</AddText>
             <Grid row gap="17px" justify="center">
-              {Gender.map((gender, idx) => {
+              {Gender.map((x, idx) => {
                 return (
                   <Button
                     key={idx}
                     BtnAdd
-                    state={selectgender === idx ? false : 'active'}
+                    state={gender !== 'unchecked' ? (gender === x.en ? false : 'active') : ''}
                     _onClick={() => {
-                      setSelectgender(idx);
+                      setgender(x.en);
                     }}
                     width="149px"
                   >
-                    {gender}
+                    {x.ko}
                   </Button>
                 );
               })}
