@@ -7,6 +7,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as listActions } from '../../../redux/modules/list';
 
+// Api
+import { getMyinfoDB } from '../../../api/modules/chemy.js';
+
 const { kakao } = window;
 
 const MapContainer = () => {
@@ -18,6 +21,8 @@ const MapContainer = () => {
   const list = useSelector(state => state.main.list);
 
   useEffect(() => {
+    const aa = getMyinfoDB();
+    console.log(aa);
     axios
       .get('https://run.mocky.io/v3/1446df68-c599-44ba-bf43-7558e5f8761b')
       .then(response => {
