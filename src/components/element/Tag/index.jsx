@@ -86,7 +86,7 @@ const Tag = props => {
 Tag.defaultProps = {
   color: '#000',
   bg: false,
-  size: '0px',
+  size: null,
   state: '',
 };
 const Iconimg = styled.img`

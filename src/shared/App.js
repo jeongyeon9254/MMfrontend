@@ -13,6 +13,7 @@ import {
   AddMyinfo,
   Hidden,
 } from '../components/templates';
+import Profile from '../components/templates/Profile';
 import PrivateRoute from '../components/modules/PrivateRoute';
 import PublicRoute from '../components/modules/PublicRoute';
 
@@ -31,6 +32,7 @@ function App() {
         <PublicRoute exact restricted={true} path="/AddMyinfo" Component={AddMyinfo} />
         <PublicRoute exact restricted={true} path="/myinfo" Component={Myinfo} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
+        <PublicRoute exact restricted={true} path="/profile/:userId" Component={Profile} />/
         <PublicRoute exact restricted={true} path="/postMain" Component={PostMain} />
         <PublicRoute exact restricted={true} path="/postMain/:postId" Component={PostDetail} />
         <PublicRoute exact restricted={true} path="/p ostWrite" Component={PostWrite} />
