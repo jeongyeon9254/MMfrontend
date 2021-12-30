@@ -23,6 +23,8 @@ const Input = props => {
     _borderColor,
     _maxWidth,
     width,
+    _readOnly,
+    _defaultValue,
   } = props;
 
   const styles = {
@@ -34,6 +36,8 @@ const Input = props => {
     _borderColor,
     _maxWidth,
     width,
+    _readOnly,
+    _defaultValue,
   };
 
   const MaxNum = el => {
@@ -101,7 +105,15 @@ const Input = props => {
     case 'comment':
       return <CommentInput {...styles} value={_value} onChange={_onChange}></CommentInput>;
     default:
-      return <InputStyle {...styles} value={_value} onChange={_onChange}></InputStyle>;
+      return (
+        <InputStyle
+          {...styles}
+          value={_value}
+          defaultValue={_defaultValue}
+          readOnly={_readOnly}
+          onChange={_onChange}
+        ></InputStyle>
+      );
   }
 };
 

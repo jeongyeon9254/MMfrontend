@@ -8,7 +8,7 @@ import AddAdress from './AddAdress';
 
 const AddMBTI = () => {
   const [seleteInterest, setSeleteInterest] = useState(false);
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
 
   if (seleteInterest === true) {
@@ -72,7 +72,7 @@ const AddMBTI = () => {
         <Button
           width="315px"
           BtnBottom
-          state={setSelected === true ? 'Inactive' : false}
+          state={selected !== '' ? false : 'Inactive'}
           _onClick={() => {
             setSeleteInterest(true);
           }}

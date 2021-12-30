@@ -1,6 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
+import { setCookie } from '../../shared/Cookie';
+
 const LOG_IN = 'LOG_IN';
 
 const logIn = createAction(LOG_IN, user => ({ user }));
@@ -23,7 +25,20 @@ const initialState = {
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
     const res = await kakaoLogin(code);
-    console.log(res);
+
+    const token = res.headers.authorization;
+
+    setCookie('authorization', token);
+
+    localStorage.setItem('userInfo', JSON.stringify(res.data));
+
+    if (res.signStatus === false) {
+      history.push('/AddMyinfo');
+      window.alert('처음이신구요! 추가정보 입력 부탁드립니다!!');
+    } else {
+      history.push('/');
+      window.alert('로그인 완료');
+    }
   };
 };
 

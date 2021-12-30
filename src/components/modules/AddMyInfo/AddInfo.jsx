@@ -8,10 +8,11 @@ import styled from 'styled-components';
 const AddInfo = props => {
   const [Address, setAddress] = useState(false);
   const [selectgender, setSelectgender] = useState(false);
+
   const Info = {
-    nickname: '닉네임',
+    nickname: '',
     profileImage: 'https://.png',
-    gender: 'unchecked',
+    gender: '',
     ageRange: '30대',
     intro: '',
     location: '',
@@ -34,7 +35,7 @@ const AddInfo = props => {
     );
   }
   const Info2 = {
-    nickname: '닉네임',
+    nickname: '',
     profileImage: 'https://.png',
     gender: gender,
     ageRange: '30대',
@@ -65,11 +66,17 @@ const AddInfo = props => {
           </Grid>
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
-            <Input _borderColor="#E1E1E1" />
+            <Input _value={Info.ageRange} _readOnly _borderColor="#E1E1E1" />
           </Grid>
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
-            <Input _borderColor="#E1E1E1" />
+            <Input
+              _defaultValue={Info.nickname}
+              _onChange={e => {
+                setnickname(e.target.value);
+              }}
+              _borderColor="#E1E1E1"
+            />
           </Grid>
           <Grid margin="0px 25px">
             <AddText>성별</AddText>
@@ -79,7 +86,7 @@ const AddInfo = props => {
                   <Button
                     key={idx}
                     BtnAdd
-                    state={gender !== 'unchecked' ? (gender === x.en ? false : 'active') : ''}
+                    state={gender !== 'unchecked' ? (gender === x.en ? false : 'active') : 'active'}
                     _onClick={() => {
                       setgender(x.en);
                     }}
@@ -95,6 +102,7 @@ const AddInfo = props => {
       </Grid>
       <Grid margin="0px 30px">
         <Button
+          state={nickname !== '' && gender !== '' ? false : 'Inactive'}
           width="315px"
           BtnBottom
           _onClick={() => {
