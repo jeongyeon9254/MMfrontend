@@ -1,9 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-const SET_CHAT = 'SET_CHAT';
+const PUSH_CHAT = 'PUSH_CHAT';
 
-const setChatRoom = createAction(SET_CHAT, () => ({}));
+const pushChatRoom = createAction(PUSH_CHAT, ms => ({ ms }));
 
 const initialState = {
   roomGet: [
@@ -87,49 +87,69 @@ const initialState = {
   chatList: [
     {
       type: 'TALK',
-      roomId: '',
-      username: '',
-      profileImage: '',
-      message: '',
+      roomId: '1',
+      username: '인텁',
+      profileImage: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
+      message: 'What have you done?',
+      userId: '1',
+    },
+
+    {
+      type: 'TALK',
+      roomId: '1',
+      username: '주영',
+      profileImage: 'https://cdn.pixabay.com/photo/2019/12/25/11/11/christmas-4718303_960_720.jpg',
+      message: '경보(음), 경고 신호 (→false alarm)She decided to sound the alarm',
+      userId: '2',
+    },
+    {
+      type: 'ALARM',
+      roomId: '1',
+      username: '인텁',
+      profileImage: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
+      message: '엔진 결함이 있다는 것을 알았지만 승객들을 불안하게 만들고 싶지 않았다.',
+      userId: '1',
+    },
+    {
+      type: 'TALK',
+      roomId: '1',
+      username: '주영',
+      profileImage: 'https://cdn.pixabay.com/photo/2019/12/25/11/11/christmas-4718303_960_720.jpg',
+      message: '시계의 알람을 7시에 맞추다',
+      userId: '2',
+    },
+    {
+      type: 'TALK',
+      roomId: '1',
+      username: '인텁',
+      profileImage: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
+      message: '이 경보 장치 어떻게 끄는지 아세요',
+      userId: '1',
+    },
+    {
+      type: 'TALK',
+      roomId: '1',
+      username: '인텁',
+      profileImage: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
+      message: '4',
+      userId: '1',
     },
   ],
 };
 
-// const initialState = {
-//   // my chat list
-//   chatListInfo: [],
-//   // 현재 채팅들어갈/들어간 방정보
-//   currentChat: {
-//     room_id: null,
-//     roomName: null,
-//     post_id: null,
-//   },
-//   // 현재 접속한 채팅 메시지 (DB저장된 내용에 추가되는 메세지 push)
-//   messages: [],
-//   // 사용자가 입력하는 순간의 메세지
-//   messageText: null,
-//   // 사용자가 입력하는 순간의 메세지 time
-//   now_time: null,
-//   // 방장에게 보이는 승인요청 리스트
-//   requestList: [],
-//   // 승인 대기중인 리스트
-//   awaitList: [],
-//   // 채팅방 안 참여중인 사용자 목록
-//   userInList: [],
-// };
 const setChatRoomDB = (post_id = null) => {
   return function (dispatch, getState, { history }) {};
 };
 
 export default handleActions(
   {
-    [SET_CHAT]: (state, action) => produce(state, draft => {}),
+    [PUSH_CHAT]: (state, action) => produce(state, draft => {}),
   },
   initialState,
 );
 
 const actionCreators = {
-  setChatRoomDB,
+  pushChatRoom,
 };
 
 export { actionCreators };
