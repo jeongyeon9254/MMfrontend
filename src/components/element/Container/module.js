@@ -16,8 +16,8 @@ export const ImgBg = styled.div`
 export const ContainerStyle = styled.div`
   box-sizing: border-box;
   width: 100%;
-  max-width: 372px;
-  max-height: 774px;
+  max-width: 377px;
+  max-height: 784px;
   height: 100%;
   padding-top: 55px;
   padding-bottom: 89px;

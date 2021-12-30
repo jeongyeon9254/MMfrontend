@@ -17,11 +17,12 @@ export const RowGridStyle = styled.div`
 
 export const RowGridList = styled.div`
   display: flex;
-  border-top: 1px solid #e8e8e8;
+  border-top: ${props => (props.Btop ? props.Btop : '1px solid #e8e8e8')};
   border-bottom: 1px solid #e8e8e8;
-  padding: 12px 33px;
+  padding: ${props => props.pad};
   justify-content: space-between;
   cursor: pointer;
   z-index: 33;
   background-color: ${props => props.theme.colors.white};
+  gap: ${props => props.gap};
 `;

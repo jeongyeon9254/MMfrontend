@@ -2,26 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
 import { Grid, Button } from '../../element';
-import { UserBox, UserPre } from './index';
+import { UserBox, UserPre, UserButton } from './index';
 import { useSelector } from 'react-redux';
 
 const UserPage = props => {
   const { Boo, _onClick } = props;
-  const user = useSelector(state => state.user.user);
-
+  const { userId, nickname, profileImg, mbti } = props.data;
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
-        {user.nickname}
+        {nickname}
       </Header>
       <Grid padding="18px 30px" gap="19px">
-        <UserBox data={user}></UserBox>
-        <UserPre data={user}></UserPre>
+        <UserBox data={props.data} />
+        <UserPre nickname={nickname} profileImg={profileImg} mbti={mbti} />
       </Grid>
-      <Fiexd>
-        <Button BtnAdd>수락하기</Button>
-        <Button BtnAdd>거절하기</Button>
-      </Fiexd>
+      <UserButton userId={userId} />
     </PageShadows>
   );
 };
@@ -35,20 +31,10 @@ const PageShadows = styled.div`
   top: 0px;
   z-index: 99;
   padding-top: 55px;
-  padding-bottom: 90px;
   transition: all ease 0.3s;
   &.open {
     left: 0px;
   }
 `;
-const Fiexd = styled.div`
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  padding: 0px 30px 45px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+
 export default UserPage;

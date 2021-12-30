@@ -22,6 +22,7 @@ const Input = props => {
     _bg,
     _borderColor,
     _maxWidth,
+    width,
   } = props;
 
   const styles = {
@@ -32,6 +33,7 @@ const Input = props => {
     _bg,
     _borderColor,
     _maxWidth,
+    width,
   };
 
   const MaxNum = el => {

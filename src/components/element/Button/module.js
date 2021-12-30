@@ -14,10 +14,10 @@ export const BtnAddStyle = styled.button`
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
   width: ${props => props.width};
   margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  border-radius: 7px;
-  padding: 14px;
+  padding: ${props => (props.padding ? props.padding : '14px')};
+  border-radius: ${props => (props.radius ? props.radius : '7px')};
   ${common};
+  font-weight: bold;
   border-top: 1px solid #eee;
 `;
 

@@ -3,26 +3,25 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
-import { Grid, Container } from '../element';
+import { Grid } from '../element';
 import { Listfrom, ListHead, UserPage } from '../modules/Choice';
 import { history } from '../../redux/configureStore';
 const Choice = () => {
   const roomGet = useSelector(state => state.chat.roomGet);
   const roomPost = useSelector(state => state.chat.roomPost);
 
-  const [open, setOpen] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const [open2, setOpen2] = React.useState(true);
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
 
   React.useEffect(() => {}, [Data]);
-
   return (
     <div>
       <Header>요청 목록</Header>
       <Grid height="100%">
         <ListHead
-          Text="내가 받은 매칭 신청 목록 2개"
+          Text={'내가 받은 매칭 신청 목록 ' + roomGet.length + '개'}
           OnClick={() => {
             setOpen(!open);
           }}
@@ -44,7 +43,7 @@ const Choice = () => {
           })}
         </Boad>
         <ListHead
-          Text="내가 보낸 매칭 신청 목록 2개"
+          Text={'내가 보낸 매칭 신청 목록 ' + roomPost.length + '개'}
           OnClick={() => {
             setOpen2(!open2);
           }}
@@ -66,9 +65,10 @@ const Choice = () => {
       </Grid>
       <UserPage
         Boo={Paging}
-        data={Data}
+        data={Data !== {} ? Data : ''}
         _onClick={() => {
           setPaging(!Paging);
+          setData({});
         }}
       ></UserPage>
       <Footer />

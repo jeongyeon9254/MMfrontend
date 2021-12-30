@@ -47,8 +47,6 @@ const Selects = props => {
   const handleChange = event => {
     setArea(event.target.value);
   };
-  sele(Area);
-  console.log(Area);
   return (
     <FormControl
       sx={{

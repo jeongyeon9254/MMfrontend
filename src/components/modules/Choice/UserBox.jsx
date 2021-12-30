@@ -6,20 +6,20 @@ import fmd_good from '../../../img/Icon/fmd_good.svg';
 import Bit from '../Bit';
 
 function UserBox(props) {
-  const { ageRange, gender, interestList, intro, location, mbti, nickname, profileImage, userId } =
+  const { date, interestList, intro, mbti, nickname, profileImg, roomId, userId, location } =
     props.data;
-  const myMbti = Bit
-    ? Bit.find(x => {
-        return x.name === mbti;
-      })
-    : '';
+  const myMbti = Bit.find(x => {
+    return x.name === mbti;
+  });
+  const List = interestList ? interestList : [];
+  React.useEffect(() => {}, [myMbti]);
   return (
     <Box black>
       <Grid gap="19px">
         <Grid row gap="14px">
           <Image
             round
-            src={profileImage}
+            src={profileImg}
             mbti={mbti}
             _border="1px solid #555"
             width="60px"
@@ -35,14 +35,14 @@ function UserBox(props) {
               <Grid row gap="7px">
                 <img
                   style={{ width: '16px', height: '16px' }}
-                  src={myMbti.image}
-                  alt={myMbti.name}
+                  src={myMbti ? myMbti.image : ''}
+                  alt={myMbti ? myMbti.name : ''}
                 />
-                <p>{myMbti.title}</p>
-                <p style={{ color: myMbti.color }}>{myMbti.name}</p>
+                <p>{myMbti ? myMbti.title : ''}</p>
+                <p style={{ color: myMbti ? myMbti.color : '' }}>{myMbti ? myMbti.name : ''}</p>
               </Grid>
               <Grid row gap="4.5px">
-                {interestList.map((x, idx) => {
+                {List.map((x, idx) => {
                   return (
                     <Tag mbti={myMbti.name} key={idx} padding="3px 15px">
                       {x.interest}
@@ -60,6 +60,20 @@ function UserBox(props) {
     </Box>
   );
 }
+UserBox.defaultProps = {
+  data: {
+    date: '',
+    interestList: [],
+    intro: '',
+    mbti: '',
+    nickname: '',
+    profileImg: '',
+    roomId: '',
+    userId: '',
+    location: '',
+  },
+};
+// date, interestList, intro, mbti, nickname, profileImg, roomId, userId, location
 const Date = styled.p`
   font-size: ${props => props.theme.fontSizes.extraSmall};
   color: #8a8a8a;

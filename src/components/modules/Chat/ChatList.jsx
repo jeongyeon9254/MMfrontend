@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Image, Tag } from '../../element';
 
-const Listfrom = props => {
+const ChatList = props => {
   const { OnClick } = props;
   const { nickname, mbti, profileImg, roomId, intro, date } = props.data;
-
+  const LastChat = '여기는 마지막 채팅글 보일거요 여기는 마지막 채팅글 보일거요';
   return (
-    <Grid list _onClick={OnClick} Btop="0px" gap="11px">
-      <Image src={profileImg} round mbti={mbti} width="50px" margin="0px" />
+    <Grid list _onClick={OnClick} gap="11px" Btop="0px" pad="17px 30px">
+      <Image src={profileImg} round mbti={mbti} width="56px" margin="0px" />
       <Grid gap="12px" width="80%">
         <Grid row align="center" gap="6px">
           <Name>{nickname}</Name>{' '}
@@ -18,8 +18,8 @@ const Listfrom = props => {
           <Date>{date}</Date>
         </Grid>
         <div>
-          <Text>{intro}</Text>
-          {intro.length >= 30 ? <Dot>...</Dot> : ''}
+          <Text>{LastChat}</Text>
+          {LastChat.length >= 30 ? <Dot>...</Dot> : ''}
         </div>
       </Grid>
     </Grid>
@@ -45,4 +45,4 @@ const Text = styled.div`
 const Dot = styled.div`
   height: 10px;
 `;
-export default Listfrom;
+export default ChatList;

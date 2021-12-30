@@ -21,17 +21,21 @@ const Grid = props => {
     borderBot,
     list,
     page,
+    Btop,
+    pad,
   } = props;
 
   const styles = {
     width,
     height,
     color,
+    pad,
     padding,
     margin,
     justify,
     align,
     gap,
+    Btop,
     border,
     borderTop,
     borderBot,
@@ -73,6 +77,7 @@ Grid.defaultProps = {
   border: 'none',
   borderTop: '0px',
   borderBot: '0px',
+  pad: '12px 33px',
 };
 
 const GridStyle = styled.div`

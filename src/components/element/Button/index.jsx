@@ -26,6 +26,7 @@ const Button = props => {
     BtnAdd,
     state,
     main,
+    radius,
   } = props;
 
   const styles = {
@@ -36,6 +37,7 @@ const Button = props => {
     size,
     height,
     fontcolor,
+    radius,
   };
 
   if (BtnAdd) {
