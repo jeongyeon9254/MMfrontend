@@ -4,14 +4,13 @@ import styled from 'styled-components';
 import imgfile from '../../img/kakaologin.png';
 import { Grid } from '../element/index';
 import Header from '../modules/layout/Header';
-import { actionCreators as userActions } from '../redux/modules/user';
-
+import { actionCreators as userAction } from '../../redux/modules/user';
 const Login = () => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
+    // dispatch(userAction.logInDB());
     window.location.href =
-      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://13.124.242.158/user/kakao/callback&response_type=code';
-    dispatch(userActions.loginDB());
+      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
   };
 
   return (

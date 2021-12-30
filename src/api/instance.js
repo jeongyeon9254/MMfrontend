@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://13.209.76.178',
+  baseURL: 'http://13.124.242.158',
 
   // 헤더에 넣을 정보
   headers: {

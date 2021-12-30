@@ -1,7 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
-
 const LOG_IN = 'LOG_IN';
 
 const logIn = createAction(LOG_IN, user => ({ user }));
@@ -22,8 +21,15 @@ const initialState = {
 };
 
 const logInDB = code => {
-  return function (dispatch, getState, { history }) {
-    // dispatch(kakaoLogin(logIn()));
+  return async function (dispatch, getState, { history }) {
+    try {
+      const res = await kakaoLogin();
+      console.log(res);
+      history.push('/AddMyinfo');
+    } catch (error) {
+      console.log(error);
+      history.push('/login');
+    }
   };
 };
 

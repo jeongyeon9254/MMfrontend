@@ -95,6 +95,28 @@ const initialState = {
   ],
 };
 
+// const initialState = {
+//   // my chat list
+//   chatListInfo: [],
+//   // 현재 채팅들어갈/들어간 방정보
+//   currentChat: {
+//     room_id: null,
+//     roomName: null,
+//     post_id: null,
+//   },
+//   // 현재 접속한 채팅 메시지 (DB저장된 내용에 추가되는 메세지 push)
+//   messages: [],
+//   // 사용자가 입력하는 순간의 메세지
+//   messageText: null,
+//   // 사용자가 입력하는 순간의 메세지 time
+//   now_time: null,
+//   // 방장에게 보이는 승인요청 리스트
+//   requestList: [],
+//   // 승인 대기중인 리스트
+//   awaitList: [],
+//   // 채팅방 안 참여중인 사용자 목록
+//   userInList: [],
+// };
 const setChatRoomDB = (post_id = null) => {
   return function (dispatch, getState, { history }) {};
 };
