@@ -4,6 +4,7 @@ import { Grid, Image, Box } from '../../element';
 
 function PartyMe(props) {
   const { children } = props;
+
   return (
     <Grid row width="100%" gap="7px" justify="flex-end">
       <Grid width="80%" row gap="4px" align="flex-end">

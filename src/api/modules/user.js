@@ -2,7 +2,7 @@ import instance from '../instance';
 import axios from 'axios';
 
 export const kakaoLogin = code => {
-  instance({
+  return instance({
     method: 'GET',
     url: `/user/kakao/callback?code=${code}`,
   });
@@ -10,7 +10,7 @@ export const kakaoLogin = code => {
 
 // 내 정보 가져오기 기능
 export const getMyinfoDB = () => {
-  instance({
+  return instance({
     method: 'get',
     url: '/user/profile',
   });
@@ -18,7 +18,7 @@ export const getMyinfoDB = () => {
 
 //내정보 추가기입 기능
 export const addMyinfoDB = data => {
-  instance({
+  return instance({
     method: 'put',
     url: '/user/profile',
     data: data,
@@ -27,7 +27,7 @@ export const addMyinfoDB = data => {
 
 // 내 정보 수정 기능
 export const editMyinfoDB = data => {
-  instance({
+  return instance({
     method: 'put',
     url: '/api/profile/edit',
     data: data,

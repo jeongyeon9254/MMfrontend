@@ -77,7 +77,7 @@ const ImageStyle = styled.img`
   width: 100%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: translate(-50%, -50%) scale(1.5);
 `;
 
 const Default = styled.img`

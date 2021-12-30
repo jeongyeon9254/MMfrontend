@@ -2,7 +2,7 @@ import instance from '../instance';
 
 // 캐미 mbti get 기능
 export const getMyinfoDB = () => {
-  instance({
+  return instance({
     method: 'get',
     url: '/api/chemy/list',
   });
@@ -10,7 +10,7 @@ export const getMyinfoDB = () => {
 
 // 빠른매칭 기능
 export const getMatchingDB = () => {
-  instance({
+  return instance({
     method: 'get',
     url: '/api/chemy/matching',
   });
@@ -18,7 +18,7 @@ export const getMatchingDB = () => {
 
 // 캐미유저 정보 가져오기 기능
 export const getchemyDB = userId => {
-  instance({
+  return instance({
     method: 'get',
     url: `/api/chemy/${userId}`,
   });

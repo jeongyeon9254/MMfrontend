@@ -22,8 +22,8 @@ const initialState = {
 
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
-    const res = await kakaoLogin(code);
-    console.log(res);
+    const response = await kakaoLogin(code);
+    console.log(response);
   };
 };
 

@@ -100,7 +100,7 @@ const initialState = {
       username: '주영',
       profileImage: 'https://cdn.pixabay.com/photo/2019/12/25/11/11/christmas-4718303_960_720.jpg',
       message: '경보(음), 경고 신호 (→false alarm)She decided to sound the alarm',
-      userId: '2',
+      userId: '42',
     },
     {
       type: 'ALARM',
@@ -116,7 +116,7 @@ const initialState = {
       username: '주영',
       profileImage: 'https://cdn.pixabay.com/photo/2019/12/25/11/11/christmas-4718303_960_720.jpg',
       message: '시계의 알람을 7시에 맞추다',
-      userId: '2',
+      userId: '42',
     },
     {
       type: 'TALK',
@@ -143,7 +143,11 @@ const setChatRoomDB = (post_id = null) => {
 
 export default handleActions(
   {
-    [PUSH_CHAT]: (state, action) => produce(state, draft => {}),
+    [PUSH_CHAT]: (state, action) =>
+      produce(state, draft => {
+        const { ms } = action.payload;
+        draft.chatList.push(ms);
+      }),
   },
   initialState,
 );

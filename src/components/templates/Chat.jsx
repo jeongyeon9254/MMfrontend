@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
 import { Grid } from '../element';
-import { Listfrom, UserPage } from '../modules/Choice';
 import { ChatForm, ChatList } from '../modules/Chat/';
 
 const Chat = () => {
