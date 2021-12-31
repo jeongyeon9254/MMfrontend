@@ -6,9 +6,7 @@ const Container = props => {
   const { children } = props;
   return (
     <ImgBg>
-      <ContainerStyle>
-        <PerfectScrollbar component="div">{children}</PerfectScrollbar>
-      </ContainerStyle>
+      <ContainerStyle>{children}</ContainerStyle>
     </ImgBg>
   );
 };

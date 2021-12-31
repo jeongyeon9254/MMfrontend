@@ -52,7 +52,7 @@ const Main = props => {
 
 const CenterBtn = styled.div`
   position: absolute;
-  bottom: 22px;
+  bottom: 112px;
   left: 50%;
   margin-left: -43.5px;
   z-index: 1;
@@ -63,7 +63,7 @@ const LocationBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  top: 78px;
+  top: 128px;
   z-index: 1;
 `;
 
