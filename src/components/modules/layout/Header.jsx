@@ -5,6 +5,7 @@ import arrow_left from '../../../img/Icon/arrow_left.svg';
 import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
 import icon_search from '../../../img/Icon/icon_search.svg';
 import Phone_head from '../../../img/Icon/phone_head.png';
+import Phone_head_w from '../../../img/Icon/phone_head_w.png';
 // JS
 import { history } from '../../../redux/configureStore';
 
@@ -25,7 +26,7 @@ const Header = props => {
   return (
     <HeaderStyle {...styles} height="50px">
       <Grid>
-        <img style={{ width: '100%' }} src={Phone_head} alt="" />
+        <img style={{ width: '100%' }} src={white ? Phone_head_w : Phone_head} alt="" />
       </Grid>
       <Grid row>
         {main ? null : (
