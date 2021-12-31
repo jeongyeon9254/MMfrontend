@@ -10,6 +10,7 @@ const Button = props => {
     return x.name === userInfo.mbti;
   });
   const {
+    name,
     fontcolor,
     height,
     width,
@@ -28,6 +29,7 @@ const Button = props => {
     main,
     radius,
     border,
+    _disabled,
   } = props;
 
   const styles = {
@@ -40,6 +42,7 @@ const Button = props => {
     fontcolor,
     radius,
     border,
+    _disabled,
   };
 
   if (BtnAdd) {
@@ -47,9 +50,11 @@ const Button = props => {
       case 'active':
         return (
           <BtnAddStyle
+            name={name}
             style={{ backgroundColor: '#fff', color: '#000' }}
             {...styles}
             onClick={_onClick}
+            disabled={_disabled}
           >
             {children}
           </BtnAddStyle>
@@ -57,7 +62,7 @@ const Button = props => {
 
       default:
         return (
-          <BtnAddStyle {...styles} onClick={_onClick}>
+          <BtnAddStyle name={name} {...styles} onClick={_onClick}>
             {children}
           </BtnAddStyle>
         );
@@ -69,6 +74,7 @@ const Button = props => {
       case 'Inactive':
         return (
           <BtnBottomStyle
+            name={name}
             style={{ backgroundColor: '#A7A7A7' }}
             {...styles}
             onClick={() => {
@@ -80,13 +86,18 @@ const Button = props => {
         );
       case 'Wait':
         return (
-          <BtnBottomStyle style={{ backgroundColor: '#EC6464' }} {...styles} onClick={_onClick}>
+          <BtnBottomStyle
+            name={name}
+            style={{ backgroundColor: '#EC6464' }}
+            {...styles}
+            onClick={_onClick}
+          >
             {children}
           </BtnBottomStyle>
         );
       default:
         return (
-          <BtnBottomStyle {...styles} onClick={_onClick}>
+          <BtnBottomStyle name={name} {...styles} onClick={_onClick}>
             {children}
           </BtnBottomStyle>
         );
@@ -95,31 +106,40 @@ const Button = props => {
 
   if (BtnRound) {
     return (
-      <BtnRoundStyle {...styles} onClick={_onClick}>
+      <BtnRoundStyle name={name} {...styles} onClick={_onClick}>
         {children}
       </BtnRoundStyle>
     );
   }
 
   if (BtnTag) {
+    if (Disable) {
+      return (
+        <BtnTagStyle name={name} value={_value} {...styles}>
+          {children}
+        </BtnTagStyle>
+      );
+    }
     switch (state) {
       case 'active':
         return (
-          <BtnTagStyle value={_value} {...styles} onClick={_onClick}>
+          <BtnTagStyle name={name} value={_value} {...styles} onClick={_onClick}>
             {children}
           </BtnTagStyle>
         );
       case 'In':
         return (
-          <BtnTagStyle value={_value} {...styles} onClick={_onClick}>
+          <BtnTagStyle name={name} value={_value} {...styles} onClick={_onClick}>
             <img style={{ width: '15px', marginRight: '12px' }} src={myMbti.image} alt="" />
             {children}
           </BtnTagStyle>
         );
+
       default:
         return (
           <BtnTagStyle
             value={_value}
+            name={name}
             style={{ backgroundColor: '#F9F9F9', color: '#313131' }}
             {...styles}
             onClick={_onClick}
@@ -131,7 +151,7 @@ const Button = props => {
   }
 
   return (
-    <ButtonStyle {...styles} onClick={_onClick}>
+    <ButtonStyle name={name} {...styles} onClick={_onClick}>
       {children}
     </ButtonStyle>
   );
