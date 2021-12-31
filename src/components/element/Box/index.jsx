@@ -14,6 +14,7 @@ const Box = props => {
     margin,
     padding,
     // 분기name
+    bg,
     myChat,
     userChat,
     profile,
@@ -30,6 +31,7 @@ const Box = props => {
     padding,
     fontColor,
     fontSize,
+    bg,
   };
 
   if (black) {
@@ -106,7 +108,7 @@ const BoxStyle = styled.div`
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   // theme Css
-  background-color: ${props => props.theme.colors.gray_1};
+  background-color: ${props => (props.bg ? props.bg : props.theme.colors.gray_1)};
   font-size: ${props => (props.fontSize ? props.fontSize : props.theme.fontSizes.small)};
   line-height: ${props => props.theme.fontSizes.xl};
 `;
