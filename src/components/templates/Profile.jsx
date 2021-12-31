@@ -1,44 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Js
 import icon_location from '../../img/Icon/icon_location.svg';
+import { history } from '../../redux/configureStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 
 // component
 import { Button, Image, Grid, Box, Tag } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 
 const Profile = props => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    const pathName = history.location.pathname;
+    const name = pathName.split('/');
+    dispatch(profileActions.getProfileDB(name[2]));
+  }, []);
+
+  const profile = useSelector(state => state.profile.list);
+  const mbti = profile.interestList;
+
   return (
     <ProfileStyle>
       <Header>프로필</Header>
       <Grid margin="30px 0 0 0">
-        <Image
-          round
-          width="50%"
-          src="https://reacteek-1.s3.ap-northeast-2.amazonaws.com/ch-1.png"
-        ></Image>
+        <Image round width="50%" src={profile.profileImage}></Image>
         <div className="mbti">
           <Image round></Image>
         </div>
       </Grid>
-      <p className="name">홍길동</p>
+      <p className="name">{profile.nickname}</p>
       <Grid justify="center" width="45px" margin="15px auto">
-        <Tag mbti="INFJ" _type="black" size="14px">
-          INFJ
+        <Tag mbti={profile.mbti} _type="black" size="14px">
+          {profile.mbti}
         </Tag>
       </Grid>
       <Grid row width="auto" justify="center" gap="5px">
         <img className="icon" alt="주소" src={icon_location}></img>
-        <p className="location">서울특별시 강서구</p>
+        <p className="location">서울특별시 {profile.location}</p>
       </Grid>
       <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
-        <Tag mbti="INFJ">운동</Tag>
-        <Tag mbti="INFJ">공부</Tag>
-        <Tag mbti="INFJ">제테크</Tag>
+        {mbti ? (
+          <>
+            <Tag mbti={profile.mbti}>{profile ? mbti[0].interest : null}</Tag>
+            <Tag mbti={profile.mbti}>{profile ? mbti[1].interest : null}</Tag>
+          </>
+        ) : null}
       </Grid>
       <Box profile margin="25px 0 0 0">
-        안녕하세요 같이 재밌게 시간보낼 친구 찾습니다~
+        {profile.intro}
       </Box>
       <Button BtnBottom width="90%">
         매칭신청

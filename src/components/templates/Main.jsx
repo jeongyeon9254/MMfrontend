@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { gpsLsit } from '../modules/main/gpsList.js';
 import { actionCreators as mainActions } from '../../redux/modules/main';
+import { getMatchingDB } from '../../api/modules/chemy';
+import { history } from '../../redux/configureStore.js';
 
 // component
 import { Button } from '../element/index.js';
@@ -26,6 +28,10 @@ const Main = props => {
     if (modal === true) setModal(false);
   };
 
+  React.useEffect(() => {
+    dispatch(mainActions.getListDB());
+  }, []);
+
   return (
     <React.Fragment>
       <Header main>메인화면</Header>
@@ -37,7 +43,15 @@ const Main = props => {
       <MapKategorieNav userInfo={userInfo} />
       <MapContainer />
       <CenterBtn>
-        <Button BtnRound width="87px">
+        <Button
+          _onClick={() => {
+            getMatchingDB().then(res => {
+              history.push(`/profile/${res.data.userId}`);
+            });
+          }}
+          BtnRound
+          width="87px"
+        >
           자동매칭
         </Button>
       </CenterBtn>
@@ -52,7 +66,7 @@ const Main = props => {
                   _onClick={() => {
                     setLocation(list.location);
                     setModal(false);
-                    dispatch(mainActions.getListDB());
+                    dispatch(mainActions.chemyListDB(idx + 1));
                     //지역 get 요청
                   }}
                   key={idx}
@@ -81,7 +95,7 @@ const LocationBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  top: 128px;
+  top: 158px;
   z-index: 1;
 `;
 
@@ -95,7 +109,7 @@ const Modal = styled.div`
   background-color: ${props => props.theme.colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  top: 170px;
+  top: 200px;
   padding: 10px 20px;
   z-index: 1;
   animation: modal-show 0.3s;

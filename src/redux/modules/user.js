@@ -31,6 +31,7 @@ const logInDB = code => {
     setCookie('authorization', token);
 
     localStorage.setItem('userInfo', JSON.stringify(res.data));
+    // localStorage.setItem('token', token);
 
     if (res.signStatus === false) {
       history.push('/AddMyinfo');

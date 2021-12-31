@@ -4,7 +4,8 @@ const instance = axios.create({
   baseURL: 'http://13.124.242.158',
   timeout: 3000,
   headers: {
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    // 베어러 부분 중첩되는거 삭제 필요
+    authorization: `bearer ${document.cookie.split(' ')[1]}`,
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
   },

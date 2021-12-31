@@ -2,9 +2,13 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import axios from 'axios';
 
+import { getMyinfoDB, getChemyDB } from '../../api/modules/chemy';
+
 const GET_LIST = 'GET_LIST';
+const CHEMY_LIST = 'CHEMY_LIST';
 
 const getList = createAction(GET_LIST, data => ({ data }));
+const chemyList = createAction(CHEMY_LIST, data => ({ data }));
 
 const initialState = {
   list: {
@@ -17,11 +21,22 @@ const initialState = {
 
 const getListDB = (data = null) => {
   return async function (dispatch, getState, { history }) {
-    // 첫 요청
-    await axios
-      .get('https://run.mocky.io/v3/1ed4adfb-c9fd-44a8-b995-f25dfe6fb6ae')
-      .then(response => {
-        dispatch(getList({ ...response.data }));
+    getMyinfoDB()
+      .then(res => {
+        dispatch(getList(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+const chemyListDB = locationID => {
+  return async function (dispatch, getState, { history }) {
+    getChemyDB(locationID)
+      .then(res => {
+        console.log(res.data);
+        dispatch(chemyList(res.data));
       })
       .catch(err => {
         console.log(err);
@@ -34,10 +49,16 @@ export default handleActions(
     [GET_LIST]: (state, action) =>
       produce(state, draft => {
         const data = action.payload.data;
-        draft.list.gps = data.gps;
-        draft.list.lat = data.lat;
-        draft.list.lng = data.lng;
-        draft.list.result = data.result;
+        draft.list.result = data.userList;
+      }),
+    [CHEMY_LIST]: (state, action) =>
+      produce(state, draft => {
+        const data = action.payload.data;
+        draft.list.result = data.userList;
+
+        draft.list.gps = data.location;
+        draft.list.lat = data.latitude;
+        draft.list.lng = data.longitude;
       }),
   },
   initialState,
@@ -45,6 +66,8 @@ export default handleActions(
 
 const actionCreators = {
   getListDB,
+  getList,
+  chemyListDB,
 };
 
 export { actionCreators };

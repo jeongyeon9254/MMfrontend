@@ -19,7 +19,7 @@ const MapKategorieNav = props => {
       <img alt="MBTI 이미지" src={aa[0].image} />
       전체보기
     </>,
-    '일상',
+    '대화',
     '운동',
     '공부',
     '게임',

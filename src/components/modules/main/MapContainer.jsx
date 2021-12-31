@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import { getCookie } from '../../../shared/Cookie.js';
 
 // Js
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,10 +41,15 @@ const MapContainer = () => {
       let marker = new kakao.maps.Marker({
         position: markerPosition,
       });
+      kakao.maps.event.addListener(marker, 'click', function () {
+        dispatch(listActions.upList());
+      });
       setMaker(marker);
       marker.setMap(map);
       return;
     }
+
+    console.log(locationInfo);
 
     // 지도 이동
     var moveLatLon = new kakao.maps.LatLng(locationInfo.lat, locationInfo.lng);
@@ -64,7 +69,7 @@ const MapContainer = () => {
     kakao.maps.event.addListener(marker, 'click', function () {
       dispatch(listActions.upList());
     });
-  }, [locationInfo]);
+  }, [locationInfo.gps]);
 
   return (
     <>
