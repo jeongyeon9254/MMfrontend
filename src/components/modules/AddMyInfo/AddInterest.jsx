@@ -7,9 +7,11 @@ import AddIntro from './AddIntro';
 import AddMBTI from './AddMBTI';
 
 const AddInterest = () => {
+  const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
+
   const [Intro, setIntro] = useState(false);
   const [BackMBTI, setBackMBTI] = useState(false);
-  const [selected, setSeleted] = useState(false);
+  const [duplicated, setDuplicated] = useState([]);
 
   if (Intro === true) {
     return (
@@ -25,7 +27,25 @@ const AddInterest = () => {
     );
   }
 
-  const InterestList = ['일상', '운동', '공부', '게임', '재테크'];
+  const handleDuplicated = e => {
+    const val = e.target.value;
+
+    const isIncludes = duplicated.find(el => el === val);
+    console.log(isIncludes);
+
+    if (duplicated.length >= 2) {
+      alert('최대 2개까지만 선택 가능합니다. 다시 선택해주세요');
+      setDuplicated(duplicated.splice(0, 1));
+      return;
+    }
+
+    if (isIncludes) {
+      setDuplicated(duplicated.filter(el => el !== val));
+    } else if (0 < duplicated.length < 3) {
+      setDuplicated([...duplicated, val]);
+    }
+  };
+  console.log(duplicated);
   return (
     <>
       <Header
@@ -50,10 +70,9 @@ const AddInterest = () => {
               <Button
                 key={idx}
                 BtnTag
-                state={selected === idx ? 'active' : false}
-                _onClick={() => {
-                  setSeleted(idx);
-                }}
+                _value={interest}
+                state={duplicated.find(element => element === interest) ? 'active' : false}
+                _onClick={handleDuplicated}
               >
                 {interest}
               </Button>
@@ -65,6 +84,7 @@ const AddInterest = () => {
         <Button
           width="315px"
           BtnBottom
+          state={setDuplicated === '' ? 'Inactive' : false}
           _onClick={() => {
             setIntro(true);
           }}
