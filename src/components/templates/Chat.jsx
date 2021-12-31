@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
 import { Grid } from '../element';
-import { ChatForm, ChatList } from '../modules/Chat/';
+import { ChatForm, ChatList, Announcement } from '../modules/Chat/';
 
 const Chat = () => {
+  // 받은 요청 수
   const roomGet = useSelector(state => state.chat.roomGet);
-
+  // 채팅방을 받아서 저장 해 놓고 쓴다.
+  // const rooms = useSelector(state => state.chat.room);
   const [open, setOpen] = React.useState(true);
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
@@ -18,6 +20,7 @@ const Chat = () => {
   return (
     <div>
       <Header>채팅</Header>
+      <Announcement num={roomGet.length}></Announcement>
       <Grid height="100%">
         <Boad className={open ? 'Open' : ''}>
           {roomGet.map((x, idx) => {

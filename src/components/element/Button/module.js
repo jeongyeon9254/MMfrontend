@@ -79,4 +79,6 @@ export const ButtonStyle = styled.button`
   width: 100%;
   box-sizing: border-box;
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
+  border: ${props => props.border};
+  border-radius: ${props => (props.radius ? props.radius : 0)};
 `;
