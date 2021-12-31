@@ -9,6 +9,7 @@ import AddInfo from './AddInfo';
 const AddAdress = () => {
   const [selecMBTI, setSelectMBIT] = useState(false);
   const [BackAddinfo, BacksetAddinfo] = useState(false);
+  const [local, setlocal] = useState('');
 
   if (selecMBTI === true) {
     return (
@@ -23,9 +24,11 @@ const AddAdress = () => {
       </>
     );
   }
+
   const sele = local => {
-    console.log(local);
+    setlocal(local.location);
   };
+
   return (
     <>
       <Header
@@ -61,6 +64,7 @@ const AddAdress = () => {
       </Grid>
       <Grid margin="0px 30px">
         <Button
+          state={local !== '' ? false : 'inactive'}
           width="315px"
           BtnBottom
           _onClick={() => {

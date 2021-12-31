@@ -8,6 +8,7 @@ import { history } from '../../../redux/configureStore';
 
 const AddIntro = () => {
   const [BackInterest, setBackInterest] = useState(false);
+  const [comment, setComment] = useState('');
 
   if (BackInterest === true) {
     return (
@@ -37,10 +38,17 @@ const AddIntro = () => {
         </Grid>
       </Grid>
       <Grid row gap="8px" padding="48px 31px 0px 28px">
-        <Input _type="textarea" _size="14px"></Input>
+        <Input
+          _type="textarea"
+          _size="14px"
+          _onChange={e => {
+            setComment(e.target.value);
+          }}
+        ></Input>
       </Grid>
       <Grid margin="0px 30px">
         <Button
+          state={comment !== '' ? 'false' : 'Inactive'}
           width="315px"
           BtnBottom
           _onClick={() => {

@@ -38,11 +38,13 @@ const useStyles = makeStyles({
 
 const Selects = props => {
   const { sele } = props;
+
   const classes = useStyles();
 
   const { data, _onChange } = props;
 
   const [Area, setArea] = React.useState('');
+  sele(Area);
 
   const handleChange = event => {
     setArea(event.target.value);
