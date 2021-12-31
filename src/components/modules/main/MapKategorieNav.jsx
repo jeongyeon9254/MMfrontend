@@ -12,9 +12,11 @@ import Button from '../../element/Button';
 import Bit from '../Bit';
 
 const MapKategorieNav = props => {
+  const aa = Bit.filter(x => x.name === props.userInfo.mbti);
+
   const navList = [
     <>
-      <img alt="MBTI 이미지" src={Bit[0].image} />
+      <img alt="MBTI 이미지" src={aa[0].image} />
       전체보기
     </>,
     '일상',
@@ -22,6 +24,7 @@ const MapKategorieNav = props => {
     '공부',
     '게임',
     '제테크',
+    '기타',
   ];
 
   const [active, setActive] = useState(0);

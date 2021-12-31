@@ -14,50 +14,57 @@ const { kakao } = window;
 
 const MapContainer = () => {
   const dispatch = useDispatch();
-  // const container = useRef();
-  const [kakaoMap, setKakaoMap] = useState(null);
-  const [make, setMake] = useState(null);
-  const [makes, setMakes] = useState(null);
-  const list = useSelector(state => state.main.list);
+  const [move, setMove] = useState('null');
+  const [maker, setMaker] = useState('null');
 
-  useEffect(() => {
-    const aa = getMyinfoDB();
-    console.log(aa);
-    axios
-      .get('https://run.mocky.io/v3/1446df68-c599-44ba-bf43-7558e5f8761b')
-      .then(response => {
-        const data = response.data;
-        let container = document.getElementById('map');
+  const locationInfo = useSelector(state => state.main.list);
 
-        let options = {
-          center: new window.kakao.maps.LatLng(data.lat, data.lng),
-          level: 7,
-        };
+  useEffect(async () => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-        // 지도를 생성
-        let map = new window.kakao.maps.Map(container, options);
-        setKakaoMap(map);
+    let container = document.getElementById('map');
 
-        let markerPosition = new kakao.maps.LatLng(data.lat, data.lng);
+    let options = {
+      center: new window.kakao.maps.LatLng(userInfo.longitude, userInfo.latitude),
+      level: 7,
+    };
 
-        // 마커를 생성
-        let marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
-        setMake(marker);
+    // 최초 1회 맵 생성
+    if (locationInfo.gps === null) {
+      let map = new window.kakao.maps.Map(container, options);
+      setMove(map);
 
-        // 마커를 지도 위에 표시
-        marker.setMap(map);
+      // 마커 생성
+      let markerPosition = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
 
-        kakao.maps.event.addListener(marker, 'click', function () {
-          // 마커 위에 인포윈도우를 표시합니다
-          dispatch(listActions.upList());
-        });
-      })
-      .catch(err => {
-        console.log(err);
+      // 마커를 생성
+      let marker = new kakao.maps.Marker({
+        position: markerPosition,
       });
-  }, []);
+      setMaker(marker);
+      marker.setMap(map);
+      return;
+    }
+
+    // 지도 이동
+    var moveLatLon = new kakao.maps.LatLng(locationInfo.lat, locationInfo.lng);
+    move.panTo(moveLatLon);
+
+    // 마커 삭제후 재생성
+    maker.setMap(null);
+    let markerPosition = new kakao.maps.LatLng(locationInfo.lat, locationInfo.lng);
+
+    // 마커를 생성
+    let marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+    marker.setMap(move);
+
+    // 마커 클릭시 리스트업 이벤트
+    kakao.maps.event.addListener(marker, 'click', function () {
+      dispatch(listActions.upList());
+    });
+  }, [locationInfo]);
 
   return (
     <>

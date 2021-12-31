@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Js
+import { useDispatch, useSelector } from 'react-redux';
 import { gpsLsit } from '../modules/main/gpsList.js';
+import { actionCreators as mainActions } from '../../redux/modules/main';
 
 // component
 import { Button } from '../element/index.js';
@@ -13,7 +15,11 @@ import MapContainer from '../modules/main/MapContainer';
 import MapKategorieNav from '../modules/main/MapKategorieNav';
 
 const Main = props => {
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [modal, setModal] = useState(false);
+  const [location, setLocation] = useState(userInfo.location);
+
+  const dispatch = useDispatch();
 
   const onModal = () => {
     if (modal === false) setModal(true);
@@ -25,10 +31,10 @@ const Main = props => {
       <Header main>메인화면</Header>
       <LocationBox>
         <Button BtnTag _onClick={onModal}>
-          서울 특별시 서대문구
+          서울 특별시 {location}
         </Button>
       </LocationBox>
-      <MapKategorieNav />
+      <MapKategorieNav userInfo={userInfo} />
       <MapContainer />
       <CenterBtn>
         <Button BtnRound width="87px">
@@ -41,7 +47,19 @@ const Main = props => {
         <Modal>
           <div className="inner">
             {gpsLsit.map((list, idx) => {
-              return <Button key={idx}>{list.location}</Button>;
+              return (
+                <Button
+                  _onClick={() => {
+                    setLocation(list.location);
+                    setModal(false);
+                    dispatch(mainActions.getListDB());
+                    //지역 get 요청
+                  }}
+                  key={idx}
+                >
+                  {list.location}
+                </Button>
+              );
             })}
           </div>
         </Modal>
@@ -77,7 +95,7 @@ const Modal = styled.div`
   background-color: ${props => props.theme.colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  top: 120px;
+  top: 170px;
   padding: 10px 20px;
   z-index: 1;
   animation: modal-show 0.3s;

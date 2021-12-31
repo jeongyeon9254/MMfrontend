@@ -4,6 +4,7 @@ import styled from 'styled-components';
 // reudx
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as listActions } from '../../../redux/modules/list';
+import { actionCreators as mainActions } from '../../../redux/modules/main';
 
 // Js
 import { Box, Grid, Image, Tag } from '../../element';
