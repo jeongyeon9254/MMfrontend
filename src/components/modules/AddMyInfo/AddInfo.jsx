@@ -7,25 +7,14 @@ import styled from 'styled-components';
 
 const AddInfo = props => {
   const [Address, setAddress] = useState(false);
-  const [selectgender, setSelectgender] = useState(false);
 
-  const Info = {
-    nickname: '',
-    profileImage: 'https://.png',
-    gender: '',
-    ageRange: '30대',
-    intro: '',
-    location: '',
-    longitude: '',
-    latitude: '',
-    mbti: '',
-    Interest: '',
-    signStatus: false,
-  };
+  const getUser = localStorage.getItem('userInfo');
+  const data = JSON.parse(getUser);
+  console.log(data);
+
   //닉네임{nickname} 연령대(ageRange)  성별(male)
-  const [age, setage] = useState(Info.ageRange);
-  const [nickname, setnickname] = useState(Info.nickname);
-  const [gender, setgender] = useState(Info.gender);
+  const [nickname, setnickname] = useState(data.nickname);
+  const [gender, setgender] = useState(data.gender);
 
   if (Address === true) {
     return (
@@ -66,12 +55,12 @@ const AddInfo = props => {
           </Grid>
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
-            <Input _value={Info.ageRange} _readOnly _borderColor="#E1E1E1" />
+            <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
           </Grid>
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
             <Input
-              _defaultValue={Info.nickname}
+              _defaultValue={data.nickname}
               _onChange={e => {
                 setnickname(e.target.value);
               }}
@@ -86,7 +75,8 @@ const AddInfo = props => {
                   <Button
                     key={idx}
                     BtnAdd
-                    state={gender !== 'unchecked' ? (gender === x.en ? false : 'active') : 'active'}
+                    state={gender !== '' ? (gender === x.en ? false : 'active') : 'active'}
+                    _disabled={gender !== '' ? true : false}
                     _onClick={() => {
                       setgender(x.en);
                     }}

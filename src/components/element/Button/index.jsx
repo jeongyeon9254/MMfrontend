@@ -29,7 +29,7 @@ const Button = props => {
     main,
     radius,
     border,
-    Disable,
+    _disabled,
   } = props;
 
   const styles = {
@@ -42,6 +42,7 @@ const Button = props => {
     fontcolor,
     radius,
     border,
+    _disabled,
   };
 
   if (BtnAdd) {
@@ -53,6 +54,7 @@ const Button = props => {
             style={{ backgroundColor: '#fff', color: '#000' }}
             {...styles}
             onClick={_onClick}
+            disabled={_disabled}
           >
             {children}
           </BtnAddStyle>
