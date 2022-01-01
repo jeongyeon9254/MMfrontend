@@ -5,10 +5,30 @@ import Bit from '../Bit';
 import { Grid, Input, Button } from '../../element/index';
 import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
+import { useDispatch } from 'react-redux';
 
-const AddIntro = () => {
+const AddIntro = props => {
+  const dispatch = useDispatch();
+  const { file, local, mbti, duplicated } = props;
+  console.log(file, local, mbti, duplicated);
   const [BackInterest, setBackInterest] = useState(false);
+
   const [comment, setComment] = useState('');
+
+  const userInfo = {
+    nickname: file.nickname,
+    profileImage: file.profileImage,
+    gender: file.gender,
+    ageRange: file.ageRange,
+    intro: comment,
+    location: local.location,
+    mbti: mbti,
+    interestList: duplicated,
+  };
+
+  const ClickEvent = () => {
+    console.log(userInfo);
+  };
 
   if (BackInterest === true) {
     return (
@@ -51,9 +71,7 @@ const AddIntro = () => {
           state={comment !== '' ? 'false' : 'Inactive'}
           width="315px"
           BtnBottom
-          _onClick={() => {
-            history.push('/');
-          }}
+          _onClick={ClickEvent}
         >
           다음으로
         </Button>

@@ -7,6 +7,7 @@ import icon_location_w from '../../../img/Icon/icon_location_w.svg';
 
 function MyinfoHead(props) {
   const Info = JSON.parse(localStorage.getItem('userInfo'));
+  const location = '성동구';
   const mbti = 'ENTJ';
   const MyBit = Bit.find(x => {
     return x.name === mbti;
@@ -14,7 +15,7 @@ function MyinfoHead(props) {
 
   return (
     <NewHeader>
-      <Announcement bg="#fff" fontcolor="#555555" ws></Announcement>
+      <Announcement bg="#fff" fontcolor="#000" ws></Announcement>
       <ImgBit src={MyBit ? MyBit.image : ''} />
       <Point>
         <Grid row gap="23px">
@@ -23,7 +24,8 @@ function MyinfoHead(props) {
             <Mename>{Info.nickname}</Mename>
             <Local>
               <Grid row gap="6px">
-                <img src={icon_location_w} alt="" /> <span>{Info.location}</span>
+                <img src={icon_location_w} alt="" />{' '}
+                <span>{Info.location ? Info.location : location}</span>
               </Grid>
             </Local>
           </Grid>
@@ -35,7 +37,7 @@ function MyinfoHead(props) {
 const NewHeader = styled.div`
   background-color: #3f3f41;
   width: 100%;
-  height: 330px;
+  height: 314px;
   border-radius: 0px 0px 50px 0px;
   position: fixed;
   left: 0px;
@@ -52,10 +54,10 @@ const ImgBit = styled.img`
 const Point = styled.div`
   position: absolute;
   left: 50%;
-  bottom: -10%;
+  bottom: -7%;
   width: 100%;
   transform: translateX(-50%);
-  padding: 0px 30px;
+  padding: 0px 28px;
 `;
 
 const Mename = styled.h2`

@@ -1,15 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Image, Box, Button } from '../../element';
+import { Grid, Button } from '../../element';
 import { Mybit } from '../Bit';
 import { MymbtiInfo } from './index';
 
 function MyinfoBit(props) {
+  const [Open, setOpen] = React.useState(false);
   const { mbti } = props;
   const bit = Mybit(mbti);
+  const OpenClick = () => {
+    setOpen(!Open);
+  };
+
+  console.log(Open);
   return (
     <>
-      <Button padding="15px 17px" radius="7px" color="#3F3F41" border="0px">
+      <Button padding="15px 17px" radius="7px" color="#3F3F41" border="0px" _onClick={OpenClick}>
         <Grid row gap="13px" align="center">
           <Icon src={bit ? bit.image : ''} />
           <Grid width="auto" gap="5px">
@@ -22,7 +28,7 @@ function MyinfoBit(props) {
           </Grid>
         </Grid>
       </Button>
-      <MymbtiInfo mbti={mbti}></MymbtiInfo>
+      <MymbtiInfo mbti={mbti} Open={Open} _onClick={OpenClick}></MymbtiInfo>
     </>
   );
 }

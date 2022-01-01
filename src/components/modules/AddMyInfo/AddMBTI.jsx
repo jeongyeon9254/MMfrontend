@@ -6,15 +6,16 @@ import { Grid, Tag, Button } from '../../element/index';
 import AddInterest from './AddInterest';
 import AddAdress from './AddAdress';
 
-const AddMBTI = () => {
+const AddMBTI = props => {
+  const { file, local } = props;
   const [seleteInterest, setSeleteInterest] = useState(false);
   const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
-
+  console.log(selected);
   if (seleteInterest === true) {
     return (
       <>
-        <AddInterest />
+        <AddInterest file={file} local={local} mbti={selected} />
       </>
     );
   } else if (Backaddress === true) {
@@ -58,9 +59,9 @@ const AddMBTI = () => {
                 _src={x.image}
                 color={x.color}
                 _onClick={i => {
-                  setSelected(idx);
+                  setSelected(x.name);
                 }}
-                state={selected === idx ? 'active' : false}
+                state={selected === x.name ? 'active' : false}
               >
                 {x.name}
               </Tag>

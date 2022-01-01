@@ -45,11 +45,6 @@ const Selects = props => {
   const { data, _onChange } = props;
 
   const [Area, setArea] = React.useState('');
-  sele(Area);
-
-  const handleChange = event => {
-    setArea(event.target.value);
-  };
   return (
     <Box
       sx={{
@@ -73,7 +68,10 @@ const Selects = props => {
           },
         }}
         value={Area}
-        onChange={handleChange}
+        onChange={e => {
+          setArea(e.target.value);
+          sele(e.target.value);
+        }}
       >
         {gpsLsit.map((item, idx) => {
           return (

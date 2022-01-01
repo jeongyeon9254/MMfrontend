@@ -7,24 +7,30 @@ function Myinterests(props) {
   const res = interestList.map(x => {
     return x.interest;
   });
-
-  const [exercise, setExercise] = React.useState(false);
-  const [study, setStudy] = React.useState(false);
-  const [conversation, setConversation] = React.useState(false);
-  const [finance, setFinance] = React.useState(false);
-  const [game, setGame] = React.useState(false);
-  const [other, setOther] = React.useState(false);
-
-  const ClickEvent = (e, active, ko) => {};
-
   const interrests = [
-    { en: 'exercise', ko: '운동', active: exercise },
-    { en: 'study', ko: '공부', active: study },
-    { en: 'conversation', ko: '대화', active: conversation },
-    { en: 'finance', ko: '제테크', active: finance },
-    { en: 'game', ko: '게임', active: game },
-    { en: 'other', ko: '기타', active: other },
+    { en: 'exercise', ko: '운동', active: false },
+    { en: 'study', ko: '공부', active: false },
+    { en: 'conversation', ko: '대화', active: false },
+    { en: 'finance', ko: '제테크', active: false },
+    { en: 'game', ko: '게임', active: false },
+    { en: 'other', ko: '기타', active: false },
   ];
+  const [state, setstate] = React.useState({
+    exercise: interrests[0].active,
+    study: interrests[1].active,
+    conversation: interrests[2].active,
+    finance: interrests[3].active,
+    game: interrests[4].active,
+    other: interrests[5].active,
+  });
+  const { exercise, study, conversation, finance, game, other } = state;
+
+  const ClickEvent = (e, active) => {
+    setstate({
+      ...state,
+      [e.target.name]: !active,
+    });
+  };
 
   interrests.filter(x => {
     if (res.includes(x.ko)) {
@@ -34,10 +40,19 @@ function Myinterests(props) {
     return x;
   });
 
-  console.log(interrests);
-
-  React.useEffect(() => {}, []);
-
+  if (Disable) {
+    return (
+      <Grid row gap="9px">
+        {interrests.map((x, idx) => {
+          return (
+            <Button key={idx} name={x.en} state={x.active ? 'active' : ''} BtnTag>
+              {x.ko}
+            </Button>
+          );
+        })}
+      </Grid>
+    );
+  }
   return (
     <Grid row gap="9px">
       {interrests.map((x, idx) => {
@@ -48,7 +63,7 @@ function Myinterests(props) {
             state={x.active ? 'active' : ''}
             BtnTag
             _onClick={e => {
-              ClickEvent(e, x.active, x.ko);
+              ClickEvent(e, x.active);
             }}
           >
             {x.ko}
