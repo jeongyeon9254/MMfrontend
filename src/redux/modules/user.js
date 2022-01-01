@@ -3,7 +3,6 @@ import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
 import { editMyinfoDB, addMyinfoDB } from '../../api/modules/user';
-
 const LOG_IN = 'LOG_IN';
 
 const logIn = createAction(LOG_IN, user => ({ user }));
@@ -29,10 +28,9 @@ const logInDB = code => {
 
     const token = res.headers.authorization;
 
-    setCookie('authorization', token);
+    setCookie('authorization ', token);
 
     localStorage.setItem('userInfo', JSON.stringify(res.data));
-    // localStorage.setItem('token', token);
 
     if (res.data.signStatus === false) {
       history.push('/AddMyinfo');
@@ -47,7 +45,9 @@ const userIngoPut = userInfo => {
   return async function (dispatch, getState, { history }) {
     const res = await editMyinfoDB(userInfo);
     console.log(res);
-    localStorage.setItem('userInfo', JSON.stringify(res.data));
+    // localStorage.removeItem('userInfo');
+    // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    // history.push('/');
   };
 };
 
