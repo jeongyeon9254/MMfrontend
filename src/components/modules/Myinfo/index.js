@@ -6,5 +6,18 @@ import MymbtiInfo from './MymbtiInfo';
 import MymbtiTxt from './MymbtiTxt';
 import MyBody from './MyBody';
 import MyBottom from './MyBottom';
+import MyEdit from './MyEdit';
+import Mymbtibtn from './Mymbtibtn';
 
-export { MyinfoBit, MyPartBox, MyinfoHead, Myinterests, MymbtiInfo, MymbtiTxt, MyBody, MyBottom };
+export {
+  MyinfoBit,
+  MyPartBox,
+  MyinfoHead,
+  Myinterests,
+  MymbtiInfo,
+  MymbtiTxt,
+  MyBody,
+  MyBottom,
+  MyEdit,
+  Mymbtibtn,
+};

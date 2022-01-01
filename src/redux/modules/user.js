@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
-import { editMyinfoDB } from '../../api/modules/user';
+import { editMyinfoDB, addMyinfoDB } from '../../api/modules/user';
 
 const LOG_IN = 'LOG_IN';
 
@@ -45,7 +45,9 @@ const logInDB = code => {
 };
 const userIngoPut = userInfo => {
   return async function (dispatch, getState, { history }) {
-    editMyinfoDB(userInfo);
+    const res = await editMyinfoDB(userInfo);
+    console.log(res);
+    localStorage.setItem('userInfo', JSON.stringify(res.data));
   };
 };
 

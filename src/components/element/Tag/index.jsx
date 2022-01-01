@@ -6,11 +6,10 @@ import Grid from '../Grid';
 const Tag = props => {
   const { _onClick, children, color, mbti, _type, icon, bg, _src, state, size, small, padding } =
     props;
-  const styles = { color, mbti, bg, state, padding };
+  const styles = { color, mbti, bg, state, padding, small };
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
-
   switch (_type) {
     case 'black':
       return (
@@ -39,12 +38,12 @@ const Tag = props => {
                 {small ? (
                   <>
                     <img style={{ transform: 'scale(0.87)' }} src={_src} alt={children} />
-                    <p style={{ marginTop: '6px' }}>{children}</p>
+                    <p>{children}</p>
                   </>
                 ) : (
                   <>
                     <img src={_src} alt={children} />
-                    <p style={{ marginTop: '3px' }}>{children}</p>
+                    <p>{children}</p>
                   </>
                 )}
               </div>
@@ -58,12 +57,12 @@ const Tag = props => {
                 {small ? (
                   <>
                     <img style={{ transform: 'scale(0.87)' }} src={_src} alt={children} />
-                    <p style={{ marginTop: '6px' }}>{children}</p>
+                    <p>{children}</p>
                   </>
                 ) : (
                   <>
                     <img src={_src} alt={children} />
-                    <p style={{ marginTop: '3px' }}>{children}</p>
+                    <p>{children}</p>
                   </>
                 )}
               </div>
@@ -88,6 +87,7 @@ Tag.defaultProps = {
   bg: false,
   size: null,
   state: '',
+  small: false,
 };
 const Iconimg = styled.img`
   width: 11px;
