@@ -33,7 +33,6 @@ const MapList = props => {
           {/* 카드리스트 */}
           <div className="inner">
             {list.result.map((list, idx) => {
-              console.log(list);
               return (
                 <div
                   className="card"

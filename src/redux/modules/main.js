@@ -35,7 +35,6 @@ const chemyListDB = locationID => {
   return async function (dispatch, getState, { history }) {
     getChemyDB(locationID)
       .then(res => {
-        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {

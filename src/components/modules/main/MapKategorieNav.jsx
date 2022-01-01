@@ -12,11 +12,10 @@ import Button from '../../element/Button';
 import { Mybit } from '../Bit';
 
 const MapKategorieNav = props => {
-  const aa = Mybit(props.userInfo.mbti);
-  console.log(aa);
+  const mbti = Mybit(props.userInfo.mbti);
   const navList = [
     <>
-      <img alt="MBTI 이미지" src={aa.image ? aa.image : null} />
+      <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
       전체보기
     </>,
     '대화',
@@ -53,6 +52,8 @@ const MapKategorieNav = props => {
 };
 
 const RowDiv = styled.div`
+  background: #fff;
+  margin-top: -2px;
   img {
     height: ${props => props.theme.fontSizes.base};
     margin-right: 10px;
