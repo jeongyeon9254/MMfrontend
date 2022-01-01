@@ -23,6 +23,8 @@ const MapList = props => {
     dispatch(listActions.downList());
   };
 
+  console.log(list);
+
   return (
     <React.Fragment>
       {listState ? (
@@ -43,8 +45,8 @@ const MapList = props => {
                   }}
                 >
                   <Image round width="45px" margin="0" src={list.profileImage}></Image>
-                  <Grid width="auto" justify="center" gap="4px">
-                    <Grid row gap="5px">
+                  <Grid width="35%" justify="center" gap="4px">
+                    <Grid row gap="5px" justify="space-between">
                       <p className="name">{list.nickname}</p>
                       <Tag mbti={list.mbti} _type="black" size="11px" icon>
                         {list.mbti}
@@ -55,7 +57,7 @@ const MapList = props => {
                       <p className="location">서울특별시 {list.location}</p>
                     </Grid>
                   </Grid>
-                  <Box width="43%" padding="6px 9px">
+                  <Box width="40%" padding="6px 9px">
                     <div className="textBox">{list.intro}</div>
                   </Box>
                 </div>
@@ -114,7 +116,7 @@ const MapListStyle = styled.div`
     margin-top: 1px;
     font-weight: 700;
     line-height: 1.2;
-    font-size: ${props => props.theme.fontSizes.base};
+    font-size: ${props => props.theme.fontSizes.small};
   }
   .card .location {
     font-weight: 500;
