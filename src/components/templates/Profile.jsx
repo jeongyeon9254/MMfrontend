@@ -26,6 +26,8 @@ const Profile = props => {
 
   const [modal, setModal] = useState(false);
 
+  console.log(profile);
+
   return (
     <>
       {modal ? (
@@ -58,12 +60,15 @@ const Profile = props => {
           <p className="location">서울특별시 {profile.location}</p>
         </Grid>
         <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
-          {mbti ? (
-            <>
-              <Tag mbti={profile ? profile.mbti : 'INFJ'}>{profile ? mbti[0].interest : null}</Tag>
-              <Tag mbti={profile ? profile.mbti : 'INFJ'}>{profile ? mbti[1].interest : null}</Tag>
-            </>
-          ) : null}
+          {mbti
+            ? mbti.map((x, idx) => {
+                return (
+                  <Tag key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
+                    {profile ? mbti[idx].interest : null}
+                  </Tag>
+                );
+              })
+            : null}
         </Grid>
         <Box profile margin="25px 0 0 0">
           {profile.intro}
