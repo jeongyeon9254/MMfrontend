@@ -46,8 +46,9 @@ const AddInterest = props => {
     }
   };
   return (
-    <>
+    <Body>
       <Header
+        point="absolute"
         _on={() => {
           setBackMBTI(true);
         }}
@@ -91,10 +92,13 @@ const AddInterest = props => {
           다음으로
         </Button>
       </Grid>
-    </>
+    </Body>
   );
 };
 
+const Body = styled.body`
+  z-index: 10;
+`;
 const InterestTitle = styled.span`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.xxxl};

@@ -27,7 +27,7 @@ const AddInfo = props => {
     };
     return (
       <>
-        <AddAdress file={file} />
+        <AddAdress file={file} AddAdress={AddAdress} />
       </>
     );
   }
@@ -51,7 +51,7 @@ const AddInfo = props => {
   ];
 
   return (
-    <>
+    <Body>
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
@@ -107,9 +107,17 @@ const AddInfo = props => {
           다음으로
         </Button>
       </Grid>
-    </>
+    </Body>
   );
 };
+
+const Body = styled.div`
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+`;
 const AddText = styled.p`
   font-size: 15px;
   font-weight: 400;

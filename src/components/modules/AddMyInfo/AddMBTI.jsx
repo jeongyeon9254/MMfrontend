@@ -33,6 +33,7 @@ const AddMBTI = props => {
   return (
     <>
       <Header
+        point="absolute"
         _on={() => {
           setBackaddress(true);
         }}

@@ -41,6 +41,7 @@ const AddIntro = props => {
   return (
     <>
       <Header
+        point="absolute"
         _on={() => {
           setBackInterest(true);
         }}

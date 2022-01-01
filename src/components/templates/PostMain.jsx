@@ -3,6 +3,7 @@ import { history } from '../../redux/configureStore';
 import MapKategorieNav from '../modules/main/MapKategorieNav';
 import Header from '../modules/layout/Header';
 import PostCard from '../modules/Post/PostCard';
+import MainComment from '../modules/Post/MainComment';
 
 const PostMain = () => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -17,6 +18,9 @@ const PostMain = () => {
       </Header>
       <MapKategorieNav userInfo={userInfo} />
       <PostCard />
+      <MainComment />
+      <MainComment />
+      <MainComment />
     </>
   );
 };
