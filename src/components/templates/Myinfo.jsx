@@ -5,6 +5,7 @@ import Bit from '../modules/Bit';
 import { MyinfoHead, MyBody, MyBottom, MyEdit } from '../modules/Myinfo';
 const Myinfo = () => {
   const [Open, setOpen] = React.useState('');
+
   return (
     <>
       <Header bg="transparent" white>

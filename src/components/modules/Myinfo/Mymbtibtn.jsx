@@ -2,9 +2,10 @@ import React from 'react';
 import { Input, Grid, Tag } from '../../element';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
-import Bit from '../Bit';
+import Bit, { Mybit } from '../Bit';
 
 function Mymbtibtn() {
+  Mybit();
   return (
     <Grid row gap="20px" padding="3px 0">
       <Swiper

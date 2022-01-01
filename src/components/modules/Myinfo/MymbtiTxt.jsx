@@ -4,7 +4,6 @@ import { Grid } from '../../element';
 
 function MymbtiTxt(props) {
   const { mbti } = props;
-
   return (
     <Scroll>
       <Grid gap="35px">

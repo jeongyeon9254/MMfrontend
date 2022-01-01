@@ -10,22 +10,9 @@ const ChatForm = props => {
   const { Boo, _onClick } = props;
   const { userId, nickname, roomId } = props.data;
 
-  const userInfo = {
-    nickname: '주르',
-    profileImage: 'https://cdn.pixabay.com/photo/2020/12/01/10/04/dog-5793625_960_720.jpg',
-    gender: 'male',
-    ageRange: '30대',
-    intro: '소개글입니다',
-    location: '종로구',
-    longitude: '15.1212',
-    latitude: '15.21212',
-    mbti: 'INTJ',
-    interestList: [{ interest: '공부' }, { interest: '운동' }],
-    signStatus: true,
-    userId: '42',
-  };
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  const Chatx = useSelector(state => state.chat.chatList);
+  const Chatx = useSelector(state => state.chat.List);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>

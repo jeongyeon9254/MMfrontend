@@ -24,6 +24,7 @@ const Grid = props => {
     Btop,
     pad,
     wrap,
+    Zindex,
   } = props;
 
   const styles = {
@@ -42,6 +43,7 @@ const Grid = props => {
     borderBot,
     _onClick,
     wrap,
+    Zindex,
   };
 
   if (row) {
@@ -80,6 +82,7 @@ Grid.defaultProps = {
   borderTop: '0px',
   borderBot: '0px',
   pad: '12px 33px',
+  Zindex: '0',
 };
 
 const GridStyle = styled.div`
@@ -96,6 +99,7 @@ const GridStyle = styled.div`
   align-items: ${props => (props.align ? props.align : 'stretch ')};
   gap: ${props => (props.gap ? props.gap : '0')};
   position: relative;
+  z-index: ${props => props.Zindex};
 `;
 
 export default Grid;
