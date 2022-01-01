@@ -6,18 +6,19 @@ import Header from '../layout/Header';
 import { Grid } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
+import { ws } from '../../../api/ws';
+
 const ChatForm = props => {
   const { Boo, _onClick } = props;
-  const { userId, nickname, roomId } = props.data;
-
+  const { userId, name, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
   const Chatx = useSelector(state => state.chat.List);
+  console.log(process.env.NODE_ENV);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
-        {nickname}
+        {name}
       </Header>
       <Grid height="89%">
         <PerfectScrollbar component="div">
@@ -55,7 +56,7 @@ const PageShadows = styled.div`
   position: fixed;
   left: -100%;
   top: 0px;
-  z-index: 99;
+  z-index: 9999;
   padding-top: 85px;
   transition: all ease 0.3s;
   &.open {

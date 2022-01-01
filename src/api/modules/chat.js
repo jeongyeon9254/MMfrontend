@@ -12,7 +12,7 @@ export const getApproveDB = userId => {
 export const creatRoom = nickname => {
   return instance({
     method: 'get',
-    url: '/chat/room',
+    url: '/chat/rooms',
   });
 };
 
