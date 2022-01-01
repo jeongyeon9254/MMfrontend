@@ -26,7 +26,7 @@ const Profile = props => {
 
   const [modal, setModal] = useState(false);
 
-  console.log(mbti);
+  console.log(profile);
 
   return (
     <>
@@ -63,8 +63,8 @@ const Profile = props => {
           {mbti
             ? mbti.map((x, idx) => {
                 return (
-                  <Tag mbti={profile ? profile.mbti : 'INFJ'}>
-                    {profile ? mbti[0].interest : null}
+                  <Tag key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
+                    {profile ? mbti[idx].interest : null}
                   </Tag>
                 );
               })
