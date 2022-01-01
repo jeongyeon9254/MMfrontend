@@ -33,6 +33,7 @@ const MapList = props => {
           {/* 카드리스트 */}
           <div className="inner">
             {list.result.map((list, idx) => {
+              console.log(list);
               return (
                 <div
                   className="card"
@@ -46,7 +47,7 @@ const MapList = props => {
                   <Grid width="auto" justify="center" gap="4px">
                     <Grid row gap="5px">
                       <p className="name">{list.nickname}</p>
-                      <Tag mbti="INFJ" _type="black" size="11px" icon>
+                      <Tag mbti={list.mbti} _type="black" size="11px" icon>
                         {list.mbti}
                       </Tag>
                     </Grid>

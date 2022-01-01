@@ -14,8 +14,8 @@ const Tag = props => {
   switch (_type) {
     case 'black':
       return (
-        <TagBlack {...styles} color={MyBit.color}>
-          <Grid row color="transparent !important" gap="5px">
+        <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
+          <Grid row color="transparent !important" gap="5px" justify="center">
             {icon ? <Iconimg src={MyBit.image} /> : ''}
             <p>{children}</p>
           </Grid>
@@ -23,7 +23,7 @@ const Tag = props => {
       );
     case 'myDefult':
       return (
-        <TagBlack {...styles} color={MyBit.color}>
+        <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
           <Grid row color="transparent !important" gap="5px">
             {icon ? <Iconimg src={MyBit.image} /> : ''}
             <p>{children}</p>

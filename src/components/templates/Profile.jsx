@@ -22,18 +22,20 @@ const Profile = props => {
   const profile = useSelector(state => state.profile.list);
   const mbti = profile.interestList;
 
+  console.log(profile);
+
   return (
     <ProfileStyle>
       <Header>프로필</Header>
       <Grid margin="30px 0 0 0">
         <Image round width="50%" src={profile.profileImage}></Image>
         <div className="mbti">
-          <Image round></Image>
+          <Image round mbti={profile ? profile.mbti : 'INFJ'}></Image>
         </div>
       </Grid>
       <p className="name">{profile.nickname}</p>
-      <Grid justify="center" width="45px" margin="15px auto">
-        <Tag mbti={profile.mbti} _type="black" size="14px">
+      <Grid width="15%" margin="15px auto">
+        <Tag mbti={profile ? profile.mbti : 'INFJ'} _type="black" size="14px">
           {profile.mbti}
         </Tag>
       </Grid>
@@ -44,8 +46,8 @@ const Profile = props => {
       <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
         {mbti ? (
           <>
-            <Tag mbti={profile.mbti}>{profile ? mbti[0].interest : null}</Tag>
-            <Tag mbti={profile.mbti}>{profile ? mbti[1].interest : null}</Tag>
+            <Tag mbti={profile ? profile.mbti : 'INFJ'}>{profile ? mbti[0].interest : null}</Tag>
+            <Tag mbti={profile ? profile.mbti : 'INFJ'}>{profile ? mbti[1].interest : null}</Tag>
           </>
         ) : null}
       </Grid>
