@@ -33,6 +33,7 @@ const Body = styled.div`
   position: fixed;
   left: 0px;
   top: 0px;
+  display: none;
   z-index: 999;
   .swiper-container {
     padding: 2px;

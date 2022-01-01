@@ -5,23 +5,17 @@ import { Grid, Box } from '../../element';
 
 function MyBody() {
   const Info = JSON.parse(localStorage.getItem('userInfo'));
-  const mbti = 'ENTJ';
-  console.log(Info);
   return (
     <Body>
       <Grid gap="27px">
         <MyPartBox title="나의 MBTI">
-          <MyinfoBit mbti={mbti} />
+          <MyinfoBit mbti={Info.mbti} />
         </MyPartBox>
         <MyPartBox title="나의 관심사">
           <Myinterests data={Info.interestList} />
         </MyPartBox>
         <MyPartBox title="한줄 소개">
-          <Box padding="12px 17px">
-            {Info.info
-              ? Info.info
-              : ' 안녕하세요~ 같이 재밌게 시간 보낼 친구 찾아요, 현재 강서구에 거주하고 있는 INFP인간입니다 :'}
-          </Box>
+          <Box padding="12px 17px">{Info.intro ? Info.intro : ' '}</Box>
         </MyPartBox>
       </Grid>
     </Body>

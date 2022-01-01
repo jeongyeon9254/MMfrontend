@@ -3,8 +3,8 @@ import { Grid, Button } from '../../element';
 
 function Myinterests(props) {
   const { Disable } = props;
-  let interestList = [{ interest: '공부' }, { interest: '운동' }];
-  const res = interestList.map(x => {
+  const Info = JSON.parse(localStorage.getItem('userInfo'));
+  const res = Info.interestList.map(x => {
     return x.interest;
   });
   const interrests = [

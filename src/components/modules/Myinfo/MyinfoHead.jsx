@@ -6,11 +6,9 @@ import { Announcement } from '../Chat';
 import icon_location_w from '../../../img/Icon/icon_location_w.svg';
 
 function MyinfoHead(props) {
-  const Info = JSON.parse(localStorage.getItem('userInfo'));
-  const location = '성동구';
-  const mbti = 'ENTJ';
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const MyBit = Bit.find(x => {
-    return x.name === mbti;
+    return x.name === userInfo.mbti;
   });
 
   return (
@@ -19,13 +17,13 @@ function MyinfoHead(props) {
       <ImgBit src={MyBit ? MyBit.image : ''} />
       <Point>
         <Grid row gap="23px">
-          <Image round src={Info.profileImage} mbti={mbti} width="140px" margin="0" />
+          <Image round src={userInfo.profileImage} mbti={userInfo.mbti} width="140px" margin="0" />
           <Grid width="auto" gap="13px" padding="21px 0px">
-            <Mename>{Info.nickname}</Mename>
+            <Mename>{userInfo.nickname}</Mename>
             <Local>
-              <Grid row gap="6px">
+              <Grid row gap="6px" align="center">
                 <img src={icon_location_w} alt="" />{' '}
-                <span>{Info.location ? Info.location : location}</span>
+                <span>서울특별시 {userInfo.location ? userInfo.location : userInfo.location}</span>
               </Grid>
             </Local>
           </Grid>

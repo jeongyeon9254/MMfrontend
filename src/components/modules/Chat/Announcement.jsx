@@ -10,7 +10,7 @@ function Announcement(props) {
   const styles = { fontcolor };
   const roomGet = useSelector(state => state.chat.roomGet);
   return (
-    <Grid padding="15px 30px 7px">
+    <Grid padding="15px 30px 7px" Zindex="9999">
       <Button
         radius="40px"
         padding="13px 16px"
@@ -36,5 +36,8 @@ function Announcement(props) {
 const Text = styled.span`
   color: ${props => (props.fontcolor ? props.fontcolor : '#ec6464')};
   font-size: 15px;
+`;
+const AlertBar = styled.div`
+  z-index: 999;
 `;
 export default Announcement;
