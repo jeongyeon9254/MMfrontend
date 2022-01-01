@@ -11,7 +11,12 @@ import Button from '../../element/Button';
 // Js
 import { Mybit } from '../Bit';
 
+// Redux
+import { actionCreators as mainActions } from '../../../redux/modules/main';
+import { useDispatch, useSelector } from 'react-redux';
+
 const MapKategorieNav = props => {
+  const dispatch = useDispatch();
   const mbti = Mybit(props.userInfo.mbti);
   const navList = [
     <>
@@ -37,8 +42,10 @@ const MapKategorieNav = props => {
               <Button
                 BtnTag
                 state={active === index ? 'active' : false}
-                _onClick={idx => {
+                _onClick={e => {
+                  const name = e.target.innerHTML;
                   setActive(index);
+                  dispatch(mainActions.setKategorie(name));
                 }}
               >
                 {list}
