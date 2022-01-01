@@ -47,7 +47,7 @@ const userIngoPut = userInfo => {
     const res = await editMyinfoDB(userInfo);
     console.log(res);
     localStorage.removeItem('userInfo');
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('userInfo', JSON.stringify(res.data));
     history.push('/');
   };
 };
