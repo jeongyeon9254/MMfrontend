@@ -14,7 +14,7 @@ function MyinfoHead(props) {
 
   return (
     <NewHeader>
-      <Announcement num="0"></Announcement>
+      <Announcement bg="#fff" fontcolor="#555555" ws></Announcement>
       <ImgBit src={MyBit ? MyBit.image : ''} />
       <Point>
         <Grid row gap="23px">

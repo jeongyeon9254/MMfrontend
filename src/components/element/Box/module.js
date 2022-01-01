@@ -15,6 +15,7 @@ export const BlackBox = styled.div`
   color: ${props => props.theme.colors.white};
   font-size: ${props => props.theme.fontSizes.small};
   line-height: ${props => props.theme.fontSizes.xl};
+  height: ${props => props.height};
 `;
 
 export const MyChatBox = styled.div`

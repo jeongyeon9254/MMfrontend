@@ -9,10 +9,10 @@ import 'swiper/swiper.min.css';
 import Button from '../../element/Button';
 
 // Js
-import Bit from '../Bit';
+import { Mybit } from '../Bit';
 
 const MapKategorieNav = props => {
-  const aa = Bit.filter(x => x.name === props.userInfo.mbti);
+  const aa = Mybit(props.userInfo.mbti);
 
   const navList = [
     <>

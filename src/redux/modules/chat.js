@@ -1,9 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-
+import { creatRoom } from '../../api/modules/chat';
 const PUSH_CHAT = 'PUSH_CHAT';
+const LOAD_CHATLIST = 'LOAD_CHATLIST';
 
 const pushChatRoom = createAction(PUSH_CHAT, ms => ({ ms }));
+const ListChatRoom = createAction(PUSH_CHAT, list => ({ list }));
 
 const initialState = {
   roomGet: [
@@ -84,7 +86,7 @@ const initialState = {
       location: '서울특별시 종로구',
     },
   ],
-  chatList: [
+  List: [
     {
       type: 'TALK',
       roomId: '1',
@@ -135,10 +137,14 @@ const initialState = {
       userId: '1',
     },
   ],
+  Room: [],
 };
 
-const setChatRoomDB = (post_id = null) => {
-  return function (dispatch, getState, { history }) {};
+const loadChatRoomList = (post_id = null) => {
+  return async function (dispatch, getState, { history }) {
+    const res = await creatRoom;
+    dispatch(ListChatRoom(res));
+  };
 };
 
 export default handleActions(
@@ -146,13 +152,19 @@ export default handleActions(
     [PUSH_CHAT]: (state, action) =>
       produce(state, draft => {
         const { ms } = action.payload;
-        draft.chatList.push(ms);
+        draft.List.push(ms);
+      }),
+    [LOAD_CHATLIST]: (state, action) =>
+      produce(state, draft => {
+        const { list } = action.payload;
+        draft.Room = list;
       }),
   },
   initialState,
 );
 
 const actionCreators = {
+  loadChatRoomList,
   pushChatRoom,
 };
 

@@ -81,4 +81,5 @@ export const ButtonStyle = styled.button`
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.base)};
   border: ${props => props.border};
   border-radius: ${props => (props.radius ? props.radius : 0)};
+  opacity: ${props => (props.opacity ? props.opacity : 1)};
 `;

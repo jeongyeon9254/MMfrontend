@@ -31,6 +31,7 @@ const Button = props => {
     border,
     _disabled,
     Disable,
+    opacity,
   } = props;
 
   const styles = {
@@ -44,6 +45,7 @@ const Button = props => {
     radius,
     border,
     _disabled,
+    opacity,
   };
 
   if (BtnAdd) {
@@ -114,13 +116,6 @@ const Button = props => {
   }
 
   if (BtnTag) {
-    if (Disable) {
-      return (
-        <BtnTagStyle name={name} value={_value} {...styles}>
-          {children}
-        </BtnTagStyle>
-      );
-    }
     switch (state) {
       case 'active':
         return (
@@ -162,6 +157,7 @@ Button.defaultProps = {
   width: null,
   color: null,
   padding: null,
+  opacity: 1,
 };
 
 export default Button;

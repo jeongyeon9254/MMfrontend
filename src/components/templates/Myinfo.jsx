@@ -21,10 +21,10 @@ const Myinfo = () => {
             <MyinfoBit mbti={mbti} />
           </MyPartBox>
           <MyPartBox title="나의 관심사">
-            <Myinterests Disable />
+            <Myinterests data={Info.interestList} />
           </MyPartBox>
           <MyPartBox title="한줄 소개">
-            <MyinfoBit data={Info.interestList} mbti={mbti} />
+            <Box>{Info.intro}</Box>
           </MyPartBox>
         </Grid>
       </Body>

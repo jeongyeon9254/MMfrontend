@@ -10,6 +10,7 @@ const Box = props => {
     _onClick,
     // css props
     width,
+    height,
     color,
     margin,
     padding,
@@ -32,6 +33,7 @@ const Box = props => {
     fontColor,
     fontSize,
     bg,
+    height,
   };
 
   if (black) {
@@ -94,6 +96,7 @@ Box.defaultProps = {
   padding: '15px',
   fontColor: '#000',
   fontSize: '14px',
+  height: 'auto',
 };
 
 const BoxStyle = styled.div`

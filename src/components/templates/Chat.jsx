@@ -20,7 +20,7 @@ const Chat = () => {
   return (
     <div>
       <Header>채팅</Header>
-      <Announcement num={roomGet.length}></Announcement>
+      <Announcement></Announcement>
       <Grid height="100%">
         <Boad className={open ? 'Open' : ''}>
           {roomGet.map((x, idx) => {

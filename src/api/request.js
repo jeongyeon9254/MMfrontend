@@ -1,19 +1,17 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  // baseURL: 'http://13.209.76.178',
-  baseURL: 'http://13.124.242.158',
+const request = axios.create({
+  baseURL: 'http://13.209.76.178',
   timeout: 3000,
   headers: {
-    // 베어러 부분 중첩되는거 삭제 필요
-    authorization: `bearer ${document.cookie.split(' ')[1]}`,
+    authorization: `Bearer ${localStorage.getItem('token')}`,
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json',
   },
 });
 
 //interceptors를 POST요청 가지고 결과 값을 캐치해서 return.
-instance.interceptors.request.use(
+request.interceptors.request.use(
   config => {
     return config;
   },
@@ -24,7 +22,7 @@ instance.interceptors.request.use(
 );
 
 //interceptors를 GET요청 가지고 결과 값을 캐치해서 return.
-instance.interceptors.response.use(
+request.interceptors.response.use(
   response => {
     const res = response;
     return res;
@@ -35,4 +33,4 @@ instance.interceptors.response.use(
   },
 );
 
-export default instance;
+export default request;
