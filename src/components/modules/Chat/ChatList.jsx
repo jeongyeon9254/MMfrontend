@@ -4,14 +4,15 @@ import { Grid, Image, Tag } from '../../element';
 
 const ChatList = props => {
   const { OnClick } = props;
-  const { nickname, mbti, profileImg, roomId, intro, date } = props.data;
+  const { mbti, profileImg, name, roomId, intro, date } = props.data;
   const LastChat = '여기는 마지막 채팅글 보일거요 여기는 마지막 채팅글 보일거요';
+
   return (
     <Grid list _onClick={OnClick} gap="11px" Btop="0px" pad="17px 30px">
       <Image src={profileImg} round mbti={mbti} width="56px" margin="0px" />
       <Grid gap="12px" width="80%">
         <Grid row align="center" gap="6px">
-          <Name>{nickname}</Name>{' '}
+          <Name>{name}</Name>{' '}
           <Tag mbti={mbti} _type="black">
             {mbti}
           </Tag>

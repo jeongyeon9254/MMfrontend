@@ -8,10 +8,13 @@ import { Grid } from '../element';
 import { ChatForm, ChatList, Announcement } from '../modules/Chat/';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../redux/modules/chat';
+
+// 소켓 통신
+
 const Chat = () => {
   // 받은 요청 수
   const dispatch = useDispatch();
-  const roomGet = useSelector(state => state.chat.roomGet);
+  const Room = useSelector(state => state.chat.Room);
   // 채팅방을 받아서 저장 해 놓고 쓴다.
   // const rooms = useSelector(state => state.chat.room);
   const [open, setOpen] = React.useState(true);
@@ -27,7 +30,7 @@ const Chat = () => {
       <Announcement></Announcement>
       <Grid height="100%">
         <Boad className={open ? 'Open' : ''}>
-          {roomGet.map((x, idx) => {
+          {Room.map((x, idx) => {
             return (
               <ChatList
                 OnClick={e => {

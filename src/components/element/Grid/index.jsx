@@ -82,7 +82,7 @@ Grid.defaultProps = {
   borderTop: '0px',
   borderBot: '0px',
   pad: '12px 33px',
-  Zindex: '0',
+  Zindex: 'auto',
 };
 
 const GridStyle = styled.div`
