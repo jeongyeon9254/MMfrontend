@@ -13,10 +13,10 @@ import { Mybit } from '../Bit';
 
 const MapKategorieNav = props => {
   const aa = Mybit(props.userInfo.mbti);
-
+  console.log(aa);
   const navList = [
     <>
-      <img alt="MBTI 이미지" src={aa[0].image} />
+      <img alt="MBTI 이미지" src={aa.image} />
       전체보기
     </>,
     '대화',
