@@ -16,7 +16,7 @@ const MapKategorieNav = props => {
   console.log(aa);
   const navList = [
     <>
-      <img alt="MBTI 이미지" src={aa.image} />
+      <img alt="MBTI 이미지" src={aa.image ? aa.image : null} />
       전체보기
     </>,
     '대화',
