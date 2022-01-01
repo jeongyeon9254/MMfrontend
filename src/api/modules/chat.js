@@ -1,5 +1,4 @@
 import instance from '../instance';
-import request from '../request';
 
 // 승인 버튼
 export const getApproveDB = userId => {
