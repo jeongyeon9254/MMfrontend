@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const RowGridStyle = styled.div`
   box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: ${props => (props.wrap ? props.wrap : 'wrap')};
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => (props.color ? props.color : 'transparent')};
@@ -13,6 +13,8 @@ export const RowGridStyle = styled.div`
   align-items: ${props => (props.align ? props.align : 'stretch ')};
   gap: ${props => (props.gap ? props.gap : '0')};
   position: relative;
+  border-top: ${props => props.borderTop};
+  border-bottom: ${props => props.borderBot};
 `;
 
 export const RowGridList = styled.div`

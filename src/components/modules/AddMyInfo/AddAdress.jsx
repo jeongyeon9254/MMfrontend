@@ -66,7 +66,7 @@ const AddAdress = props => {
       </Grid>
       <Grid margin="0px 30px">
         <Button
-          state={local !== '' ? false : 'inactive'}
+          state={local === '' ? 'Inactive' : false}
           width="315px"
           BtnBottom
           _onClick={() => {
@@ -82,7 +82,7 @@ const AddAdress = props => {
 
 const AddressTitle = styled.p`
   font-weight: 400;
-  font-size: ${props => props.theme.fontSizes.xxxl};
+  font-size: ;
 `;
 
 const AddressCommet = styled.p`

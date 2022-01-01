@@ -3,7 +3,6 @@ import { getCookie } from '../shared/Cookie';
 console.log(getCookie('authorization'));
 const TOCKEN = getCookie('authorization');
 const instance = axios.create({
-  // baseURL: 'http://13.209.76.178',
   baseURL: 'http://13.124.242.158',
   timeout: 3000,
   headers: {

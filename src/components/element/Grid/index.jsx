@@ -23,6 +23,7 @@ const Grid = props => {
     page,
     Btop,
     pad,
+    wrap,
   } = props;
 
   const styles = {
@@ -40,6 +41,7 @@ const Grid = props => {
     borderTop,
     borderBot,
     _onClick,
+    wrap,
   };
 
   if (row) {
