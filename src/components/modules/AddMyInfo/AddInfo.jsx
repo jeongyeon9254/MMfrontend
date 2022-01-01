@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button } from '../../element/index';
 import AddAdress from './AddAdress';
@@ -6,11 +7,12 @@ import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 
 const AddInfo = props => {
+  const dispatch = useDispatch();
+
   const [Address, setAddress] = useState(false);
 
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
-  console.log(data);
 
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
@@ -36,11 +38,12 @@ const AddInfo = props => {
     Interest: '',
     signStatus: false,
   };
-  console.log(Info2);
+
   const Gender = [
     { en: 'male', ko: '남자' },
     { en: 'female', ko: '여자' },
   ];
+
   return (
     <>
       <Grid>
@@ -49,10 +52,10 @@ const AddInfo = props => {
           <Image photoRound width="188px" height="188px"></Image>
         </Grid>
         <Grid row gap="20px">
-          <Grid margin=" 0px 30px">
+          {/* <Grid margin=" 0px 30px">
             <AddText>이름</AddText>
             <Input _borderColor="#E1E1E1" />
-          </Grid>
+          </Grid> */}
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
             <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />

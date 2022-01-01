@@ -8,18 +8,10 @@ export const kakaoLogin = code => {
   });
 };
 
-// 내 정보 가져오기 기능
-export const getMyinfoDB = () => {
-  return instance({
-    method: 'get',
-    url: '/user/profile',
-  });
-};
-
 //내정보 추가기입 기능
 export const addMyinfoDB = data => {
   return instance({
-    method: 'put',
+    method: 'PUT',
     url: '/user/profile',
     data: data,
   });

@@ -25,9 +25,7 @@ const AddAdress = () => {
     );
   }
 
-  const sele = local => {
-    setlocal(local.location);
-  };
+  const sele = local => {};
 
   return (
     <>

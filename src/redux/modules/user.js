@@ -42,6 +42,10 @@ const logInDB = code => {
   };
 };
 
+const AddMyinfoDB = () => {
+  return async function (dispatch, getState, { history }) {};
+};
+
 export default handleActions(
   {
     [LOG_IN]: (state, action) => produce(state, draft => {}),
