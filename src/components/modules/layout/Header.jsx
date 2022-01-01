@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../element';
 import arrow_left from '../../../img/Icon/arrow_left.svg';
@@ -8,9 +8,13 @@ import Phone_head from '../../../img/Icon/phone_head.png';
 import Phone_head_w from '../../../img/Icon/phone_head_w.png';
 // JS
 import { history } from '../../../redux/configureStore';
+import { useDispatch } from 'react-redux';
+import { actionCreators as mainActions } from '../../../redux/modules/main';
 
 const Header = props => {
   const { children, main, chat, post, point, _on, bg, white } = props;
+
+  const dispatch = useDispatch();
 
   const styles = {
     main,
@@ -21,6 +25,7 @@ const Header = props => {
 
   const goBack = () => {
     history.goBack();
+    dispatch(mainActions.reset());
   };
 
   return (

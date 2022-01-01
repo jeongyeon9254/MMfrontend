@@ -11,7 +11,6 @@ import { actionCreators as userAction } from '../../../redux/modules/user';
 const AddIntro = props => {
   const dispatch = useDispatch();
   const { file, local, mbti, duplicated } = props;
-  console.log(file, local, mbti, duplicated);
   const [BackInterest, setBackInterest] = useState(false);
 
   const [comment, setComment] = useState('');

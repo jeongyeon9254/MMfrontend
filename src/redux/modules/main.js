@@ -6,9 +6,11 @@ import { getMyinfoDB, getChemyDB } from '../../api/modules/chemy';
 
 const GET_LIST = 'GET_LIST';
 const CHEMY_LIST = 'CHEMY_LIST';
+const RESET = 'RESET';
 
 const getList = createAction(GET_LIST, data => ({ data }));
 const chemyList = createAction(CHEMY_LIST, data => ({ data }));
+const reset = createAction(RESET, () => ({}));
 
 const initialState = {
   list: {
@@ -59,6 +61,13 @@ export default handleActions(
         draft.list.lat = data.latitude;
         draft.list.lng = data.longitude;
       }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.list.result = null;
+        draft.list.gps = null;
+        draft.list.lat = null;
+        draft.list.lng = null;
+      }),
   },
   initialState,
 );
@@ -67,6 +76,7 @@ const actionCreators = {
   getListDB,
   getList,
   chemyListDB,
+  reset,
 };
 
 export { actionCreators };

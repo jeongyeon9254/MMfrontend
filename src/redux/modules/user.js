@@ -2,8 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
-import { editMyinfoDB } from '../../api/modules/user';
-
+import { editMyinfoDB, addMyinfoDB } from '../../api/modules/user';
+import { getCookie } from '../../shared/Cookie';
 const LOG_IN = 'LOG_IN';
 
 const logIn = createAction(LOG_IN, user => ({ user }));
@@ -29,23 +29,26 @@ const logInDB = code => {
 
     const token = res.headers.authorization;
 
-    setCookie('authorization', token);
+    setCookie('authorization ', token);
 
     localStorage.setItem('userInfo', JSON.stringify(res.data));
-    // localStorage.setItem('token', token);
 
     if (res.data.signStatus === false) {
-      history.push('/AddMyinfo');
+      document.location.href = '/AddMyinfo';
       window.alert('처음이신구요! 추가정보 입력 부탁드립니다!!');
     } else {
-      history.push('/');
+      document.location.href = '/';
       window.alert('로그인 완료');
     }
   };
 };
 const userIngoPut = userInfo => {
   return async function (dispatch, getState, { history }) {
-    editMyinfoDB(userInfo);
+    const res = await editMyinfoDB(userInfo);
+    console.log(res);
+    localStorage.removeItem('userInfo');
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    history.push('/');
   };
 };
 

@@ -1,19 +1,12 @@
-const getCookie = key => {
-  let cookieKey = key + '=';
-  let result = '';
-  const cookieArr = document.cookie.split(';');
-
-  for (let i = 0; i < cookieArr.length; i++) {
-    if (cookieArr[i][0] === ' ') {
-      cookieArr[i] = cookieArr[i].substring(1);
-    }
-
-    if (cookieArr[i].indexOf(cookieKey) === 0) {
-      result = cookieArr[i].slice(cookieKey.length, cookieArr[i].length);
-      return result;
-    }
+const getCookie = name => {
+  // 쿠키 값을 가져옵니다.
+  let value = '; ' + document.cookie;
+  // 키 값을 기준으로 파싱(구성 성분으로 분해)합니다.
+  let parts = value.split(`; ${name}=`);
+  // value를 return!
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
   }
-  return result;
 };
 
 const setCookie = (name, value, exp = 5) => {
