@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { gpsLsit } from '../main/gpsList';
+import styled from 'styled-components';
 
 const useStyles = makeStyles({
   select: {
@@ -50,7 +51,7 @@ const Selects = props => {
     setArea(event.target.value);
   };
   return (
-    <FormControl
+    <Box
       sx={{
         m: 1,
         maxWidth: 183,
@@ -82,12 +83,18 @@ const Selects = props => {
           );
         })}
       </Select>
-    </FormControl>
+    </Box>
   );
 };
 
 Selects.defaultProps = {
   data: false,
 };
+
+const Box = styled(FormControl)`
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+`;
 
 export default Selects;

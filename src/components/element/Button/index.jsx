@@ -30,6 +30,7 @@ const Button = props => {
     radius,
     border,
     _disabled,
+    Disable,
   } = props;
 
   const styles = {
