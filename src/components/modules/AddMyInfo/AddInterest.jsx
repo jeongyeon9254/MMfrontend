@@ -6,17 +6,17 @@ import { Grid, Button } from '../../element/index';
 import AddIntro from './AddIntro';
 import AddMBTI from './AddMBTI';
 
-const AddInterest = () => {
+const AddInterest = props => {
+  const { file, local, mbti } = props;
   const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
 
   const [Intro, setIntro] = useState(false);
   const [BackMBTI, setBackMBTI] = useState(false);
   const [duplicated, setDuplicated] = useState([]);
-
   if (Intro === true) {
     return (
       <>
-        <AddIntro />
+        <AddIntro file={file} local={local} mbti={mbti} duplicated={duplicated} />
       </>
     );
   } else if (BackMBTI === true) {
@@ -45,7 +45,6 @@ const AddInterest = () => {
       setDuplicated([...duplicated, val]);
     }
   };
-  console.log(duplicated);
   return (
     <>
       <Header

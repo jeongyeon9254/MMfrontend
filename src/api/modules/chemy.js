@@ -8,11 +8,19 @@ export const getMyinfoDB = () => {
   });
 };
 
+// 캐미 mbti get 기능
+export const getChemyDB = locationId => {
+  return instance({
+    method: 'get',
+    url: `/api/chemy/list/${locationId}`,
+  });
+};
+
 // 빠른매칭 기능
 export const getMatchingDB = () => {
   return instance({
     method: 'get',
-    url: '/api/chemy/matching',
+    url: '/api/chemy/auto',
   });
 };
 

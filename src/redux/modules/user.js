@@ -31,8 +31,9 @@ const logInDB = code => {
     setCookie('authorization', token);
 
     localStorage.setItem('userInfo', JSON.stringify(res.data));
+    // localStorage.setItem('token', token);
 
-    if (res.signStatus === false) {
+    if (res.data.signStatus === false) {
       history.push('/AddMyinfo');
       window.alert('처음이신구요! 추가정보 입력 부탁드립니다!!');
     } else {

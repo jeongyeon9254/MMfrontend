@@ -9,17 +9,16 @@ import 'swiper/swiper.min.css';
 import Button from '../../element/Button';
 
 // Js
-import Bit from '../Bit';
+import { Mybit } from '../Bit';
 
 const MapKategorieNav = props => {
-  const aa = Bit.filter(x => x.name === props.userInfo.mbti);
-
+  const mbti = Mybit(props.userInfo.mbti);
   const navList = [
     <>
-      <img alt="MBTI 이미지" src={aa[0].image} />
+      <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
       전체보기
     </>,
-    '일상',
+    '대화',
     '운동',
     '공부',
     '게임',
@@ -53,6 +52,8 @@ const MapKategorieNav = props => {
 };
 
 const RowDiv = styled.div`
+  background: #fff;
+  margin-top: -2px;
   img {
     height: ${props => props.theme.fontSizes.base};
     margin-right: 10px;

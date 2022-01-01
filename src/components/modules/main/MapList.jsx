@@ -14,10 +14,10 @@ import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
   // api연결후 변경
-  const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   const dispatch = useDispatch();
   const listState = useSelector(state => state.list.state);
+  const list = useSelector(state => state.main.list);
 
   const offModal = () => {
     dispatch(listActions.downList());
@@ -32,31 +32,31 @@ const MapList = props => {
           </div>
           {/* 카드리스트 */}
           <div className="inner">
-            {testArr.map((list, idx) => {
+            {list.result.map((list, idx) => {
               return (
                 <div
                   className="card"
                   key={idx}
                   onClick={() => {
-                    history.push(`/profile/${idx}`);
+                    history.push(`/profile/${list.userId}`);
                     dispatch(listActions.downList());
                   }}
                 >
-                  <Image round width="45px" margin="0"></Image>
+                  <Image round width="45px" margin="0" src={list.profileImage}></Image>
                   <Grid width="auto" justify="center" gap="4px">
                     <Grid row gap="5px">
-                      <p className="name">홍길동</p>
-                      <Tag mbti="INFJ" _type="black" size="11px" icon>
-                        INFJ
+                      <p className="name">{list.nickname}</p>
+                      <Tag mbti={list.mbti} _type="black" size="11px" icon>
+                        {list.mbti}
                       </Tag>
                     </Grid>
                     <Grid row width="auto">
                       <img className="icon" alt="주소" src={icon_location}></img>
-                      <p className="location">서울특별시 강서구</p>
+                      <p className="location">서울특별시 {list.location}</p>
                     </Grid>
                   </Grid>
                   <Box width="43%" padding="6px 9px">
-                    <div className="textBox">안녕하세요 함께 재밌게 놀 친구를 찾아요</div>
+                    <div className="textBox">{list.intro}</div>
                   </Box>
                 </div>
               );
@@ -113,6 +113,8 @@ const MapListStyle = styled.div`
   .card .name {
     margin-top: 1px;
     font-weight: 700;
+    line-height: 1.2;
+    font-size: ${props => props.theme.fontSizes.base};
   }
   .card .location {
     font-weight: 500;

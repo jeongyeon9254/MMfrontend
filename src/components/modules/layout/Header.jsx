@@ -49,7 +49,7 @@ const Header = props => {
 
 const HeaderStyle = styled.header`
   width: 100%;
-  max-width: 375px;
+  max-width: 377px;
   position: ${props => (props.point ? props.point : 'fixed')};
   left: 0px;
   top: 0px;

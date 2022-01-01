@@ -10,18 +10,24 @@ const AddInfo = props => {
   const dispatch = useDispatch();
 
   const [Address, setAddress] = useState(false);
-
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
+  const [profileImage, setProfileImage] = useState(data.profileImage);
 
   if (Address === true) {
+    const file = {
+      nickname: nickname,
+      gender: gender,
+      profileImage: profileImage,
+      ageRange: data.ageRange,
+    };
     return (
       <>
-        <AddAdress />
+        <AddAdress file={file} />
       </>
     );
   }
@@ -49,26 +55,22 @@ const AddInfo = props => {
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
-          <Image photoRound width="188px" height="188px"></Image>
+          <Image src={data.profileImage} photoRound width="188px" height="188px"></Image>
         </Grid>
         <Grid row gap="20px">
-          {/* <Grid margin=" 0px 30px">
-            <AddText>이름</AddText>
-            <Input _borderColor="#E1E1E1" />
-          </Grid> */}
-          <Grid margin="0px 30px">
-            <AddText>연령대</AddText>
-            <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
-          </Grid>
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
             <Input
-              _defaultValue={data.nickname}
+              _value={nickname}
               _onChange={e => {
                 setnickname(e.target.value);
               }}
               _borderColor="#E1E1E1"
             />
+          </Grid>
+          <Grid margin="0px 30px">
+            <AddText>연령대</AddText>
+            <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
           </Grid>
           <Grid margin="0px 25px">
             <AddText>성별</AddText>

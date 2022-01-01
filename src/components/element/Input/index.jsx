@@ -109,7 +109,7 @@ const Input = props => {
         <InputStyle
           {...styles}
           value={_value}
-          defaultValue={_defaultValue}
+          // defaultValue={_defaultValue}
           readOnly={_readOnly}
           onChange={_onChange}
         ></InputStyle>
@@ -121,6 +121,8 @@ Input.defaultProps = {
   _size: props => props.theme.fontSizes.small,
   _bg: props => props.theme.colors.white,
   _borderColor: props => props.theme.colors.input_gray1,
+  _readOnly: false,
+  _defaultValue: '',
   _maxWidth: '100%',
 };
 

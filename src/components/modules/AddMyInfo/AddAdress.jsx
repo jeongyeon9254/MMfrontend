@@ -6,7 +6,9 @@ import LoSelect from '../addInfo/LoSelct';
 import AddMBTI from './AddMBTI';
 import AddInfo from './AddInfo';
 
-const AddAdress = () => {
+const AddAdress = props => {
+  const { file } = props;
+  console.log(file);
   const [selecMBTI, setSelectMBIT] = useState(false);
   const [BackAddinfo, BacksetAddinfo] = useState(false);
   const [local, setlocal] = useState('');
@@ -14,7 +16,7 @@ const AddAdress = () => {
   if (selecMBTI === true) {
     return (
       <>
-        <AddMBTI />
+        <AddMBTI file={file} local={local} />
       </>
     );
   } else if (BackAddinfo === true) {
@@ -25,7 +27,9 @@ const AddAdress = () => {
     );
   }
 
-  const sele = local => {};
+  const sele = locals => {
+    setlocal(locals);
+  };
 
   return (
     <>

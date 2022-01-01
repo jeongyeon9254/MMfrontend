@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import { getCookie } from '../../../shared/Cookie.js';
 
 // Js
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,8 +14,9 @@ const { kakao } = window;
 
 const MapContainer = () => {
   const dispatch = useDispatch();
-  const [move, setMove] = useState('null');
-  const [maker, setMaker] = useState('null');
+  const [move, setMove] = useState(null);
+  const [maker, setMaker] = useState(null);
+  const [makers, setMakers] = useState(null);
 
   const locationInfo = useSelector(state => state.main.list);
 
@@ -41,30 +42,42 @@ const MapContainer = () => {
       let marker = new kakao.maps.Marker({
         position: markerPosition,
       });
+      kakao.maps.event.addListener(marker, 'click', function () {
+        dispatch(listActions.upList());
+      });
       setMaker(marker);
       marker.setMap(map);
       return;
     }
 
     // 지도 이동
-    var moveLatLon = new kakao.maps.LatLng(locationInfo.lat, locationInfo.lng);
+    var moveLatLon = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
     move.panTo(moveLatLon);
 
     // 마커 삭제후 재생성
     maker.setMap(null);
-    let markerPosition = new kakao.maps.LatLng(locationInfo.lat, locationInfo.lng);
-
-    // 마커를 생성
+    let markerPosition = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
     let marker = new kakao.maps.Marker({
       position: markerPosition,
     });
+    // 마커를 생성
+    setMakers(marker);
+    if (makers === null) {
+      setMakers(marker);
+      marker.setMap(move);
+      kakao.maps.event.addListener(marker, 'click', function () {
+        dispatch(listActions.upList());
+      });
+      return;
+    }
+    makers.setMap(null);
     marker.setMap(move);
 
     // 마커 클릭시 리스트업 이벤트
     kakao.maps.event.addListener(marker, 'click', function () {
       dispatch(listActions.upList());
     });
-  }, [locationInfo]);
+  }, [locationInfo.gps]);
 
   return (
     <>
@@ -75,8 +88,10 @@ const MapContainer = () => {
 
 const Map = styled.div`
   width: 100%;
-  height: calc(100% - 170px);
+  height: calc(100% - 80px);
   position: fixed;
+  margin-top: -90px;
+  z-index: -1;
 `;
 
 export default MapContainer;
