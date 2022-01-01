@@ -6,6 +6,7 @@ import { Grid, Input, Button } from '../../element/index';
 import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
+import { actionCreators as userAction } from '../../../redux/modules/user';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const AddIntro = props => {
   };
 
   const ClickEvent = () => {
-    console.log(userInfo);
+    dispatch(userAction.userIngoPut(userInfo));
   };
 
   if (BackInterest === true) {

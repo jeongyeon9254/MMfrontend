@@ -11,7 +11,7 @@ const AddMBTI = props => {
   const [seleteInterest, setSeleteInterest] = useState(false);
   const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
-  console.log(selected);
+
   if (seleteInterest === true) {
     return (
       <>

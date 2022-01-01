@@ -27,16 +27,16 @@ function App() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <PublicRoute exact restricted={true} path="/" Component={Main} />
-        <PublicRoute exact restricted={true} path="/choice" Component={Choice} />
-        <PublicRoute exact restricted={true} path="/chat" Component={Chat} />
-        <PublicRoute exact restricted={true} path="/AddMyinfo" Component={AddMyinfo} />
-        <PublicRoute exact restricted={true} path="/myinfo" Component={Myinfo} />
-        <PublicRoute exact restricted={true} path="/login" Component={Login} />
-        <PublicRoute exact restricted={true} path="/profile/:userId" Component={Profile} />/
-        <PublicRoute exact restricted={true} path="/postMain" Component={PostMain} />
-        <PublicRoute exact restricted={true} path="/postMain/:postId" Component={PostDetail} />
-        <PublicRoute exact restricted={true} path="/postWrite" Component={PostWrite} />
+        <PublicRoute exact restricted={false} path="/" Component={Main} />
+        <PublicRoute exact restricted={false} path="/choice" Component={Choice} />
+        <PublicRoute exact restricted={false} path="/chat" Component={Chat} />
+        <PublicRoute exact restricted={false} path="/AddMyinfo" Component={AddMyinfo} />
+        <PublicRoute exact restricted={false} path="/myinfo" Component={Myinfo} />
+        <PublicRoute exact restricted={false} path="/login" Component={Login} />
+        <PublicRoute exact restricted={false} path="/profile/:userId" Component={Profile} />/
+        <PublicRoute exact restricted={false} path="/postMain" Component={PostMain} />
+        <PublicRoute exact restricted={false} path="/postMain/:postId" Component={PostDetail} />
+        <PublicRoute exact restricted={false} path="/postWrite" Component={PostWrite} />
         <PublicRoute
           exact
           restricted={true}
