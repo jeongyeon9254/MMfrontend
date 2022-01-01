@@ -11,7 +11,7 @@ export const getApproveDB = userId => {
 //채팅방 만들기
 export const creatRoom = nickname => {
   return instance({
-    method: 'post',
+    method: 'get',
     url: '/chat/room',
   });
 };

@@ -6,9 +6,11 @@ import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
 import { Grid } from '../element';
 import { ChatForm, ChatList, Announcement } from '../modules/Chat/';
-
+import { useDispatch } from 'react-redux';
+import { actionCreators as ChatAction } from '../../redux/modules/chat';
 const Chat = () => {
   // 받은 요청 수
+  const dispatch = useDispatch();
   const roomGet = useSelector(state => state.chat.roomGet);
   // 채팅방을 받아서 저장 해 놓고 쓴다.
   // const rooms = useSelector(state => state.chat.room);
@@ -16,7 +18,9 @@ const Chat = () => {
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
 
-  React.useEffect(() => {}, [Data]);
+  React.useEffect(() => {
+    dispatch(ChatAction.loadChatRoomList());
+  }, []);
   return (
     <div>
       <Header>채팅</Header>

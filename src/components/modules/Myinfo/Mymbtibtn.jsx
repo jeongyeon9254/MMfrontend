@@ -5,7 +5,6 @@ import 'swiper/swiper.min.css';
 import Bit, { Mybit } from '../Bit';
 
 function Mymbtibtn() {
-  Mybit();
   return (
     <Grid row gap="20px" padding="3px 0">
       <Swiper

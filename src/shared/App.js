@@ -27,19 +27,19 @@ function App() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <PublicRoute exact restricted={false} path="/" Component={Main} />
-        <PublicRoute exact restricted={false} path="/choice" Component={Choice} />
-        <PublicRoute exact restricted={false} path="/chat" Component={Chat} />
-        <PublicRoute exact restricted={false} path="/AddMyinfo" Component={AddMyinfo} />
-        <PublicRoute exact restricted={false} path="/myinfo" Component={Myinfo} />
+        <PrivateRoute exact path="/" Component={Main} />
+        <PrivateRoute exact path="/choice" Component={Choice} />
+        <PrivateRoute exact path="/chat" Component={Chat} />
+        <PrivateRoute exact path="/AddMyinfo" Component={AddMyinfo} />
+        <PrivateRoute exact path="/myinfo" Component={Myinfo} />
         <PublicRoute exact restricted={false} path="/login" Component={Login} />
-        <PublicRoute exact restricted={false} path="/profile/:userId" Component={Profile} />/
-        <PublicRoute exact restricted={false} path="/postMain" Component={PostMain} />
-        <PublicRoute exact restricted={false} path="/postMain/:postId" Component={PostDetail} />
-        <PublicRoute exact restricted={false} path="/postWrite" Component={PostWrite} />
+        <PrivateRoute exact path="/profile/:userId" Component={Profile} />/
+        <PrivateRoute exact path="/postMain" Component={PostMain} />
+        <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
+        <PrivateRoute exact path="/postWrite" Component={PostWrite} />
         <PublicRoute
           exact
-          restricted={true}
+          restricted={false}
           path="/user/kakao/callback"
           Component={KakaoCallback}
         />

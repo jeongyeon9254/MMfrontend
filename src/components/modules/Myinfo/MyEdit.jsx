@@ -5,6 +5,7 @@ import { Input, Grid, Tag } from '../../element';
 import { MyPartBox, Mymbtibtn } from './index';
 
 function MyEdit() {
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   return (
     <Body>
       {' '}

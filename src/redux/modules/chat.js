@@ -142,7 +142,8 @@ const initialState = {
 
 const loadChatRoomList = (post_id = null) => {
   return async function (dispatch, getState, { history }) {
-    const res = await creatRoom;
+    const res = await creatRoom();
+    console.log(res);
     dispatch(ListChatRoom(res));
   };
 };
