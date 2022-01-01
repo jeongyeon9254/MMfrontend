@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button } from '../../element/index';
 import AddAdress from './AddAdress';
@@ -6,10 +7,11 @@ import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 
 const AddInfo = props => {
+  const dispatch = useDispatch();
+
   const [Address, setAddress] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
-  console.log(data);
 
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
@@ -29,11 +31,25 @@ const AddInfo = props => {
       </>
     );
   }
+  const Info2 = {
+    nickname: '',
+    profileImage: 'https://.png',
+    gender: gender,
+    ageRange: '30대',
+    intro: '',
+    location: '',
+    longitude: '',
+    latitude: '',
+    mbti: '',
+    Interest: '',
+    signStatus: false,
+  };
 
   const Gender = [
     { en: 'male', ko: '남자' },
     { en: 'female', ko: '여자' },
   ];
+
   return (
     <>
       <Grid>
