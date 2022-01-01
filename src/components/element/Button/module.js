@@ -23,7 +23,7 @@ export const BtnAddStyle = styled.button`
 
 export const BtnBottomStyle = styled.button`
   color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
-  background-color: ${props => props.theme.colors.gray_2};
+  background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
   font-size: ${props => props.theme.fontSizes.lg};
   margin: ${props => props.margin};
   padding: 16px;
