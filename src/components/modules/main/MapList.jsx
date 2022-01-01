@@ -18,12 +18,15 @@ const MapList = props => {
   const dispatch = useDispatch();
   const listState = useSelector(state => state.list.state);
   const list = useSelector(state => state.main.list);
+  const kategorie = useSelector(state => state.main.kategorie);
 
   const offModal = () => {
     dispatch(listActions.downList());
   };
 
   console.log(list);
+  console.log(list.result.filter(x => x.interestList[0].interest === kategorie));
+  console.log(kategorie);
 
   return (
     <React.Fragment>

@@ -7,10 +7,12 @@ import { getMyinfoDB, getChemyDB } from '../../api/modules/chemy';
 const GET_LIST = 'GET_LIST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
+const SET_KATEGORIE = 'SET_KATEGORIE';
 
 const getList = createAction(GET_LIST, data => ({ data }));
 const chemyList = createAction(CHEMY_LIST, data => ({ data }));
 const reset = createAction(RESET, () => ({}));
+const setKategorie = createAction(SET_KATEGORIE, name => ({ name }));
 
 const initialState = {
   list: {
@@ -19,6 +21,7 @@ const initialState = {
     lng: null,
     result: [],
   },
+  kategorie: null,
 };
 
 const getListDB = (data = null) => {
@@ -68,6 +71,10 @@ export default handleActions(
         draft.list.lat = null;
         draft.list.lng = null;
       }),
+    [SET_KATEGORIE]: (state, action) =>
+      produce(state, draft => {
+        draft.kategorie = action.payload.name;
+      }),
   },
   initialState,
 );
@@ -77,6 +84,7 @@ const actionCreators = {
   getList,
   chemyListDB,
   reset,
+  setKategorie,
 };
 
 export { actionCreators };
