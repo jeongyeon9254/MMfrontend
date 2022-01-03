@@ -77,7 +77,7 @@ const Profile = props => {
         {!modal ? (
           <Button
             BtnBottom
-            width="90%"
+            width="85%"
             _onClick={() => {
               console.log('신청!');
               dispatch(chatActions.postChatRoomListDB(profile.userId));
@@ -89,7 +89,7 @@ const Profile = props => {
         ) : (
           <Button
             BtnBottom
-            width="90%"
+            width="85%"
             color="#EC6464"
             _onClick={() => {
               // const userId = { userId: profile.userId };
@@ -106,7 +106,7 @@ const Profile = props => {
 };
 
 const ProfileStyle = styled.div`
-  padding: 20px;
+  padding: 30px;
   .name {
     margin-top: 28px;
     font-size: ${props => props.theme.fontSizes.xxxl};

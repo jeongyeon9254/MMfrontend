@@ -9,13 +9,7 @@ const PostMain = () => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   return (
     <>
-      <Header
-        _on={() => {
-          history.push('/');
-        }}
-      >
-        커뮤니티
-      </Header>
+      <Header>커뮤니티</Header>
       <MapKategorieNav userInfo={userInfo} />
       <PostCard />
       <MainComment />

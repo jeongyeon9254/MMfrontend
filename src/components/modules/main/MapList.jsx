@@ -4,7 +4,6 @@ import styled from 'styled-components';
 // reudx
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as listActions } from '../../../redux/modules/list';
-import { actionCreators as mainActions } from '../../../redux/modules/main';
 
 // Js
 import { Box, Grid, Image, Tag } from '../../element';
@@ -13,8 +12,6 @@ import icon_location from '../../../img/Icon/icon_location.svg';
 import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
-  // api연결후 변경
-
   const dispatch = useDispatch();
   const listState = useSelector(state => state.list.state);
   const lists = useSelector(state => state.main.list);
@@ -56,11 +53,11 @@ const MapList = props => {
                     offModal();
                   }}
                 >
-                  <Image round width="45px" margin="0" src={list.profileImage}></Image>
-                  <Grid width="35%" justify="center" gap="4px">
-                    <Grid row gap="5px" justify="space-between">
+                  <Image round width="53px" margin="0" src={list.profileImage}></Image>
+                  <Grid width="37%" justify="center" gap="5px">
+                    <Grid row gap="3px">
                       <p className="name">{list.nickname}</p>
-                      <Tag mbti={list.mbti} _type="black" size="11px" icon>
+                      <Tag mbti={list.mbti} _type="black" size="10px" icon>
                         {list.mbti}
                       </Tag>
                     </Grid>
@@ -119,16 +116,16 @@ const MapListStyle = styled.div`
   .card {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     padding: 22.5px 30px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
   }
   .card .name {
-    margin-top: 1px;
     font-weight: 700;
-    line-height: 1.2;
-    font-size: ${props => props.theme.fontSizes.small};
+    line-height: 1.1;
+    margin-top: 1px;
+    font-size: ${props => props.theme.fontSizes.base};
   }
   .card .location {
     font-weight: 500;

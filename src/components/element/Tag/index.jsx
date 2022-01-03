@@ -6,7 +6,7 @@ import Grid from '../Grid';
 const Tag = props => {
   const { _onClick, children, color, mbti, _type, icon, bg, _src, state, size, small, padding } =
     props;
-  const styles = { color, mbti, bg, state, padding, small };
+  const styles = { color, mbti, bg, state, padding, small, size };
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
@@ -33,7 +33,7 @@ const Tag = props => {
       switch (state) {
         case 'active':
           return (
-            <TagBtn {...styles} style={{ backgroundColor: '#3F3F41' }}>
+            <TagBtn {...styles} onClick={_onClick} style={{ backgroundColor: '#3F3F41' }}>
               <div>
                 {small ? (
                   <>

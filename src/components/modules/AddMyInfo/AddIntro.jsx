@@ -26,6 +26,8 @@ const AddIntro = props => {
     interestList: duplicated,
   };
 
+  console.log(userInfo);
+
   const ClickEvent = () => {
     dispatch(userAction.userIngoPut(userInfo));
   };
