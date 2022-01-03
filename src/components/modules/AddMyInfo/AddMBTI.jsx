@@ -15,9 +15,14 @@ const AddMBTI = props => {
 
   console.log(selected);
 
-  const toggle = () => {
-    setisClick(isClick => !isClick);
+  const toggle = name => {
+    console.log(name, selected);
     console.log(isClick);
+    if (selected === '') {
+      setSelected(name);
+    } else if (selected === name) {
+      setSelected('');
+    }
   };
 
   if (seleteInterest === true) {
@@ -68,10 +73,9 @@ const AddMBTI = props => {
                 _src={x.image}
                 color={x.color}
                 _onClick={i => {
-                  setSelected(x.name);
-                  toggle();
+                  toggle(x.name);
                 }}
-                state={selected === x.name ? (isClick ? 'active' : false) : false}
+                state={selected === x.name ? 'active' : false}
               >
                 {x.name}
               </Tag>
