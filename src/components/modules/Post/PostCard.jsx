@@ -5,27 +5,36 @@ import { ReactComponent as HeartIcon } from '../../../img/Icon/icon_heart_no.svg
 import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg';
 
 const PostCard = () => {
+  const getUser = localStorage.getItem('userInfo');
+  const data = JSON.parse(getUser);
+
+  const interestList = data.interestList;
+
+  interestList.map((interest, idx) => console.log(interest.interest));
+
   return (
     <>
-      <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 0px 0px 0px">
-        <Grid row wrap="nowrap" align="center">
-          <Grid row align="center">
-            <Image photoRound width="50px" />
+      <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 20px 0px 20px">
+        <Grid width="100%" row wrap="nowrap" align="center" gap="10px">
+          <Grid row align="center" margin="0px">
+            <Image photoRound width="50px">
+              {data.profileImage}
+            </Image>
           </Grid>
-          <Grid gap="7px">
-            <NameText>홍길동</NameText>
-            <TimeText>3일전</TimeText>
+          <Grid width="100%" gap="7px">
+            <NameText>{data.nickname}</NameText>
+            <TimeText>3시간 전</TimeText>
           </Grid>
         </Grid>
-        <Grid row width="59px" height="19px">
-          <Tag mbti="INTJ" _type="black" icon wrap="nowrap">
+        <Grid padding="2px 0px 0px 0px" width="50%" height="19px">
+          <Tag mbti={data.mbti} _type="black" icon>
             INTJ
           </Tag>
         </Grid>
-        <Grid padding="4px 0px 0px 37px" align="center">
-          <LocalText>서울특별시 강서구</LocalText>
-          <Grid padding="9px 0px 0px 0px" width="44px">
-            <Tag _type="black">운동</Tag>
+        <Grid gap="9px" padding="4px 0px 0px 37px" align="flex-end">
+          <LocalText>{`서울특별시 ${data.location}`}</LocalText>
+          <Grid row justify="flex-end">
+            <Tag mbti={data.mbti}>{}</Tag>
           </Grid>
         </Grid>
       </Grid>

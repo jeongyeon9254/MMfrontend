@@ -22,4 +22,5 @@ export const TagStyle = styled.div`
   color: ${props => props.color};
   font-size: ${props => props.theme.fontSizes.extraSmall};
   border-radius: ${props => props.theme.radius.tag};
+  height: ${props => props.height};
 `;

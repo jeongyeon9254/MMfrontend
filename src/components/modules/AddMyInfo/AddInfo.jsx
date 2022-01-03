@@ -5,6 +5,7 @@ import { Image, Grid, Input, Button } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
@@ -109,7 +110,19 @@ const AddInfo = props => {
           width="315px"
           BtnBottom
           _onClick={() => {
-            setAddress(true);
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!',
+            }).then(result => {
+              if (result.isConfirmed) {
+                setAddress(true);
+              }
+            });
           }}
         >
           다음으로
