@@ -5,7 +5,9 @@ import Bit from '../modules/Bit';
 import { MyinfoHead, MyBody, MyBottom, MyEdit } from '../modules/Myinfo';
 const Myinfo = () => {
   const [Open, setOpen] = React.useState('');
-
+  const ClickEvent = e => {
+    setOpen(!Open);
+  };
   return (
     <>
       <Header bg="transparent" white>
@@ -13,8 +15,10 @@ const Myinfo = () => {
       </Header>
       <MyinfoHead></MyinfoHead>
       <MyBody></MyBody>
-      <MyEdit></MyEdit>
-      <MyBottom Edit>내 정보 수정하기</MyBottom>
+      <MyEdit Open={Open} _onClick={ClickEvent}></MyEdit>
+      <MyBottom Edit _onClick={ClickEvent}>
+        내 정보 수정하기
+      </MyBottom>
     </>
   );
 };
