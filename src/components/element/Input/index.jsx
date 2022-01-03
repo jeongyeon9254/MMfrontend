@@ -51,9 +51,7 @@ const Input = props => {
       evt.preventDefault();
     }
   };
-  const posting =
-    '지금 부터 네이버 글자수 세기로 공백 포함 100자를 맞춰 보겠습니다, 아야어여오요우유으이 이 글은 100자 이내로 작성이 가능합니다, 그렇다고 합니다 얼렁 맞춰져라 빨리 맞춰저라';
-
+  const posting = '내용을 적어주세요';
   switch (_type) {
     case 'textarea':
       return (
@@ -73,6 +71,7 @@ const Input = props => {
           onChange={_onChange}
           readOnly={_readOnly}
           placeholder={posting}
+          maxLength="100"
         ></InputPostText>
       );
     case 'date':

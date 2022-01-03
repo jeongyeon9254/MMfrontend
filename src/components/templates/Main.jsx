@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Js
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { gpsLsit } from '../modules/main/gpsList.js';
 import { actionCreators as mainActions } from '../../redux/modules/main';
 import { getMatchingDB } from '../../api/modules/chemy';
