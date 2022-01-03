@@ -76,7 +76,7 @@ const Profile = props => {
         {!modal ? (
           <Button
             BtnBottom
-            width="90%"
+            width="85%"
             _onClick={() => {
               console.log('신청!');
               setModal(true);
@@ -87,7 +87,7 @@ const Profile = props => {
         ) : (
           <Button
             BtnBottom
-            width="90%"
+            width="85%"
             color="#EC6464"
             _onClick={() => {
               console.log('취소!');
@@ -103,7 +103,7 @@ const Profile = props => {
 };
 
 const ProfileStyle = styled.div`
-  padding: 20px;
+  padding: 30px;
   .name {
     margin-top: 28px;
     font-size: ${props => props.theme.fontSizes.xxxl};
