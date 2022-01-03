@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
 import { Grid } from '../element';
@@ -15,6 +15,7 @@ const Choice = () => {
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
 
+  const dispatch = useDispatch();
   React.useEffect(() => {}, [Data]);
   return (
     <div>

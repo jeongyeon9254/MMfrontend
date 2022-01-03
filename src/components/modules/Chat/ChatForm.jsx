@@ -16,6 +16,11 @@ const ChatForm = props => {
   const Chatx = useSelector(state => state.chat.List);
   console.log(props.data);
   console.log(Chatx);
+
+  React.useEffect(() => {
+    dispatch(ChatAction.getChatMsListDB(roomId));
+  }, [roomId]);
+
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>

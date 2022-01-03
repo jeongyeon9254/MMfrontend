@@ -17,26 +17,21 @@ const initialState = {
   List: [],
   Room: [],
 };
-const PostChatting = props => {
+
+// 채팅방 만들기
+const postChatRoomListDB = userId => {
   return async function (dispatch, getState, { history }) {
-    const res = await sendMessage(props);
-    dispatch(pushChatRoom(props));
+    const res = await postChatRoomList(userId);
+    console.log(res);
   };
 };
 
 // 채팅방 리스트 가지고 오기
-const loadChatRoomList = () => {
+const getChatRoomListDB = () => {
   return async function (dispatch, getState, { history }) {
     const res = await getChatRoomList();
     console.log(res);
     dispatch(ListChatRoom(res.data));
-  };
-};
-
-const postChatRoomListDB = userId => {
-  return async function (dispatch, getState, { history }) {
-    const res = postChatRoomList(userId);
-    console.log(res);
   };
 };
 
@@ -60,7 +55,15 @@ const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
     const res = await getChatMsList(roomId);
     console.log(res);
-    dispatch(LoadChatting(res ? res : []));
+    dispatch(LoadChatting(res));
+  };
+};
+
+// 채팅 메세지 보내기
+const PostChatting = props => {
+  return async function (dispatch, getState, { history }) {
+    const res = await sendMessage(props);
+    dispatch(pushChatRoom(props));
   };
 };
 
@@ -86,7 +89,7 @@ export default handleActions(
 );
 
 const actionCreators = {
-  loadChatRoomList,
+  getChatRoomListDB,
   pushChatRoom,
   loadChatCommetList,
   PostChatting,
