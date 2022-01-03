@@ -6,8 +6,8 @@ import { MymbtiInfo } from './index';
 
 function MyinfoBit(props) {
   const [Open, setOpen] = React.useState(false);
-  // const { mbti } = props;
-  const mbti = 'INTP';
+  const { mbti } = props;
+  // const mbti = 'INTP';
   const bit = Mybit(mbti);
   const OpenClick = () => {
     setOpen(!Open);

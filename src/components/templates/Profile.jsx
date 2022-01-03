@@ -8,6 +8,7 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 
+import { actionCreators as chatActions } from '../../redux/modules/chat';
 // component
 import { Button, Image, Grid, Box, Tag } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
@@ -79,6 +80,7 @@ const Profile = props => {
             width="90%"
             _onClick={() => {
               console.log('신청!');
+              dispatch(chatActions.postChatRoomListDB(profile.userId));
               setModal(true);
             }}
           >
@@ -90,7 +92,8 @@ const Profile = props => {
             width="90%"
             color="#EC6464"
             _onClick={() => {
-              console.log('취소!');
+              // const userId = { userId: profile.userId };
+              // dispatch(chatActions.postChatRoomListDB(userId));
               setModal(false);
             }}
           >

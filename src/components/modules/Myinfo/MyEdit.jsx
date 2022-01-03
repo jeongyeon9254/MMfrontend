@@ -7,6 +7,8 @@ import { MyPartBox, Mymbtibtn, Myinterests, MyBottom } from './index';
 function MyEdit(props) {
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const [nickname, setNickname] = React.useState(userInfo.nickname);
+  const [textarea, setTextarea] = React.useState(userInfo.intro);
   const Updata = e => {
     console.log(e);
   };
@@ -18,16 +20,30 @@ function MyEdit(props) {
       </Header>
       <Grid padding="20px 30px" gap="20px">
         <MyPartBox title="나의 이름">
-          <Input _borderColor="#ECECEC" _bg="#ECECEC" _padding="8px 14px" _value="홍길동" />
+          <Input
+            _borderColor="#ECECEC"
+            _bg="#ECECEC"
+            _padding="8px 14px"
+            _value={nickname}
+            _onChange={e => {
+              setNickname(e.target.value);
+            }}
+          />
         </MyPartBox>
         <MyPartBox title="나의 MBTI">
-          <Mymbtibtn></Mymbtibtn>
+          <Mymbtibtn mbti={userInfo.mbti}></Mymbtibtn>
         </MyPartBox>
         <MyPartBox title="관심사 설정">
           <Myinterests Updata={Updata}></Myinterests>
         </MyPartBox>
         <MyPartBox title="한줄 소개">
-          <Input _type="textarea" />
+          <Input
+            _type="textarea"
+            _value={textarea}
+            _onChange={e => {
+              setTextarea(e.target.value);
+            }}
+          />
         </MyPartBox>
       </Grid>
       <MyBottom>내 정보 수정하기</MyBottom>

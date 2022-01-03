@@ -28,10 +28,7 @@ export const UserInRoom = roomId => {
     // },
   );
 };
-// 받기
-export const recvMessage = recv => {
-  messages.unshift({ type: recv.type, sender: recv.sender, message: recv.message });
-};
+// 보내는거
 export const sendMessage = props => {
-  ws.send('/pub/chat/message', { token: TOKEN }, JSON.stringify(props));
+  ws.send(`/pub/chat/message`, { token: TOKEN }, JSON.stringify(props));
 };

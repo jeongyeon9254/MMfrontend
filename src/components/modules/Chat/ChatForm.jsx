@@ -14,12 +14,8 @@ const ChatForm = props => {
   const { userId, name, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
-
-  // React.useEffect(() => {
-  //   if (roomId) {
-  //     dispatch(ChatAction.loadChatCommetList(roomId));
-  //   }
-  // }, []);
+  console.log(props.data);
+  console.log(Chatx);
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
@@ -28,24 +24,26 @@ const ChatForm = props => {
       <Grid height="89%">
         <PerfectScrollbar component="div">
           <Grid gap="19px" padding="19px 30px">
-            {Chatx.map((x, idx) => {
-              switch (x.type) {
-                case 'TALK':
-                  return x.userId === userInfo.userId ? (
-                    <PartyMe key={idx} data={x}>
-                      {x.message}
-                    </PartyMe>
-                  ) : (
-                    <PartyOther key={idx} data={x}>
-                      {x.message}
-                    </PartyOther>
-                  );
-                case 'ALARM':
-                  return <Alarm key={idx}> {x.message}</Alarm>;
-                default:
-                  return;
-              }
-            })}
+            {!Chatx
+              ? ''
+              : Chatx.map((x, idx) => {
+                  switch (x.type) {
+                    case 'TALK':
+                      return x.userId === userInfo.userId ? (
+                        <PartyMe key={idx} data={x}>
+                          {x.message}
+                        </PartyMe>
+                      ) : (
+                        <PartyOther key={idx} data={x}>
+                          {x.message}
+                        </PartyOther>
+                      );
+                    case 'ENTER':
+                      return <Alarm key={idx}> {x.message}</Alarm>;
+                    default:
+                      return;
+                  }
+                })}
           </Grid>
         </PerfectScrollbar>
       </Grid>

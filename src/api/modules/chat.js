@@ -1,6 +1,6 @@
 import instance from '../instance';
 
-// 승인 버튼
+// 채팅방 입장
 export const getApproveDB = userId => {
   return instance({
     method: 'get',
@@ -8,19 +8,19 @@ export const getApproveDB = userId => {
   });
 };
 
-//채팅방 만들기
-export const creatRoom = nickname => {
+//채팅방 목록 가져오기
+export const getChatRoomList = () => {
   return instance({
     method: 'get',
     url: '/chat/rooms',
   });
 };
 
-//채팅리스트 가져오기
-export const getRoomList = () => {
+//채팅방 만들기
+export const postChatRoomList = guestId => {
   return instance({
-    method: 'get',
-    url: '/chat/room',
+    method: 'post',
+    url: `/chat/room?guestId=${guestId}`,
   });
 };
 
@@ -28,7 +28,15 @@ export const getRoomList = () => {
 export const getInRoom = roomId => {
   return instance({
     method: 'get',
-    url: `/chat/room/{roomId}`,
+    url: `/chat/room/${roomId}`,
+  });
+};
+
+//채팅방에 메세지 리스트 가져오기 버튼을 눌렸을때
+export const getChatMsList = roomId => {
+  return instance({
+    method: 'get',
+    url: `/room/message`,
   });
 };
 

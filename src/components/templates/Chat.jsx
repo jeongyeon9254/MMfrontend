@@ -15,10 +15,11 @@ const Chat = () => {
   const Room = useSelector(state => state.chat.Room);
   // 채팅방을 받아서 저장 해 놓고 쓴다.
   // const rooms = useSelector(state => state.chat.room);
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [open, setOpen] = React.useState(true);
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
-
+  console.log(Room);
   React.useEffect(() => {
     dispatch(ChatAction.loadChatRoomList());
   }, []);
@@ -36,7 +37,8 @@ const Chat = () => {
                   //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
                   setPaging(!Paging);
                   setData(x);
-                  dispatch(ChatAction.loadChatCommetList(x.roomId));
+                  //채팅방 입장할때
+                  dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
                 }}
                 data={x}
                 key={idx}

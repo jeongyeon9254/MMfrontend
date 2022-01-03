@@ -1,8 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { creatRoom } from '../../api/modules/chat';
-import { UserInRoom } from '../../api/modules/communication';
-import { sendMessage } from '../../api/modules/communication';
+import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
+import { UserInRoom, sendMessage } from '../../api/modules/communication';
 
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
@@ -25,17 +24,41 @@ const PostChatting = props => {
   };
 };
 
-const loadChatRoomList = (post_id = null) => {
+// 채팅방 리스트 가지고 오기
+const loadChatRoomList = () => {
   return async function (dispatch, getState, { history }) {
-    const res = await creatRoom();
+    const res = await getChatRoomList();
     console.log(res);
     dispatch(ListChatRoom(res.data));
   };
 };
 
-const loadChatCommetList = roomId => {
+const postChatRoomListDB = userId => {
   return async function (dispatch, getState, { history }) {
-    const res = await UserInRoom(roomId);
+    const res = postChatRoomList(userId);
+    console.log(res);
+  };
+};
+
+// 채팅방 입장
+const loadChatCommetList = (roomId, hostname) => {
+  return async function (dispatch, getState, { history }) {
+    await UserInRoom(roomId);
+    const ms = {
+      type: 'ENTER',
+      roomId: roomId,
+      // username: userInfo.nickname,
+      // profileImage: userInfo.profileImage,
+      message: `${hostname}님이 입장 하였습니다.`,
+    };
+    dispatch(pushChatRoom(ms));
+  };
+};
+
+// 채팅 메세지 목록 가져오기
+const getChatMsListDB = roomId => {
+  return async function (dispatch, getState, { history }) {
+    const res = await getChatMsList(roomId);
     console.log(res);
     dispatch(LoadChatting(res ? res : []));
   };
@@ -67,6 +90,8 @@ const actionCreators = {
   pushChatRoom,
   loadChatCommetList,
   PostChatting,
+  postChatRoomListDB,
+  getChatMsListDB,
 };
 
 export { actionCreators };
