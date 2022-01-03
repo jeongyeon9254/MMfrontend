@@ -100,6 +100,7 @@ const GridStyle = styled.div`
   gap: ${props => (props.gap ? props.gap : '0')};
   position: relative;
   z-index: ${props => props.Zindex};
+  border-bottom: ${props => props.borderBot};
 `;
 
 export default Grid;

@@ -34,6 +34,7 @@ const AddAdress = props => {
   return (
     <>
       <Header
+        point="absolute"
         _on={() => {
           BacksetAddinfo(true);
         }}
@@ -79,6 +80,8 @@ const AddAdress = props => {
     </>
   );
 };
+
+const OpenBox = styled.div``;
 
 const AddressTitle = styled.p`
   font-weight: 400;
