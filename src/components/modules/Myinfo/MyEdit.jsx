@@ -7,6 +7,9 @@ import { MyPartBox, Mymbtibtn, Myinterests, MyBottom } from './index';
 function MyEdit(props) {
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const Updata = e => {
+    console.log(e);
+  };
   return (
     <Body className={Open ? 'Open' : 'Close'}>
       {' '}
@@ -21,7 +24,7 @@ function MyEdit(props) {
           <Mymbtibtn></Mymbtibtn>
         </MyPartBox>
         <MyPartBox title="관심사 설정">
-          <Myinterests></Myinterests>
+          <Myinterests Updata={Updata}></Myinterests>
         </MyPartBox>
         <MyPartBox title="한줄 소개">
           <Input _type="textarea" />

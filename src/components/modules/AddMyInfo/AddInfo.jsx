@@ -50,6 +50,13 @@ const AddInfo = props => {
     { en: 'female', ko: '여자' },
   ];
 
+  const MaxNickname = e => {
+    if (e.target.value.length > 4) {
+      e.target.value = e.target.value.substr(0, 4);
+      alert('4자 이내로 작성부탁드립니다');
+    }
+  };
+
   return (
     <Body>
       <Grid>
@@ -61,6 +68,7 @@ const AddInfo = props => {
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
             <Input
+              _onInput={MaxNickname}
               _value={nickname}
               _onChange={e => {
                 setnickname(e.target.value);

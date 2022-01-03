@@ -12,7 +12,7 @@ function MyBody() {
           <MyinfoBit mbti={Info.mbti} />
         </MyPartBox>
         <MyPartBox title="나의 관심사">
-          <Myinterests data={Info.interestList} />
+          <Myinterests Disable data={Info.interestList} />
         </MyPartBox>
         <MyPartBox title="한줄 소개">
           <Box padding="12px 17px">{Info.intro ? Info.intro : ' '}</Box>

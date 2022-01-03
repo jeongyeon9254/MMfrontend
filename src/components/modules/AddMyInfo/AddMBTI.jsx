@@ -11,6 +11,14 @@ const AddMBTI = props => {
   const [seleteInterest, setSeleteInterest] = useState(false);
   const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
+  const [isClick, setisClick] = useState(false); // 메뉴의 초기값을 false로 설정
+
+  console.log(selected);
+
+  const toggle = () => {
+    setisClick(isClick => !isClick);
+    console.log(isClick);
+  };
 
   if (seleteInterest === true) {
     return (
@@ -61,8 +69,9 @@ const AddMBTI = props => {
                 color={x.color}
                 _onClick={i => {
                   setSelected(x.name);
+                  toggle();
                 }}
-                state={selected === x.name ? 'active' : false}
+                state={selected === x.name ? (isClick ? 'active' : false) : false}
               >
                 {x.name}
               </Tag>
