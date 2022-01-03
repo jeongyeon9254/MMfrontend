@@ -28,10 +28,10 @@ const AddInterest = props => {
   }
 
   const handleDuplicated = e => {
-    const val = e.target.value;
+    const val = e.target.name;
+    console.log(val);
 
     const isIncludes = duplicated.find(el => el === val);
-    console.log(isIncludes);
 
     if (duplicated.length >= 2) {
       alert('최대 2개까지만 선택 가능합니다. 다시 선택해주세요');
@@ -44,9 +44,10 @@ const AddInterest = props => {
     } else if (0 < duplicated.length < 3) {
       setDuplicated([...duplicated, val]);
     }
+    console.log(duplicated);
   };
   return (
-    <Body>
+    <>
       <Header
         point="absolute"
         _on={() => {
@@ -69,8 +70,8 @@ const AddInterest = props => {
             return (
               <Button
                 key={idx}
+                name={interest}
                 BtnTag
-                _value={interest}
                 state={duplicated.find(element => element === interest) ? 'active' : false}
                 _onClick={handleDuplicated}
               >
@@ -84,7 +85,7 @@ const AddInterest = props => {
         <Button
           width="315px"
           BtnBottom
-          state={setDuplicated === '' ? 'Inactive' : false}
+          state={duplicated.length === 1 || duplicated.length === 2 ? false : 'Inactive'}
           _onClick={() => {
             setIntro(true);
           }}
@@ -92,13 +93,10 @@ const AddInterest = props => {
           다음으로
         </Button>
       </Grid>
-    </Body>
+    </>
   );
 };
 
-const Body = styled.body`
-  z-index: 10;
-`;
 const InterestTitle = styled.span`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.xxxl};

@@ -37,6 +37,12 @@ const AddIntro = props => {
       </>
     );
   }
+  const MaxIntro = e => {
+    if (e.target.value.length > 100) {
+      e.target.value = e.target.value.substr(0, 100);
+      alert('100자 이내로 작성부탁드립니다');
+    }
+  };
 
   return (
     <>
@@ -60,6 +66,7 @@ const AddIntro = props => {
       </Grid>
       <Grid row gap="8px" padding="48px 31px 0px 28px">
         <Input
+          _onInput={MaxIntro}
           _type="textarea"
           _size="14px"
           _onChange={e => {

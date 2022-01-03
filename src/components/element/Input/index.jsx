@@ -25,6 +25,7 @@ const Input = props => {
     width,
     _readOnly,
     _defaultValue,
+    _onInput,
   } = props;
 
   const styles = {
@@ -45,6 +46,11 @@ const Input = props => {
       el.target.value = el.target.value.substr(0, 6);
     }
   };
+  const MaxIntro = e => {
+    if (e.target.value.length > 6) {
+      e.target.value = e.target.value.substr(0, 6);
+    }
+  };
 
   const Edelete = evt => {
     if ((evt.which !== 8 && evt.which !== 0 && evt.which < 48) || evt.which > 57) {
@@ -63,6 +69,7 @@ const Input = props => {
           value={_value}
           onChange={_onChange}
           readOnly={_readOnly}
+          onInput={_onInput}
         ></InputTextarea>
       );
     case 'posting':
@@ -132,6 +139,7 @@ const Input = props => {
           // defaultValue={_defaultValue}
           readOnly={_readOnly}
           onChange={_onChange}
+          onInput={_onInput}
         ></InputStyle>
       );
   }
