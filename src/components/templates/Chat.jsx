@@ -9,8 +9,6 @@ import { ChatForm, ChatList, Announcement } from '../modules/Chat/';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../redux/modules/chat';
 
-// 소켓 통신
-
 const Chat = () => {
   // 받은 요청 수
   const dispatch = useDispatch();
@@ -24,6 +22,7 @@ const Chat = () => {
   React.useEffect(() => {
     dispatch(ChatAction.loadChatRoomList());
   }, []);
+
   return (
     <div>
       <Header>채팅</Header>
@@ -37,6 +36,7 @@ const Chat = () => {
                   //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
                   setPaging(!Paging);
                   setData(x);
+                  dispatch(ChatAction.loadChatCommetList(x.roomId));
                 }}
                 data={x}
                 key={idx}

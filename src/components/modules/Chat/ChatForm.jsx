@@ -6,15 +6,20 @@ import Header from '../layout/Header';
 import { Grid } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
-import { ws } from '../../../api/ws';
-
+import { useDispatch } from 'react-redux';
+import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 const ChatForm = props => {
+  const dispatch = useDispatch();
   const { Boo, _onClick } = props;
   const { userId, name, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
-  console.log(process.env.NODE_ENV);
 
+  // React.useEffect(() => {
+  //   if (roomId) {
+  //     dispatch(ChatAction.loadChatCommetList(roomId));
+  //   }
+  // }, []);
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>

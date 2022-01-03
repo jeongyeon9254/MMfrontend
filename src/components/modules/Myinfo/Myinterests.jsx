@@ -15,13 +15,22 @@ function Myinterests(props) {
     { en: 'game', ko: '게임', active: false },
     { en: 'other', ko: '기타', active: false },
   ];
+
+  const newInterests = interrests.filter(x => {
+    if (res.includes(x.ko)) {
+      x.active = !x.active;
+      return x;
+    }
+    return x;
+  });
+  console.log(newInterests);
   const [state, setstate] = React.useState({
-    exercise: interrests[0].active,
-    study: interrests[1].active,
-    conversation: interrests[2].active,
-    finance: interrests[3].active,
-    game: interrests[4].active,
-    other: interrests[5].active,
+    exercise: newInterests[0].active,
+    study: newInterests[1].active,
+    conversation: newInterests[2].active,
+    finance: newInterests[3].active,
+    game: newInterests[4].active,
+    other: newInterests[5].active,
   });
   const { exercise, study, conversation, finance, game, other } = state;
 
@@ -32,30 +41,9 @@ function Myinterests(props) {
     });
   };
 
-  interrests.filter(x => {
-    if (res.includes(x.ko)) {
-      x.active = !x.active;
-      return x;
-    }
-    return x;
-  });
-
-  if (Disable) {
-    return (
-      <Grid row gap="9px">
-        {interrests.map((x, idx) => {
-          return (
-            <Button key={idx} name={x.en} state={x.active ? 'active' : ''} BtnTag>
-              {x.ko}
-            </Button>
-          );
-        })}
-      </Grid>
-    );
-  }
   return (
     <Grid row gap="9px">
-      {interrests.map((x, idx) => {
+      {newInterests.map((x, idx) => {
         return (
           <Button
             key={idx}

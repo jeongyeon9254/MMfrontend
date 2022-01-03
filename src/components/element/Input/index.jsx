@@ -47,13 +47,12 @@ const Input = props => {
   };
 
   const Edelete = evt => {
-    if ((evt.which != 8 && evt.which != 0 && evt.which < 48) || evt.which > 57) {
+    if ((evt.which !== 8 && evt.which !== 0 && evt.which < 48) || evt.which > 57) {
       evt.preventDefault();
     }
   };
   const posting =
     '지금 부터 네이버 글자수 세기로 공백 포함 100자를 맞춰 보겠습니다, 아야어여오요우유으이 이 글은 100자 이내로 작성이 가능합니다, 그렇다고 합니다 얼렁 맞춰져라 빨리 맞춰저라';
-  const TagSouces = {};
 
   switch (_type) {
     case 'textarea':
@@ -63,6 +62,7 @@ const Input = props => {
           {...styles}
           value={_value}
           onChange={_onChange}
+          readOnly={_readOnly}
         ></InputTextarea>
       );
     case 'posting':
@@ -71,6 +71,7 @@ const Input = props => {
           {...styles}
           value={_value}
           onChange={_onChange}
+          readOnly={_readOnly}
           placeholder={posting}
         ></InputPostText>
       );
@@ -82,13 +83,22 @@ const Input = props => {
           value={_value}
           onInput={MaxNum}
           onChange={_onChange}
+          readOnly={_readOnly}
           type="number"
           {...styles}
         ></InputNum>
       );
 
     case 'password':
-      return <InputPw type={_type} {...styles} value={_value} onChange={_onChange}></InputPw>;
+      return (
+        <InputPw
+          type={_type}
+          {...styles}
+          readOnly={_readOnly}
+          value={_value}
+          onChange={_onChange}
+        ></InputPw>
+      );
 
     case 'number':
       return (
@@ -97,13 +107,23 @@ const Input = props => {
           type={_type}
           {...styles}
           value={_value}
+          readOnly={_readOnly}
           onChange={_onChange}
         ></InputNum>
       );
     case 'chat':
-      return <ChatInput {...styles} value={_value} onChange={_onChange}></ChatInput>;
+      return (
+        <ChatInput {...styles} value={_value} readOnly={_readOnly} onChange={_onChange}></ChatInput>
+      );
     case 'comment':
-      return <CommentInput {...styles} value={_value} onChange={_onChange}></CommentInput>;
+      return (
+        <CommentInput
+          {...styles}
+          value={_value}
+          readOnly={_readOnly}
+          onChange={_onChange}
+        ></CommentInput>
+      );
     default:
       return (
         <InputStyle
@@ -124,6 +144,9 @@ Input.defaultProps = {
   _readOnly: false,
   _defaultValue: '',
   _maxWidth: '100%',
+  _onChange: () => {
+    alert('읽기 전용입니다.');
+  },
 };
 
 export default Input;
