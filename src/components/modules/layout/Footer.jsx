@@ -10,7 +10,7 @@ import { Grid } from '../../element';
 
 // JS
 import { history } from '../../../redux/configureStore';
-
+//수정
 const Footer = props => {
   return (
     <FooterStyle>
