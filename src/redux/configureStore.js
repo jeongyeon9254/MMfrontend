@@ -8,10 +8,12 @@ import chat from './modules/chat';
 import user from './modules/user';
 import list from './modules/list';
 import profile from './modules/profile';
+import preview from './modules/preview';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  preview: preview,
   profile: profile,
   list: list,
   main: main,
