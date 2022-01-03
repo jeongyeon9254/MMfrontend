@@ -18,18 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const MapKategorieNav = props => {
   const dispatch = useDispatch();
   const mbti = Mybit(props.userInfo.mbti);
-  const navList = [
-    <>
-      <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
-      전체보기
-    </>,
-    '대화',
-    '운동',
-    '공부',
-    '게임',
-    '제테크',
-    '기타',
-  ];
+  const navList = ['전체보기', '대화', '운동', '공부', '게임', '제테크', '기타'];
 
   const [active, setActive] = useState(0);
 
@@ -43,11 +32,13 @@ const MapKategorieNav = props => {
                 BtnTag
                 state={active === index ? 'active' : false}
                 _onClick={e => {
-                  const name = e.target.innerHTML;
                   setActive(index);
-                  dispatch(mainActions.setKategorie(name));
+                  dispatch(mainActions.setKategorie(list));
                 }}
               >
+                {list === '전체보기' ? (
+                  <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
+                ) : null}
                 {list}
               </Button>
             </SwiperSlide>

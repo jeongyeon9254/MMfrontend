@@ -26,6 +26,7 @@ const Header = props => {
   const goBack = () => {
     history.goBack();
     dispatch(mainActions.reset());
+    dispatch(mainActions.kategorieReset());
   };
 
   return (

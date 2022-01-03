@@ -8,11 +8,13 @@ const GET_LIST = 'GET_LIST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
 const SET_KATEGORIE = 'SET_KATEGORIE';
+const RESET_KATEGORIE = 'RESET_KATEGORIE';
 
 const getList = createAction(GET_LIST, data => ({ data }));
 const chemyList = createAction(CHEMY_LIST, data => ({ data }));
 const reset = createAction(RESET, () => ({}));
 const setKategorie = createAction(SET_KATEGORIE, name => ({ name }));
+const kategorieReset = createAction(RESET_KATEGORIE, () => ({}));
 
 const initialState = {
   list: {
@@ -75,6 +77,10 @@ export default handleActions(
       produce(state, draft => {
         draft.kategorie = action.payload.name;
       }),
+    [RESET_KATEGORIE]: (state, action) =>
+      produce(state, draft => {
+        draft.kategorie = null;
+      }),
   },
   initialState,
 );
@@ -85,6 +91,7 @@ const actionCreators = {
   chemyListDB,
   reset,
   setKategorie,
+  kategorieReset,
 };
 
 export { actionCreators };

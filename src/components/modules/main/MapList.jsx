@@ -17,16 +17,25 @@ const MapList = props => {
 
   const dispatch = useDispatch();
   const listState = useSelector(state => state.list.state);
-  const list = useSelector(state => state.main.list);
+  const lists = useSelector(state => state.main.list);
   const kategorie = useSelector(state => state.main.kategorie);
 
   const offModal = () => {
     dispatch(listActions.downList());
   };
 
-  console.log(list);
-  console.log(list.result.filter(x => x.interestList[0].interest === kategorie));
-  console.log(kategorie);
+  // filter 기능
+  let list;
+  if (kategorie !== null) {
+    list = lists.result.filter(x =>
+      x.interestList.length === 2
+        ? x.interestList[0].interest === kategorie || x.interestList[1].interest === kategorie
+        : x.interestList[0].interest === kategorie,
+    );
+  }
+  if (kategorie === null || kategorie === '전체보기') {
+    list = lists.result;
+  }
 
   return (
     <React.Fragment>
@@ -37,14 +46,14 @@ const MapList = props => {
           </div>
           {/* 카드리스트 */}
           <div className="inner">
-            {list.result.map((list, idx) => {
+            {list.map((list, idx) => {
               return (
                 <div
                   className="card"
                   key={idx}
                   onClick={() => {
                     history.push(`/profile/${list.userId}`);
-                    dispatch(listActions.downList());
+                    offModal();
                   }}
                 >
                   <Image round width="45px" margin="0" src={list.profileImage}></Image>
