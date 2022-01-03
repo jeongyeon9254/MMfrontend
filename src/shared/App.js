@@ -32,14 +32,14 @@ function App() {
         <PrivateRoute exact path="/chat" Component={Chat} />
         <PrivateRoute exact path="/AddMyinfo" Component={AddMyinfo} />
         <PrivateRoute exact path="/myinfo" Component={Myinfo} />
-        <PublicRoute exact restricted={false} path="/login" Component={Login} />
+        <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PrivateRoute exact path="/profile/:userId" Component={Profile} />/
         <PrivateRoute exact path="/postMain" Component={PostMain} />
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />
         <PublicRoute
           exact
-          restricted={false}
+          restricted={true}
           path="/user/kakao/callback"
           Component={KakaoCallback}
         />
