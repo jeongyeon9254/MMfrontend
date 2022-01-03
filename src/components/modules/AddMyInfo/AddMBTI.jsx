@@ -16,8 +16,6 @@ const AddMBTI = props => {
   console.log(selected);
 
   const toggle = name => {
-    console.log(name, selected);
-    console.log(isClick);
     if (selected === '') {
       setSelected(name);
     } else if (selected === name) {

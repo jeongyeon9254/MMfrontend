@@ -33,7 +33,7 @@ const Tag = props => {
       switch (state) {
         case 'active':
           return (
-            <TagBtn {...styles} style={{ backgroundColor: '#3F3F41' }}>
+            <TagBtn {...styles} onClick={_onClick} style={{ backgroundColor: '#3F3F41' }}>
               <div>
                 {small ? (
                   <>

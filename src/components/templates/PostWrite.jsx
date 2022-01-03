@@ -75,7 +75,7 @@ const PostWrite = () => {
         </Grid>
         <Button
           _onClick={() => {
-            console.log('실행');
+            console.log(photoToAddList, text);
           }}
           BtnBottom
           width="83%"
