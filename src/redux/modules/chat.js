@@ -42,10 +42,9 @@ const loadChatCommetList = (roomId, hostname) => {
     const ms = {
       type: 'ENTER',
       roomId: roomId,
-      // username: userInfo.nickname,
-      // profileImage: userInfo.profileImage,
       message: `${hostname}님이 입장 하였습니다.`,
     };
+    dispatch(PostChatting(ms, ms));
     dispatch(pushChatRoom(ms));
   };
 };
@@ -60,10 +59,10 @@ const getChatMsListDB = roomId => {
 };
 
 // 채팅 메세지 보내기
-const PostChatting = props => {
+const PostChatting = (ms, req) => {
   return async function (dispatch, getState, { history }) {
-    const res = await sendMessage(props);
-    dispatch(pushChatRoom(props));
+    await sendMessage(ms);
+    dispatch(pushChatRoom(req));
   };
 };
 

@@ -18,12 +18,16 @@ function PartyInput(props) {
     const ms = {
       type: 'TALK',
       roomId: roomId,
-      username: userInfo.nickname,
-      profileImage: userInfo.profileImage,
       message: Chatting,
     };
+    const req = {
+      type: 'TALK',
+      roomId: roomId,
+      message: Chatting,
+      sender: userInfo.username,
+    };
     console.log(ms);
-    dispatch(ChatAction.PostChatting(ms));
+    dispatch(ChatAction.PostChatting(ms, req));
     setChatting('');
   };
 

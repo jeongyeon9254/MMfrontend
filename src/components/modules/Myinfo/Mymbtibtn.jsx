@@ -6,7 +6,7 @@ import 'swiper/swiper.min.css';
 import Bit, { Mybit } from '../Bit';
 
 function Mymbtibtn(props) {
-  const { mbti, Emit } = props;
+  const { mbti, emti } = props;
   const [active, SetActive] = React.useState(mbti);
   const My = Mybit(active);
 
@@ -36,7 +36,7 @@ function Mymbtibtn(props) {
                   color={x.color}
                   _onClick={e => {
                     SetActive(x.name);
-                    Emit(active);
+                    emti(active);
                   }}
                 >
                   {x.name}
@@ -50,7 +50,7 @@ function Mymbtibtn(props) {
   );
 }
 Mymbtibtn.defaultProps = {
-  Emit: () => {},
+  emti: () => {},
 };
 const MbtiBox = styled.div`
   width: 100%;

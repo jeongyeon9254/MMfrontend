@@ -7,15 +7,14 @@ import { MyPartBox, Mymbtibtn, Myinterests, MyBottom } from './index';
 function MyEdit(props) {
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
   const [nickname, setNickname] = React.useState(userInfo.nickname);
   const [textarea, setTextarea] = React.useState(userInfo.intro);
-  const Interest = {};
-  const meMbti = '';
-  const InterestEmit = e => {};
-  const MbtiEmit = bit => {};
 
-  console.log(Interest, meMbti);
+  const [Mbti, SetMbti] = React.useState(userInfo.mbti);
+  const SetEmit = e => {
+    SetMbti(e);
+  };
+
   return (
     <Body className={Open ? 'Open' : 'Close'}>
       {' '}
@@ -35,10 +34,10 @@ function MyEdit(props) {
           />
         </MyPartBox>
         <MyPartBox title="나의 MBTI">
-          <Mymbtibtn mbti={userInfo.mbti} Emit={MbtiEmit}></Mymbtibtn>
+          <Mymbtibtn mbti={Mbti} emit={SetEmit}></Mymbtibtn>
         </MyPartBox>
         <MyPartBox title="관심사 설정">
-          <Myinterests Emit={InterestEmit}></Myinterests>
+          <Myinterests></Myinterests>
         </MyPartBox>
         <MyPartBox title="한줄 소개">
           <Input

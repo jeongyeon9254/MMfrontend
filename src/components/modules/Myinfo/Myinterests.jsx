@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import { Grid, Button } from '../../element';
 
 function Myinterests(props) {
-  const { Disable, Emit } = props;
-  const Info = JSON.parse(localStorage.getItem('userInfo'));
-  // const Info = [{ interest: '공부' }, { interest: '운동' }];
-  const res = Info.interestList.map(x => {
+  const { Disable, emit } = props;
+  // const Info = JSON.parse(localStorage.getItem('userInfo'));
+  const Info = [{ interest: '공부' }, { interest: '운동' }];
+  const res = Info.map(x => {
     return x.interest;
   });
   const [myInfo, SetmyInfo] = React.useState(res);
   const [showTxt, SetTxt] = React.useState(false);
-
   const interests = [
     { en: 'exercise', ko: '운동' },
     { en: 'study', ko: '공부' },
@@ -31,8 +30,6 @@ function Myinterests(props) {
       return SetmyInfo(index);
     }
   };
-  // const emit
-  Emit(myInfo);
   return (
     <>
       {showTxt ? <CheckTxt>중복선택이 가능합니다.</CheckTxt> : ''}
@@ -59,7 +56,7 @@ function Myinterests(props) {
   );
 }
 Myinterests.defaultProps = {
-  Emit: e => {},
+  Updata: e => {},
 };
 
 const CheckTxt = styled.p`
