@@ -3,8 +3,8 @@ import { getCookie } from '../shared/Cookie';
 // console.log(getCookie('authorization'));
 const TOCKEN = getCookie('authorization');
 const instance = axios.create({
-  baseURL: 'http://13.124.242.158',
-  // baseURL: 'http://13.209.76.178',
+  // baseURL: 'http://13.124.242.158',
+  baseURL: 'http://13.209.76.178',
   timeout: 3000,
   headers: {
     // 베어러 부분 중첩되는거 삭제 필요
