@@ -6,19 +6,20 @@ import 'swiper/swiper.min.css';
 import Bit, { Mybit } from '../Bit';
 
 function Mymbtibtn(props) {
-  const { mbti, emit } = props;
+  const { mbti, Emit } = props;
   const [active, SetActive] = React.useState(mbti);
   const My = Mybit(active);
-  emit(active);
+
   return (
-    <Grid row gap="9px" padding="3px 0" align>
+    <Grid row gap="8px" padding="3px 0" align="center">
       <Tag small _type="Btn" state="active" _src={My.image} color={My.color}>
         {My.name}
       </Tag>
-      <Grid row width="70%">
+      <Line />
+      <Grid row width="75%">
         <Swiper
           slidesPerView={4}
-          spaceBetween={30}
+          spaceBetween={40}
           pagination={{
             clickable: true,
           }}
@@ -35,6 +36,7 @@ function Mymbtibtn(props) {
                   color={x.color}
                   _onClick={e => {
                     SetActive(x.name);
+                    Emit(active);
                   }}
                 >
                   {x.name}
@@ -47,9 +49,17 @@ function Mymbtibtn(props) {
     </Grid>
   );
 }
+Mymbtibtn.defaultProps = {
+  Emit: () => {},
+};
 const MbtiBox = styled.div`
   width: 100%;
   height: suto;
   overflow: hidden;
+`;
+const Line = styled.div`
+  height: 50px;
+  width: 1px;
+  background-color: #ededed;
 `;
 export default Mymbtibtn;

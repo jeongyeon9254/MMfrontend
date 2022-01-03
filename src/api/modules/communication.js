@@ -5,6 +5,7 @@ console.log(TOKEN);
 export const messages = [];
 
 export const UserInRoom = roomId => {
+  console.log(roomId);
   ws.connect(
     { token: TOKEN },
     frame => {
@@ -18,14 +19,15 @@ export const UserInRoom = roomId => {
           // profileImage: userInfo.profileImage,
           message: '',
         };
+        console.log(ms);
         sendMessage(ms);
         return recv;
       });
     },
-    // error => {
-    //   alert('서버 연결에 실패 하였습니다. 다시 접속해 주십시요.');
-    //   document.location.href = '/';
-    // },
+    error => {
+      alert('서버 연결에 실패 하였습니다. 다시 접속해 주십시요.');
+      document.location.href = '/';
+    },
   );
 };
 // 보내는거

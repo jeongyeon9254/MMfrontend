@@ -21,7 +21,7 @@ const Chat = () => {
   const [Data, setData] = React.useState({});
   console.log(Room);
   React.useEffect(() => {
-    dispatch(ChatAction.loadChatRoomList());
+    dispatch(ChatAction.getChatRoomListDB());
   }, []);
 
   return (
