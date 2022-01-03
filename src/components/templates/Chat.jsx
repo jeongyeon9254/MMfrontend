@@ -21,7 +21,7 @@ const Chat = () => {
   const [Data, setData] = React.useState({});
   console.log(Room);
   React.useEffect(() => {
-    dispatch(ChatAction.loadChatRoomList());
+    dispatch(ChatAction.getChatRoomListDB());
   }, []);
 
   return (
@@ -39,6 +39,7 @@ const Chat = () => {
                   setData(x);
                   //채팅방 입장할때
                   dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
+                  dispatch(ChatAction.getChatMsListDB(x.roomId));
                 }}
                 data={x}
                 key={idx}

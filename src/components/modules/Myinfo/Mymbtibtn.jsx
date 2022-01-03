@@ -9,7 +9,7 @@ function Mymbtibtn(props) {
   const { mbti, emit } = props;
   const [active, SetActive] = React.useState(mbti);
   const My = Mybit(active);
-  emit(active);
+  // emit(active);
   return (
     <Grid row gap="9px" padding="3px 0" align>
       <Tag small _type="Btn" state="active" _src={My.image} color={My.color}>

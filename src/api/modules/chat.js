@@ -36,7 +36,7 @@ export const getInRoom = roomId => {
 export const getChatMsList = roomId => {
   return instance({
     method: 'get',
-    url: `/room/message`,
+    url: `/room/message/${roomId}`,
   });
 };
 
