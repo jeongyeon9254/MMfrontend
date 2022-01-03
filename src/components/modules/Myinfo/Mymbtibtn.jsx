@@ -6,9 +6,12 @@ import 'swiper/swiper.min.css';
 import Bit, { Mybit } from '../Bit';
 
 function Mymbtibtn(props) {
-  const { mbti, emti } = props;
+  const { mbti, Emit } = props;
   const [active, SetActive] = React.useState(mbti);
   const My = Mybit(active);
+  React.useEffect(() => {
+    Emit(active);
+  }, [active]);
 
   return (
     <Grid row gap="8px" padding="3px 0" align="center">
@@ -36,7 +39,6 @@ function Mymbtibtn(props) {
                   color={x.color}
                   _onClick={e => {
                     SetActive(x.name);
-                    emti(active);
                   }}
                 >
                   {x.name}
@@ -50,7 +52,7 @@ function Mymbtibtn(props) {
   );
 }
 Mymbtibtn.defaultProps = {
-  emti: () => {},
+  Emit: () => {},
 };
 const MbtiBox = styled.div`
   width: 100%;

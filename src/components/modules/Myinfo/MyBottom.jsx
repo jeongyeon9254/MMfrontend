@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { Button } from '../../element';
 
 function MyBottom(props) {
-  const { Edit, Open, children, _onClick } = props;
-  const [state, setstate] = React.useState(false);
-  const OpenClick = () => {};
+  const { children, _onClick } = props;
   return (
     <>
       <BottomBox>

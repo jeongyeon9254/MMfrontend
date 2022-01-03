@@ -3,18 +3,44 @@ import styled from 'styled-components';
 import Header from '../layout/Header';
 import { Input, Grid, Button } from '../../element';
 import { MyPartBox, Mymbtibtn, Myinterests, MyBottom } from './index';
-
+import { useDispatch } from 'react-redux';
+import { actionCreators as userAction } from '../../../redux/modules/user';
 function MyEdit(props) {
+  const dispatch = useDispatch();
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [nickname, setNickname] = React.useState(userInfo.nickname);
   const [textarea, setTextarea] = React.useState(userInfo.intro);
-
   const [Mbti, SetMbti] = React.useState(userInfo.mbti);
+  const [Int, SetInt] = React.useState([]);
+
   const SetEmit = e => {
     SetMbti(e);
   };
 
+  const Haddit = e => {
+    SetInt(e);
+  };
+
+  const map = Int.map(x => {
+    return { interest: x };
+  });
+
+  const AddInfo = {
+    nickname: nickname,
+    profileImage: userInfo.profileImage,
+    gender: userInfo.gender,
+    ageRange: userInfo.ageRange,
+    intro: textarea,
+    location: userInfo.location,
+    mbti: Mbti,
+    interestList: map,
+  };
+
+  const ClickEvent = () => {
+    console.log(AddInfo);
+    // dispatch(userAction.userIngoPut(AddInfo));
+  };
   return (
     <Body className={Open ? 'Open' : 'Close'}>
       {' '}
@@ -29,27 +55,35 @@ function MyEdit(props) {
             _padding="8px 14px"
             _value={nickname}
             _onChange={e => {
-              setNickname(e.target.value);
+              if (e.target.value.length <= 4) {
+                setNickname(e.target.value);
+              } else {
+                alert('4자 이하로 부탁드립니다.');
+              }
             }}
           />
         </MyPartBox>
         <MyPartBox title="나의 MBTI">
-          <Mymbtibtn mbti={Mbti} emit={SetEmit}></Mymbtibtn>
+          <Mymbtibtn mbti={userInfo.mbti} Emit={SetEmit}></Mymbtibtn>
         </MyPartBox>
         <MyPartBox title="관심사 설정">
-          <Myinterests></Myinterests>
+          <Myinterests Emit={Haddit}></Myinterests>
         </MyPartBox>
         <MyPartBox title="한줄 소개">
           <Input
             _type="textarea"
             _value={textarea}
             _onChange={e => {
-              setTextarea(e.target.value);
+              if (e.target.value.length <= 100) {
+                setTextarea(e.target.value);
+              } else {
+                alert('100자 이하로 부탁드립니다.');
+              }
             }}
           />
         </MyPartBox>
       </Grid>
-      <MyBottom>내 정보 수정하기</MyBottom>
+      <MyBottom _onClick={ClickEvent}>내 정보 수정하기</MyBottom>
     </Body>
   );
 }
