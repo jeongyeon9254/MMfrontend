@@ -54,8 +54,8 @@ const loadChatCommetList = (roomId, hostname) => {
 const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
     const res = await getChatMsList(roomId);
-    console.log(res);
-    dispatch(LoadChatting(res));
+    console.log(res.data.chatMessageDtoList);
+    dispatch(LoadChatting(res.data.chatMessageDtoList));
   };
 };
 

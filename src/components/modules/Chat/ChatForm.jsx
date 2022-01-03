@@ -18,7 +18,9 @@ const ChatForm = props => {
   console.log(Chatx);
 
   React.useEffect(() => {
-    dispatch(ChatAction.getChatMsListDB(roomId));
+    if (roomId) {
+      dispatch(ChatAction.getChatMsListDB(roomId));
+    }
   }, [roomId]);
 
   return (

@@ -24,19 +24,11 @@ export const postChatRoomList = guestId => {
   });
 };
 
-//채팅방 입장 => 승인를 누르면 나는 입장하고 상대방에게 입장승인 알림을 울리게 한다.
-export const getInRoom = roomId => {
-  return instance({
-    method: 'get',
-    url: `/chat/room/${roomId}`,
-  });
-};
-
 //채팅방에 메세지 리스트 가져오기 버튼을 눌렸을때
 export const getChatMsList = roomId => {
   return instance({
     method: 'get',
-    url: `/room/message/${roomId}`,
+    url: `/chat/room/${roomId}`,
   });
 };
 

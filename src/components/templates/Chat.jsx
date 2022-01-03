@@ -39,7 +39,6 @@ const Chat = () => {
                   setData(x);
                   //채팅방 입장할때
                   dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
-                  dispatch(ChatAction.getChatMsListDB(x.roomId));
                 }}
                 data={x}
                 key={idx}

@@ -10,6 +10,7 @@ import PostWrite from './PostWrite';
 import PostEdit from './PostEdit';
 import KakaoCallback from './KakaoCallback';
 import Hidden from './Hidden';
+import Demo from './Demo';
 
 export {
   Main,
@@ -24,4 +25,5 @@ export {
   PostEdit,
   Hidden,
   KakaoCallback,
+  Demo,
 };

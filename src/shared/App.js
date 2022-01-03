@@ -13,6 +13,7 @@ import {
   AddMyinfo,
   Hidden,
   KakaoCallback,
+  Demo,
 } from '../components/templates';
 import Profile from '../components/templates/Profile';
 import PrivateRoute from '../components/modules/PrivateRoute';
@@ -43,6 +44,7 @@ function App() {
           path="/user/kakao/callback"
           Component={KakaoCallback}
         />
+        <PublicRoute exact restricted={true} path="/room/message/:roomId" Component={Demo} />
       </Switch>
       <Route exact path="/hidden" component={Hidden} />
     </ConnectedRouter>
