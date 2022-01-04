@@ -15,22 +15,31 @@ function PartyInput(props) {
   };
 
   const ClickEvent = () => {
-    const ms = {
-      type: 'TALK',
-      roomId: roomId,
-      message: Chatting,
-    };
-    const req = {
-      type: 'TALK',
-      roomId: roomId,
-      message: Chatting,
-      sender: userInfo.username,
-    };
-    console.log(ms);
-    dispatch(ChatAction.PostChatting(ms, req));
-    setChatting('');
+    if (Chatting !== '') {
+      const ms = {
+        type: 'TALK',
+        roomId: roomId,
+        message: Chatting,
+      };
+      const req = {
+        type: 'TALK',
+        roomId: roomId,
+        message: Chatting,
+        sender: userInfo.username,
+      };
+      console.log(ms);
+      dispatch(ChatAction.PostChatting(ms, req));
+      dispatch(ChatAction.getChatMsListDB(roomId));
+      setChatting('');
+    } else {
+      alert('정보를 입력해주세요');
+    }
   };
-
+  const Pressevent = e => {
+    if (e.key === 'Enter') {
+      ClickEvent();
+    }
+  };
   return (
     <BottomInput>
       <Grid row justify="space-between">
@@ -40,6 +49,9 @@ function PartyInput(props) {
           _padding="9px 15px"
           _value={Chatting}
           _onChange={ChatPost}
+          onKeyPress={e => {
+            Pressevent(e);
+          }}
         />
         <Button BtnAdd padding="9px 16px" radius="30px" _onClick={ClickEvent}>
           전송

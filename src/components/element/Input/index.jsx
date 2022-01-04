@@ -26,6 +26,7 @@ const Input = props => {
     _readOnly,
     _defaultValue,
     _onInput,
+    onKeyPress,
   } = props;
 
   const styles = {
@@ -139,6 +140,7 @@ const Input = props => {
           readOnly={_readOnly}
           onChange={_onChange}
           onInput={_onInput}
+          onKeyPress={onKeyPress}
         ></InputStyle>
       );
   }

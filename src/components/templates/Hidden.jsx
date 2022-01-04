@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Grid } from '../element';
-import { Box, Image, Tag, Button } from '../element/index';
+import { Box, Image, Tag, Button, Select } from '../element/index';
 import Pen from '../../img/Icon/icon_create.svg';
 import Bit from '../modules/Bit';
 const Hidden = () => {
@@ -8,6 +8,7 @@ const Hidden = () => {
     <div>
       <Grid border="1px solid #000" height="100%" padding="30px" gap="40px" align="flex-start">
         <h4 style={{ fontSize: '50px' }}> Element 정리 페이지</h4>
+        <Select></Select>
         <Grid gap="20px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>
           <p>normal input</p>

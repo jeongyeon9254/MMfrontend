@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Grid, Box, Button } from '../../element/index';
+import { Grid, Box, Button, Select } from '../../element/index';
 import LoSelect from '../addInfo/LoSelct';
 import AddMBTI from './AddMBTI';
 import AddInfo from './AddInfo';
@@ -29,6 +29,7 @@ const AddAdress = props => {
 
   const sele = locals => {
     setlocal(locals);
+    console.log(locals);
   };
 
   return (

@@ -39,6 +39,8 @@ const Chat = () => {
                   setData(x);
                   //채팅방 입장할때
                   dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
+                  //입장한 채팅방 메세지 정보 가져 오기
+                  dispatch(ChatAction.getChatMsListDB(x.roomId));
                 }}
                 data={x}
                 key={idx}
