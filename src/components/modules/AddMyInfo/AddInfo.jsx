@@ -5,8 +5,7 @@ import { Image, Grid, Input, Button } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
-import Swal from 'sweetalert2';
-import { AddMyinfoAlert } from '../AlertModal/Modal';
+
 const AddInfo = props => {
   const dispatch = useDispatch();
 
@@ -73,7 +72,6 @@ const AddInfo = props => {
 
     reader.onload = () => {
       setProfileImage(reader.result);
-      console.log(reader.result);
     };
   };
 
@@ -150,7 +148,6 @@ const AddInfo = props => {
           BtnBottom
           _onClick={() => {
             setAddress(true);
-            AddMyinfoAlert();
           }}
         >
           다음으로
