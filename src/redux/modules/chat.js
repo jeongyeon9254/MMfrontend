@@ -38,7 +38,8 @@ const getChatRoomListDB = () => {
 // 채팅방 입장
 const loadChatCommetList = (roomId, hostname) => {
   return async function (dispatch, getState, { history }) {
-    await UserInRoom(roomId);
+    const res = await UserInRoom(roomId);
+    console.log(res);
     const ms = {
       type: 'ENTER',
       roomId: roomId,
@@ -64,7 +65,8 @@ const getChatMsListDB = roomId => {
 // 채팅 메세지 보내기
 const PostChatting = (ms, req) => {
   return async function (dispatch, getState, { history }) {
-    await sendMessage(ms);
+    const res = await sendMessage(ms);
+    console.log(res);
     dispatch(pushChatRoom(req));
   };
 };

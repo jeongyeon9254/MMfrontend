@@ -17,9 +17,10 @@ const ChatForm = props => {
 
   React.useEffect(() => {
     if (roomId) {
+      console.log(roomId);
       dispatch(ChatAction.getChatMsListDB(roomId));
     }
-  }, []);
+  }, [roomId]);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>

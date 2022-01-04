@@ -9,7 +9,6 @@ export const UserInRoom = roomId => {
     { token: TOKEN },
     frame => {
       ws.subscribe(`/sub/chat/room/${roomId}`, message => {
-        console.log(message);
         let recv = JSON.parse(message.body);
         return recv;
       });
