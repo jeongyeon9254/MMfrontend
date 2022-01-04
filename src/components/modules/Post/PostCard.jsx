@@ -15,12 +15,7 @@ import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg
 const PostCard = props => {
   // 페이지 네이션 사용
   SwiperCore.use([Pagination]);
-  const getUser = localStorage.getItem('userInfo');
-  const data = JSON.parse(getUser);
   const info = props.info;
-
-  const interestList = data.interestList;
-  interestList.map((interest, idx) => console.log(interest.interest));
 
   const time = info.createdAt.split(' ');
 
@@ -30,7 +25,7 @@ const PostCard = props => {
         <Grid width="auto">
           <Image src={info.profileImage} photoRound width="50px" margin="0" />
         </Grid>
-        <Grid gap="3px" justify="center">
+        <Grid gap="10px" justify="center">
           <Grid row gap="13px">
             <NameText>{info.nickname}</NameText>
             <Tag mbti={info.mbti} _type="black" icon>

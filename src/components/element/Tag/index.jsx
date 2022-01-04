@@ -27,7 +27,13 @@ const Tag = props => {
     case 'black':
       return (
         <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
-          <Grid row color="transparent !important" gap="5px" justify="center">
+          <Grid
+            row
+            color="transparent !important"
+            gap="5px"
+            justify="center!important"
+            align="center!important"
+          >
             {icon ? <Iconimg src={MyBit.image} /> : ''}
             <p>{children}</p>
           </Grid>
@@ -36,7 +42,13 @@ const Tag = props => {
     case 'myDefult':
       return (
         <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
-          <Grid row color="transparent !important" gap="5px">
+          <Grid
+            row
+            color="transparent !important"
+            gap="5px"
+            justify="center!important"
+            align="center!important"
+          >
             {icon ? <Iconimg src={MyBit.image} /> : ''}
             <p>{children}</p>
           </Grid>

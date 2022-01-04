@@ -19,7 +19,7 @@ export const ContainerStyle = styled.div`
   max-width: 377px;
   max-height: 828px;
   height: 100%;
-  padding-top: 84px;
+  padding-top: 82px;
   padding-bottom: 89px;
   background-color: ${props => props.theme.colors.white};
   border-radius: 32px;

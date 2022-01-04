@@ -8,9 +8,6 @@ export const TagBlack = styled.div`
   color: ${props => props.color};
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
   border-radius: ${props => props.theme.radius.tag};
-  p {
-    line-height: 1.1;
-  }
 `;
 
 export const TagStyle = styled.div`
