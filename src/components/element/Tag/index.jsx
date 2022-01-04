@@ -27,7 +27,7 @@ const Tag = props => {
     case 'black':
       return (
         <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
-          <Grid row color="transparent !important" gap="5px" justify="center">
+          <Grid row color="transparent !important" gap="5px" justify="center" align="center">
             {icon ? <Iconimg src={MyBit.image} /> : ''}
             <p>{children}</p>
           </Grid>

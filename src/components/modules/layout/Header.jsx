@@ -6,6 +6,7 @@ import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
 import icon_search from '../../../img/Icon/icon_search.svg';
 import Phone_head from '../../../img/Icon/phone_head.png';
 import Phone_head_w from '../../../img/Icon/phone_head_w.png';
+import icon_detail from '../../../img/Icon/icon_detail.svg';
 // JS
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
@@ -13,7 +14,7 @@ import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { delCookie } from '../../../shared/Cookie';
 
 const Header = props => {
-  const { children, main, chat, post, point, _on, bg, white, myinfo } = props;
+  const { children, main, chat, post, point, _on, bg, white, myinfo, detail, _onClick } = props;
 
   const dispatch = useDispatch();
 
@@ -56,6 +57,7 @@ const Header = props => {
         {chat ? <Search src={icon_search} /> : ''}
         {post ? <Exit>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
         {myinfo ? <LogOut onClick={logOutBack}>로그아웃</LogOut> : ''}
+        {detail ? <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail> : ''}
       </Grid>
     </HeaderStyle>
   );
@@ -103,6 +105,11 @@ const Exit = styled.div`
 const Search = styled.img`
   height: 24px;
   width: 24px;
+`;
+const Detail = styled.img`
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
 `;
 const LogOut = styled.div`
   font-size: 14px;
