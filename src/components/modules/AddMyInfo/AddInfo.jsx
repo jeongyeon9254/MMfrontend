@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button } from '../../element/index';
@@ -6,18 +6,21 @@ import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
-
+import { AddMyinfoAlert } from '../AlertModal/Modal';
 const AddInfo = props => {
   const dispatch = useDispatch();
 
   const [Address, setAddress] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
+  console.log(data);
 
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
+  const [Preview, setPreview] = useState();
+  const fileRef = useRef();
 
   if (Address === true) {
     const file = {
@@ -58,12 +61,48 @@ const AddInfo = props => {
     }
   };
 
+  const handleFileOnChange = e => {
+    //파일 불러오기
+    e.preventDefault();
+    console.log(e.target.files);
+    console.log(e.target.files[0]);
+
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      setProfileImage(reader.result);
+      console.log(reader.result);
+    };
+  };
+
+  const handleFileUploadClick = e => {
+    //버튼 대신 클릭하기
+    e.preventDefault();
+    fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
+  };
+
   return (
     <Body>
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
-          <Image src={data.profileImage} photoRound width="188px" height="188px"></Image>
+          <Image
+            src={profileImage}
+            photoRound
+            width="188px"
+            height="188px"
+            _onClick={handleFileUploadClick}
+          ></Image>
+          <input
+            ref={fileRef}
+            hidden={true}
+            id="file"
+            type="file"
+            onChange={handleFileOnChange}
+            accept="image/*"
+          />
         </Grid>
         <Grid row gap="20px">
           <Grid margin="0px 30px">
@@ -110,19 +149,8 @@ const AddInfo = props => {
           width="315px"
           BtnBottom
           _onClick={() => {
-            Swal.fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!',
-            }).then(result => {
-              if (result.isConfirmed) {
-                setAddress(true);
-              }
-            });
+            setAddress(true);
+            AddMyinfoAlert();
           }}
         >
           다음으로
