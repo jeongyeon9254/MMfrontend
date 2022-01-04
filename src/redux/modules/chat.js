@@ -44,7 +44,6 @@ const loadChatCommetList = (roomId, hostname) => {
       roomId: roomId,
       message: `${hostname}님이 입장 하였습니다.`,
     };
-    dispatch(PostChatting(ms, ms));
     dispatch(pushChatRoom(ms));
   };
 };
@@ -52,9 +51,13 @@ const loadChatCommetList = (roomId, hostname) => {
 // 채팅 메세지 목록 가져오기
 const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
-    const res = await getChatMsList(roomId);
-    console.log(res.data.chatMessageDtoList);
-    dispatch(LoadChatting(res.data.chatMessageDtoList));
+    try {
+      const res = await getChatMsList(roomId);
+      console.log(res.data.chatMessageDtoList);
+      dispatch(LoadChatting(res.data.chatMessageDtoList));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 

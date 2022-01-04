@@ -15,25 +15,21 @@ function PartyInput(props) {
   };
 
   const ClickEvent = () => {
-    if (Chatting !== '') {
-      const ms = {
-        type: 'TALK',
-        roomId: roomId,
-        message: Chatting,
-      };
-      const req = {
-        type: 'TALK',
-        roomId: roomId,
-        message: Chatting,
-        sender: userInfo.username,
-      };
-      console.log(ms);
-      dispatch(ChatAction.PostChatting(ms, req));
-      dispatch(ChatAction.getChatMsListDB(roomId));
-      setChatting('');
-    } else {
-      alert('정보를 입력해주세요');
-    }
+    const ms = {
+      type: 'TALK',
+      roomId: roomId,
+      message: Chatting,
+    };
+    const req = {
+      type: 'TALK',
+      roomId: roomId,
+      message: Chatting,
+      sender: userInfo.username,
+    };
+    console.log(ms);
+    dispatch(ChatAction.PostChatting(ms, req));
+    dispatch(ChatAction.getChatMsListDB(roomId));
+    setChatting('');
   };
   const Pressevent = e => {
     if (e.key === 'Enter') {
