@@ -38,8 +38,8 @@ function MyEdit(props) {
   };
 
   const ClickEvent = () => {
-    console.log(AddInfo);
-    // dispatch(userAction.userIngoPut(AddInfo));
+    // console.log(AddInfo);
+    dispatch(userAction.userInfoPut(AddInfo));
   };
   return (
     <Body className={Open ? 'Open' : 'Close'}>

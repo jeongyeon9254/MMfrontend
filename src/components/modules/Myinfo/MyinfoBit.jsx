@@ -3,14 +3,18 @@ import styled from 'styled-components';
 import { Grid, Button } from '../../element';
 import { Mybit } from '../Bit';
 import { MymbtiInfo } from './index';
+import { actionCreators as userAction } from '../../../redux/modules/user';
+import { useDispatch } from 'react-redux';
 
 function MyinfoBit(props) {
+  const dispatch = useDispatch();
   const [Open, setOpen] = React.useState(false);
   const { mbti } = props;
   // const mbti = 'INTP';
   const bit = Mybit(mbti);
   const OpenClick = () => {
     setOpen(!Open);
+    dispatch(userAction.AddMyinfoDB());
   };
 
   console.log(Open);
