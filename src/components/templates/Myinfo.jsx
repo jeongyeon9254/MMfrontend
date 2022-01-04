@@ -10,7 +10,7 @@ const Myinfo = () => {
   };
   return (
     <>
-      <Header bg="transparent" white>
+      <Header bg="transparent" white myinfo>
         내 정보
       </Header>
       <MyinfoHead></MyinfoHead>

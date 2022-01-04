@@ -12,15 +12,6 @@ export const UserInRoom = roomId => {
       ws.subscribe(`/sub/chat/room/${roomId}`, message => {
         console.log(message);
         let recv = JSON.parse(message.body);
-        const ms = {
-          type: 'ENTER',
-          roomId: roomId,
-          // username: userInfo.nickname,
-          // profileImage: userInfo.profileImage,
-          message: '',
-        };
-        console.log(ms);
-        sendMessage(ms);
         return recv;
       });
     },

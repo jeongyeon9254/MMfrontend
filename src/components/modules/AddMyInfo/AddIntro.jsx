@@ -29,7 +29,7 @@ const AddIntro = props => {
   console.log(userInfo);
 
   const ClickEvent = () => {
-    dispatch(userAction.userIngoPut(userInfo));
+    dispatch(userAction.userInfoPut(userInfo));
   };
 
   if (BackInterest === true) {

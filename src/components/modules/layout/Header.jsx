@@ -10,9 +10,10 @@ import Phone_head_w from '../../../img/Icon/phone_head_w.png';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
+import { delCookie } from '../../../shared/Cookie';
 
 const Header = props => {
-  const { children, main, chat, post, point, _on, bg, white } = props;
+  const { children, main, chat, post, point, _on, bg, white, myinfo } = props;
 
   const dispatch = useDispatch();
 
@@ -29,12 +30,18 @@ const Header = props => {
     dispatch(mainActions.kategorieReset());
   };
 
+  const logOutBack = () => {
+    history.push('/login');
+    delCookie('authorization');
+    localStorage.clear();
+  };
+
   return (
     <HeaderStyle {...styles} height="50px">
       <Grid>
         <img style={{ width: '100%' }} src={white ? Phone_head_w : Phone_head} alt="" />
       </Grid>
-      <Grid row>
+      <Grid row justify="space-between">
         {main ? null : (
           <div
             className="backBtn"
@@ -47,7 +54,8 @@ const Header = props => {
         )}
         <TiTle {...styles}>{children}</TiTle>
         {chat ? <Search src={icon_search} /> : ''}
-        {post ? <Exit>방 나가기</Exit> : chat ? '' : <Null></Null>}
+        {post ? <Exit>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
+        {myinfo ? <LogOut onClick={logOutBack}>로그아웃</LogOut> : ''}
       </Grid>
     </HeaderStyle>
   );
@@ -95,5 +103,11 @@ const Exit = styled.div`
 const Search = styled.img`
   height: 24px;
   width: 24px;
+`;
+const LogOut = styled.div`
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+  line-height: 24px;
 `;
 export default Header;

@@ -36,7 +36,7 @@ const ChatForm = props => {
               : Chatx.map((x, idx) => {
                   switch (x.type) {
                     case 'TALK':
-                      return x.userId === userInfo.userId ? (
+                      return x.sender === userInfo.username ? (
                         <PartyMe key={idx} data={x}>
                           {x.message}
                         </PartyMe>

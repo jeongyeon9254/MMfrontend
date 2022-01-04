@@ -9,6 +9,9 @@ function Mymbtibtn(props) {
   const { mbti, Emit } = props;
   const [active, SetActive] = React.useState(mbti);
   const My = Mybit(active);
+  React.useEffect(() => {
+    Emit(active);
+  }, [active]);
 
   return (
     <Grid row gap="8px" padding="3px 0" align="center">
@@ -36,7 +39,6 @@ function Mymbtibtn(props) {
                   color={x.color}
                   _onClick={e => {
                     SetActive(x.name);
-                    Emit(active);
                   }}
                 >
                   {x.name}

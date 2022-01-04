@@ -16,3 +16,11 @@ export const editMyinfoDB = data => {
     data: data,
   });
 };
+
+// 내 mbti 정보 가져오기
+export const getMyMbitInfo = () => {
+  return instance({
+    method: 'get',
+    url: '/api/profile/mbti',
+  });
+};
