@@ -26,14 +26,6 @@ const PostMain = () => {
 
   console.log(postList);
 
-  console.log(
-    postList !== []
-      ? postList.sort((a, b) => {
-          return a.postId - b.postId;
-        })
-      : null,
-  );
-
   return (
     <PostBox>
       <Header>커뮤니티</Header>
