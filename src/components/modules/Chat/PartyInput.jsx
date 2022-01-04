@@ -28,7 +28,6 @@ function PartyInput(props) {
     };
     console.log(ms);
     dispatch(ChatAction.PostChatting(ms, req));
-    dispatch(ChatAction.getChatMsListDB(roomId));
     setChatting('');
   };
   const Pressevent = e => {
