@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 // Js
 import { useDispatch } from 'react-redux';
@@ -39,6 +40,13 @@ const Main = props => {
         <Button BtnTag _onClick={onModal}>
           서울 특별시 {location}
         </Button>
+        <div
+          onClick={() => {
+            Swal.fire('Any fool can use a computer');
+          }}
+        >
+          ss
+        </div>
       </LocationBox>
       <MapKategorieNav userInfo={userInfo} />
       <MapContainer />

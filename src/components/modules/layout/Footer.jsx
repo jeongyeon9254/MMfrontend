@@ -67,7 +67,7 @@ const Footer = props => {
   );
 };
 
-const FooterStyle = styled.header`
+const FooterStyle = styled.footer`
   height: 89px;
   width: 100%;
   position: fixed;

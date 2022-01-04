@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { getCookie } from '../../shared/Cookie';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,41 +22,58 @@ const PostWrite = () => {
   };
 
   // 이미지
-  const [photoToAddList, setPhotoToAddList] = useState([]);
+  const [images, setImages] = React.useState([]);
 
   const photoInput = useRef();
 
   const selectFile = e => {
-    const file = photoInput.current.files;
-
-    const obj = { ...file };
+    if (images.length !== 0) {
+      setImages([...images, e.target.files]);
+    } else {
+      setImages(e.target.files);
+    }
+    console.log(images);
+    const obj = { ...e.target.files };
     const fileList = Object.entries(obj);
 
+    if (fileList.length > 8) {
+      alert('ㄴㄴ');
+      return false;
+    }
+    // 프리뷰
     fileList.map((x, idx) => {
-      console.log(x);
       let reader = new FileReader();
       reader.readAsDataURL(x[1]);
       reader.onloadend = () => {
         dispatch(imageActions.setPreview(reader.result));
       };
     });
-
-    if (file) {
-      setPhotoToAddList(file);
-    }
   };
 
   const preview = useSelector(state => state.preview.preview);
 
   const addPost = () => {
-    let addFormData = new FormData();
+    let multipartFile = new FormData();
+    for (let i = 0; i < images.length; i++) {
+      multipartFile.append('multipartFile', images[i]);
+    }
     const data = {
+      tag: '공부',
       content: text,
     };
-    console.log(data);
-    console.log(photoToAddList);
-    addFormData.append('multipartFile', photoToAddList);
-    addFormData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    multipartFile.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    const TOCKEN = getCookie('authorization');
+
+    // api
+    axios({
+      method: 'post',
+      url: 'http://13.124.242.158/api/post',
+      data: multipartFile,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `${TOCKEN}`,
+      },
+    });
   };
 
   return (
@@ -78,6 +97,7 @@ const PostWrite = () => {
           <input
             type="file"
             accept="image/jpg, image/jpeg, image/png"
+            encType="multipart/form-data"
             multiple
             ref={photoInput}
             onChange={selectFile}

@@ -1,56 +1,79 @@
 import React from 'react';
-import { Grid, Image, Tag } from '../../element/index';
 import styled from 'styled-components';
+
+// Swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Pagination } from 'swiper/core';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+
+// Component
+import { Grid, Image, Tag } from '../../element/index';
 import { ReactComponent as HeartIcon } from '../../../img/Icon/icon_heart_no.svg';
 import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg';
 
-const PostCard = () => {
+const PostCard = props => {
+  // 페이지 네이션 사용
+  SwiperCore.use([Pagination]);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
+  const info = props.info;
 
   const interestList = data.interestList;
-
   interestList.map((interest, idx) => console.log(interest.interest));
 
+  const time = info.createdAt.split(' ');
+
   return (
-    <>
-      <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 20px 0px 20px">
-        <Grid width="100%" row wrap="nowrap" align="center" gap="10px">
-          <Grid row align="center" margin="0px">
-            <Image photoRound width="50px">
-              {data.profileImage}
-            </Image>
-          </Grid>
-          <Grid width="100%" gap="7px">
-            <NameText>{data.nickname}</NameText>
-            <TimeText>3시간 전</TimeText>
-          </Grid>
+    <Grid>
+      <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 30px" gap="10px">
+        <Grid width="auto">
+          <Image src={info.profileImage} photoRound width="50px" margin="0" />
         </Grid>
-        <Grid padding="2px 0px 0px 0px" width="50%" height="19px">
-          <Tag mbti={data.mbti} _type="black" icon>
-            INTJ
+        <Grid gap="3px" justify="center">
+          <Grid row gap="13px">
+            <NameText>{info.nickname}</NameText>
+            <Tag mbti={info.mbti} _type="black" icon>
+              {info.mbti}
+            </Tag>
+          </Grid>
+          <TimeText>{time[0]}</TimeText>
+        </Grid>
+        <Grid gap="9px" justify="center" align="flex-end" width="50%">
+          <LocalText>서울특별시 {info.location}</LocalText>
+          <Tag mbti={info.mbti} padding="4px 10px">
+            {info.tag}
           </Tag>
         </Grid>
-        <Grid gap="9px" padding="4px 0px 0px 37px" align="flex-end">
-          <LocalText>{`서울특별시 ${data.location}`}</LocalText>
-          <Grid row justify="flex-end">
-            <Tag mbti={data.mbti}>{}</Tag>
-          </Grid>
-        </Grid>
       </Grid>
-      <Grid padding="21px 0px 0px 0px">
-        <Image></Image>
-      </Grid>
-      <Grid borderBot="1px solid #E8E8E8" padding="17px 44px 16px 33px">
-        <PostRead></PostRead>
-        <Grid row padding="16px 0px 0px 0px">
+
+      <Swiper
+        className="swiper-container"
+        style={{ width: '100%', position: 'relative' }}
+        pagination={{
+          type: 'fraction',
+        }}
+      >
+        {info.imageList.map((list, idx) => {
+          return (
+            <SwiperSlide key={list.imageId}>
+              <Image src={list.imageLink} />
+            </SwiperSlide>
+          );
+        })}
+        <PaginationBakc />
+      </Swiper>
+
+      <Grid padding="17px 44px 16px 33px">
+        <Text>{info.content}</Text>
+        <Grid row padding="16px 0px 0px 0px" align="center">
           <HeartIcon />
-          <Count>24</Count>
+          <Count>{info.likesCount}</Count>
           <CommentIcon style={{ margin: '0px 0px 0px 14px' }} />
-          <Count>24</Count>
+          <Count>{info.commentList.length}</Count>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
 
@@ -77,15 +100,24 @@ const Count = styled.p`
   margin: 0px 0px 0px 4px;
 `;
 
-const PostRead = styled.textarea`
+const Text = styled.p`
   display: block;
-  resize: none;
-  outline: none;
-  text-overflow: ellipsis;
-  overflow: hidden;
   word-break: break-all;
+  line-height: 1.5;
   font-weight: 500;
   font-size: ${props => props.theme.fontSizes.small};
+`;
+const PaginationBakc = styled.div`
+  width: 80px;
+  height: 25px;
+  background: #fff;
+  position: absolute;
+  bottom: 6px;
+  z-index: 1;
+  border-radius: 50px;
+  opacity: 0.5;
+  left: 50%;
+  margin-left: -40px;
 `;
 
 export default PostCard;
