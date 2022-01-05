@@ -17,6 +17,7 @@ import { ReactComponent as CommentIcon } from '../../img/Icon/chat_bubble.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
 import PostModal from '../modules/Post/PostModal';
+import AddComment from '../modules/Post/AddComment';
 
 const PostDetail = props => {
   const dispatch = useDispatch();
@@ -119,6 +120,7 @@ const PostDetail = props => {
       <Box>ss</Box>
       <Box>ss</Box>
       <Box>ss</Box>
+      <AddComment></AddComment>
       {modal ? <PostModal boardId={boardId[2]} out={outModal} /> : null}
     </DetailBox>
   );
@@ -170,7 +172,7 @@ const PaginationBakc = styled.div`
 const DetailBox = styled.div`
   height: calc(100% + 105px);
   overflow: scroll;
-
+  padding-bottom: 78px;
   margin-top: -3px;
 `;
 
