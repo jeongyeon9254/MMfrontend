@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Component
-import MapKategorieNav from '../modules/main/MapKategorieNav';
+import MapKategorieNav from '../modules/Main/MapKategorieNav';
 import Header from '../modules/layout/Header';
 import PostCard from '../modules/Post/PostCard';
 

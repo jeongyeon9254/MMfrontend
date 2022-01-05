@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Swiper
@@ -9,13 +9,14 @@ import 'swiper/components/pagination/pagination.min.css';
 
 // Component
 import Header from '../modules/layout/Header';
-import { Grid, Image, Tag } from '../element/index';
+import { Grid, Image, Tag, Box } from '../element/index';
 import { ReactComponent as HeartIcon } from '../../img/Icon/icon_heart_no.svg';
 import { ReactComponent as CommentIcon } from '../../img/Icon/chat_bubble.svg';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
+import PostModal from '../modules/Post/PostModal';
 
 const PostDetail = props => {
   const dispatch = useDispatch();
@@ -40,13 +41,29 @@ const PostDetail = props => {
   const comment = detailInfo.commentList;
   const time = detailInfo.createdAt;
 
+  const [modal, setModal] = useState(false);
+
+  const outModal = () => {
+    setModal(false);
+  };
+
   return (
     <DetailBox>
-      <Header detail>게시글 상세보기</Header>
+      <Header
+        defaultName={data.nickname}
+        name={detailInfo.nickname}
+        detail
+        _onClick={() => {
+          setModal(true);
+        }}
+      >
+        게시글 상세보기
+      </Header>
+
       <Grid>
         <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 30px" gap="10px">
           <Grid width="auto">
-            <Image photoRound width="50px" margin="0" />
+            <Image src={detailInfo.profileImage} photoRound width="50px" margin="0" />
           </Grid>
           <Grid gap="10px" justify="center">
             <Grid row gap="13px">
@@ -94,6 +111,15 @@ const PostDetail = props => {
           </Grid>
         </Grid>
       </Grid>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      <Box>ss</Box>
+      {modal ? <PostModal boardId={boardId[2]} out={outModal} /> : null}
     </DetailBox>
   );
 };
@@ -142,6 +168,9 @@ const PaginationBakc = styled.div`
 `;
 
 const DetailBox = styled.div`
+  height: calc(100% + 105px);
+  overflow: scroll;
+
   margin-top: -3px;
 `;
 

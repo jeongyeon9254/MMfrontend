@@ -10,6 +10,7 @@ import { Grid } from '../../element';
 
 // Redux
 import { useDispatch } from 'react-redux';
+import { actionCreators as mainActions } from '../../../redux/modules/main.js';
 
 // JS
 import { history } from '../../../redux/configureStore';
@@ -39,6 +40,7 @@ const Footer = props => {
           onClick={() => {
             history.push('/PostMain');
             offModal();
+            dispatch(mainActions.kategorieReset());
           }}
         >
           <img alt="커뮤니티" src={feed}></img>

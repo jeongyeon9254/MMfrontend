@@ -14,7 +14,21 @@ import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { delCookie } from '../../../shared/Cookie';
 
 const Header = props => {
-  const { children, main, chat, post, point, _on, bg, white, myinfo, detail, _onClick } = props;
+  const {
+    children,
+    main,
+    chat,
+    post,
+    point,
+    _on,
+    bg,
+    white,
+    myinfo,
+    detail,
+    _onClick,
+    name,
+    defaultName,
+  } = props;
 
   const dispatch = useDispatch();
 
@@ -57,7 +71,11 @@ const Header = props => {
         {chat ? <Search src={icon_search} /> : ''}
         {post ? <Exit>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
         {myinfo ? <LogOut onClick={logOutBack}>로그아웃</LogOut> : ''}
-        {detail ? <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail> : ''}
+        {detail ? (
+          name === defaultName ? (
+            <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail>
+          ) : null
+        ) : null}
       </Grid>
     </HeaderStyle>
   );
@@ -76,7 +94,7 @@ const HeaderStyle = styled.header`
   border-radius: 30px 30px 0px 0px;
   border-bottom: ${props => (props.white ? '0px' : '1px solid #eee')};
   background-color: ${props => (props.bg ? props.bg : props.theme.colors.white)};
-  z-index: 99;
+  z-index: 50;
   gap: 13px;
   .backBtn {
     height: 24px;
