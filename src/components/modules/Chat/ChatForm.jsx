@@ -18,6 +18,14 @@ const ChatForm = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
   const TOKEN = getCookie('authorization');
+  console.log(TOKEN);
+
+  React.useEffect(() => {
+    if (roomId) {
+      console.log(roomId);
+      // wsConnectSubscribe();
+    }
+  }, [roomId]);
 
   const wsConnectSubscribe = roomId => {
     try {
@@ -30,6 +38,7 @@ const ChatForm = props => {
             let recv = JSON.parse(data.body);
             console.log('구독후 새로운 메세지 data :' + recv);
             dispatch(ChatAction.PostChatting(recv));
+            console.log('sss');
           },
           {
             token: TOKEN,
@@ -67,13 +76,6 @@ const ChatForm = props => {
       console.log('연결 구독 해체 에러', e);
     }
   };
-
-  React.useEffect(() => {
-    if (roomId) {
-      console.log(roomId);
-      wsConnectSubscribe();
-    }
-  }, [roomId]);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
