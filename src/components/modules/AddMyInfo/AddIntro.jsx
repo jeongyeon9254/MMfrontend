@@ -36,12 +36,14 @@ const AddIntro = props => {
   }
   const ClickEvent = () => {
     console.log(userInfo);
+    const jsonFile = datas => {
+      return new Blob([JSON.stringify(datas)], { type: 'application/json' });
+    };
     const formData = new FormData();
-    // const kakaoImg = { kakaoImg: file.profileImage };
+    const kakaoImg = { kakaoImg: file.profileImage };
     const Check = isString(file.profileImage);
-    formData.append('multipartFile', Check ? '' : file.profileImage);
-
-    formData.append('data', new Blob([JSON.stringify(userInfo)], { type: 'application/json' }));
+    formData.append('multipartFile', Check ? jsonFile(kakaoImg) : file.profileImage);
+    formData.append('data', jsonFile(userInfo));
     dispatch(userAction.userInfoPut(formData));
   };
 

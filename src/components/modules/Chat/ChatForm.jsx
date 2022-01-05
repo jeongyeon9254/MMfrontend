@@ -22,23 +22,32 @@ const ChatForm = props => {
   React.useEffect(() => {
     if (roomId) {
       console.log(roomId);
-      dispatch(ChatAction.getChatMsListDB(roomId));
+      // dispatch(ChatAction.getChatMsListDB(roomId));
+      wsConnectSubscribe();
     }
   }, [roomId]);
 
-  ws.connect(
-    { token: TOKEN },
-    frame => {
-      ws.subscribe(`/sub/chat/room/${roomId}`, message => {
-        let recv = JSON.parse(message.body);
-        dispatch(ChatAction.PostChatting(recv));
+  const wsConnectSubscribe = () => {
+    try {
+      ws.debug = null;
+      ws.connect({ token: TOKEN }, () => {
+        ws.subscribe(
+          `/sub/chat/room/${roomId}`,
+          data => {
+            let recv = JSON.parse(data.body);
+            console.log('구독후 새로운 메세지 data :' + recv);
+            dispatch(ChatAction.PostChatting(recv));
+          },
+          {
+            token: TOKEN,
+          },
+        );
       });
-    },
-    error => {
-      alert('서버 연결에 실패 하였습니다. 다시 접속해 주십시요.');
-      document.location.href = '/';
-    },
-  );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
