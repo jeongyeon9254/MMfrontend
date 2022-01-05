@@ -3,16 +3,36 @@ import styled from 'styled-components';
 
 // Redux
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../../../redux/modules/post';
 
 const PostModal = props => {
-  const { boardId, out } = props;
+  const { boardId, out, commentState, commenttId } = props;
   const dispatch = useDispatch();
 
   const deletePost = () => {
     dispatch(postActions.deletePostDB(boardId));
   };
+
+  const deleteComment = () => {
+    dispatch(postActions.deleteCommentsDB(boardId, commenttId));
+    out();
+  };
+
+  if (commentState) {
+    return (
+      <>
+        <ModalBox>
+          <BtnBox>
+            <button style={{ color: 'red' }} onClick={deleteComment}>
+              댓글 삭제하기
+            </button>
+          </BtnBox>
+          <ExitBtn onClick={out}>취소</ExitBtn>
+        </ModalBox>
+      </>
+    );
+  }
 
   return (
     <>

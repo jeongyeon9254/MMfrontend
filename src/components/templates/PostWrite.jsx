@@ -6,10 +6,14 @@ import { getCookie } from '../../shared/Cookie';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../../redux/modules/preview';
+import { actionCreators as postActions } from '../../redux/modules/post';
 
 // component
 import { Button, Grid, Input } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
+
+// Js
+import { history } from '../../redux/configureStore.js';
 
 const PostWrite = () => {
   const dispatch = useDispatch();
@@ -32,12 +36,12 @@ const PostWrite = () => {
     } else {
       setImages(e.target.files);
     }
-    console.log(images);
+
     const obj = { ...e.target.files };
     const fileList = Object.entries(obj);
 
     if (fileList.length > 8) {
-      alert('ㄴㄴ');
+      alert('최대 8개까지 가능합니다');
       return false;
     }
     // 프리뷰
@@ -52,11 +56,18 @@ const PostWrite = () => {
 
   const preview = useSelector(state => state.preview.preview);
 
-  const addPost = () => {
+  const addPost = async () => {
     let multipartFile = new FormData();
-    for (let i = 0; i < images.length; i++) {
-      multipartFile.append('multipartFile', images[i]);
+    const emptyFile = new File([''], 'empty');
+    if (images.length === 0) {
+      multipartFile.append('multipartFile', emptyFile);
     }
+    if (images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        multipartFile.append('multipartFile', images[i]);
+      }
+    }
+
     const data = {
       tag: '공부',
       content: text,
@@ -64,16 +75,19 @@ const PostWrite = () => {
     multipartFile.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
     const TOCKEN = getCookie('authorization');
 
+    dispatch(postActions.addPostDB(multipartFile));
     // api
-    axios({
-      method: 'post',
-      url: 'http://13.124.242.158/api/post',
-      data: multipartFile,
-      headers: {
-        'Content-type': 'multipart/form-data',
-        Authorization: `${TOCKEN}`,
-      },
-    });
+    // await axios({
+    //   method: 'post',
+    //   url: 'http://13.124.242.158/api/post',
+    //   data: multipartFile,
+    //   headers: {
+    //     'Content-type': 'multipart/form-data',
+    //     Authorization: `${TOCKEN}`,
+    //   },
+    // });
+
+    // history.pushState('/PostMain');
   };
 
   return (
@@ -82,7 +96,6 @@ const PostWrite = () => {
       <PostBox>
         <Grid>
           <p>카테고리 선택하기</p>
-          {/* 선택 컴포넌트 */}
         </Grid>
         <Grid>
           <p>사진 첨부하기</p>
