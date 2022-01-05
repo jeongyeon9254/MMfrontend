@@ -50,7 +50,7 @@ const PostMain = () => {
 
   return (
     <PostBox>
-      <Header>커뮤니티</Header>
+      <Header _on>커뮤니티</Header>
       <MapKategorieNav userInfo={userInfo} />
       {postList
         ? filterLists.map((x, idx) => {
