@@ -51,7 +51,7 @@ const CommentBox = styled.div`
   border-top: 1px solid #eee;
   padding: 16px 28px;
   input {
-    width: 220px;
+    width: 70%;
     border-radius: 30px;
     outline: none;
     border: none;

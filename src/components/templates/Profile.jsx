@@ -109,6 +109,11 @@ const Profile = props => {
 
 const ProfileStyle = styled.div`
   padding: 30px;
+  @media only screen and (max-width: 450px) {
+    padding: 10px 30px;
+    overflow: scroll;
+    height: 97%;
+  }
   .name {
     margin-top: 28px;
     font-size: ${props => props.theme.fontSizes.xxxl};

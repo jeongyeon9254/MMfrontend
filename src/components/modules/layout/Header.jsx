@@ -60,7 +60,12 @@ const Header = props => {
   return (
     <HeaderStyle {...styles} height="50px">
       <Grid>
-        <img style={{ width: '100%' }} src={white ? Phone_head_w : Phone_head} alt="" />
+        <img
+          className="mock"
+          style={{ width: '100%' }}
+          src={white ? Phone_head_w : Phone_head}
+          alt=""
+        />
       </Grid>
       <Grid row justify="space-between">
         {main ? null : (
@@ -89,7 +94,6 @@ const Header = props => {
 
 const HeaderStyle = styled.header`
   width: 100%;
-  max-width: 377px;
   position: ${props => (props.point ? props.point : 'fixed')};
   left: 0px;
   top: 0px;
@@ -107,6 +111,13 @@ const HeaderStyle = styled.header`
     border: none;
     cursor: pointer;
     background-color: transparent;
+  }
+  @media only screen and (max-width: 450px) {
+    padding: 13px 23px;
+    gap: 0;
+    .mock {
+      display: none;
+    }
   }
 `;
 const TiTle = styled.h2`

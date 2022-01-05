@@ -21,7 +21,7 @@ const MainComment = props => {
       <Grid width="40px">
         <Image src={info.image} photoRound></Image>
       </Grid>
-      <Grid width="260px">
+      <Grid width="85%">
         <Box comment>
           <Grid align="center" row gap="6px">
             <Grid row align="center" gap="5px">
