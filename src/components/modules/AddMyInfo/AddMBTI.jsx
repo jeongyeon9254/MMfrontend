@@ -15,10 +15,10 @@ const AddMBTI = props => {
   console.log(selected);
 
   const toggle = name => {
-    if (selected === '') {
-      setSelected(name);
-    } else if (selected === name) {
+    if (selected === name) {
       setSelected('');
+    } else {
+      setSelected(name);
     }
   };
 
@@ -60,7 +60,7 @@ const AddMBTI = props => {
             <ClickCommet onClick={CheckMBTI}>MBTI 확인 하러가기</ClickCommet>
           </Grid>
         </Grid>
-        <Grid row gap="20px" margin="23px 0px 0px 0px">
+        <Grid row gap="20px" margin="23px 0px 0px 0px" justify="space-between">
           {Bit.map((x, idx) => {
             return (
               <Tag
@@ -99,10 +99,12 @@ const AddMBTI = props => {
 const MBTITitle = styled.span`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.xxxl};
+  color: #3f3f41;
 `;
 
 const MBTICommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
+  color: #4e4e4e;
 `;
 const ClickCommet = styled.span`
   font-weight: 400;

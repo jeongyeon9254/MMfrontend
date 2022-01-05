@@ -5,7 +5,7 @@ import icon_photo from '../../../img/Icon/icon_photo.svg';
 import Bit from '../../modules/Bit';
 
 const Image = props => {
-  const { width, margin, _onClick, round, border, src, photoRound, mbti, _border } = props;
+  const { width, margin, _onClick, round, border, src, photoRound, mbti, _border, pointer } = props;
 
   const select = Bit.find(x => x.name === mbti);
 
@@ -14,6 +14,7 @@ const Image = props => {
     margin,
     src,
     _border,
+    pointer,
   };
 
   if (round) {

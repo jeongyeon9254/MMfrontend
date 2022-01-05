@@ -23,6 +23,7 @@ export const ImagePhotoRoundStyle = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+  cursor: ${props => (props.pointer ? 'pointer' : '')};
   &:after {
     content: '';
     display: block;
