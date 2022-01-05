@@ -39,10 +39,10 @@ const AddIntro = props => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
+    const emptyFile = new File([''], 'empty');
     const formData = new FormData();
-    const kakaoImg = { kakaoImg: file.profileImage };
     const Check = isString(file.profileImage);
-    formData.append('multipartFile', Check ? jsonFile(kakaoImg) : file.profileImage);
+    formData.append('multipartFile', Check ? emptyFile : file.profileImage);
     formData.append('data', jsonFile(userInfo));
     dispatch(userAction.userInfoPut(formData));
   };
