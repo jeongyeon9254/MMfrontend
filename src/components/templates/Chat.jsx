@@ -21,11 +21,17 @@ const Chat = () => {
   const [RommNum, setRommNum] = React.useState('');
   const [Data, setData] = React.useState({});
   console.log(Room);
+  React.useEffect(() => {}, []);
+
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
-    dispatch(ChatAction.getChatMsListDB(RommNum));
-  }, [RommNum ? RommNum : '']);
+  }, []);
 
+  React.useEffect(() => {
+    if (RommNum) {
+      dispatch(ChatAction.getChatMsListDB(RommNum));
+    }
+  }, [RommNum]);
   return (
     <div>
       <Header>채팅</Header>
@@ -42,7 +48,8 @@ const Chat = () => {
                   //채팅방 입장할때
                   dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
                   //입장한 채팅방 메세지 정보 가져 오기
-                  setRommNum(x.roomId);
+                  // setRommNum(x.roomId);
+                  dispatch(ChatAction.getChatMsListDB(x.roomId));
                 }}
                 data={x}
                 key={idx}

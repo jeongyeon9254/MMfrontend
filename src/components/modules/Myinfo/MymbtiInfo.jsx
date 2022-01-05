@@ -7,7 +7,6 @@ import { MymbtiTxt } from './index';
 function MymbtiInfo(props) {
   const { mbti, Open, _onClick } = props;
   const Myinfo = Mybit(mbti);
-  console.log(Myinfo);
 
   return (
     <ModalBg className={Open ? 'Open' : 'Close'}>

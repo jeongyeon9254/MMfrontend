@@ -27,7 +27,6 @@ function PartyInput(props) {
       message: Chatting,
       sender: userInfo.username,
     };
-    console.log(ms);
     dispatch(ChatAction.PostChatting(ms, req));
     setChatting('');
   };

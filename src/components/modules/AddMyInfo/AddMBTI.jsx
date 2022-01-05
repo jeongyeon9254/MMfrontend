@@ -8,12 +8,10 @@ import AddAdress from './AddAdress';
 
 const AddMBTI = props => {
   const { file, local } = props;
-  console.log(file);
+
   const [seleteInterest, setSeleteInterest] = useState(false);
   const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
-
-  console.log(selected);
 
   const toggle = name => {
     if (selected === name) {

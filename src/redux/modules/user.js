@@ -34,7 +34,6 @@ const logInDB = code => {
 const userInfoPut = userInfo => {
   return async function (dispatch, getState, { history }) {
     const res = await editMyinfoDB(userInfo);
-    console.log(res);
     localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(res.data));
     history.push('/');

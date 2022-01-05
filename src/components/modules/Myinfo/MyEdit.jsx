@@ -38,7 +38,6 @@ function MyEdit(props) {
   };
 
   const ClickEvent = () => {
-    // console.log(AddInfo);
     dispatch(userAction.userInfoPut(AddInfo));
   };
   return (
