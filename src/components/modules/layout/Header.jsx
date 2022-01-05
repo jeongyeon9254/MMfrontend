@@ -39,6 +39,12 @@ const Header = props => {
     white,
   };
 
+  const goHome = () => {
+    history.push('/');
+    dispatch(mainActions.reset());
+    dispatch(mainActions.kategorieReset());
+  };
+
   const goBack = () => {
     history.goBack();
     dispatch(mainActions.reset());
@@ -61,7 +67,7 @@ const Header = props => {
           <div
             className="backBtn"
             onClick={() => {
-              _on ? _on() : goBack();
+              _on ? goHome() : goBack();
             }}
           >
             <img alt="뒤로가기 버튼" src={white ? arrow_left_w : arrow_left}></img>

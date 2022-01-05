@@ -101,6 +101,7 @@ const GridStyle = styled.div`
   position: relative;
   z-index: ${props => props.Zindex};
   border-bottom: ${props => props.borderBot};
+  border-top: ${props => props.borderTop};
 `;
 
 export default Grid;

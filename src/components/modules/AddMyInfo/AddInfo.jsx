@@ -27,7 +27,7 @@ const AddInfo = props => {
   const fileRef = useRef();
 
   const YesAlert = useSelector(state => state.modal.Alert);
-  const NoAler = useSelector(state => state.modal.Alert);
+  // const NoAler = useSelector(state => state.modal.Alert);
 
   console.log(typeof profileImage);
 

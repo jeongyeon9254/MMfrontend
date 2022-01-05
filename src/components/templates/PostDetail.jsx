@@ -9,8 +9,10 @@ import 'swiper/components/pagination/pagination.min.css';
 
 // Component
 import Header from '../modules/layout/Header';
-import { Grid, Image, Tag, Box } from '../element/index';
+import MainComment from '../../components/modules/Post/MainComment';
+import { Grid, Image, Tag } from '../element/index';
 import { ReactComponent as HeartIcon } from '../../img/Icon/icon_heart_no.svg';
+import { ReactComponent as OnHeartIcon } from '../../img/Icon/icon_heart_in.svg';
 import { ReactComponent as CommentIcon } from '../../img/Icon/chat_bubble.svg';
 
 // Redux
@@ -31,10 +33,6 @@ const PostDetail = props => {
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
-  React.useEffect(() => {
-    dispatch(postActions.getDetailDB(boardId[2]));
-  }, []);
-
   // 예외처리용 정보
   const detailInfo = useSelector(state => state.post.detail);
   const mbti = detailInfo.mbti;
@@ -42,10 +40,26 @@ const PostDetail = props => {
   const comment = detailInfo.commentList;
   const time = detailInfo.createdAt;
 
+  React.useEffect(() => {
+    dispatch(postActions.getDetailDB(boardId[2]));
+  }, []);
   const [modal, setModal] = useState(false);
+  const [commentState, setCommentState] = useState(false);
+
+  const [commenttId, setCommenttId] = useState();
+
+  const onCommentModal = () => {
+    setModal(true);
+    setCommentState(true);
+  };
 
   const outModal = () => {
     setModal(false);
+    setCommentState(false);
+  };
+
+  const addlike = () => {
+    dispatch(postActions.addLikeDB(boardId[2]));
   };
 
   return (
@@ -91,13 +105,15 @@ const PostDetail = props => {
           }}
         >
           {imgList
-            ? imgList.map((list, idx) => {
-                return (
-                  <SwiperSlide key={list.imageId}>
-                    <Image src={list.imageLink} />
-                  </SwiperSlide>
-                );
-              })
+            ? imgList[0].imageLink === ''
+              ? null
+              : imgList.map((list, idx) => {
+                  return (
+                    <SwiperSlide key={list.imageId}>
+                      <Image src={list.imageLink} />
+                    </SwiperSlide>
+                  );
+                })
             : null}
           <PaginationBakc />
         </Swiper>
@@ -105,23 +121,42 @@ const PostDetail = props => {
         <Grid padding="17px 44px 16px 33px">
           <Text>{detailInfo.content}</Text>
           <Grid row padding="16px 0px 0px 0px" align="center">
-            <HeartIcon />
+            {detailInfo.likeStatus ? (
+              <OnHeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+            ) : (
+              <HeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+            )}
             <Count>{detailInfo.likesCount}</Count>
             <CommentIcon style={{ margin: '0px 0px 0px 14px' }} />
             <Count>{comment ? comment.length : null}</Count>
           </Grid>
         </Grid>
       </Grid>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <Box>ss</Box>
-      <AddComment></AddComment>
-      {modal ? <PostModal boardId={boardId[2]} out={outModal} /> : null}
+      <Grid padding="20px 30px" gap="12px" borderTop="1px solid #E8E8E8">
+        {comment
+          ? comment.map((x, idx) => {
+              return (
+                <Grid key={idx}>
+                  <MainComment
+                    set={setCommenttId}
+                    info={x}
+                    boardId={boardId[2]}
+                    out={onCommentModal}
+                  ></MainComment>
+                </Grid>
+              );
+            })
+          : null}
+      </Grid>
+      <AddComment boardId={boardId[2]}></AddComment>
+      {modal ? (
+        <PostModal
+          commenttId={commenttId}
+          commentState={commentState}
+          boardId={boardId[2]}
+          out={outModal}
+        />
+      ) : null}
     </DetailBox>
   );
 };

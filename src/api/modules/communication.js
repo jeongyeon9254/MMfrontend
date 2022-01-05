@@ -1,24 +1,30 @@
 import { ws } from '../ws';
 import { getCookie } from '../../shared/Cookie';
 const TOKEN = getCookie('authorization');
-console.log(TOKEN);
 export const messages = [];
 
-export const UserInRoom = roomId => {
-  ws.connect(
-    { token: TOKEN },
-    frame => {
-      ws.subscribe(`/sub/chat/room/${roomId}`, message => {
-        let recv = JSON.parse(message.body);
-        return recv;
-      });
-    },
-    error => {
-      alert('서버 연결에 실패 하였습니다. 다시 접속해 주십시요.');
-      document.location.href = '/';
-    },
-  );
+export const wsConnectSubscribe = roomId => {
+  try {
+    ws.debug = null;
+    console.log('sss');
+    ws.connect({ token: TOKEN }, () => {
+      ws.subscribe(
+        `/sub/chat/room/${roomId}`,
+        data => {
+          let recv = JSON.parse(data.body);
+          console.log('구독후 새로운 메세지 data :' + recv);
+          return recv;
+        },
+        {
+          token: TOKEN,
+        },
+      );
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
+
 // 보내는거
 export const sendMessage = props => {
   try {

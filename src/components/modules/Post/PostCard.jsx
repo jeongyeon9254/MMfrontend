@@ -10,12 +10,14 @@ import 'swiper/components/pagination/pagination.min.css';
 // Component
 import { Grid, Image, Tag } from '../../element/index';
 import { ReactComponent as HeartIcon } from '../../../img/Icon/icon_heart_no.svg';
+import { ReactComponent as OnHeartIcon } from '../../../img/Icon/icon_heart_in.svg';
 import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg';
 
 const PostCard = props => {
   // 페이지 네이션 사용
   SwiperCore.use([Pagination]);
   const info = props.info;
+  const imgList = info.imageList;
 
   const time = info.createdAt.split(' ');
 
@@ -49,20 +51,24 @@ const PostCard = props => {
           type: 'fraction',
         }}
       >
-        {info.imageList.map((list, idx) => {
-          return (
-            <SwiperSlide key={list.imageId}>
-              <Image src={list.imageLink} />
-            </SwiperSlide>
-          );
-        })}
+        {imgList
+          ? imgList[0].imageLink === ''
+            ? null
+            : imgList.map((list, idx) => {
+                return (
+                  <SwiperSlide key={list.imageId}>
+                    <Image src={list.imageLink} />
+                  </SwiperSlide>
+                );
+              })
+          : null}
         <PaginationBakc />
       </Swiper>
 
       <Grid padding="17px 44px 16px 33px">
         <Text>{info.content}</Text>
         <Grid row padding="16px 0px 0px 0px" align="center">
-          <HeartIcon />
+          {info.likeStatus ? <OnHeartIcon /> : <HeartIcon />}
           <Count>{info.likesCount}</Count>
           <CommentIcon style={{ margin: '0px 0px 0px 14px' }} />
           <Count>{info.commentList.length}</Count>
