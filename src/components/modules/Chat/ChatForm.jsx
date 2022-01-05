@@ -9,44 +9,63 @@ import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 import { getCookie } from '../../../shared/Cookie';
-import { ws } from '../../../api/ws';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 
 const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick } = props;
   const { userId, name, roomId } = props.data;
+
+  const [Chatting, setChatting] = React.useState('');
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
-  const TOKEN = getCookie('authorization');
-  console.log(TOKEN);
+
+  const env = process.env.NODE_ENV;
+  const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
+  const TOKEN = getCookie('authorization').replace('Bearer ', '');
+  const sock = new SockJS(devTarget);
+  const ws = Stomp.over(sock);
 
   React.useEffect(() => {
     if (roomId) {
-      console.log(roomId);
-      // wsConnectSubscribe();
+      dispatch(ChatAction.getChatMsListDB(roomId));
+      wsConnectSubscribe(roomId);
     }
   }, [roomId]);
 
-  const wsConnectSubscribe = roomId => {
+  const wsConnectSubscribe = Id => {
     try {
       ws.debug = null;
-      console.log('sss');
       ws.connect({ token: TOKEN }, () => {
-        ws.subscribe(
-          `/sub/chat/room/${roomId}`,
-          data => {
-            let recv = JSON.parse(data.body);
-            console.log('구독후 새로운 메세지 data :' + recv);
-            dispatch(ChatAction.PostChatting(recv));
-            console.log('sss');
-          },
-          {
-            token: TOKEN,
-          },
-        );
+        ws.subscribe(`/sub/chat/room/${Id}`, data => {
+          let recv = JSON.parse(data.body);
+          console.log('구독후 새로운 메세지 data :' + recv);
+          dispatch(ChatAction.PostChatting(recv));
+        });
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+  // 채팅 보내기
+  const sendMessage = new_message => {
+    console.log(new_message);
+    try {
+      // send할 데이터
+      const ms = {
+        type: 'TALK',
+        roomId: roomId,
+        message: new_message,
+      };
+      waitForConnection(ws, () => {
+        ws.debug = null;
+        ws.send('/pub/message', { token: TOKEN }, JSON.stringify(ms));
+        dispatch(ChatAction.pushChatting(ms));
+      });
+    } catch (e) {
+      console.log('message 소켓 함수 에러', e);
+      console.log('메세지보내기 상태', ws.ws.readyState);
     }
   };
 
@@ -108,7 +127,7 @@ const ChatForm = props => {
           </Grid>
         </PerfectScrollbar>
       </Grid>
-      <PartyInput roomId={roomId}></PartyInput>
+      <PartyInput sendMessage={sendMessage} roomId={roomId}></PartyInput>
     </PageShadows>
   );
 };

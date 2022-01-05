@@ -7,7 +7,7 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 function PartyInput(props) {
   const dispatch = useDispatch();
   const [Chatting, setChatting] = React.useState('');
-  const { roomId } = props;
+  const { roomId, sendMessage } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   // 보내는거
@@ -16,19 +16,7 @@ function PartyInput(props) {
   };
 
   const ClickEvent = () => {
-    const ms = {
-      type: 'TALK',
-      roomId: roomId,
-      message: Chatting,
-    };
-    const req = {
-      type: 'TALK',
-      roomId: roomId,
-      message: Chatting,
-      sender: userInfo.username,
-    };
-    console.log(ms);
-    dispatch(ChatAction.PostChatting(ms, req));
+    sendMessage(Chatting);
     setChatting('');
   };
   const Pressevent = e => {

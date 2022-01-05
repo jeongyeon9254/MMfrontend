@@ -27,8 +27,6 @@ const Profile = props => {
 
   const [modal, setModal] = useState(false);
 
-  console.log(profile);
-
   return (
     <>
       {modal ? (

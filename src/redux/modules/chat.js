@@ -1,7 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
-import { wsConnectSubscribe, sendMessage } from '../../api/modules/communication';
 
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
@@ -29,7 +28,6 @@ const postChatRoomListDB = userId => {
 const getChatRoomListDB = () => {
   return async function (dispatch, getState, { history }) {
     const res = await getChatRoomList();
-    console.log(res);
     dispatch(ListChatRoom(res.data));
   };
 };
@@ -37,8 +35,6 @@ const getChatRoomListDB = () => {
 // 채팅방 입장
 const loadChatCommetList = (roomId, hostname) => {
   return async function (dispatch, getState, { history }) {
-    const res = await wsConnectSubscribe(roomId);
-    console.log(res);
     const ms = {
       type: 'ENTER',
       roomId: roomId,
@@ -53,7 +49,6 @@ const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
     try {
       const res = await getChatMsList(roomId);
-      console.log(res.data.chatMessageDtoList);
       dispatch(LoadChatting(res.data.chatMessageDtoList));
     } catch (e) {
       console.log(e);
@@ -64,8 +59,6 @@ const getChatMsListDB = roomId => {
 // 채팅 메세지 보내기
 const PostChatting = (ms, req) => {
   return async function (dispatch, getState, { history }) {
-    const res = await sendMessage(ms);
-    console.log(res);
     dispatch(pushChatting(req));
   };
 };
