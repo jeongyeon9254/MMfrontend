@@ -7,7 +7,7 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 
-const pushChatRoom = createAction(PUSH_CHAT, ms => ({ ms }));
+const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
 
@@ -45,7 +45,7 @@ const loadChatCommetList = (roomId, hostname) => {
       roomId: roomId,
       message: `${hostname}님이 입장 하였습니다.`,
     };
-    dispatch(pushChatRoom(ms));
+    dispatch(pushChatting(ms));
   };
 };
 
@@ -67,7 +67,7 @@ const PostChatting = (ms, req) => {
   return async function (dispatch, getState, { history }) {
     const res = await sendMessage(ms);
     console.log(res);
-    dispatch(pushChatRoom(req));
+    dispatch(pushChatting(req));
   };
 };
 
@@ -94,7 +94,7 @@ export default handleActions(
 
 const actionCreators = {
   getChatRoomListDB,
-  pushChatRoom,
+  pushChatting,
   loadChatCommetList,
   PostChatting,
   postChatRoomListDB,

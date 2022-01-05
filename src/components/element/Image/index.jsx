@@ -75,7 +75,7 @@ const Square = styled.div`
 
 const ImageStyle = styled.img`
   position: absolute;
-  width: 100%;
+  height: 100%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) scale(1.05);

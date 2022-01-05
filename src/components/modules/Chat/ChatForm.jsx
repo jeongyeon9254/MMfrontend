@@ -8,19 +8,45 @@ import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
+import { ws } from '../../../api/ws';
+import { getCookie } from '../../../shared/Cookie';
+
 const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick } = props;
   const { userId, name, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
+  const TOKEN = getCookie('authorization');
 
   React.useEffect(() => {
     if (roomId) {
       console.log(roomId);
-      dispatch(ChatAction.getChatMsListDB(roomId));
+      // dispatch(ChatAction.getChatMsListDB(roomId));
+      wsConnectSubscribe();
     }
   }, [roomId]);
+
+  const wsConnectSubscribe = () => {
+    try {
+      ws.debug = null;
+      ws.connect({ token: TOKEN }, () => {
+        ws.subscribe(
+          `/sub/chat/room/${roomId}`,
+          data => {
+            let recv = JSON.parse(data.body);
+            console.log('구독후 새로운 메세지 data :' + recv);
+            dispatch(ChatAction.PostChatting(recv));
+          },
+          {
+            token: TOKEN,
+          },
+        );
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
