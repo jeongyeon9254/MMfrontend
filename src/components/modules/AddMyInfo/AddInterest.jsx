@@ -8,6 +8,8 @@ import AddMBTI from './AddMBTI';
 
 const AddInterest = props => {
   const { file, local, mbti } = props;
+
+  console.log(file);
   const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
 
   const [Intro, setIntro] = useState(false);

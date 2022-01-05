@@ -6,30 +6,62 @@ import { Grid, Input, Button } from '../../element/index';
 import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
-import { actionCreators as userAction } from '../../../redux/modules/user';
+// import { actionCreators as userAction } from '../../../redux/modules/user';
+import axios from 'axios';
+import { getCookie } from '../../../shared/Cookie';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
   const { file, local, mbti, duplicated } = props;
+
   const [BackInterest, setBackInterest] = useState(false);
 
   const [comment, setComment] = useState('');
 
-  const userInfo = {
-    nickname: file.nickname,
-    profileImage: file.profileImage,
-    gender: file.gender,
-    ageRange: file.ageRange,
-    intro: comment,
-    location: local.location,
-    mbti: mbti,
-    interestList: duplicated,
-  };
+  // const userInfo = {
+  //   nickname: file.nickname,
+  //   profileImage: file.profileImage,
+  //   gender: file.gender,
+  //   ageRange: file.ageRange,
+  //   intro: comment,
+  //   location: local.location,
+  //   mbti: mbti,
+  //   interestList: duplicated,
+  // };
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const ClickEvent = () => {
-    dispatch(userAction.userInfoPut(userInfo));
+    const multipartFile = new FormData();
+    multipartFile.append('multipartFile', file.profileImage);
+    for (const keyValue of multipartFile) console.log(keyValue);
+
+    const userInfo = {
+      nickname: file.nickname,
+      gender: file.gender,
+      ageRange: file.ageRange,
+      intro: comment,
+      location: local.location,
+      mbti: mbti,
+      interestList: duplicated,
+    };
+
+    multipartFile.append(
+      'data',
+      new Blob([JSON.stringify(userInfo)], { type: 'application/json' }),
+    );
+    const TOCKEN = getCookie('authorization');
+
+    // dispatch(userAction.userInfoPut(multipartFile));
+    axios({
+      method: 'put',
+      url: 'http://13.124.242.158/api/profile',
+      data: multipartFile,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `${TOCKEN}`,
+      },
+    });
   };
 
   if (BackInterest === true) {

@@ -17,9 +17,11 @@ const AddInfo = props => {
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
-  const [profileImage, setProfileImage] = useState(data.profileImage);
-  const [Preview, setPreview] = useState();
+  const [profileImage, setProfileImage] = useState('');
+  const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
+
+  console.log(profileImage);
 
   if (Address === true) {
     const file = {
@@ -63,15 +65,14 @@ const AddInfo = props => {
   const handleFileOnChange = e => {
     //파일 불러오기
     e.preventDefault();
-    console.log(e.target.files);
-    console.log(e.target.files[0]);
 
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
     reader.onload = () => {
-      setProfileImage(reader.result);
+      setPreview(reader.result);
+      setProfileImage(e.target.files[0]);
     };
   };
 
@@ -87,7 +88,7 @@ const AddInfo = props => {
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
           <Image
-            src={profileImage}
+            src={Preview}
             photoRound
             width="188px"
             height="188px"
