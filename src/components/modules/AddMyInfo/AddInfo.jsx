@@ -17,11 +17,7 @@ const AddInfo = props => {
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
-<<<<<<< HEAD
-  const [profileImage, setProfileImage] = useState('');
-=======
   const [profileImage, setProfileImage] = useState({});
->>>>>>> 84e63b2b25460d0717e204852f4f0bd3fffbfa28
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
@@ -65,10 +61,6 @@ const AddInfo = props => {
     // 파일이 읽어 오면 useState에 저장한다.
     reader.onload = () => {
       setPreview(reader.result);
-<<<<<<< HEAD
-      setProfileImage(e.target.files[0]);
-=======
->>>>>>> 84e63b2b25460d0717e204852f4f0bd3fffbfa28
     };
   };
 
