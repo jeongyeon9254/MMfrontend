@@ -10,6 +10,7 @@ function PartyInput(props) {
   const { roomId } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+  // 보내는거
   const ChatPost = e => {
     setChatting(e.target.value);
   };

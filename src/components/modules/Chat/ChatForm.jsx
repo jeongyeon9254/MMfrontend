@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
-import { ws } from '../../../api/ws';
 import { getCookie } from '../../../shared/Cookie';
+import { ws } from '../../../api/ws';
 
 const ChatForm = props => {
   const dispatch = useDispatch();
@@ -18,18 +18,19 @@ const ChatForm = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
   const TOKEN = getCookie('authorization');
+  console.log(TOKEN);
 
   React.useEffect(() => {
     if (roomId) {
       console.log(roomId);
-      // dispatch(ChatAction.getChatMsListDB(roomId));
-      wsConnectSubscribe();
+      // wsConnectSubscribe();
     }
   }, [roomId]);
 
-  const wsConnectSubscribe = () => {
+  const wsConnectSubscribe = roomId => {
     try {
       ws.debug = null;
+      console.log('sss');
       ws.connect({ token: TOKEN }, () => {
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
@@ -37,6 +38,7 @@ const ChatForm = props => {
             let recv = JSON.parse(data.body);
             console.log('구독후 새로운 메세지 data :' + recv);
             dispatch(ChatAction.PostChatting(recv));
+            console.log('sss');
           },
           {
             token: TOKEN,
@@ -45,6 +47,33 @@ const ChatForm = props => {
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  // 웹소켓이 연결될 때 까지 실행하는 함수
+  const waitForConnection = (ws, callback) => {
+    setTimeout(() => {
+      if (ws.ws.readyState === 1) {
+        callback();
+      } else {
+        waitForConnection(ws, callback);
+      }
+    }, 0.1);
+  };
+
+  // 다른 방을 클릭하거나 뒤로가기 버튼 클릭시 연결해제 및 구독해제
+  const wsDisConnectUnsubscribe = () => {
+    try {
+      ws.debug = null;
+      ws.disconnect(
+        () => {
+          ws.unsubscribe('sub-0');
+          clearTimeout(waitForConnection);
+        },
+        { token: TOKEN },
+      );
+    } catch (e) {
+      console.log('연결 구독 해체 에러', e);
     }
   };
 

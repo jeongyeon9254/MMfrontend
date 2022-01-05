@@ -37,7 +37,7 @@ function Select(props) {
                   key={idx}
                   onClick={() => {
                     SetActive(x);
-                    console.log(x);
+
                     OnOffEvent();
                   }}
                 >

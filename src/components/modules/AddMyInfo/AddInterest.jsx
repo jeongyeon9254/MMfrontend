@@ -8,8 +8,6 @@ import AddMBTI from './AddMBTI';
 
 const AddInterest = props => {
   const { file, local, mbti } = props;
-
-  console.log(file);
   const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
 
   const [Intro, setIntro] = useState(false);
@@ -31,7 +29,6 @@ const AddInterest = props => {
 
   const handleDuplicated = e => {
     const val = e.target.name;
-    console.log(val);
 
     const isIncludes = duplicated.find(el => el === val);
 
@@ -46,7 +43,6 @@ const AddInterest = props => {
     } else if (0 < duplicated.length < 3) {
       setDuplicated([...duplicated, val]);
     }
-    console.log(duplicated);
   };
   return (
     <>
