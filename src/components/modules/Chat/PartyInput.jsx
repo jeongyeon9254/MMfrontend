@@ -3,19 +3,14 @@ import styled from 'styled-components';
 import { Grid, Button, Input, Image, Box } from '../../element';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
-import { getCookie } from '../../../shared/Cookie';
-import { ws } from '../../../api/ws';
 
 function PartyInput(props) {
   const dispatch = useDispatch();
   const [Chatting, setChatting] = React.useState('');
   const { roomId } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const TOKEN = getCookie('authorization');
+
   // 보내는거
-  const sendMessage = props => {
-    ws.send(`/pub/chat/message`, { token: TOKEN }, JSON.stringify(props));
-  };
   const ChatPost = e => {
     setChatting(e.target.value);
   };
@@ -26,15 +21,14 @@ function PartyInput(props) {
       roomId: roomId,
       message: Chatting,
     };
-    // const req = {
-    //   type: 'TALK',
-    //   roomId: roomId,
-    //   message: Chatting,
-    //   sender: userInfo.username,
-    // };
-    // console.log(ms);
-    // dispatch(ChatAction.PostChatting(ms, req));
-    sendMessage(ms);
+    const req = {
+      type: 'TALK',
+      roomId: roomId,
+      message: Chatting,
+      sender: userInfo.username,
+    };
+    console.log(ms);
+    dispatch(ChatAction.PostChatting(ms, req));
     setChatting('');
   };
   const Pressevent = e => {
