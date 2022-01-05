@@ -52,17 +52,17 @@ const AddAdress = props => {
             <AddressCommet>궁합이 맞는 MBTI유저를 추천해줍니다. </AddressCommet>
           </Grid>
         </Grid>
-        <Grid padding="51px 0px 0px 36px;">
+        <Grid padding="51px 0px 7px 36px;">
           <p style={({ fontSize: '15px' }, { fontWeight: '400' })}>주소설정</p>
         </Grid>
-        <Grid padding="0px 0px 0px 29px" row align="center">
+        <Grid padding="0px 0px 0px 29px" row align="center" gap="20px">
           <Grid width="118px">
             <Box>
               <AddressCommet>서울특별시</AddressCommet>
             </Box>
           </Grid>
-          <Grid width="183px">
-            <LoSelect sele={sele} />
+          <Grid width="55%">
+            <Select Emit={sele} />
           </Grid>
         </Grid>
       </Grid>
@@ -86,12 +86,14 @@ const OpenBox = styled.div``;
 
 const AddressTitle = styled.p`
   font-weight: 400;
-  font-size: ;
+  font-size: ${props => props.theme.fontSizes.xxxl};
+  color: #3f3f41;
 `;
 
 const AddressCommet = styled.p`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.small};
+  color: #4e4e4e;
 `;
 
 export default AddAdress;
