@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../layout/Header';
-import { Image, Grid, Input, Button } from '../../element/index';
+import { Image, Grid, Input, Button, Select } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
+import { Gender, Area } from './needData.js';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const AddInfo = props => {
     const file = {
       nickname: nickname,
       gender: gender,
-      profileImage: profileImage,
+      profileImage: profileImage !== {} ? profileImage : data.profileImage,
       ageRange: data.ageRange,
     };
     return (
@@ -39,11 +40,6 @@ const AddInfo = props => {
       </>
     );
   }
-
-  const Gender = [
-    { en: 'male', ko: '남자' },
-    { en: 'female', ko: '여자' },
-  ];
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
@@ -118,6 +114,7 @@ const AddInfo = props => {
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
             <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
+            <Select Data={Area} Area />
           </Grid>
           <Grid margin="0px 25px">
             <AddText>성별</AddText>

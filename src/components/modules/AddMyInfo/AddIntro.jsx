@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
 import Bit from '../Bit';
-import { Grid, Input, Button } from '../../element/index';
+import { Grid, Input, Button, Select } from '../../element/index';
 import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
@@ -32,36 +32,8 @@ const AddIntro = props => {
   // console.log(userInfo);
 
   const ClickEvent = () => {
-    const multipartFile = new FormData();
-    multipartFile.append('multipartFile', file.profileImage);
-    for (const keyValue of multipartFile) console.log(keyValue);
-
-    const userInfo = {
-      nickname: file.nickname,
-      gender: file.gender,
-      ageRange: file.ageRange,
-      intro: comment,
-      location: local.location,
-      mbti: mbti,
-      interestList: duplicated,
-    };
-
-    multipartFile.append(
-      'data',
-      new Blob([JSON.stringify(userInfo)], { type: 'application/json' }),
-    );
-    const TOCKEN = getCookie('authorization');
-
-    // dispatch(userAction.userInfoPut(multipartFile));
-    axios({
-      method: 'put',
-      url: 'http://13.124.242.158/api/profile',
-      data: multipartFile,
-      headers: {
-        'Content-type': 'multipart/form-data',
-        Authorization: `${TOCKEN}`,
-      },
-    });
+    console.log(userInfo);
+    // dispatch(userAction.userInfoPut(userInfo));
   };
 
   if (BackInterest === true) {
