@@ -6,3 +6,5 @@ const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
 // 소켓
 const sock = new SockJS(devTarget);
 export const ws = Stomp.over(sock);
+
+//안녕하세용
