@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../layout/Header';
-import { Image, Grid, Input, Button } from '../../element/index';
+import { Image, Grid, Input, Button, Select } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
+import { Gender, Area } from './needData.js';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const AddInfo = props => {
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
-  const [profileImage, setProfileImage] = useState({});
+  const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
@@ -36,11 +37,6 @@ const AddInfo = props => {
     );
   }
 
-  const Gender = [
-    { en: 'male', ko: '남자' },
-    { en: 'female', ko: '여자' },
-  ];
-
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
       e.target.value = e.target.value.substr(0, 4);
@@ -51,15 +47,14 @@ const AddInfo = props => {
   const handleFileOnChange = e => {
     //파일 불러오기
     e.preventDefault();
-
     const file = e.target.files[0];
     // 파일이 프론트파일에 저장된 url를 읽어 오는 매소드
     const reader = new FileReader();
     // 파일를 datafrom으로 저장할 수 있는 매소드
-    const formData = new FormData();
     // 파이를 fromData에 img라는 key 값으로 저장한다.
-    formData.append('img', file);
-    setProfileImage(formData);
+    const arrfile = [file];
+
+    setProfileImage(arrfile);
     // 파일를 저장된 위치를 찾는다.
     reader.readAsDataURL(file);
     // 파일이 읽어 오면 useState에 저장한다.
@@ -110,6 +105,7 @@ const AddInfo = props => {
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
             <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
+            <Select Data={Area} Area />
           </Grid>
           <Grid margin="0px 25px">
             <AddText>성별</AddText>

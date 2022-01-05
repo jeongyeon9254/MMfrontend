@@ -1,5 +1,5 @@
 import instance from '../instance';
-import axios from 'axios';
+import multi from '../multi';
 
 export const kakaoLogin = code => {
   return instance({
@@ -10,7 +10,7 @@ export const kakaoLogin = code => {
 
 // 내 정보 수정 기능
 export const editMyinfoDB = data => {
-  return instance({
+  return multi({
     method: 'put',
     url: '/api/profile',
     data: data,
