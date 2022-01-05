@@ -8,7 +8,6 @@ import AddInfo from './AddInfo';
 
 const AddAdress = props => {
   const { file } = props;
-  console.log(file);
   const [selecMBTI, setSelectMBIT] = useState(false);
   const [BackAddinfo, BacksetAddinfo] = useState(false);
   const [local, setlocal] = useState('');
@@ -29,7 +28,6 @@ const AddAdress = props => {
 
   const sele = locals => {
     setlocal(locals);
-    console.log(locals);
   };
 
   return (

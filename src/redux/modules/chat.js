@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
-import { UserInRoom, sendMessage } from '../../api/modules/communication';
+import { wsConnectSubscribe, sendMessage } from '../../api/modules/communication';
 
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
@@ -21,8 +21,7 @@ const initialState = {
 // 채팅방 만들기
 const postChatRoomListDB = userId => {
   return async function (dispatch, getState, { history }) {
-    const res = await postChatRoomList(userId);
-    console.log(res);
+    const res = postChatRoomList(userId);
   };
 };
 
@@ -38,7 +37,7 @@ const getChatRoomListDB = () => {
 // 채팅방 입장
 const loadChatCommetList = (roomId, hostname) => {
   return async function (dispatch, getState, { history }) {
-    const res = await UserInRoom(roomId);
+    const res = await wsConnectSubscribe(roomId);
     console.log(res);
     const ms = {
       type: 'ENTER',

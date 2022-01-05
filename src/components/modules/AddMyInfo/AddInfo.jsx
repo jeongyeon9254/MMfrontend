@@ -24,8 +24,6 @@ const AddInfo = props => {
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
-  console.log(typeof profileImage);
-
   if (Address === true) {
     const file = {
       nickname: nickname,
