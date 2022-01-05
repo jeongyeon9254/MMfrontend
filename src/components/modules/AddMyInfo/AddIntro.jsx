@@ -6,7 +6,7 @@ import { Grid, Input, Button, Select } from '../../element/index';
 import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
-// import { actionCreators as userAction } from '../../../redux/modules/user';
+import { actionCreators as userAction } from '../../../redux/modules/user';
 import axios from 'axios';
 import { getCookie } from '../../../shared/Cookie';
 
@@ -18,22 +18,22 @@ const AddIntro = props => {
 
   const [comment, setComment] = useState('');
 
-  // const userInfo = {
-  //   nickname: file.nickname,
-  //   profileImage: file.profileImage,
-  //   gender: file.gender,
-  //   ageRange: file.ageRange,
-  //   intro: comment,
-  //   location: local.location,
-  //   mbti: mbti,
-  //   interestList: duplicated,
-  // };
-
-  // console.log(userInfo);
+  const userInfo = {
+    nickname: file.nickname,
+    gender: file.gender,
+    ageRange: file.ageRange,
+    intro: comment,
+    location: local.location,
+    mbti: mbti,
+    interestList: duplicated,
+  };
 
   const ClickEvent = () => {
     console.log(userInfo);
-    // dispatch(userAction.userInfoPut(userInfo));
+    const formData = new FormData();
+    formData.append('multipartFile', file.profileImage);
+    formData.append('data', new Blob([JSON.stringify(userInfo)], { type: 'application/json' }));
+    dispatch(userAction.userInfoPut(formData));
   };
 
   if (BackInterest === true) {
