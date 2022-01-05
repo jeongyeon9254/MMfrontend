@@ -77,7 +77,7 @@ export const ProfileBox = styled.div`
     border-left: 10px solid transparent;
     border-right: 9px solid transparent;
     border-bottom: 25px solid #e3e3e3;
-    border-radius: 10px;
+
     content: '';
     position: absolute;
     top: -17px;
