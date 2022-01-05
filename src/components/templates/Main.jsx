@@ -44,9 +44,7 @@ const Main = props => {
           onClick={() => {
             Swal.fire('Any fool can use a computer');
           }}
-        >
-          ss
-        </div>
+        ></div>
       </LocationBox>
       <MapKategorieNav userInfo={userInfo} />
       <MapContainer />

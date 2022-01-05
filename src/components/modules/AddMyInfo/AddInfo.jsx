@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as modalActions } from '../../../redux/modules/modal';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
+import Alert from '../../element/Alert';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
@@ -23,6 +25,9 @@ const AddInfo = props => {
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
+
+  const YesAlert = useSelector(state => state.modal.Alert);
+  const NoAler = useSelector(state => state.modal.Alert);
 
   console.log(typeof profileImage);
 
@@ -77,6 +82,7 @@ const AddInfo = props => {
   };
   return (
     <Body>
+      {YesAlert ? <Alert isButton /> : null}
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">
@@ -145,7 +151,8 @@ const AddInfo = props => {
           width="315px"
           BtnBottom
           _onClick={() => {
-            setAddress(true);
+            dispatch(modalActions.setAlert());
+            // setAddress(true);
           }}
         >
           다음으로
