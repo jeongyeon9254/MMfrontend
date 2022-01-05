@@ -4,14 +4,14 @@ import { Grid } from '../../element';
 import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
 import { gpsLsit } from '../../modules/main/gpsList';
 function Select(props) {
-  const { width, Emit } = props;
+  const { width, Emit, Data } = props;
   const [active, SetActive] = React.useState({});
   const [OnOff, SetOnOff] = React.useState(false);
 
   const styles = {
     width,
   };
-
+  const OpationData = Data ? Data : gpsLsit;
   const OnOffEvent = () => {
     SetOnOff(!OnOff);
   };
@@ -23,14 +23,14 @@ function Select(props) {
     <Frame {...styles}>
       <IsSelect onClick={OnOffEvent}>
         <Grid row justify="space-between" align="center">
-          <span>{active ? active : ''}</span>
+          <div>{active ? active.location : ''}</div>
           <Arrow className={OnOff ? 'on' : ''} src={arrow_down_d} alt="" />
         </Grid>
       </IsSelect>
       <OptionBox className={OnOff ? 'on' : ''}>
         <OverScroll>
           <Grid>
-            {gpsLsit.map((x, idx) => {
+            {OpationData.map((x, idx) => {
               return (
                 <Option
                   key={idx}
