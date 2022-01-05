@@ -24,7 +24,7 @@ function Select(props) {
     <Frame {...styles}>
       <IsSelect onClick={OnOffEvent}>
         <Grid row justify="space-between" align="center">
-          <div>{active ? active.location : ''}</div>
+          <div>{active ? (Area ? active.area : active.location) : ''}</div>
           <Arrow className={OnOff ? 'on' : ''} src={arrow_down_d} alt="" />
         </Grid>
       </IsSelect>
@@ -92,7 +92,7 @@ const OptionBox = styled.div`
   background-color: #fff;
   border-radius: 7px;
   padding: 9px 0px;
-  transition: all ease 0.3s;
+  transition: all ease 0.15s;
   position: absolute;
   top: 11px;
   left: 5px;

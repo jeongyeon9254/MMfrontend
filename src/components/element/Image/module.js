@@ -19,7 +19,7 @@ export const ImageRoundStyle = styled.div`
 export const ImagePhotoRoundStyle = styled.div`
   width: ${props => props.width};
   margin: ${props => props.margin};
-  background: ${props => props.theme.colors.gray_1};
+  background: #000;
   position: relative;
   overflow: hidden;
   border-radius: 50%;

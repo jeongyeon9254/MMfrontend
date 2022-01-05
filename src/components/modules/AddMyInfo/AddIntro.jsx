@@ -27,11 +27,20 @@ const AddIntro = props => {
     mbti: mbti,
     interestList: duplicated,
   };
-
+  function isString(inputText) {
+    if (typeof inputText === 'string' || inputText instanceof String) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   const ClickEvent = () => {
     console.log(userInfo);
     const formData = new FormData();
-    formData.append('multipartFile', file.profileImage);
+    // const kakaoImg = { kakaoImg: file.profileImage };
+    const Check = isString(file.profileImage);
+    formData.append('multipartFile', Check ? '' : file.profileImage);
+
     formData.append('data', new Blob([JSON.stringify(userInfo)], { type: 'application/json' }));
     dispatch(userAction.userInfoPut(formData));
   };

@@ -14,6 +14,9 @@ const AddInfo = props => {
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
+  // const [area, setArea] = useState(data.ageRange);
+  const [isarea, setArea] = useState('');
+
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
@@ -21,7 +24,7 @@ const AddInfo = props => {
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
-  console.log(profileImage);
+  console.log(typeof profileImage);
 
   if (Address === true) {
     const file = {
@@ -54,7 +57,7 @@ const AddInfo = props => {
     // 파이를 fromData에 img라는 key 값으로 저장한다.
     const arrfile = [file];
 
-    setProfileImage(arrfile);
+    setProfileImage(file);
     // 파일를 저장된 위치를 찾는다.
     reader.readAsDataURL(file);
     // 파일이 읽어 오면 useState에 저장한다.
@@ -68,7 +71,10 @@ const AddInfo = props => {
     e.preventDefault();
     fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
   };
-
+  const GetArea = area => {
+    setArea(area);
+    console.log(area);
+  };
   return (
     <Body>
       <Grid>
@@ -104,8 +110,11 @@ const AddInfo = props => {
           </Grid>
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
-            <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
-            <Select Data={Area} Area />
+            {isarea !== '' ? (
+              <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
+            ) : (
+              <Select Data={Area} Emit={GetArea} Area height="182px" />
+            )}
           </Grid>
           <Grid margin="0px 25px">
             <AddText>성별</AddText>

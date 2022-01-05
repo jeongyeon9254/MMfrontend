@@ -8,12 +8,16 @@ import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
+import { ws } from '../../../api/ws';
+import { getCookie } from '../../../shared/Cookie';
+
 const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick } = props;
   const { userId, name, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
+  const TOKEN = getCookie('authorization');
 
   React.useEffect(() => {
     if (roomId) {
@@ -22,6 +26,19 @@ const ChatForm = props => {
     }
   }, [roomId]);
 
+  ws.connect(
+    { token: TOKEN },
+    frame => {
+      ws.subscribe(`/sub/chat/room/${roomId}`, message => {
+        let recv = JSON.parse(message.body);
+        dispatch(ChatAction.PostChatting(recv));
+      });
+    },
+    error => {
+      alert('서버 연결에 실패 하였습니다. 다시 접속해 주십시요.');
+      document.location.href = '/';
+    },
+  );
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
