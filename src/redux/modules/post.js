@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-import { getPost, getDetailPost } from '../../api/modules/post';
+import { getPost, getDetailPost, deletePost } from '../../api/modules/post';
 
 const GET_POST = 'GET_POST';
 const GET_DETAIL = 'GET_DETAIL';
@@ -16,15 +16,34 @@ const initialState = {
 
 const getPostDB = (data = null) => {
   return async function (dispatch, getState, { history }) {
-    const data = await getPost();
-    dispatch(getPostList(data.data));
+    try {
+      const data = await getPost();
+      dispatch(getPostList(data.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+const deletePostDB = (postId = null) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      await deletePost(postId);
+      history.replace('/PostMain');
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
 const getDetailDB = (postId = null) => {
   return async function (dispatch, getState, { history }) {
-    const data = await getDetailPost(postId);
-    dispatch(getPostDetail(data.data));
+    try {
+      const data = await getDetailPost(postId);
+      dispatch(getPostDetail(data.data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -47,6 +66,7 @@ const actionCreators = {
   getPostList,
   getPostDB,
   getDetailDB,
+  deletePostDB,
 };
 
 export { actionCreators };

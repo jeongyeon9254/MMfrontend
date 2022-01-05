@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../element';
 import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
-import { gpsLsit } from '../../modules/main/gpsList';
+import { gpsLsit } from '../../modules/Main/gpsList';
 function Select(props) {
   const { width, Emit } = props;
   const [active, SetActive] = React.useState({});

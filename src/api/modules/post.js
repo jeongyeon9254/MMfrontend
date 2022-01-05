@@ -8,6 +8,13 @@ export const getPost = code => {
   });
 };
 
+export const deletePost = postId => {
+  return instance({
+    method: 'delete',
+    url: `/api/post/${postId}`,
+  });
+};
+
 export const getDetailPost = postId => {
   return instance({
     method: 'get',

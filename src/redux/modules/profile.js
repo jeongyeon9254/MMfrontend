@@ -12,10 +12,13 @@ const initialState = {
 };
 
 const getProfileDB = (userId = null) => {
-  return function (dispatch, getState, { history }) {
-    getchemyDB(userId).then(res => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const res = await getchemyDB(userId);
       dispatch(getProfile(res.data));
-    });
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

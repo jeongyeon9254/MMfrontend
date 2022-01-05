@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 // Js
 import { useDispatch } from 'react-redux';
-import { gpsLsit } from '../modules/main/gpsList.js';
+import { gpsLsit } from '../modules/Main/gpsList.js';
 import { actionCreators as mainActions } from '../../redux/modules/main';
 import { getMatchingDB } from '../../api/modules/chemy';
 import { history } from '../../redux/configureStore.js';
@@ -13,9 +13,9 @@ import { history } from '../../redux/configureStore.js';
 import { Button } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import MapList from '../modules/main/MapList.jsx';
-import MapContainer from '../modules/main/MapContainer';
-import MapKategorieNav from '../modules/main/MapKategorieNav';
+import MapList from '../modules/Main/MapList.jsx';
+import MapContainer from '../modules/Main/MapContainer';
+import MapKategorieNav from '../modules/Main/MapKategorieNav';
 
 const Main = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
