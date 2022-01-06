@@ -66,6 +66,11 @@ const PostWrite = () => {
     setTag(e.target.name);
   };
 
+  const restPost = () => {
+    setImages([]);
+    dispatch(imageActions.resetPreview());
+  };
+
   const addPost = async () => {
     let multipartFile = new FormData();
     const emptyFile = new File([''], 'empty');
@@ -120,24 +125,31 @@ const PostWrite = () => {
                   <p>{preview.length}/8</p>
                 </Grid>
               </label>
-              <RowDiv>
-                <Swiper
-                  style={{ background: '#fff' }}
-                  spaceBetween={10}
-                  slidesPerView={2}
-                  className="scroll-container"
-                >
-                  {preview.length > 0
-                    ? preview.map((src, idx) => {
-                        return (
-                          <SwiperSlide className="slide" key={idx}>
-                            <img alt="이미지" src={src} key={idx}></img>{' '}
-                          </SwiperSlide>
-                        );
-                      })
-                    : null}
-                </Swiper>
-              </RowDiv>
+              {preview.length ? (
+                <RowDiv>
+                  <button className="resetBtn" onClick={restPost}>
+                    x
+                  </button>
+                  <div style={{ overflow: 'hidden', borderRadius: '10px' }}>
+                    <Swiper
+                      style={{ background: '#fff' }}
+                      spaceBetween={10}
+                      slidesPerView={2}
+                      className="scroll-container"
+                    >
+                      {preview.length > 0
+                        ? preview.map((src, idx) => {
+                            return (
+                              <SwiperSlide className="slide" key={idx}>
+                                <img alt="이미지" src={src} key={idx}></img>{' '}
+                              </SwiperSlide>
+                            );
+                          })
+                        : null}
+                    </Swiper>
+                  </div>
+                </RowDiv>
+              ) : null}
             </Grid>
           </div>
           <Grid row gap="10px"></Grid>
@@ -218,6 +230,12 @@ const PostBox = styled.div`
 const RowDiv = styled.div`
   background: #fff;
   width: 68%;
+  border: 1px solid #a7a7a7;
+  padding: 1px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  /* overflow: hidden; */
+  position: relative;
   img {
     height: ${props => props.theme.fontSizes.base};
     margin-right: 10px;
@@ -233,6 +251,21 @@ const RowDiv = styled.div`
   }
   .slide {
     width: auto !important;
+    height: 75px;
+  }
+  .resetBtn {
+    width: 24px;
+    height: 24px;
+    background: #a7a7a7;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 10;
+    font-size: 16px;
+    cursor: pointer;
   }
 `;
 
