@@ -5,10 +5,12 @@ import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modu
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
+const Delet_CHAT = 'Delet_CHAT';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
+const DeletMsList = createAction(Delet_CHAT, () => ({}));
 
 const initialState = {
   roomGet: [],
@@ -82,6 +84,10 @@ export default handleActions(
         const { chatting } = action.payload;
         draft.List = chatting;
       }),
+    [Delet_CHAT]: (state, action) =>
+      produce(state, draft => {
+        draft.List = [];
+      }),
   },
   initialState,
 );
@@ -93,6 +99,7 @@ const actionCreators = {
   PostChatting,
   postChatRoomListDB,
   getChatMsListDB,
+  DeletMsList,
 };
 
 export { actionCreators };

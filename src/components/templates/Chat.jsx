@@ -22,14 +22,11 @@ const Chat = () => {
   const [Paging, setPaging] = React.useState(false);
   const [RommNum, setRommNum] = React.useState('');
   const [Data, setData] = React.useState({});
-  console.log(Room);
+  console.log(Data);
 
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
-    if (RommNum) {
-      dispatch(ChatAction.getChatMsListDB(RommNum));
-    }
-  }, [RommNum]);
+  }, []);
 
   return (
     <div>
@@ -63,6 +60,7 @@ const Chat = () => {
         _onClick={() => {
           setPaging(!Paging);
           setData({});
+          dispatch(ChatAction.DeletMsList());
         }}
       ></ChatForm>
       <Footer />
