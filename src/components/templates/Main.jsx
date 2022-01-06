@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Swal from 'sweetalert2';
 
 // Js
 import { useDispatch } from 'react-redux';
@@ -40,11 +39,6 @@ const Main = props => {
         <Button BtnTag _onClick={onModal}>
           서울 특별시 {location}
         </Button>
-        <div
-          onClick={() => {
-            Swal.fire('Any fool can use a computer');
-          }}
-        ></div>
       </LocationBox>
       <MapKategorieNav userInfo={userInfo} />
       <MapContainer />
@@ -52,7 +46,11 @@ const Main = props => {
         <Button
           _onClick={() => {
             getMatchingDB().then(res => {
-              history.push(`/profile/${res.data.userId}`);
+              if (res.data.userId === -1) {
+                console.log('맞는 유저가 없습니다.');
+              } else {
+                history.push(`/profile/${res.data.userId}`);
+              }
             });
           }}
           BtnRound

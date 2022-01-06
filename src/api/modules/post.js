@@ -37,3 +37,11 @@ export const addPost = multipartFile => {
     data: multipartFile,
   });
 };
+
+export const editPost = (postId, data) => {
+  return instance({
+    method: 'put',
+    url: `/api/post/${postId}`,
+    data: data,
+  });
+};

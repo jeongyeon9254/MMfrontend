@@ -38,6 +38,7 @@ function App() {
         <PrivateRoute exact path="/postMain" Component={PostMain} />
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />
+        <PrivateRoute exact path="/postEdit/:postId" Component={PostEdit} />
         <PublicRoute
           exact
           restricted={true}

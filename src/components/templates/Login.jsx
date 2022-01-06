@@ -15,7 +15,7 @@ const Login = () => {
 
   return (
     <>
-      <Header>로그인</Header>
+      <Header main>로그인</Header>
       <Grid height="100%" justify="center" align="center">
         <LoginBox>
           <p>카카오톡으로 간편로그인을 진행해주세요!</p>

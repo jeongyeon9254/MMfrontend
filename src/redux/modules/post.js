@@ -1,7 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-import { getPost, getDetailPost, deletePost, addLike, addPost } from '../../api/modules/post';
+import {
+  getPost,
+  getDetailPost,
+  deletePost,
+  addLike,
+  addPost,
+  editPost,
+} from '../../api/modules/post';
 import { addComment, deleteComment } from '../../api/modules/comment';
 
 const GET_POST = 'GET_POST';
@@ -34,6 +41,17 @@ const addPostDB = multipartFile => {
   return async function (dispatch, getState, { history }) {
     try {
       await addPost(multipartFile);
+      history.replace('/PostMain');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+const editPostDB = (postId, data) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      await editPost(postId, data);
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -134,6 +152,7 @@ const actionCreators = {
   addLikeDB,
   deleteCommentsDB,
   addPostDB,
+  editPostDB,
 };
 
 export { actionCreators };

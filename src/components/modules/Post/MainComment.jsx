@@ -6,6 +6,8 @@ import { Grid, Image, Box, Tag } from '../../element/index';
 import icon_downCircle from '../../../img/Icon/icon_downCircle.svg';
 
 const MainComment = props => {
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
   const info = props.info;
   const out = props.out;
   const set = props.set;
@@ -32,7 +34,9 @@ const MainComment = props => {
                 </Tag>
               </Grid>
               <TimeText>{info.createdAt.split(' ')[0]}</TimeText>
-              <Circl onClick={onModal} alt="댓글삭제" src={icon_downCircle}></Circl>
+              {userInfo.nickname === info.nickname ? (
+                <Circl onClick={onModal} alt="댓글삭제" src={icon_downCircle}></Circl>
+              ) : null}
             </Grid>
             <Text>{info.comment}</Text>
           </Grid>

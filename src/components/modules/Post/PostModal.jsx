@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Redux
-// Redux
 import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../../../redux/modules/post';
+
+// Js
+import { history } from '../../../redux/configureStore';
 
 const PostModal = props => {
   const { boardId, out, commentState, commenttId } = props;
@@ -38,7 +40,13 @@ const PostModal = props => {
     <>
       <ModalBox>
         <BtnBox>
-          <button>게시글 수정하기</button>
+          <button
+            onClick={() => {
+              history.push(`/postEdit/${boardId}`);
+            }}
+          >
+            게시글 수정하기
+          </button>
           <button onClick={deletePost}>게시글 삭제하기</button>
         </BtnBox>
         <ExitBtn onClick={out}>취소</ExitBtn>

@@ -18,15 +18,17 @@ import { history } from '../../redux/configureStore.js';
 const PostWrite = () => {
   const dispatch = useDispatch();
 
-  // 텍스트
+  // 버튼
+  const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
+
+  // 전송용 데이터
   const [text, setTest] = useState('');
+  const [tag, setTag] = useState('운동');
+  const [images, setImages] = React.useState([]);
 
   const changeText = e => {
     setTest(e.target.value);
   };
-
-  // 이미지
-  const [images, setImages] = React.useState([]);
 
   const photoInput = useRef();
 
@@ -45,6 +47,7 @@ const PostWrite = () => {
       return false;
     }
     // 프리뷰
+    dispatch(imageActions.resetPreview());
     fileList.map((x, idx) => {
       let reader = new FileReader();
       reader.readAsDataURL(x[1]);
@@ -55,6 +58,10 @@ const PostWrite = () => {
   };
 
   const preview = useSelector(state => state.preview.preview);
+
+  const changeTag = e => {
+    setTag(e.target.name);
+  };
 
   const addPost = async () => {
     let multipartFile = new FormData();
@@ -69,25 +76,13 @@ const PostWrite = () => {
     }
 
     const data = {
-      tag: '공부',
+      tag: tag,
       content: text,
     };
     multipartFile.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-    const TOCKEN = getCookie('authorization');
 
     dispatch(postActions.addPostDB(multipartFile));
-    // api
-    // await axios({
-    //   method: 'post',
-    //   url: 'http://13.124.242.158/api/post',
-    //   data: multipartFile,
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     Authorization: `${TOCKEN}`,
-    //   },
-    // });
-
-    // history.pushState('/PostMain');
+    dispatch(imageActions.resetPreview());
   };
 
   return (
@@ -95,19 +90,44 @@ const PostWrite = () => {
       <Header>글 작성하기</Header>
       <PostBox>
         <Grid>
-          <p>카테고리 선택하기</p>
+          <p className="title">카테고리 선택하기</p>
+          <Grid row gap="8px">
+            {InterestList.map((interest, idx) => {
+              return (
+                <Button
+                  key={idx}
+                  name={interest}
+                  BtnTag
+                  _onClick={changeTag}
+                  state={interest === tag ? 'active' : null}
+                >
+                  {interest}
+                </Button>
+              );
+            })}
+          </Grid>
         </Grid>
         <Grid>
-          <p>사진 첨부하기</p>
-          <Grid row>
-            {preview.length > 0
-              ? preview.map((src, idx) => {
-                  return <img alt="이미지" src={src} key={idx}></img>;
-                })
-              : null}
-          </Grid>
+          <p className="title">사진 첨부하기</p>
+          <div>
+            <Grid row>
+              <label htmlFor="file">
+                <Grid align="center" justify="center" height="100%">
+                  <p className="plus">+</p>
+                  <p>{preview.length}/8</p>
+                </Grid>
+              </label>
+              {preview.length > 0
+                ? preview.map((src, idx) => {
+                    return <img alt="이미지" src={src} key={idx}></img>;
+                  })
+                : null}
+            </Grid>
+          </div>
           <Grid row gap="10px"></Grid>
           <input
+            className="file-input"
+            id="file"
             type="file"
             accept="image/jpg, image/jpeg, image/png"
             encType="multipart/form-data"
@@ -117,7 +137,7 @@ const PostWrite = () => {
           />
         </Grid>
         <Grid>
-          <p>내용 작성하기</p>
+          <p className="title">내용 작성하기</p>
           <Input _onChange={changeText} _type="posting"></Input>
           <div className="limit">
             <span className="recent">{text.length} </span>
@@ -135,8 +155,11 @@ const PostWrite = () => {
 const PostBox = styled.div`
   padding: 20px 30px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   img {
-    width: 50px;
+    width: 80px;
   }
   .limit {
     position: absolute;
@@ -155,6 +178,26 @@ const PostBox = styled.div`
   }
   .photoPreview {
     width: 100px;
+  }
+  .file-input {
+    display: none;
+  }
+  label {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1.5px solid #a7a7a7;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .plus {
+    font-size: 45px;
+    color: #c8c8c8;
+  }
+  .title {
+    font-weight: 700;
+    margin-bottom: 20px;
   }
 `;
 

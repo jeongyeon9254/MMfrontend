@@ -76,6 +76,7 @@ const Input = props => {
         <InputPostText
           {...styles}
           value={_value}
+          defaultValue={_defaultValue}
           onChange={_onChange}
           readOnly={_readOnly}
           placeholder={posting}

@@ -74,9 +74,11 @@ const PostMain = () => {
                     </CommentBox>
                   )
                 ) : null}
-                <Grid width="20px;" margin="0 auto 20px auto">
-                  <img alt="더보기" src={icno_circle}></img>
-                </Grid>
+                {x.commentList.length > 2 ? (
+                  <Grid width="20px;" margin="0 auto 20px auto">
+                    <img alt="더보기" src={icno_circle}></img>
+                  </Grid>
+                ) : null}
               </div>
             );
           })
