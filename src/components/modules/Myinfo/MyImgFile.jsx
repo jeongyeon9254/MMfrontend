@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Image, Grid } from '../../element';
 function MyImgFile(props) {
   const { Img, mbti, Emit } = props;
-  const [active, SetActive] = React.useState({});
+  const [active, SetActive] = React.useState('string');
   const [Preview, SetPreview] = React.useState(Img);
   const fileRef = React.useRef();
+
+  useEffect(() => {
+    Emit(active);
+    console.log(active);
+  }, [active]);
 
   const handleFileOnChange = e => {
     e.preventDefault();
@@ -22,9 +27,6 @@ function MyImgFile(props) {
     e.preventDefault();
     fileRef.current.click();
   };
-  React.useEffect(() => {
-    Emit(active);
-  }, [active]);
 
   return (
     <Grid>

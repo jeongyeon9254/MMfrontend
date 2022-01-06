@@ -31,9 +31,9 @@ const logInDB = code => {
     }
   };
 };
-const userInfoPut = userInfo => {
+const userInfoPut = multipartFile => {
   return async function (dispatch, getState, { history }) {
-    const res = await editMyinfoDB(userInfo);
+    const res = await editMyinfoDB(multipartFile);
     localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(res.data));
     history.push('/');

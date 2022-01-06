@@ -36,6 +36,8 @@ function MyEdit(props) {
     return { interest: x };
   });
 
+  console.log(Img);
+
   const AddInfo = {
     nickname: nickname,
     gender: userInfo.gender,
@@ -52,15 +54,20 @@ function MyEdit(props) {
       return false;
     }
   }
+
   const ClickEvent = () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
-    const emptyFile = new File([''], 'empty');
     const formData = new FormData();
+    const emptyFile = new File([''], 'empty');
     const Check = isString(Img);
+
     formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
+    for (let value of formData.values()) {
+      console.log(value);
+    }
     dispatch(userAction.userInfoPut(formData));
   };
   return (
