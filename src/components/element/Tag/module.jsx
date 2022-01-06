@@ -17,7 +17,7 @@ export const TagStyle = styled.div`
   text-align: center;
   border-color: ${props => props.color};
   color: ${props => props.color};
-  font-size: ${props => props.theme.fontSizes.extraSmall};
+  font-size: ${props => (props.size ? props.size : props.theme.fontSizes.extraSmall)};
   border-radius: ${props => props.theme.radius.tag};
   height: ${props => props.height};
 `;
