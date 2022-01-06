@@ -35,7 +35,7 @@ const AddInfo = props => {
       nickname: nickname,
       gender: gender,
       profileImage: profileImage,
-      ageRange: data.ageRange,
+      ageRange: isarea,
     };
     return (
       <>
@@ -129,7 +129,7 @@ const AddInfo = props => {
           </Grid>
           <Grid margin="0px 30px">
             <AddText>연령대</AddText>
-            {isarea !== '' ? (
+            {data.ageRange !== '' ? (
               <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
             ) : (
               <Select Data={Area} Emit={GetArea} Area height="182px" />

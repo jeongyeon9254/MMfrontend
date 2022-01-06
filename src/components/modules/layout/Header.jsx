@@ -28,6 +28,7 @@ const Header = props => {
     _onClick,
     name,
     defaultName,
+    Page,
   } = props;
 
   const dispatch = useDispatch();
@@ -40,12 +41,14 @@ const Header = props => {
   };
 
   const goHome = () => {
+    console.log('home');
     history.push('/');
     dispatch(mainActions.reset());
     dispatch(mainActions.kategorieReset());
   };
 
   const goBack = () => {
+    console.log('back');
     history.goBack();
     dispatch(mainActions.reset());
     dispatch(mainActions.kategorieReset());
@@ -72,7 +75,7 @@ const Header = props => {
           <div
             className="backBtn"
             onClick={() => {
-              _on ? goHome() : goBack();
+              _on ? goHome() : Page ? _onClick() : goBack();
             }}
           >
             <img alt="뒤로가기 버튼" src={white ? arrow_left_w : arrow_left}></img>

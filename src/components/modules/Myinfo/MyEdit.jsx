@@ -75,7 +75,7 @@ function MyEdit(props) {
   return (
     <Body className={Open ? 'Open' : 'Close'}>
       {' '}
-      <Header point="relative" _on={_onClick}>
+      <Header point="relative" Page _onClick={_onClick}>
         내 정보 수정하기
       </Header>
       <Grid padding="18px 30px" gap="20px">

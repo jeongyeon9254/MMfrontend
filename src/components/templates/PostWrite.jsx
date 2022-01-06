@@ -48,6 +48,7 @@ const PostWrite = () => {
       alert('최대 8개까지 가능합니다');
       return false;
     }
+
     // 프리뷰
     dispatch(imageActions.resetPreview());
     fileList.map((x, idx) => {

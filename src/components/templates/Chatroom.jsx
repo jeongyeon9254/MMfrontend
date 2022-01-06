@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import Header from '../layout/Header';
-import { Grid } from '../../element';
-import { useSelector } from 'react-redux';
-import { PartyOther, PartyMe, PartyInput } from './index';
-import { useDispatch } from 'react-redux';
-import { actionCreators as ChatAction } from '../../../redux/modules/chat';
-import { getCookie } from '../../../shared/Cookie';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
-const ChatForm = props => {
+import Header from '../modules/layout/Header';
+import { Grid } from '../element';
+import { useSelector, useDispatch } from 'react-redux';
+import { PartyOther, PartyMe, PartyInput } from '../modules/Chat/index';
+import { actionCreators as ChatAction } from '../../redux/modules/chat';
+import { getCookie } from '../../shared/Cookie';
+
+const Chatroom = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick } = props;
   const { userId, name, roomId } = props.data;
@@ -23,7 +23,7 @@ const ChatForm = props => {
 
   const env = process.env.NODE_ENV;
   const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
-  const TOKEN = getCookie('authorization');
+  const TOKEN = getCookie('authorization').replace('Bearer ', '');
   const sock = new SockJS(devTarget);
   const ws = Stomp.over(sock);
 
@@ -98,7 +98,7 @@ const ChatForm = props => {
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
-      <Header Page point="absolute" _onClick={_onClick}>
+      <Header point="absolute" _on={_onClick}>
         {name}
       </Header>
       <Grid height="89%">
@@ -158,4 +158,4 @@ const Alarm = styled.p`
   width: 100%;
   text-align: center;
 `;
-export default ChatForm;
+export default Chatroom;

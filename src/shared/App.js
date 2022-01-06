@@ -14,6 +14,7 @@ import {
   Hidden,
   KakaoCallback,
   Demo,
+  Chatroom,
 } from '../components/templates';
 import Profile from '../components/templates/Profile';
 import PrivateRoute from '../components/modules/PrivateRoute';
@@ -28,12 +29,12 @@ function App() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
+        <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PrivateRoute exact path="/" Component={Main} />
         <PrivateRoute exact path="/choice" Component={Choice} />
         <PrivateRoute exact path="/chat" Component={Chat} />
         <PrivateRoute exact path="/AddMyinfo" Component={AddMyinfo} />
         <PrivateRoute exact path="/myinfo" Component={Myinfo} />
-        <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PrivateRoute exact path="/profile/:userId" Component={Profile} />/
         <PrivateRoute exact path="/postMain" Component={PostMain} />
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
