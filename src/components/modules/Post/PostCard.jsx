@@ -12,6 +12,7 @@ import { Grid, Image, Tag } from '../../element/index';
 import { ReactComponent as HeartIcon } from '../../../img/Icon/icon_heart_no.svg';
 import { ReactComponent as OnHeartIcon } from '../../../img/Icon/icon_heart_in.svg';
 import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg';
+import icon_location from '../../../img/Icon/icon_location.svg';
 
 const PostCard = props => {
   // 페이지 네이션 사용
@@ -36,8 +37,10 @@ const PostCard = props => {
           </Grid>
           <TimeText>{time[0]}</TimeText>
         </Grid>
-        <Grid gap="9px" justify="center" align="flex-end" width="50%">
-          <LocalText>서울특별시 {info.location}</LocalText>
+        <Grid gap="9px" justify="center" align="flex-end" width="60%">
+          <LocalText>
+            <img alt="마커" src={icon_location}></img>서울특별시 {info.location}
+          </LocalText>
           <Tag mbti={info.mbti} padding="4px 10px" size="12px">
             {info.tag}
           </Tag>
@@ -93,6 +96,8 @@ const LocalText = styled.p`
   font-weight: 500;
   font-size: ${props => props.theme.fontSizes.extraSmall};
   color: #9b9b9b;
+  display: flex;
+  align-items: center;
 `;
 
 const Count = styled.p`
