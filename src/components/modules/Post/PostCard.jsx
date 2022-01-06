@@ -38,7 +38,7 @@ const PostCard = props => {
         </Grid>
         <Grid gap="9px" justify="center" align="flex-end" width="50%">
           <LocalText>서울특별시 {info.location}</LocalText>
-          <Tag mbti={info.mbti} padding="4px 10px">
+          <Tag mbti={info.mbti} padding="4px 10px" size="12px">
             {info.tag}
           </Tag>
         </Grid>
