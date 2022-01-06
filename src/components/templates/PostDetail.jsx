@@ -21,6 +21,9 @@ import { actionCreators as postActions } from '../../redux/modules/post';
 import PostModal from '../modules/Post/PostModal';
 import AddComment from '../modules/Post/AddComment';
 
+// Js
+import icon_location from '../../img/Icon/icon_location.svg';
+
 const PostDetail = props => {
   const dispatch = useDispatch();
   SwiperCore.use([Pagination]);
@@ -89,9 +92,12 @@ const PostDetail = props => {
             </Grid>
             <TimeText>{time ? time.split(' ')[0] : null}</TimeText>
           </Grid>
-          <Grid gap="9px" justify="center" align="flex-end" width="50%">
-            <LocalText>서울특별시 {detailInfo.location}</LocalText>
-            <Tag mbti={mbti ? mbti : 'INFJ'} padding="4px 10px">
+          <Grid gap="9px" justify="center" align="flex-end" width="60%">
+            <LocalText>
+              <img alt="마커" src={icon_location} />
+              서울특별시 {detailInfo.location}
+            </LocalText>
+            <Tag mbti={mbti ? mbti : 'INFJ'} padding="4px 10px" size="12px">
               {detailInfo.tag}
             </Tag>
           </Grid>
@@ -176,6 +182,8 @@ const LocalText = styled.p`
   font-weight: 500;
   font-size: ${props => props.theme.fontSizes.extraSmall};
   color: #9b9b9b;
+  display: flex;
+  align-items: center;
 `;
 
 const Count = styled.p`
