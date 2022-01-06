@@ -4,27 +4,41 @@ import { Grid } from '../../element';
 import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
 import { gpsLsit } from '../../modules/Main/gpsList';
 function Select(props) {
-  const { width, Emit, Data, Area, height } = props;
-  const [active, SetActive] = React.useState({});
+  const { width, Emit, Data, Area, height, padding, high, fontsize, defult } = props;
+  console.log(`defult: ${defult}`);
+  const [active, SetActive] = React.useState(defult);
   const [OnOff, SetOnOff] = React.useState(false);
 
   const styles = {
     width,
     height,
+    padding,
+    fontsize,
+    high,
   };
   const OpationData = Data ? Data : gpsLsit;
   const OnOffEvent = () => {
     SetOnOff(!OnOff);
   };
+
+  function isString(inputText) {
+    if (typeof inputText === 'string' || inputText instanceof String) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   React.useEffect(() => {
     Emit(active);
   }, [active]);
 
   return (
     <Frame {...styles}>
-      <IsSelect onClick={OnOffEvent}>
+      <IsSelect {...styles} onClick={OnOffEvent}>
         <Grid row justify="space-between" align="center">
-          <div>{active ? (Area ? active.area : active.location) : ''}</div>
+          <Tiactive {...styles}>
+            {active ? (Area ? active.area : isString(active) ? active : active.location) : ''}
+          </Tiactive>
           <Arrow className={OnOff ? 'on' : ''} src={arrow_down_d} alt="" />
         </Grid>
       </IsSelect>
@@ -53,9 +67,13 @@ function Select(props) {
 }
 Select.defaultProps = {
   width: '100%',
+  fontsize: '16px',
+  high: '43px',
+  padding: '9px 17px',
   Emit: e => {
     console.log(e);
   },
+  defult: '',
 };
 const Frame = styled.div`
   position: relative;
@@ -72,13 +90,17 @@ const Arrow = styled.img`
 const IsSelect = styled.div`
   width: 100%;
   background-color: #fff;
-  padding: 9px 17px;
+  padding: ${p => p.padding};
   cursor: pointer;
   border-radius: 7px;
   border: 1px solid #e1e1e1;
   position: relative;
   z-index: 9999;
-  height: 46px;
+  height: ${p => p.high};
+`;
+const Tiactive = styled.p`
+  font-size: ${p => p.fontsize};
+  color: #3f3f41;
 `;
 const OverScroll = styled.div`
   width: 100%;
