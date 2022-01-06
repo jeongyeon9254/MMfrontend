@@ -30,7 +30,7 @@ export const BtnBottomStyle = styled.button`
   width: ${props => props.width};
   border-radius: 30px;
   ${common};
-  position: fixed;
+  position: ${props => (props.position ? props.position : 'fixed')};
   bottom: 44px;
 `;
 

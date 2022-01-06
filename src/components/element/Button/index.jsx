@@ -10,6 +10,7 @@ const Button = props => {
     return x.name === userInfo.mbti;
   });
   const {
+    position,
     name,
     fontcolor,
     height,
@@ -45,6 +46,7 @@ const Button = props => {
     border,
     _disabled,
     opacity,
+    position,
   };
 
   if (BtnAdd) {
