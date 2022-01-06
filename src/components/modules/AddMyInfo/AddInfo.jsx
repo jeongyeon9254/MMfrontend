@@ -27,7 +27,6 @@ const AddInfo = props => {
   const fileRef = useRef();
 
   const YesAlert = useSelector(state => state.modal.Alert);
-  // const NoAler = useSelector(state => state.modal.Alert);
 
   console.log(typeof profileImage);
 
@@ -80,9 +79,23 @@ const AddInfo = props => {
     setArea(area);
     console.log(area);
   };
+  const address = () => {
+    setAddress(true);
+  };
+
+  const exit = () => {
+    dispatch(modalActions.ExitAlert());
+  };
+
   return (
     <Body>
-      {YesAlert ? <Alert isButton /> : null}
+      {YesAlert ? (
+        <Alert MyBit isButton yes={address} no={exit}>
+          <p>다음으로 넘어가시겠습니까?</p>
+          <p>다음으로 넘어가시겠습니까?</p>
+          <p>다음으로 넘어가시겠습니까?</p>
+        </Alert>
+      ) : null}
       <Grid>
         <Header>추가정보 입력하기</Header>
         <Grid margin="47px 0px 17px 0px">

@@ -3,7 +3,7 @@ import { Input, Grid } from '../element';
 import { Box, Image, Tag, Button, Select } from '../element/index';
 import Pen from '../../img/Icon/icon_create.svg';
 import Bit from '../modules/Bit';
-import Alert from '../element/Alert';
+// import Alert from '../element/Alert';
 const Hidden = () => {
   return (
     <div>
@@ -151,7 +151,7 @@ const Hidden = () => {
           변경
         </Button>
       </Grid>
-      <Alert />
+      {/* <Alert /> */}
     </div>
   );
 };

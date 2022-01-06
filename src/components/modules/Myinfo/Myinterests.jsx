@@ -36,7 +36,7 @@ function Myinterests(props) {
   }, [myInfo]);
   return (
     <>
-      {showTxt ? <CheckTxt>중복선택이 가능합니다.</CheckTxt> : ''}
+      {showTxt ? <CheckTxt>최대 2개까지 입력 가능합니다.</CheckTxt> : ''}
       <Grid row gap="9px">
         {interests.map((x, idx) => {
           return (

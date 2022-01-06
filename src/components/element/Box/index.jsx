@@ -23,6 +23,7 @@ const Box = props => {
     black,
     fontColor,
     fontSize,
+    align,
   } = props;
 
   const styles = {
@@ -34,6 +35,7 @@ const Box = props => {
     fontSize,
     bg,
     height,
+    align,
   };
 
   if (black) {
@@ -97,6 +99,7 @@ Box.defaultProps = {
   fontColor: '#000',
   fontSize: '14px',
   height: 'auto',
+  align: 'left',
 };
 
 const BoxStyle = styled.div`
@@ -114,6 +117,7 @@ const BoxStyle = styled.div`
   background-color: ${props => (props.bg ? props.bg : props.theme.colors.gray_1)};
   font-size: ${props => (props.fontSize ? props.fontSize : props.theme.fontSizes.small)};
   line-height: ${props => props.theme.fontSizes.xl};
+  text-align: ${props => props.align};
 `;
 
 export default Box;

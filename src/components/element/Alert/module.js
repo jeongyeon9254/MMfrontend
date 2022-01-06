@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
-export const YesOrNo = styled.p`
+export const Yes = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
   font-weight: 500;
-  color: ;
+  color: 262626;
+  cursor: pointer;
+`;
+
+export const No = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 500;
+  color: #ec6464;
+  cursor: pointer;
 `;

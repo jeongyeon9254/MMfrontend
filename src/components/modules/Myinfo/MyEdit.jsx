@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Input, Grid, Button } from '../../element';
-import { MyPartBox, Mymbtibtn, Myinterests, MyBottom } from './index';
+import { Input, Grid, Button, Image } from '../../element';
+import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyLocation, MyImgFile } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 function MyEdit(props) {
@@ -13,13 +13,23 @@ function MyEdit(props) {
   const [textarea, setTextarea] = React.useState(userInfo.intro);
   const [Mbti, SetMbti] = React.useState(userInfo.mbti);
   const [Int, SetInt] = React.useState([]);
+  const [Img, SetImg] = React.useState(userInfo.profileImage);
+  const [Location, SetLocation] = React.useState(userInfo.location);
 
-  const SetEmit = e => {
-    SetMbti(e);
+  const SetEmit = item => {
+    SetMbti(item);
   };
 
-  const Haddit = e => {
-    SetInt(e);
+  const Haddit = item => {
+    SetInt(item);
+  };
+  const ImgCheck = item => {
+    console.log(item);
+    SetImg(item);
+  };
+  const ActiveLocal = item => {
+    SetLocation(item);
+    console.log(Location);
   };
 
   const map = Int.map(x => {
@@ -28,17 +38,30 @@ function MyEdit(props) {
 
   const AddInfo = {
     nickname: nickname,
-    profileImage: userInfo.profileImage,
     gender: userInfo.gender,
     ageRange: userInfo.ageRange,
     intro: textarea,
-    location: userInfo.location,
+    location: Location,
     mbti: Mbti,
     interestList: map,
   };
-
+  function isString(inputText) {
+    if (typeof inputText === 'string' || inputText instanceof String) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   const ClickEvent = () => {
-    dispatch(userAction.userInfoPut(AddInfo));
+    const jsonFile = datas => {
+      return new Blob([JSON.stringify(datas)], { type: 'application/json' });
+    };
+    const emptyFile = new File([''], 'empty');
+    const formData = new FormData();
+    const Check = isString(Img);
+    formData.append('multipartFile', Check ? emptyFile : Img);
+    formData.append('data', jsonFile(AddInfo));
+    dispatch(userAction.userInfoPut(formData));
   };
   return (
     <Body className={Open ? 'Open' : 'Close'}>
@@ -46,15 +69,16 @@ function MyEdit(props) {
       <Header point="relative" _on={_onClick}>
         내 정보 수정하기
       </Header>
-      <Grid padding="20px 30px" gap="20px">
-        <MyPartBox title="나의 이름">
+      <Grid padding="18px 30px" gap="20px">
+        <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
+        <MyPartBox title="나의 이름" num={nickname.length} max="7" input>
           <Input
             _borderColor="#ECECEC"
             _bg="#ECECEC"
             _padding="8px 14px"
             _value={nickname}
             _onChange={e => {
-              if (e.target.value.length <= 4) {
+              if (e.target.value.length <= 7) {
                 setNickname(e.target.value);
               } else {
                 alert('4자 이하로 부탁드립니다.');
@@ -62,13 +86,16 @@ function MyEdit(props) {
             }}
           />
         </MyPartBox>
+        <MyPartBox title="나의 주소">
+          <MyLocation Location={Location} Emit={ActiveLocal}></MyLocation>
+        </MyPartBox>
         <MyPartBox title="나의 MBTI">
           <Mymbtibtn mbti={userInfo.mbti} Emit={SetEmit}></Mymbtibtn>
         </MyPartBox>
         <MyPartBox title="관심사 설정">
           <Myinterests Emit={Haddit}></Myinterests>
         </MyPartBox>
-        <MyPartBox title="한줄 소개">
+        <MyPartBox title="한줄 소개" num={textarea.length} max="100" input>
           <Input
             _type="textarea"
             _value={textarea}
@@ -82,7 +109,7 @@ function MyEdit(props) {
           />
         </MyPartBox>
       </Grid>
-      <MyBottom _onClick={ClickEvent}>내 정보 수정하기</MyBottom>
+      <MyBottom _onClick={ClickEvent}>수정 완료하기</MyBottom>
     </Body>
   );
 }
@@ -97,7 +124,7 @@ const Body = styled.div`
   opacity: 0;
   transition: all ease 0.3s;
   .swiper-container {
-    padding: 2px;
+    padding: 0px 0px 6px;
   }
   &.Open {
     opacity: 1;

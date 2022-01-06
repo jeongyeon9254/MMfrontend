@@ -14,10 +14,14 @@ function Mymbtibtn(props) {
   }, [active]);
 
   return (
-    <Grid row gap="8px" padding="3px 0" align="center">
-      <Tag small _type="Btn" state="active" _src={My.image} color={My.color}>
-        {My.name}
-      </Tag>
+    <Grid row gap="8px" padding="3px 0" align="flex-start">
+      <Grid width="auto">
+        <Tag small _type="Btn" state="active" _src={My.image} color={My.color}>
+          {My.name}
+        </Tag>
+        <Mytype>내 유형</Mytype>
+      </Grid>
+
       <Line />
       <Grid row width="75%">
         <Swiper slidesPerView={4} spaceBetween={40} className="scroll-container">
@@ -47,14 +51,14 @@ function Mymbtibtn(props) {
 Mymbtibtn.defaultProps = {
   Emit: () => {},
 };
-const MbtiBox = styled.div`
-  width: 100%;
-  height: suto;
-  overflow: hidden;
-`;
 const Line = styled.div`
   height: 50px;
   width: 1px;
   background-color: #ededed;
+`;
+const Mytype = styled.p`
+  font-size: 10px;
+  text-align: center;
+  margin-top: 6px;
 `;
 export default Mymbtibtn;

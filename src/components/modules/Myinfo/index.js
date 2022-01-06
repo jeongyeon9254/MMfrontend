@@ -8,6 +8,8 @@ import MyBody from './MyBody';
 import MyBottom from './MyBottom';
 import MyEdit from './MyEdit';
 import Mymbtibtn from './Mymbtibtn';
+import MyLocation from './MyLocation';
+import MyImgFile from './MyImgFile';
 
 export {
   MyinfoBit,
@@ -20,4 +22,6 @@ export {
   MyBottom,
   MyEdit,
   Mymbtibtn,
+  MyLocation,
+  MyImgFile,
 };

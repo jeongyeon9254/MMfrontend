@@ -37,7 +37,7 @@ export const BorderSquare = styled.div`
   background: ${props => props.theme.colors.gray_1};
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: ${props => props.radius};
   &:after {
     content: '';
     display: block;
