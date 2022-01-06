@@ -1,24 +1,62 @@
 import React from 'react';
 import { Grid, Button } from '../index';
 import styled from 'styled-components';
+import { Yes, No } from '../../element/Alert/module.js';
+import Bit from '../../modules/Bit';
 
 const Alert = props => {
-  const { children, isButton, bg, display } = props;
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const MyBit = Bit.find(x => {
+    return x.name === userInfo.mbti;
+  });
+  const { children, isButton, bg, display, color } = props;
 
   const styles = {
     display,
     bg,
+    color,
   };
 
   if (isButton) {
     return (
       <>
         <AlertBox>
-          <AlertInBox {...styles}>{children}</AlertInBox>
+          <AlertInBox {...styles} style={{ backgroundImage: `url(${MyBit ? MyBit.image : ''})` }}>
+            {children}
+            <Grid row justify="flex-end" gap="16px" padding="0px 18px 0px 0px">
+              <No
+                onClick={() => {
+                  props.no();
+                }}
+              >
+                아니요
+              </No>
+              <Yes
+                onClick={() => {
+                  props.yes();
+                }}
+              >
+                예
+              </Yes>
+            </Grid>
+          </AlertInBox>
         </AlertBox>
       </>
     );
   }
+
+  return (
+    <>
+      <AlertBox>
+        <AlertInBox {...styles} style={{ backgroundImage: `url(${MyBit ? MyBit.image : ''})` }}>
+          {children}
+        </AlertInBox>
+      </AlertBox>
+    </>
+  );
+};
+Alert.defaultProps = {
+  color: '#262626',
 };
 
 const AlertBox = styled.div`
@@ -52,9 +90,14 @@ const AlertInBox = styled.div`
   height: auto;
   left: 50%;
   top: 50%;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12),
+    0px 8px 10px rgba(0, 0, 0, 0.2);
   transform: translate(-50%, -50%);
-  background-color: ${props => props.bg};
-  box-shadow: 0px 0px 1px 2px #eee;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 204px -42px;
+  background-size: 100px 100px;
+  border-radius: 4px;
 `;
 
 export default Alert;
