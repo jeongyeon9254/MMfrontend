@@ -58,9 +58,9 @@ const Header = props => {
   };
 
   const logOutBack = () => {
-    history.push('/login');
     delCookie('authorization');
     localStorage.clear();
+    history.push('/login');
   };
 
   return (
