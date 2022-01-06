@@ -20,7 +20,7 @@ const ChatForm = props => {
   const [Chatting, setChatting] = React.useState('');
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
-
+  console.log(Chatx);
   const env = process.env.NODE_ENV;
   const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
   const TOKEN = getCookie('authorization');
@@ -37,7 +37,7 @@ const ChatForm = props => {
   const wsConnectSubscribe = Id => {
     try {
       ws.debug = null;
-      ws.connect({ authorization: TOKEN }, () => {
+      ws.connect({ token: TOKEN }, () => {
         ws.subscribe(`/sub/chat/room/${Id}`, data => {
           let recv = JSON.parse(data.body);
           console.log('구독후 새로운 메세지 data :' + recv);
