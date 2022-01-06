@@ -21,6 +21,7 @@ function MyEdit(props) {
   };
 
   const Haddit = item => {
+    console.log(item);
     SetInt(item);
   };
   const ImgCheck = item => {
@@ -43,7 +44,7 @@ function MyEdit(props) {
     gender: userInfo.gender,
     ageRange: userInfo.ageRange,
     intro: textarea,
-    location: Location,
+    location: Location.location,
     mbti: Mbti,
     interestList: map,
   };
@@ -56,13 +57,14 @@ function MyEdit(props) {
   }
 
   const ClickEvent = () => {
+    console.log(AddInfo);
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
     const formData = new FormData();
     const emptyFile = new File([''], 'empty');
     const Check = isString(Img);
-
+    console.log(`${Check} : ${Img} 는 ${typeof Img}`);
     formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
     for (let value of formData.values()) {

@@ -4,11 +4,12 @@ import { Grid, Button } from '../../element';
 
 function Myinterests(props) {
   const { Disable, Emit } = props;
-  // const Info = JSON.parse(localStorage.getItem('userInfo'));
-  const Info = [{ interest: '공부' }, { interest: '운동' }];
-  const res = Info.map(x => {
+  const Info = JSON.parse(localStorage.getItem('userInfo'));
+  // const Info = [{ interest: '공부' }, { interest: '운동' }];
+  const res = Info.interestList.map(x => {
     return x.interest;
   });
+  console.log(res);
   const [myInfo, SetmyInfo] = React.useState(res);
   const [showTxt, SetTxt] = React.useState(false);
 
@@ -16,7 +17,7 @@ function Myinterests(props) {
     { en: 'exercise', ko: '운동' },
     { en: 'study', ko: '공부' },
     { en: 'conversation', ko: '대화' },
-    { en: 'finance', ko: '제테크' },
+    { en: 'finance', ko: '재테크' },
     { en: 'game', ko: '게임' },
     { en: 'other', ko: '기타' },
   ];

@@ -15,6 +15,7 @@ import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
 import MapContainer from '../modules/Main/MapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import MainNoneLoing from '../modules/Main/MainNoneLoing';
 
 const Main = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));

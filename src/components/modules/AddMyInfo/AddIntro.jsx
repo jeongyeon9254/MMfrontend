@@ -39,6 +39,7 @@ const AddIntro = props => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
     const emptyFile = new File([''], 'empty');
+
     const formData = new FormData();
     const Check = isString(file.profileImage);
     formData.append('multipartFile', Check ? emptyFile : file.profileImage);
