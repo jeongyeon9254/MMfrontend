@@ -37,7 +37,7 @@ const ChatForm = props => {
   const wsConnectSubscribe = Id => {
     try {
       ws.debug = null;
-      ws.connect({ token: TOKEN }, () => {
+      ws.connect({ authorization: TOKEN }, () => {
         ws.subscribe(`/sub/chat/room/${Id}`, data => {
           let recv = JSON.parse(data.body);
           console.log('구독후 새로운 메세지 data :' + recv);
@@ -60,7 +60,7 @@ const ChatForm = props => {
       };
       waitForConnection(ws, () => {
         ws.debug = null;
-        ws.send('/pub/message', { token: TOKEN }, JSON.stringify(ms));
+        ws.send('/pub/chat/message', { token: TOKEN }, JSON.stringify(ms));
         dispatch(ChatAction.pushChatting(ms));
       });
     } catch (e) {
