@@ -59,7 +59,7 @@ const getChatMsListDB = roomId => {
 };
 
 // 채팅 메세지 보내기
-const PostChatting = (ms, req) => {
+const PostChatting = req => {
   return async function (dispatch, getState, { history }) {
     dispatch(pushChatting(req));
   };
