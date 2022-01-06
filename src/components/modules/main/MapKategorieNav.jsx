@@ -24,7 +24,12 @@ const MapKategorieNav = props => {
 
   return (
     <RowDiv>
-      <Swiper spaceBetween={10} slidesPerView={4} className="scroll-container">
+      <Swiper
+        style={{ background: '#fff' }}
+        spaceBetween={10}
+        slidesPerView={4}
+        className="scroll-container"
+      >
         {navList.map((list, index) => {
           return (
             <SwiperSlide className="slide" key={index}>

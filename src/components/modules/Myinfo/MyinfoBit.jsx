@@ -17,7 +17,6 @@ function MyinfoBit(props) {
     dispatch(userAction.AddMyinfoDB());
   };
 
-  console.log(Open);
   return (
     <>
       <Button padding="15px 17px" radius="7px" color="#3F3F41" border="0px" _onClick={OpenClick}>

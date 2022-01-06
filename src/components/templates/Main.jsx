@@ -103,6 +103,9 @@ const LocationBox = styled.div`
   justify-content: center;
   top: 158px;
   z-index: 1;
+  @media only screen and (max-width: 450px) {
+    top: 120px;
+  }
 `;
 
 // 개선필요
@@ -143,6 +146,9 @@ const Modal = styled.div`
     color: ${props => props.theme.colors.gray_2};
     font-weight: bold;
     font-size: ${props => props.theme.fontSizes.lg};
+  }
+  @media only screen and (max-width: 450px) {
+    top: 160px;
   }
 `;
 

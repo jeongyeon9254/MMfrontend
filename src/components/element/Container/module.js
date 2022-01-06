@@ -12,6 +12,15 @@ export const ImgBg = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  @media only screen and (max-width: 450px) {
+    background-image: none;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
 `;
 export const ContainerStyle = styled.div`
   box-sizing: border-box;
@@ -28,4 +37,16 @@ export const ContainerStyle = styled.div`
   left: 50%;
   top: 23px;
   transform: translateX(-50%);
+  @media only screen and (max-width: 450px) {
+    position: absolute;
+    max-width: 100%;
+    max-height: 828px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transform: none;
+    border-radius: 0px;
+    padding: 47px 0 87px 0;
+  }
 `;

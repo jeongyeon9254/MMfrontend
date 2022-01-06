@@ -4,7 +4,9 @@ import { history } from '../../redux/configureStore';
 import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
+
 import { Grid } from '../element';
+
 import { ChatForm, ChatList, Announcement } from '../modules/Chat/';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../redux/modules/chat';
@@ -21,10 +23,13 @@ const Chat = () => {
   const [RommNum, setRommNum] = React.useState('');
   const [Data, setData] = React.useState({});
   console.log(Room);
+
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
-    dispatch(ChatAction.getChatMsListDB(RommNum));
-  }, [RommNum ? RommNum : '']);
+    if (RommNum) {
+      dispatch(ChatAction.getChatMsListDB(RommNum));
+    }
+  }, [RommNum]);
 
   return (
     <div>
@@ -42,7 +47,8 @@ const Chat = () => {
                   //채팅방 입장할때
                   dispatch(ChatAction.loadChatCommetList(x.roomId, userInfo.nickname));
                   //입장한 채팅방 메세지 정보 가져 오기
-                  setRommNum(x.roomId);
+                  // setRommNum(x.roomId);
+                  dispatch(ChatAction.getChatMsListDB(x.roomId));
                 }}
                 data={x}
                 key={idx}
