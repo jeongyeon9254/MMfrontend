@@ -59,7 +59,7 @@ const ModalBox = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 110%;
+  height: 100vh;
   z-index: 51;
   background-color: rgba(0, 0, 0, 0.5);
   animation: postModal-show 0.5s;
@@ -70,7 +70,7 @@ const ModalBox = styled.div`
     }
     to {
       opacity: 1;
-      margin-bottom: 0;
+      margin-bottom: 0%;
     }
   }
 `;

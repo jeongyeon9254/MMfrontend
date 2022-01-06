@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { getCookie } from '../../shared/Cookie';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../../redux/modules/preview';
 import { actionCreators as postActions } from '../../redux/modules/post';
+
+// Swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.min.css';
 
 // component
 import { Button, Grid, Input } from '../element/index.js';
@@ -56,7 +58,7 @@ const PostWrite = () => {
       };
     });
   };
-
+  console.log(images);
   const preview = useSelector(state => state.preview.preview);
 
   const changeTag = e => {
@@ -110,18 +112,31 @@ const PostWrite = () => {
         <Grid>
           <p className="title">사진 첨부하기</p>
           <div>
-            <Grid row>
+            <Grid wrap="none-wrap" row gap="20px;">
               <label htmlFor="file">
                 <Grid align="center" justify="center" height="100%">
                   <p className="plus">+</p>
                   <p>{preview.length}/8</p>
                 </Grid>
               </label>
-              {preview.length > 0
-                ? preview.map((src, idx) => {
-                    return <img alt="이미지" src={src} key={idx}></img>;
-                  })
-                : null}
+              <RowDiv>
+                <Swiper
+                  style={{ background: '#fff' }}
+                  spaceBetween={10}
+                  slidesPerView={2}
+                  className="scroll-container"
+                >
+                  {preview.length > 0
+                    ? preview.map((src, idx) => {
+                        return (
+                          <SwiperSlide className="slide" key={idx}>
+                            <img alt="이미지" src={src} key={idx}></img>{' '}
+                          </SwiperSlide>
+                        );
+                      })
+                    : null}
+                </Swiper>
+              </RowDiv>
             </Grid>
           </div>
           <Grid row gap="10px"></Grid>
@@ -158,9 +173,7 @@ const PostBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  img {
-    width: 80px;
-  }
+
   .limit {
     position: absolute;
     bottom: 10px;
@@ -198,6 +211,27 @@ const PostBox = styled.div`
   .title {
     font-weight: 700;
     margin-bottom: 20px;
+  }
+`;
+
+const RowDiv = styled.div`
+  background: #fff;
+  width: 68%;
+  img {
+    height: ${props => props.theme.fontSizes.base};
+    margin-right: 10px;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+  }
+  .scroll-container {
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+  .slide {
+    width: auto !important;
   }
 `;
 
