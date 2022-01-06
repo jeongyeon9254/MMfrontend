@@ -5,9 +5,9 @@ export const ImgBg = styled.div`
   background-image: url(${Phone});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   height: 876px;
-  width: 441px;
+  width: 427px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,7 +35,7 @@ export const ContainerStyle = styled.div`
   overflow: hidden;
   position: absolute;
   left: 50%;
-  top: 23px;
+  top: 21px;
   transform: translateX(-50%);
   @media only screen and (max-width: 450px) {
     position: absolute;
