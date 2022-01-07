@@ -16,11 +16,14 @@ import MapList from '../modules/Main/MapList.jsx';
 import MapContainer from '../modules/Main/MapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
 import MainNoneLoing from '../modules/Main/MainNoneLoing';
+import Spiner from '../../shared/Spiner.jsx';
 
 const Main = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [modal, setModal] = useState(false);
   const [location, setLocation] = useState(userInfo.location);
+
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -45,12 +48,15 @@ const Main = props => {
       <MapContainer />
       <CenterBtn>
         <Button
-          _onClick={() => {
+          _onClick={async () => {
             getMatchingDB().then(res => {
               if (res.data.userId === -1) {
                 console.log('맞는 유저가 없습니다.');
               } else {
-                history.push(`/profile/${res.data.userId}`);
+                setLoading(true);
+                setTimeout(function () {
+                  history.push(`/profile/${res.data.userId}`);
+                }, 1500);
               }
             });
           }}
@@ -83,6 +89,7 @@ const Main = props => {
           </div>
         </Modal>
       ) : null}
+      {loading ? <Spiner /> : null}
     </React.Fragment>
   );
 };
