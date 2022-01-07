@@ -11,7 +11,6 @@ import PostEdit from './PostEdit';
 import KakaoCallback from './KakaoCallback';
 import Hidden from './Hidden';
 import NotPound from './NotPound';
-import Chatroom from './Chatroom';
 
 export {
   Main,
@@ -27,5 +26,4 @@ export {
   Hidden,
   KakaoCallback,
   NotPound,
-  Chatroom,
 };

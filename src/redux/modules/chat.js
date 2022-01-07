@@ -34,18 +34,6 @@ const getChatRoomListDB = () => {
   };
 };
 
-// 채팅방 입장
-const loadChatCommetList = (roomId, hostname) => {
-  return async function (dispatch, getState, { history }) {
-    const ms = {
-      type: 'ENTER',
-      roomId: roomId,
-      message: `${hostname}님이 입장 하였습니다.`,
-    };
-    dispatch(pushChatting(ms));
-  };
-};
-
 // 채팅 메세지 목록 가져오기
 const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
@@ -95,7 +83,6 @@ export default handleActions(
 const actionCreators = {
   getChatRoomListDB,
   pushChatting,
-  loadChatCommetList,
   PostChatting,
   postChatRoomListDB,
   getChatMsListDB,

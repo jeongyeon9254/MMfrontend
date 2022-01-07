@@ -16,7 +16,13 @@ function PartyInput(props) {
   };
 
   const ClickEvent = () => {
-    sendMessage(Chatting);
+    // send할 데이터
+    const ms = {
+      type: 'TALK',
+      roomId: roomId,
+      message: Chatting,
+    };
+    sendMessage(ms);
     setChatting('');
   };
   const Pressevent = e => {
