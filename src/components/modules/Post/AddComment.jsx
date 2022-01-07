@@ -23,6 +23,13 @@ const AddComment = props => {
     setComment('');
   };
 
+  const enterkey = () => {
+    if (window.event.keyCode == 13) {
+      dispatch(postActions.addCommentsDB(postId, comment));
+      setComment('');
+    }
+  };
+
   return (
     <CommentBox>
       <Grid row gap="10px">
@@ -34,6 +41,7 @@ const AddComment = props => {
           }}
           value={comment || ''}
           placeholder="댓글을 달아보세요!"
+          onKeyUp={enterkey}
         ></input>
         <button onClick={addComment}>등록</button>
       </Grid>

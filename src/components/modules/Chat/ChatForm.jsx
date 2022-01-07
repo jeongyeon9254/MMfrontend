@@ -32,6 +32,9 @@ const ChatForm = props => {
       dispatch(ChatAction.getChatMsListDB(roomId));
       wsConnectSubscribe(roomId);
     }
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
   }, [roomId]);
 
   const wsConnectSubscribe = Id => {

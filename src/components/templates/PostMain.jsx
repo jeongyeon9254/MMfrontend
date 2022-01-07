@@ -18,6 +18,7 @@ import { actionCreators as postAcitions } from '../../redux/modules/post.js';
 // component
 import { Button, Grid } from '../element/index.js';
 import MainComment from '../../components/modules/Post/MainComment';
+import Null from '../../shared/Null';
 
 const PostMain = () => {
   const dispatch = useDispatch();
@@ -52,8 +53,9 @@ const PostMain = () => {
     <PostBox>
       <Header _on>커뮤니티</Header>
       <MapKategorieNav userInfo={userInfo} />
-      {postList
-        ? filterLists.map((x, idx) => {
+      {postList ? (
+        filterLists.length > 0 ? (
+          filterLists.map((x, idx) => {
             return (
               <div
                 key={x.postId}
@@ -82,7 +84,12 @@ const PostMain = () => {
               </div>
             );
           })
-        : null}
+        ) : (
+          <Grid padding="40px 0 0 0">
+            <Null post></Null>
+          </Grid>
+        )
+      ) : null}
       <div className="postBtnBox">
         <Button
           BtnRound

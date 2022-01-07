@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as listActions } from '../../../redux/modules/list';
 
+// Component
+import Null from '../../../shared/Null';
+
 // Js
 import { Box, Grid, Image, Tag } from '../../element';
 import arrow_bottom from '../../../img/Icon/arrow_bottom.svg';
@@ -33,7 +36,6 @@ const MapList = props => {
   if (kategorie === null || kategorie === '전체보기') {
     list = lists.result;
   }
-
   return (
     <React.Fragment>
       {listState ? (
@@ -43,35 +45,39 @@ const MapList = props => {
           </div>
           {/* 카드리스트 */}
           <div className="inner">
-            {list.map((list, idx) => {
-              return (
-                <div
-                  className="card"
-                  key={idx}
-                  onClick={() => {
-                    history.push(`/profile/${list.userId}`);
-                    offModal();
-                  }}
-                >
-                  <Image round width="53px" margin="0" src={list.profileImage}></Image>
-                  <Grid width="37%" justify="center" gap="5px">
-                    <Grid row gap="3px">
-                      <p className="name">{list.nickname}</p>
-                      <Tag mbti={list.mbti} _type="black" size="10px" icon>
-                        {list.mbti}
-                      </Tag>
+            {list.length > 0 ? (
+              list.map((list, idx) => {
+                return (
+                  <div
+                    className="card"
+                    key={idx}
+                    onClick={() => {
+                      history.push(`/profile/${list.userId}`);
+                      offModal();
+                    }}
+                  >
+                    <Image round width="53px" margin="0" src={list.profileImage}></Image>
+                    <Grid width="37%" justify="center" gap="5px">
+                      <Grid row gap="3px">
+                        <p className="name">{list.nickname}</p>
+                        <Tag mbti={list.mbti} _type="black" size="10px" icon>
+                          {list.mbti}
+                        </Tag>
+                      </Grid>
+                      <Grid row width="auto">
+                        <img className="icon" alt="주소" src={icon_location}></img>
+                        <p className="location">서울특별시 {list.location}</p>
+                      </Grid>
                     </Grid>
-                    <Grid row width="auto">
-                      <img className="icon" alt="주소" src={icon_location}></img>
-                      <p className="location">서울특별시 {list.location}</p>
-                    </Grid>
-                  </Grid>
-                  <Box width="40%" padding="6px 9px">
-                    <div className="textBox">{list.intro}</div>
-                  </Box>
-                </div>
-              );
-            })}
+                    <Box width="40%" padding="6px 9px">
+                      <div className="textBox">{list.intro}</div>
+                    </Box>
+                  </div>
+                );
+              })
+            ) : (
+              <Null></Null>
+            )}
           </div>
         </MapListStyle>
       ) : null}
