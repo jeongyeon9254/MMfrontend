@@ -3,6 +3,12 @@ import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
 import { editMyinfoDB, getMyMbitInfo } from '../../api/modules/user';
+// 모달
+// import { Alert } from '../../components/element/index';
+// import { actionCreators as modalActions } from '../../../redux/modules/modal';
+
+// 모달
+// const YesAlert = useSelector(state => state.modal.Alert);
 
 const GET_MBTIINFO = 'GET_MBTIINFO';
 
