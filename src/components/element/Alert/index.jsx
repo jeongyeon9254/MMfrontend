@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button } from '../index';
+import { Grid } from '../index';
 import styled from 'styled-components';
 import { Yes, No } from '../../element/Alert/module.js';
 import Bit from '../../modules/Bit';
@@ -9,7 +9,7 @@ const Alert = props => {
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
   });
-  const { children, isButton, bg, display, color } = props;
+  const { children, isButton, bg, display, color, check } = props;
 
   const styles = {
     display,
@@ -23,7 +23,14 @@ const Alert = props => {
         <AlertBox>
           <AlertInBox {...styles} style={{ backgroundImage: `url(${MyBit ? MyBit.image : ''})` }}>
             {children}
-            <Grid row justify="flex-end" gap="16px" padding="0px 18px 0px 0px">
+            <Grid
+              row
+              justify="flex-end"
+              gap="16px"
+              padding="0px 18px 0px 0px"
+              align="center"
+              height="36px"
+            >
               <No
                 onClick={() => {
                   props.no();
@@ -37,6 +44,33 @@ const Alert = props => {
                 }}
               >
                 예
+              </Yes>
+            </Grid>
+          </AlertInBox>
+        </AlertBox>
+      </>
+    );
+  }
+  if (check) {
+    return (
+      <>
+        <AlertBox>
+          <AlertInBox {...styles} style={{ backgroundImage: `url(${MyBit ? MyBit.image : ''})` }}>
+            {children}
+            <Grid
+              row
+              justify="flex-end"
+              gap="16px"
+              padding="0px 18px 0px 0px"
+              align="center"
+              height="36px"
+            >
+              <Yes
+                onClick={() => {
+                  props.yes();
+                }}
+              >
+                확인
               </Yes>
             </Grid>
           </AlertInBox>
