@@ -7,6 +7,10 @@ import 'swiper/swiper.min.css';
 function MyLocation(props) {
   const { Location, Emit } = props;
   const [active, SetActive] = React.useState(Location);
+  const LocationFuc = item => {
+    // console.log(item);
+    SetActive(item);
+  };
   React.useEffect(() => {
     Emit(active);
   }, [active]);
@@ -21,7 +25,7 @@ function MyLocation(props) {
         fontsize="14px"
         high="36px"
         defult={Location}
-        Emit={Emit}
+        Emit={LocationFuc}
       ></Select>
     </Grid>
   );
