@@ -44,3 +44,16 @@ export const BorderSquare = styled.div`
     padding-bottom: 100%;
   }
 `;
+
+export const Nobackground = styled.div`
+  width: ${props => props.width};
+  margin: ${props => props.margin};
+  position: relative;
+  overflow: hidden;
+  border-radius: ${props => props.radius};
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+`;

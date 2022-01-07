@@ -1,16 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
+
 import Header from '../layout/Header';
-import { Image, Grid, Input, Button, Select } from '../../element/index';
+import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
-import Alert from '../../element/Alert';
+import { actionCreators as modalActions } from '../../../redux/modules/modal';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
+
+  const YesAlert = useSelector(state => state.modal.Alert);
 
   const [Address, setAddress] = useState(false);
   const getUser = localStorage.getItem('userInfo');
@@ -25,8 +27,6 @@ const AddInfo = props => {
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
-
-  const YesAlert = useSelector(state => state.modal.Alert);
 
   console.log(typeof profileImage);
 
@@ -47,7 +47,7 @@ const AddInfo = props => {
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
       e.target.value = e.target.value.substr(0, 4);
-      alert('4자 이내로 작성부탁드립니다');
+      dispatch(modalActions.setAlert());
     }
   };
 
@@ -79,9 +79,6 @@ const AddInfo = props => {
     setArea(area);
     console.log(area);
   };
-  const address = () => {
-    setAddress(true);
-  };
 
   const exit = () => {
     dispatch(modalActions.ExitAlert());
@@ -89,15 +86,15 @@ const AddInfo = props => {
 
   return (
     <Body>
-      {YesAlert ? (
-        <Alert MyBit isButton yes={address} no={exit}>
-          <p>다음으로 넘어가시겠습니까?</p>
-          <p>다음으로 넘어가시겠습니까?</p>
-          <p>다음으로 넘어가시겠습니까?</p>
-        </Alert>
-      ) : null}
       <Grid>
         <Header>추가정보 입력하기</Header>
+        {YesAlert ? (
+          <Alert check yes={exit}>
+            <Grid gap="15px" padding="16px 8px 8px 24px">
+              <Title>닉네임은 4자이내로 작성해주세요</Title>
+            </Grid>
+          </Alert>
+        ) : null}
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -164,8 +161,7 @@ const AddInfo = props => {
           width="315px"
           BtnBottom
           _onClick={() => {
-            dispatch(modalActions.setAlert());
-            // setAddress(true);
+            setAddress(true);
           }}
         >
           다음으로
@@ -186,6 +182,16 @@ const AddText = styled.p`
   font-size: 15px;
   font-weight: 400;
   margin: 0px 0px 7px 0px;
+`;
+const Title = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+`;
+const Content = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default AddInfo;

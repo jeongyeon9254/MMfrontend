@@ -8,9 +8,10 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as chatActions } from '../../redux/modules/chat';
+import { actionCreators as modalActions } from '../../redux/modules/modal';
 
 // component
-import { Button, Image, Grid, Box, Tag } from '../element/index.js';
+import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 
 const Profile = props => {
@@ -23,12 +24,53 @@ const Profile = props => {
   }, []);
 
   const profile = useSelector(state => state.profile.list);
+  const YesAlert = useSelector(state => state.modal.Alert);
+  const AfterAlert = useSelector(state => state.modal.AfterAlert);
   const mbti = profile.interestList;
 
   const [modal, setModal] = useState(false);
 
+  const exit = () => {
+    dispatch(modalActions.ExitAlert());
+  };
+
+  const next = () => {
+    dispatch(chatActions.postChatRoomListDB(profile.userId));
+    setModal(true);
+    exit();
+  };
+
+  const After = () => {
+    setModal(false);
+    exit();
+  };
+
   return (
     <>
+      {YesAlert ? (
+        <Alert MyBit isButton yes={next} no={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Title>매칭을 신청하시겠습니까?</Title>
+            <Grid gap="4px">
+              <Content>{profile.nickname}님께 매치을 신청할까요?</Content>
+              <Content>나와 딱 맞는 친구일지 몰라요!</Content>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
+
+      {AfterAlert ? (
+        <Alert MyBit isButton yes={After} no={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Title>매칭 친구를 끊을까요?</Title>
+            <Grid gap="4px">
+              <Content>{profile.nickname} 님과의 매칭을 끊을까요?</Content>
+              <Content>나와 딱 맞는 친구일지 몰라요!</Content>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
+
       {modal ? (
         <MatchBox
           onClick={() => {
@@ -78,10 +120,7 @@ const Profile = props => {
             width="85%"
             _onClick={() => {
               console.log('신청!');
-
-              dispatch(chatActions.postChatRoomListDB(profile.userId));
-
-              setModal(true);
+              dispatch(modalActions.setAlert());
             }}
           >
             매칭신청
@@ -94,7 +133,8 @@ const Profile = props => {
             _onClick={() => {
               // const userId = { userId: profile.userId };
               // dispatch(chatActions.postChatRoomListDB(userId));
-              setModal(false);
+              dispatch(modalActions.AfterAlert());
+              // setModal(false);
             }}
           >
             매칭 친구 끊기
@@ -157,6 +197,17 @@ const MatchBox = styled.div`
       margin-top: 0;
     }
   }
+`;
+
+const Title = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+`;
+const Content = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default Profile;
