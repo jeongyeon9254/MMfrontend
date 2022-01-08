@@ -1,48 +1,41 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select } from '../../element/index';
 import AddAdress from './AddAdress';
-import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
-import Alert from '../../element/Alert';
+import { history } from '../../../redux/configureStore';
+import { delCookie } from '../../../shared/Cookie';
 
 const AddInfo = props => {
   const dispatch = useDispatch();
 
-  const [Address, setAddress] = useState(false);
+  const [Open, setOpen] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
-  // const [area, setArea] = useState(data.ageRange);
-  const [isarea, setArea] = useState('');
-
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
+  const [isarea, setArea] = useState(data.ageRange);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
-  const YesAlert = useSelector(state => state.modal.Alert);
-
   console.log(typeof profileImage);
 
-  if (Address === true) {
-    const file = {
-      nickname: nickname,
-      gender: gender,
-      profileImage: profileImage,
-      ageRange: isarea,
-    };
-    return (
-      <>
-        <AddAdress file={file} AddAdress={AddAdress} />
-      </>
-    );
-  }
+  React.useEffect(() => {
+    // if (data.signStatus) {
+    //   history.push('/');
+    // }
+  });
+  const file = {
+    nickname: nickname,
+    gender: gender,
+    profileImage: profileImage,
+    ageRange: isarea,
+  };
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
@@ -76,28 +69,29 @@ const AddInfo = props => {
     fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
   };
   const GetArea = area => {
-    setArea(area);
+    setArea(area.area);
     console.log(area);
   };
-  const address = () => {
-    setAddress(true);
-  };
-
-  const exit = () => {
-    dispatch(modalActions.ExitAlert());
+  const PageControl = () => {
+    setOpen(!Open);
   };
 
   return (
     <Body>
-      {YesAlert ? (
-        <Alert MyBit isButton yes={address} no={exit}>
-          <p>다음으로 넘어가시겠습니까?</p>
-          <p>다음으로 넘어가시겠습니까?</p>
-          <p>다음으로 넘어가시겠습니까?</p>
-        </Alert>
-      ) : null}
+      <AddAdress file={file} PageControl={PageControl} Show={Open} />
       <Grid>
-        <Header>추가정보 입력하기</Header>
+        <Header
+          Page
+          point="relative"
+          zIndex="0"
+          _onClick={() => {
+            history.push('/login');
+            delCookie('authorization');
+            localStorage.clear();
+          }}
+        >
+          추가정보 입력하기
+        </Header>
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -158,34 +152,36 @@ const AddInfo = props => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid margin="0px 30px">
+      <BtnBox>
         <Button
           state={nickname !== '' && gender !== '' ? false : 'Inactive'}
           width="315px"
+          position="absolute"
           BtnBottom
-          _onClick={() => {
-            dispatch(modalActions.setAlert());
-            // setAddress(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>
-      </Grid>
+      </BtnBox>
     </Body>
   );
 };
 
 const Body = styled.div`
   z-index: 10;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0px;
+  top: 0px;
 `;
 const AddText = styled.p`
   font-size: 15px;
   font-weight: 400;
   margin: 0px 0px 7px 0px;
+`;
+const BtnBox = styled.div`
+  padding: 0px 9%;
 `;
 
 export default AddInfo;

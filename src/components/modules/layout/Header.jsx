@@ -26,6 +26,7 @@ const Header = props => {
     white,
     myinfo,
     detail,
+    zIndex,
     _onClick,
     name,
     defaultName,
@@ -39,6 +40,7 @@ const Header = props => {
     point,
     bg,
     white,
+    zIndex,
   };
 
   const goHome = () => {
@@ -110,7 +112,7 @@ const HeaderStyle = styled.header`
   border-radius: 30px 30px 0px 0px;
   border-bottom: ${props => (props.white ? '0px' : '1px solid #eee')};
   background-color: ${props => (props.bg ? props.bg : props.theme.colors.white)};
-  z-index: 50;
+  z-index: ${props => (props.zIndex ? props.zIndex : '50')};
   gap: 13px;
   .backBtn {
     height: 24px;

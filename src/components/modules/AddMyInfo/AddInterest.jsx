@@ -7,7 +7,7 @@ import AddIntro from './AddIntro';
 import AddMBTI from './AddMBTI';
 
 const AddInterest = props => {
-  const { file, local, mbti } = props;
+  const { file, local, mbti, Open } = props;
   const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
 
   const [Intro, setIntro] = useState(false);
@@ -45,10 +45,11 @@ const AddInterest = props => {
     }
   };
   return (
-    <>
+    <ShowPage className={Open ? 'open' : 'open'}>
       <Header
+        Page
         point="absolute"
-        _on={() => {
+        _onClick={() => {
           setBackMBTI(true);
         }}
       >
@@ -91,7 +92,7 @@ const AddInterest = props => {
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -104,4 +105,17 @@ const InterestCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
+`;
 export default AddInterest;

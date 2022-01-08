@@ -35,6 +35,7 @@ const AddIntro = props => {
     }
   }
   const ClickEvent = () => {
+    console.log(userInfo);
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
@@ -65,8 +66,9 @@ const AddIntro = props => {
   return (
     <>
       <Header
+        Page
         point="absolute"
-        _on={() => {
+        _onClick={() => {
           setBackInterest(true);
         }}
       >

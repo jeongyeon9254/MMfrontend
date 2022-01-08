@@ -32,9 +32,11 @@ const Button = props => {
     _disabled,
     Disable,
     opacity,
+    bottom,
   } = props;
 
   const styles = {
+    bottom,
     width,
     color,
     padding,

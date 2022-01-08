@@ -9,7 +9,7 @@ import AddAdress from './AddAdress';
 const AddMBTI = props => {
   const { file, local } = props;
 
-  const [seleteInterest, setSeleteInterest] = useState(false);
+  const [Open, setOpen] = useState(false);
   const [selected, setSelected] = useState('');
   const [Backaddress, setBackaddress] = useState(false);
 
@@ -21,7 +21,7 @@ const AddMBTI = props => {
     }
   };
 
-  if (seleteInterest === true) {
+  if (Open === true) {
     return (
       <>
         <AddInterest file={file} local={local} mbti={selected} />
@@ -40,10 +40,11 @@ const AddMBTI = props => {
   };
 
   return (
-    <>
+    <ShowPage>
       <Header
+        Page
         point="absolute"
-        _on={() => {
+        _onClick={() => {
           setBackaddress(true);
         }}
       >
@@ -85,13 +86,13 @@ const AddMBTI = props => {
           BtnBottom
           state={selected !== '' ? false : 'Inactive'}
           _onClick={() => {
-            setSeleteInterest(true);
+            setOpen(!Open);
           }}
         >
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -110,6 +111,19 @@ const ClickCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
   text-decoration: underline;
   cursor: pointer;
+`;
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
 `;
 
 export default AddMBTI;

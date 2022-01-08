@@ -46,7 +46,7 @@ const Chat = () => {
   const wsConnectSubscribe = Id => {
     try {
       ws.debug = null;
-      ws.connect({ token: TOKEN }, () => {
+      ws.connect({ tocken: TOKEN }, () => {
         ws.subscribe(`/sub/chat/room/${Id}`, data => {
           let recv = JSON.parse(data.body);
           console.log('구독후 새로운 메세지 data :' + recv);
