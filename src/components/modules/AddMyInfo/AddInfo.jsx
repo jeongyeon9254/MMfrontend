@@ -1,30 +1,16 @@
 import React, { useState, useRef } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
-
 import { history } from '../../../redux/configureStore';
 import { delCookie } from '../../../shared/Cookie';
 
 const AddInfo = props => {
-  const dispatch = useDispatch();
   const [Open, setOpen] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
-
-  //닉네임{nickname} 연령대(ageRange)  성별(male)
-
-const AddInfo = props => {
-  const [Address, setAddress] = useState(false);
-  const getUser = localStorage.getItem('userInfo');
-  const data = JSON.parse(getUser);
-
-  // const [area, setArea] = useState(data.ageRange);
-  const [isarea, setArea] = useState('');
 
   // 데이터
   const [nickname, setnickname] = useState(data.nickname);
@@ -33,11 +19,6 @@ const AddInfo = props => {
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
 
-  React.useEffect(() => {
-    // if (data.signStatus) {
-    //   history.push('/');
-    // }
-  });
   const file = {
     nickname: nickname,
     gender: gender,
@@ -47,20 +28,6 @@ const AddInfo = props => {
   // 모달창
   const [Alt, setAlt] = useState(false);
   const fileRef = useRef();
-
-  if (Address === true) {
-    const file = {
-      nickname: nickname,
-      gender: gender,
-      profileImage: profileImage,
-      ageRange: isarea,
-    };
-    return (
-      <>
-        <AddAdress file={file} AddAdress={AddAdress} />
-      </>
-    );
-  }
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
@@ -99,17 +66,20 @@ const AddInfo = props => {
 
   const PageControl = () => {
     setOpen(!Open);
-
+  };
   // 닫기 버튼 함수
   const exit = () => {
     setAlt(false);
   };
-
+  React.useEffect(() => {
+    // if (data.signStatus) {
+    //   history.push('/');
+    // }
+  }, []);
   return (
     <Body>
       <AddAdress file={file} Control={PageControl} Show={Open} />
       <Grid>
-
         <Header
           Page
           point="relative"
@@ -220,6 +190,7 @@ const AddText = styled.p`
 `;
 const BtnBox = styled.div`
   padding: 0px 9%;
+`;
 
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};

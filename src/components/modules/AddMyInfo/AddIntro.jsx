@@ -12,7 +12,6 @@ const AddIntro = props => {
 
   const { file, local, mbti, duplicated, show, Control } = props;
 
-
   const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
 
@@ -135,7 +134,6 @@ const IntroCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
-
 const ShowPage = styled.div`
   position: fixed;
   width: 100%;
@@ -148,6 +146,7 @@ const ShowPage = styled.div`
   &.open {
     left: 0px;
   }
+`;
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 700;
