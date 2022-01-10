@@ -1,182 +1,123 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Header from '../layout/Header';
-import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
-import AddAdress from './AddAdress';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Gender, Area } from './needData.js';
+import Header from '../layout/Header';
+import Bit from '../Bit';
+import { Grid, Input, Button, Select } from '../../element/index';
+import Alert from '../../element/Alert';
+import AddInterest from './AddInterest';
 import { history } from '../../../redux/configureStore';
-import { delCookie } from '../../../shared/Cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as userAction } from '../../../redux/modules/user';
+import { actionCreators as modalActions } from '../../../redux/modules/modal';
+import axios from 'axios';
+import { getCookie } from '../../../shared/Cookie';
 
-const AddInfo = props => {
+const AddIntro = props => {
   const dispatch = useDispatch();
-  const [Open, setOpen] = useState(false);
-  const getUser = localStorage.getItem('userInfo');
-  const data = JSON.parse(getUser);
+  const { file, local, mbti, duplicated, show, Control } = props;
 
-  //닉네임{nickname} 연령대(ageRange)  성별(male)
-  const [nickname, setnickname] = useState(data.nickname);
-  const [isarea, setArea] = useState(data.ageRange);
-  const [gender, setgender] = useState(data.gender);
-  const [profileImage, setProfileImage] = useState(data.profileImage);
-  const [Preview, setPreview] = useState(data.profileImage);
-  const fileRef = useRef();
+  const [comment, setComment] = useState('');
 
-  React.useEffect(() => {
-    // if (data.signStatus) {
-    //   history.push('/');
-    // }
-  });
-  const file = {
-    nickname: nickname,
-    gender: gender,
-    profileImage: profileImage,
-    ageRange: isarea,
+  const YesAlert = useSelector(state => state.modal.Alert);
+
+  const userInfo = {
+    nickname: file.nickname,
+    gender: file.gender,
+    ageRange: file.ageRange,
+    intro: comment,
+    location: local.location,
+    mbti: mbti,
+    interestList: duplicated,
+  };
+  function isString(inputText) {
+    if (typeof inputText === 'string' || inputText instanceof String) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  console.log(userInfo);
+  const ClickEvent = () => {
+    const jsonFile = datas => {
+      return new Blob([JSON.stringify(datas)], { type: 'application/json' });
+    };
+    const emptyFile = new File([''], 'empty');
+
+    const formData = new FormData();
+    const Check = isString(file.profileImage);
+    formData.append('multipartFile', Check ? emptyFile : file.profileImage);
+    formData.append('data', jsonFile(userInfo));
+
+    dispatch(userAction.userInfoPut(formData));
   };
 
-  const MaxNickname = e => {
-    if (e.target.value.length > 4) {
-      e.target.value = e.target.value.substr(0, 4);
+  const MaxIntro = e => {
+    if (e.target.value.length > 100) {
+      e.target.value = e.target.value.substr(0, 100);
+      alert('100자 이내로 작성부탁드립니다');
     }
   };
 
-  const handleFileOnChange = e => {
-    //파일 불러오기
-    e.preventDefault();
-    const file = e.target.files[0];
-    // 파일이 프론트파일에 저장된 url를 읽어 오는 매소드
-    const reader = new FileReader();
-    // 파일를 datafrom으로 저장할 수 있는 매소드
-    // 파이를 fromData에 img라는 key 값으로 저장한다.
-    const arrfile = [file];
-
-    setProfileImage(file);
-    // 파일를 저장된 위치를 찾는다.
-    reader.readAsDataURL(file);
-    // 파일이 읽어 오면 useState에 저장한다.
-    reader.onload = () => {
-      setPreview(reader.result);
-    };
-  };
-
-  const handleFileUploadClick = e => {
-    //버튼 대신 클릭하기
-    e.preventDefault();
-    fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
-  };
-  const GetArea = area => {
-    setArea(area.area);
-  };
-  const PageControl = () => {
-    setOpen(!Open);
-  };
-
   return (
-    <Body>
-      <AddAdress file={file} Control={PageControl} Show={Open} />
-      <Grid>
-        <Header
-          Page
-          point="relative"
-          zIndex="0"
-          _onClick={() => {
-            history.push('/login');
-            delCookie('authorization');
-            localStorage.clear();
-          }}
-        >
-          추가정보 입력하기
-        </Header>
-        <Grid margin="47px 0px 17px 0px">
-          <Image
-            src={Preview}
-            photoRound
-            width="188px"
-            height="188px"
-            _onClick={handleFileUploadClick}
-          ></Image>
-          <input
-            ref={fileRef}
-            hidden={true}
-            id="file"
-            type="file"
-            onChange={handleFileOnChange}
-            accept="image/*"
-          />
-        </Grid>
-        <Grid row gap="20px">
-          <Grid margin="0px 30px">
-            <AddText>닉네임 설정</AddText>
-            <Input
-              _onInput={MaxNickname}
-              _value={nickname}
-              _onChange={e => {
-                setnickname(e.target.value);
-              }}
-              _borderColor="#E1E1E1"
-            />
-          </Grid>
-          <Grid margin="0px 30px">
-            <AddText>연령대</AddText>
-            {data.ageRange !== '' ? (
-              <Input _value={data.ageRange} _readOnly _borderColor="#E1E1E1" />
-            ) : (
-              <Select Data={Area} Emit={GetArea} Area height="182px" />
-            )}
-          </Grid>
-          <Grid margin="0px 25px">
-            <AddText>성별</AddText>
-            <Grid row gap="17px" justify="center">
-              {Gender.map((x, idx) => {
-                return (
-                  <Button
-                    key={idx}
-                    BtnAdd
-                    state={gender !== '' ? (gender === x.en ? false : 'active') : 'active'}
-                    _disabled={gender !== '' ? true : false}
-                    _onClick={() => {
-                      setgender(x.en);
-                    }}
-                    width="149px"
-                  >
-                    {x.ko}
-                  </Button>
-                );
-              })}
-            </Grid>
+    <ShowPage className={show ? 'open' : ''}>
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
+        한줄 소개 작성하기
+      </Header>
+      <Grid padding="122px 30px 0px 30px">
+        <Grid gap="10px">
+          <IntroTitle>
+            <span style={{ fontWeight: '700' }}>한줄 소개</span>를 작성해주세요!
+          </IntroTitle>
+          <Grid gap="5px">
+            <IntroCommet>다른 사람들에게 저를 소개해보아요! </IntroCommet>
           </Grid>
         </Grid>
       </Grid>
-      <BtnBox>
+      <Grid row gap="8px" padding="48px 31px 0px 28px">
+        <Input
+          _onInput={MaxIntro}
+          _type="textarea"
+          _size="14px"
+          _onChange={e => {
+            setComment(e.target.value);
+          }}
+        ></Input>
+      </Grid>
+      <Grid margin="0px 30px">
         <Button
-          state={nickname !== '' && gender !== '' ? false : 'Inactive'}
+          state={comment !== '' ? 'false' : 'Inactive'}
           width="315px"
-          position="absolute"
           BtnBottom
-          _onClick={PageControl}
+          _onClick={ClickEvent}
         >
           다음으로
         </Button>
-      </BtnBox>
-    </Body>
+      </Grid>
+    </ShowPage>
   );
 };
 
-const Body = styled.div`
-  z-index: 10;
+const IntroTitle = styled.span`
+  font-weight: 400;
+  font-size: ${props => props.theme.fontSizes.xxxl};
+`;
+
+const IntroCommet = styled.span`
+  font-size: ${props => props.theme.fontSizes.small};
+`;
+
+const ShowPage = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  left: 0px;
+  left: -100%;
   top: 0px;
-`;
-const AddText = styled.p`
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0px 0px 7px 0px;
-`;
-const BtnBox = styled.div`
-  padding: 0px 9%;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
 `;
 
-export default AddInfo;
+export default AddIntro;
