@@ -7,7 +7,9 @@ import { InterestList } from './needData';
 
 const AddInterest = props => {
   const { file, local, mbti, show, Control } = props;
+
   const [Open, setOpen] = useState(false);
+
   const [duplicated, setDuplicated] = useState([]);
 
   const handleDuplicated = e => {
@@ -23,6 +25,7 @@ const AddInterest = props => {
       return setDuplicated(index);
     }
   };
+  //
 
   const PageControl = () => {
     setOpen(!Open);
@@ -102,4 +105,5 @@ const ShowPage = styled.div`
     left: 0px;
   }
 `;
+
 export default AddInterest;
