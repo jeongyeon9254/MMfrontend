@@ -28,15 +28,6 @@ const Chat = () => {
   const [roomNum, setroomNum] = React.useState('');
   const [Data, setData] = React.useState({});
 
-  console.log(Data);
-
-  React.useEffect(() => {
-    dispatch(ChatAction.getChatRoomListDB());
-    if (roomNum) {
-      wsConnectSubscribe(roomNum);
-    }
-  }, [roomNum]);
-
   const env = process.env.NODE_ENV;
   const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
   const TOKEN = getCookie('authorization');
@@ -102,7 +93,7 @@ const Chat = () => {
   const sendStop = () => {
     try {
       const ms = {
-        type: 'BREAK',
+        type: 'QUIT',
         roomId: roomNum,
         message: '매칭상대가 방을 나갔습니다.',
       };
@@ -116,6 +107,12 @@ const Chat = () => {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
+  React.useEffect(() => {
+    dispatch(ChatAction.getChatRoomListDB());
+    if (roomNum) {
+      wsConnectSubscribe(roomNum);
+    }
+  }, [roomNum]);
   return (
     <div>
       <Header>채팅</Header>
@@ -132,14 +129,7 @@ const Chat = () => {
                   //입장한 채팅방 메세지 정보 가져 오기
                   setroomNum(x.roomId);
                   dispatch(ChatAction.getChatMsListDB(x.roomId));
-
                   //채팅방 입장 잘때
-                  const ms = {
-                    type: 'ENTER',
-                    roomId: x.roomId,
-                    message: `${userInfo.nickname}님이 입장 하셨습니다.`,
-                  };
-                  sendMessage(ms);
                 }}
                 data={x}
                 key={idx}
@@ -149,6 +139,7 @@ const Chat = () => {
         </Boad>
       </Grid>
       <ChatForm
+        sendStop={sendStop}
         sendMessage={sendMessage}
         wsDisConnectUnsubscribe={wsDisConnectUnsubscribe}
         Boo={Paging}
