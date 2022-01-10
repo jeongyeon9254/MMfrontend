@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImageRoundStyle, BorderSquare, ImagePhotoRoundStyle } from './module';
+import { ImageRoundStyle, BorderSquare, ImagePhotoRoundStyle, Nobackground } from './module';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import Bit from '../../modules/Bit';
 
@@ -17,6 +17,7 @@ const Image = props => {
     _border,
     pointer,
     radius,
+    nobackground,
   } = props;
 
   const select = Bit.find(x => x.name === mbti);
@@ -54,6 +55,14 @@ const Image = props => {
         <ImageStyle src={src}></ImageStyle>
         {src ? null : <Default src={icon_photo} />}
       </BorderSquare>
+    );
+  }
+
+  if (nobackground) {
+    return (
+      <Nobackground>
+        <ImageStyle src={src}></ImageStyle>
+      </Nobackground>
     );
   }
 

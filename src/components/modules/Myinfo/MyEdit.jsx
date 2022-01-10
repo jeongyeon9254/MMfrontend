@@ -17,6 +17,7 @@ function MyEdit(props) {
   const [Location, SetLocation] = React.useState(userInfo.location);
 
   const SetEmit = item => {
+    console.log(item);
     SetMbti(item);
   };
 

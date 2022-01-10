@@ -6,5 +6,6 @@ import Input from './Input';
 import Tag from './Tag';
 import Box from './Box';
 import Select from './Select';
+import Alert from './Alert';
 
-export { Button, Container, Grid, Image, Input, Tag, Box, Select };
+export { Button, Container, Grid, Image, Input, Tag, Box, Select, Alert };

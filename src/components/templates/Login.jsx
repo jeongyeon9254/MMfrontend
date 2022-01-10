@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import imgfile from '../../img/kakaologin.png';
-import { Grid } from '../element/index';
+import { Grid, Image } from '../element/index';
 import Header from '../modules/layout/Header';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import Logo from '../../img/Icon/Start_logo.svg';
 const Login = () => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
@@ -17,11 +18,16 @@ const Login = () => {
   return (
     <>
       <Header main>로그인</Header>
-      <Grid height="100%" justify="center" align="center">
-        <LoginBox>
-          <p>카카오톡으로 간편로그인을 진행해주세요!</p>
-          <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
-        </LoginBox>
+      <Grid align="center" padding="203px 0px 0px 0px">
+        <Grid width="112px" height="110px">
+          <Image nobackground src={Logo}></Image>
+        </Grid>
+        <Grid margin="53px 0px 0px 0px">
+          <LoginBox>
+            <p>카카오톡으로 간편로그인을 진행해주세요!</p>
+            <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
+          </LoginBox>
+        </Grid>
       </Grid>
     </>
   );
