@@ -45,7 +45,7 @@ function MyEdit(props) {
     gender: userInfo.gender,
     ageRange: userInfo.ageRange,
     intro: textarea,
-    location: Location.location,
+    location: Location.location ? Location.location : Location,
     mbti: Mbti,
     interestList: map,
   };
@@ -81,17 +81,17 @@ function MyEdit(props) {
       </Header>
       <Grid padding="18px 30px" gap="20px">
         <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
-        <MyPartBox title="나의 이름" num={nickname.length} max="5" input>
+        <MyPartBox title="나의 이름" num={nickname.length} max="4" input>
           <Input
             _borderColor="#ECECEC"
             _bg="#ECECEC"
             _padding="8px 14px"
             _value={nickname}
             _onChange={e => {
-              if (e.target.value.length <= 5) {
+              if (e.target.value.length <= 4) {
                 setNickname(e.target.value);
               } else {
-                alert('5자 이하로 부탁드립니다.');
+                alert('4자 이하로 부탁드립니다.');
               }
             }}
           />

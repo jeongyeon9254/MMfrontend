@@ -53,5 +53,6 @@ const Title = styled.div`
 const SubTxt = styled.p`
   font-size: ${x => x.theme.fontSizes.maxSmall};
   color: ${x => x.theme.colors.white};
+  text-align: left;
 `;
 export default MyinfoBit;
