@@ -50,6 +50,7 @@ const addPostDB = multipartFile => {
     try {
       await addPost(multipartFile);
       dispatch(loading(false));
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -63,6 +64,7 @@ const editPostDB = (postId, data) => {
     try {
       await editPost(postId, data);
       dispatch(loading(false));
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -74,6 +76,7 @@ const deletePostDB = (postId = null) => {
   return async function (dispatch, getState, { history }) {
     try {
       await deletePost(postId);
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
