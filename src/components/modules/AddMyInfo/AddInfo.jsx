@@ -1,31 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
-<<<<<<< HEAD
 import { history } from '../../../redux/configureStore';
 import { delCookie } from '../../../shared/Cookie';
-=======
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
->>>>>>> main
 
 const AddInfo = props => {
   const dispatch = useDispatch();
-
-<<<<<<< HEAD
   const [Open, setOpen] = useState(false);
-=======
-  const YesAlert = useSelector(state => state.modal.Alert);
-
-  const [Address, setAddress] = useState(false);
->>>>>>> main
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
@@ -37,7 +22,6 @@ const AddInfo = props => {
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
-<<<<<<< HEAD
   React.useEffect(() => {
     // if (data.signStatus) {
     //   history.push('/');
@@ -49,28 +33,10 @@ const AddInfo = props => {
     profileImage: profileImage,
     ageRange: isarea,
   };
-=======
-  console.log(typeof profileImage);
-
-  if (Address === true) {
-    const file = {
-      nickname: nickname,
-      gender: gender,
-      profileImage: profileImage,
-      ageRange: isarea,
-    };
-    return (
-      <>
-        <AddAdress file={file} AddAdress={AddAdress} />
-      </>
-    );
-  }
->>>>>>> main
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
       e.target.value = e.target.value.substr(0, 4);
-      dispatch(modalActions.setAlert());
     }
   };
 
@@ -99,24 +65,14 @@ const AddInfo = props => {
     fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
   };
   const GetArea = area => {
-<<<<<<< HEAD
     setArea(area.area);
   };
   const PageControl = () => {
     setOpen(!Open);
-=======
-    setArea(area);
-    console.log(area);
-  };
-
-  const exit = () => {
-    dispatch(modalActions.ExitAlert());
->>>>>>> main
   };
 
   return (
     <Body>
-<<<<<<< HEAD
       <AddAdress file={file} Control={PageControl} Show={Open} />
       <Grid>
         <Header
@@ -131,17 +87,6 @@ const AddInfo = props => {
         >
           추가정보 입력하기
         </Header>
-=======
-      <Grid>
-        <Header>추가정보 입력하기</Header>
-        {YesAlert ? (
-          <Alert check yes={exit}>
-            <Grid gap="15px" padding="16px 8px 8px 24px">
-              <Title>닉네임은 4자이내로 작성해주세요</Title>
-            </Grid>
-          </Alert>
-        ) : null}
->>>>>>> main
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -208,13 +153,7 @@ const AddInfo = props => {
           width="315px"
           position="absolute"
           BtnBottom
-<<<<<<< HEAD
           _onClick={PageControl}
-=======
-          _onClick={() => {
-            setAddress(true);
-          }}
->>>>>>> main
         >
           다음으로
         </Button>
@@ -236,20 +175,8 @@ const AddText = styled.p`
   font-weight: 400;
   margin: 0px 0px 7px 0px;
 `;
-<<<<<<< HEAD
 const BtnBox = styled.div`
   padding: 0px 9%;
-=======
-const Title = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.87);
-`;
-const Content = styled.p`
-  font-size: ${props => props.theme.fontSizes.small};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
->>>>>>> main
 `;
 
 export default AddInfo;
