@@ -58,11 +58,29 @@ const AddIntro = props => {
     }
   };
 
+  const next = () => {
+    ClickEvent();
+  };
+
+  const exit = () => {
+    dispatch(modalActions.ExitAlert());
+  };
+
   return (
     <ShowPage className={show ? 'open' : ''}>
       <Header Page point="relative" zIndex="0" _onClick={Control}>
         한줄 소개 작성하기
       </Header>
+      {YesAlert ? (
+        <Alert MyBit isButton yes={next} no={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <IntroTitle>추가입력 작성을 완료할까요?</IntroTitle>
+            <Grid gap="4px">
+              <IntroCommet>확인 시 메인하면으로 이동합니다.</IntroCommet>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">
           <IntroTitle>
@@ -88,7 +106,9 @@ const AddIntro = props => {
           state={comment !== '' ? 'false' : 'Inactive'}
           width="315px"
           BtnBottom
-          _onClick={ClickEvent}
+          _onClick={() => {
+            dispatch(modalActions.setAlert());
+          }}
         >
           다음으로
         </Button>
