@@ -36,6 +36,7 @@ const getPostDB = (page = null) => {
     try {
       console.log(page);
       const data = await getPost(page);
+
       dispatch(getPostList(data.data, page));
     } catch (err) {
       console.log(err);

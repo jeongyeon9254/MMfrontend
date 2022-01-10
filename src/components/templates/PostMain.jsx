@@ -55,26 +55,19 @@ const PostMain = () => {
 
   let element = document.getElementById('allBox');
   let element_2 = document.getElementById('scrollBox');
-  const scrollBox = element ? element : window;
 
-  scrollBox.addEventListener('scroll', function () {
-    console.log('aa');
-    const SCROLLED_HEIGHT = scrollBox.scrollTop;
+  const aa = () => {
+    const SCROLLED_HEIGHT = element.scrollTop;
     const WINDOW_HEIGHT = element_2.offsetHeight;
-    const DOC_TOTAL_HEIGHT = scrollBox.offsetHeight;
-
-    console.log(SCROLLED_HEIGHT);
-    console.log(WINDOW_HEIGHT);
-    console.log(DOC_TOTAL_HEIGHT);
-
-    if (SCROLLED_HEIGHT + DOC_TOTAL_HEIGHT - 94 === WINDOW_HEIGHT) {
+    const DOC_TOTAL_HEIGHT = element.offsetHeight;
+    if (SCROLLED_HEIGHT + DOC_TOTAL_HEIGHT - 77 === WINDOW_HEIGHT) {
       console.log('실행');
-      // dispatch(postAcitions.getPostDB(page));
+      dispatch(postAcitions.getPostDB(page));
     }
-  });
+  };
 
   return (
-    <PostBox id="allBox">
+    <PostBox id="allBox" onScroll={aa}>
       <Header _on>커뮤니티</Header>
       <MapKategorieNav userInfo={userInfo} />
       <div id="scrollBox">
@@ -116,13 +109,13 @@ const PostMain = () => {
           )
         ) : null}
       </div>
-      <div
+      {/* <div
         onClick={() => {
           dispatch(postAcitions.getPostDB(page));
         }}
       >
         다음으로갑시다잉
-      </div>
+      </div> */}
       <div className="postBtnBox">
         <Button
           BtnRound
