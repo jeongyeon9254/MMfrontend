@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { Grid } from '../../element';
 
 function MyPartBox(props) {
-  const { children, title, max, num, input } = props;
+  const { children, title, max, num, input, err } = props;
   return (
     <Grid gap="9px">
-      <SubTxt>{title}</SubTxt>
+      <Grid row align="center" gap="14px">
+        <SubTxt>{title}</SubTxt>
+        {err ? <LimitTxt>{max}자 이하로 입력 부탁드립니다.</LimitTxt> : ''}
+      </Grid>
       {children}
       {input ? <TextNum>{`${num}/${max}`}</TextNum> : ''}
     </Grid>
@@ -26,5 +29,10 @@ const TextNum = styled.p`
   position: absolute;
   right: 0px;
   bottom: -14px;
+`;
+
+const LimitTxt = styled.div`
+  font-size: 10px;
+  color: #d41321;
 `;
 export default MyPartBox;
