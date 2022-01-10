@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
+
 import { history } from '../../../redux/configureStore';
 import { delCookie } from '../../../shared/Cookie';
 
@@ -15,12 +17,21 @@ const AddInfo = props => {
   const data = JSON.parse(getUser);
 
   //닉네임{nickname} 연령대(ageRange)  성별(male)
+
+const AddInfo = props => {
+  const [Address, setAddress] = useState(false);
+  const getUser = localStorage.getItem('userInfo');
+  const data = JSON.parse(getUser);
+
+  // const [area, setArea] = useState(data.ageRange);
+  const [isarea, setArea] = useState('');
+
+  // 데이터
   const [nickname, setnickname] = useState(data.nickname);
   const [isarea, setArea] = useState(data.ageRange);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
-  const fileRef = useRef();
 
   React.useEffect(() => {
     // if (data.signStatus) {
@@ -33,10 +44,28 @@ const AddInfo = props => {
     profileImage: profileImage,
     ageRange: isarea,
   };
+  // 모달창
+  const [Alt, setAlt] = useState(false);
+  const fileRef = useRef();
+
+  if (Address === true) {
+    const file = {
+      nickname: nickname,
+      gender: gender,
+      profileImage: profileImage,
+      ageRange: isarea,
+    };
+    return (
+      <>
+        <AddAdress file={file} AddAdress={AddAdress} />
+      </>
+    );
+  }
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
       e.target.value = e.target.value.substr(0, 4);
+      setAlt(true);
     }
   };
 
@@ -67,14 +96,20 @@ const AddInfo = props => {
   const GetArea = area => {
     setArea(area.area);
   };
+
   const PageControl = () => {
     setOpen(!Open);
+
+  // 닫기 버튼 함수
+  const exit = () => {
+    setAlt(false);
   };
 
   return (
     <Body>
       <AddAdress file={file} Control={PageControl} Show={Open} />
       <Grid>
+
         <Header
           Page
           point="relative"
@@ -87,6 +122,14 @@ const AddInfo = props => {
         >
           추가정보 입력하기
         </Header>
+        {Alt ? (
+          <Alert check yes={exit}>
+            <Grid padding="16px 8px 8px 24px">
+              <Title>닉네임은 4자이내로 작성해주세요</Title>
+            </Grid>
+          </Alert>
+        ) : null}
+
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -177,6 +220,11 @@ const AddText = styled.p`
 `;
 const BtnBox = styled.div`
   padding: 0px 9%;
+
+const Title = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
 `;
 
 export default AddInfo;
