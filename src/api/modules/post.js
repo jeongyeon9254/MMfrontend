@@ -5,7 +5,7 @@ import multi from '../multi';
 export const getPost = page => {
   return instance({
     method: 'get',
-    url: `/api/post?page=${page}&size=10`,
+    url: `/api/post?page=${page}&size=20`,
   });
 };
 
