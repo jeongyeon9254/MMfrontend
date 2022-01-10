@@ -28,10 +28,10 @@ const initialState = {
   loading: false,
 };
 
-const getPostDB = (data = null) => {
+const getPostDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const data = await getPost();
+      const data = await getPost(page);
       dispatch(getPostList(data.data));
     } catch (err) {
       console.log(err);
