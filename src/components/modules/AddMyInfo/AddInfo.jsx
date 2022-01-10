@@ -1,33 +1,55 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
-import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
+<<<<<<< HEAD
+import { history } from '../../../redux/configureStore';
+import { delCookie } from '../../../shared/Cookie';
+=======
 import { actionCreators as modalActions } from '../../../redux/modules/modal';
+>>>>>>> main
 
 const AddInfo = props => {
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
+  const [Open, setOpen] = useState(false);
+=======
   const YesAlert = useSelector(state => state.modal.Alert);
 
   const [Address, setAddress] = useState(false);
+>>>>>>> main
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
-  // const [area, setArea] = useState(data.ageRange);
-  const [isarea, setArea] = useState('');
-
   //닉네임{nickname} 연령대(ageRange)  성별(male)
   const [nickname, setnickname] = useState(data.nickname);
+  const [isarea, setArea] = useState(data.ageRange);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
+<<<<<<< HEAD
+  React.useEffect(() => {
+    // if (data.signStatus) {
+    //   history.push('/');
+    // }
+  });
+  const file = {
+    nickname: nickname,
+    gender: gender,
+    profileImage: profileImage,
+    ageRange: isarea,
+  };
+=======
   console.log(typeof profileImage);
 
   if (Address === true) {
@@ -43,6 +65,7 @@ const AddInfo = props => {
       </>
     );
   }
+>>>>>>> main
 
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
@@ -76,16 +99,39 @@ const AddInfo = props => {
     fileRef.current.click(); // file 불러오는 버튼을 대신 클릭함
   };
   const GetArea = area => {
+<<<<<<< HEAD
+    setArea(area.area);
+  };
+  const PageControl = () => {
+    setOpen(!Open);
+=======
     setArea(area);
     console.log(area);
   };
 
   const exit = () => {
     dispatch(modalActions.ExitAlert());
+>>>>>>> main
   };
 
   return (
     <Body>
+<<<<<<< HEAD
+      <AddAdress file={file} Control={PageControl} Show={Open} />
+      <Grid>
+        <Header
+          Page
+          point="relative"
+          zIndex="0"
+          _onClick={() => {
+            history.push('/login');
+            delCookie('authorization');
+            localStorage.clear();
+          }}
+        >
+          추가정보 입력하기
+        </Header>
+=======
       <Grid>
         <Header>추가정보 입력하기</Header>
         {YesAlert ? (
@@ -95,6 +141,7 @@ const AddInfo = props => {
             </Grid>
           </Alert>
         ) : null}
+>>>>>>> main
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -155,34 +202,44 @@ const AddInfo = props => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid margin="0px 30px">
+      <BtnBox>
         <Button
           state={nickname !== '' && gender !== '' ? false : 'Inactive'}
           width="315px"
+          position="absolute"
           BtnBottom
+<<<<<<< HEAD
+          _onClick={PageControl}
+=======
           _onClick={() => {
             setAddress(true);
           }}
+>>>>>>> main
         >
           다음으로
         </Button>
-      </Grid>
+      </BtnBox>
     </Body>
   );
 };
 
 const Body = styled.div`
   z-index: 10;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0px;
+  top: 0px;
 `;
 const AddText = styled.p`
   font-size: 15px;
   font-weight: 400;
   margin: 0px 0px 7px 0px;
 `;
+<<<<<<< HEAD
+const BtnBox = styled.div`
+  padding: 0px 9%;
+=======
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 400;
@@ -192,6 +249,7 @@ const Content = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
+>>>>>>> main
 `;
 
 export default AddInfo;

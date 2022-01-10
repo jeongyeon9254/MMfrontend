@@ -10,3 +10,5 @@ export const Area = [
   { area: '40대' },
   { area: '50대이상' },
 ];
+
+export const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];

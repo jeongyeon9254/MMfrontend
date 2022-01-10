@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
+<<<<<<< HEAD
+import { Grid, Button } from '../../element/index';
+import AddIntro from './AddIntro';
+import { InterestList } from './needData';
+
+const AddInterest = props => {
+  const { file, local, mbti, show, Control } = props;
+
+  const [Open, setOpen] = useState(false);
+
+=======
 import Bit from '../Bit';
 import { Grid, Button, Alert } from '../../element/index';
 import AddIntro from './AddIntro';
@@ -18,23 +29,22 @@ const AddInterest = props => {
 
   const [Intro, setIntro] = useState(false);
   const [BackMBTI, setBackMBTI] = useState(false);
+>>>>>>> main
   const [duplicated, setDuplicated] = useState([]);
-  if (Intro === true) {
-    return (
-      <>
-        <AddIntro file={file} local={local} mbti={mbti} duplicated={duplicated} />
-      </>
-    );
-  } else if (BackMBTI === true) {
-    return (
-      <>
-        <AddMBTI />
-      </>
-    );
-  }
 
   const handleDuplicated = e => {
     const val = e.target.name;
+<<<<<<< HEAD
+    if (!duplicated.includes(val)) {
+      return duplicated.length >= 2
+        ? alert('최대 2개까지만 선택 가능합니다. 다시 선택해주세요')
+        : setDuplicated([...duplicated, val]);
+    } else {
+      const index = duplicated.filter(x => {
+        return x !== val;
+      });
+      return setDuplicated(index);
+=======
 
     const isIncludes = duplicated.find(el => el === val);
 
@@ -42,26 +52,29 @@ const AddInterest = props => {
       dispatch(modalActions.setAlert());
       setDuplicated(duplicated.splice(0, 1));
       return;
+>>>>>>> main
     }
+  };
+  //
 
-    if (isIncludes) {
-      setDuplicated(duplicated.filter(el => el !== val));
-    } else if (0 < duplicated.length < 3) {
-      setDuplicated([...duplicated, val]);
-    }
+  const PageControl = () => {
+    setOpen(!Open);
   };
 
   const exit = () => {
     dispatch(modalActions.ExitAlert());
   };
   return (
-    <>
-      <Header
-        point="absolute"
-        _on={() => {
-          setBackMBTI(true);
-        }}
-      >
+    <ShowPage className={show ? 'open' : ''}>
+      <AddIntro
+        file={file}
+        local={local}
+        mbti={mbti}
+        show={Open}
+        duplicated={duplicated}
+        Control={PageControl}
+      />
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         관심사 설정하기
       </Header>
       {YesAlert ? (
@@ -104,14 +117,12 @@ const AddInterest = props => {
           width="315px"
           BtnBottom
           state={duplicated.length === 1 || duplicated.length === 2 ? false : 'Inactive'}
-          _onClick={() => {
-            setIntro(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -124,6 +135,21 @@ const InterestCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
+<<<<<<< HEAD
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
+`;
+=======
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 400;
@@ -135,4 +161,5 @@ const Content = styled.p`
   color: rgba(0, 0, 0, 0.6);
 `;
 
+>>>>>>> main
 export default AddInterest;

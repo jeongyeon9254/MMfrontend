@@ -14,9 +14,7 @@ import { getCookie } from '../../../shared/Cookie';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
-  const { file, local, mbti, duplicated } = props;
-
-  const [BackInterest, setBackInterest] = useState(false);
+  const { file, local, mbti, duplicated, show, Control } = props;
 
   const [comment, setComment] = useState('');
 
@@ -38,6 +36,7 @@ const AddIntro = props => {
       return false;
     }
   }
+  console.log(userInfo);
   const ClickEvent = () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
@@ -52,13 +51,6 @@ const AddIntro = props => {
     dispatch(userAction.userInfoPut(formData));
   };
 
-  if (BackInterest === true) {
-    return (
-      <>
-        <AddInterest />
-      </>
-    );
-  }
   const MaxIntro = e => {
     if (e.target.value.length > 100) {
       e.target.value = e.target.value.substr(0, 100);
@@ -75,13 +67,8 @@ const AddIntro = props => {
   };
 
   return (
-    <>
-      <Header
-        point="absolute"
-        _on={() => {
-          setBackInterest(true);
-        }}
-      >
+    <ShowPage className={show ? 'open' : ''}>
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         한줄 소개 작성하기
       </Header>
       {YesAlert ? (
@@ -126,7 +113,7 @@ const AddIntro = props => {
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -139,6 +126,20 @@ const IntroCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
+<<<<<<< HEAD
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
+=======
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 400;
@@ -148,6 +149,7 @@ const Content = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
+>>>>>>> main
 `;
 
 export default AddIntro;

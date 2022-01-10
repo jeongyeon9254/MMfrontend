@@ -7,37 +7,23 @@ import AddMBTI from './AddMBTI';
 import AddInfo from './AddInfo';
 
 const AddAdress = props => {
-  const { file } = props;
-  const [selecMBTI, setSelectMBIT] = useState(false);
+  const { file, Control, Show } = props;
+  const [Open, setOpen] = useState(false);
   const [BackAddinfo, BacksetAddinfo] = useState(false);
   const [local, setlocal] = useState('');
-
-  if (selecMBTI === true) {
-    return (
-      <>
-        <AddMBTI file={file} local={local} />
-      </>
-    );
-  } else if (BackAddinfo === true) {
-    return (
-      <>
-        <AddInfo />
-      </>
-    );
-  }
 
   const sele = locals => {
     setlocal(locals);
   };
 
+  const PageControl = () => {
+    setOpen(!Open);
+  };
+
   return (
-    <>
-      <Header
-        point="absolute"
-        _on={() => {
-          BacksetAddinfo(true);
-        }}
-      >
+    <ShowPage className={Show ? 'open' : ''}>
+      <AddMBTI file={file} local={local} show={Open} Control={PageControl} />
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         추가정보 입력하기
       </Header>
       <Grid>
@@ -69,14 +55,12 @@ const AddAdress = props => {
           state={local === '' ? 'Inactive' : false}
           width="315px"
           BtnBottom
-          _onClick={() => {
-            setSelectMBIT(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -92,6 +76,20 @@ const AddressCommet = styled.p`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.small};
   color: #4e4e4e;
+`;
+
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 10;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
 `;
 
 export default AddAdress;

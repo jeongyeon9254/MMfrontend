@@ -7,11 +7,10 @@ import AddInterest from './AddInterest';
 import AddAdress from './AddAdress';
 
 const AddMBTI = props => {
-  const { file, local } = props;
+  const { file, local, show, Control } = props;
 
-  const [seleteInterest, setSeleteInterest] = useState(false);
+  const [Open, setOpen] = useState(false);
   const [selected, setSelected] = useState('');
-  const [Backaddress, setBackaddress] = useState(false);
 
   const toggle = name => {
     if (selected === name) {
@@ -21,32 +20,18 @@ const AddMBTI = props => {
     }
   };
 
-  if (seleteInterest === true) {
-    return (
-      <>
-        <AddInterest file={file} local={local} mbti={selected} />
-      </>
-    );
-  } else if (Backaddress === true) {
-    return (
-      <>
-        <AddAdress />
-      </>
-    );
-  }
+  const PageControl = () => {
+    setOpen(!Open);
+  };
 
   const CheckMBTI = () => {
     window.location.href = 'https://www.16personalities.com/ko/';
   };
 
   return (
-    <>
-      <Header
-        point="absolute"
-        _on={() => {
-          setBackaddress(true);
-        }}
-      >
+    <ShowPage className={show ? 'open' : ''}>
+      <AddInterest file={file} local={local} mbti={selected} show={Open} Control={PageControl} />
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         MBTI 입력하기
       </Header>
       <Grid padding="122px 30px 0px 30px">
@@ -84,14 +69,12 @@ const AddMBTI = props => {
           width="315px"
           BtnBottom
           state={selected !== '' ? false : 'Inactive'}
-          _onClick={() => {
-            setSeleteInterest(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>
       </Grid>
-    </>
+    </ShowPage>
   );
 };
 
@@ -110,6 +93,19 @@ const ClickCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
   text-decoration: underline;
   cursor: pointer;
+`;
+const ShowPage = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0px;
+  transition: all ease 0.3s;
+  z-index: 99;
+  background-color: #fff;
+  &.open {
+    left: 0px;
+  }
 `;
 
 export default AddMBTI;
