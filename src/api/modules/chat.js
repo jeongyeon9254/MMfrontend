@@ -17,10 +17,11 @@ export const getChatRoomList = () => {
 };
 
 //채팅방 만들기
-export const postChatRoomList = guestId => {
+export const postChatRoomList = guestinfo => {
   return instance({
     method: 'post',
-    url: `/chat/room?guestId=${guestId}`,
+    url: `/chat/room`,
+    data: guestinfo,
   });
 };
 
@@ -33,9 +34,9 @@ export const getChatMsList = roomId => {
 };
 
 // 채팅방 퇴장 => 퇴장시 방 유지
-export const deleteOutRoom = roomId => {
-  return instance({
-    method: 'get',
-    url: `/quit/{roomId}`,
-  });
-};
+// export const deleteOutRoom = roomId => {
+//   return instance({
+//     method: 'get',
+//     url: `/quit/${roomId}`,
+//   });
+// };

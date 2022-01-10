@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Button, Input, Image, Box } from '../../element';
-import { useDispatch } from 'react-redux';
-import { actionCreators as ChatAction } from '../../../redux/modules/chat';
+import { Grid, Button, Input } from '../../element';
+import moment from 'moment';
 
 function PartyInput(props) {
-  const dispatch = useDispatch();
   const [Chatting, setChatting] = React.useState('');
   const { roomId, sendMessage } = props;
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
+  const date = moment().format('YYYY-MM-DD HH:mm');
   // 보내는거
   const ChatPost = e => {
     setChatting(e.target.value);
@@ -21,6 +18,7 @@ function PartyInput(props) {
       type: 'TALK',
       roomId: roomId,
       message: Chatting,
+      date: date,
     };
     sendMessage(ms);
     setChatting('');
