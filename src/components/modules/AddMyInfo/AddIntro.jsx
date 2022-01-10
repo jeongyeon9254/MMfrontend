@@ -74,9 +74,9 @@ const AddIntro = props => {
       {YesAlert ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Title>추가입력 작성을 완료할까요?</Title>
+            <IntroTitle>추가입력 작성을 완료할까요?</IntroTitle>
             <Grid gap="4px">
-              <Content>확인 시 메인하면으로 이동합니다.</Content>
+              <IntroCommet>확인 시 메인하면으로 이동합니다.</IntroCommet>
             </Grid>
           </Grid>
         </Alert>
@@ -126,7 +126,6 @@ const IntroCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
-<<<<<<< HEAD
 const ShowPage = styled.div`
   position: fixed;
   width: 100%;
@@ -139,17 +138,6 @@ const ShowPage = styled.div`
   &.open {
     left: 0px;
   }
-=======
-const Title = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.87);
-`;
-const Content = styled.p`
-  font-size: ${props => props.theme.fontSizes.small};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
->>>>>>> main
 `;
 
 export default AddIntro;
