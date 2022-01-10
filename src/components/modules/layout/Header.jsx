@@ -1,6 +1,6 @@
-import React, { Dispatch } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Grid } from '../../element';
+import { Grid, Alert } from '../../element';
 import arrow_left from '../../../img/Icon/arrow_left.svg';
 import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
 import icon_search from '../../../img/Icon/icon_search.svg';
@@ -12,7 +12,9 @@ import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { actionCreators as imageActions } from '../../../redux/modules/preview';
+import { actionCreators as modalActions } from '../../../redux/modules/modal';
 import { delCookie } from '../../../shared/Cookie';
+import LoginNeed from '../../templates/LoginNeed';
 
 const Header = props => {
   const {
@@ -32,14 +34,20 @@ const Header = props => {
     Page,
   } = props;
 
-  const dispatch = useDispatch();
-
   const styles = {
     main,
     point,
     bg,
     white,
   };
+
+  const dispatch = useDispatch();
+
+  const getUser = localStorage.getItem('userInfo');
+  const data = JSON.parse(getUser);
+
+  // 모달창
+  const [Alt, setAlt] = useState(false);
 
   const goHome = () => {
     console.log('home');
@@ -60,7 +68,16 @@ const Header = props => {
   const logOutBack = () => {
     delCookie('authorization');
     localStorage.clear();
-    history.push('/login');
+    history.push('/LoginNeed');
+  };
+
+  const next = () => {
+    logOutBack();
+    exit();
+  };
+
+  const exit = () => {
+    setAlt(false);
   };
 
   return (
@@ -87,13 +104,31 @@ const Header = props => {
         <TiTle {...styles}>{children}</TiTle>
         {chat ? <Search src={icon_search} /> : ''}
         {post ? <Exit>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
-        {myinfo ? <LogOut onClick={logOutBack}>로그아웃</LogOut> : ''}
+        {myinfo ? (
+          <LogOut
+            onClick={() => {
+              setAlt(true);
+            }}
+          >
+            로그아웃
+          </LogOut>
+        ) : (
+          ''
+        )}
         {detail ? (
           name === defaultName ? (
             <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail>
           ) : null
         ) : null}
       </Grid>
+      {Alt ? (
+        <Alert MyBit logout yes={next} no={exit}>
+          <Grid gap="15px" padding="16px 51px 8px 24px">
+            <AltTitle>로그아웃을 하시겠습니까?</AltTitle>
+            <AltContent>후에도 비즈케미는 계속 {data.nickname}님을 기다리고 있을게요!</AltContent>
+          </Grid>
+        </Alert>
+      ) : null}
     </HeaderStyle>
   );
 };
@@ -157,5 +192,16 @@ const LogOut = styled.div`
   color: #999;
   cursor: pointer;
   line-height: 24px;
+`;
+
+const AltTitle = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+`;
+const AltContent = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 `;
 export default Header;

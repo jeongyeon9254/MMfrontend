@@ -1,19 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
 import icon_photo from '../../../img/Icon/icon_photo.svg';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
 
 const AddInfo = props => {
-  const dispatch = useDispatch();
-
-  const YesAlert = useSelector(state => state.modal.Alert);
-
   const [Address, setAddress] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
@@ -21,14 +14,15 @@ const AddInfo = props => {
   // const [area, setArea] = useState(data.ageRange);
   const [isarea, setArea] = useState('');
 
-  //닉네임{nickname} 연령대(ageRange)  성별(male)
+  // 데이터
   const [nickname, setnickname] = useState(data.nickname);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
-  const fileRef = useRef();
 
-  console.log(typeof profileImage);
+  // 모달창
+  const [Alt, setAlt] = useState(false);
+  const fileRef = useRef();
 
   if (Address === true) {
     const file = {
@@ -47,7 +41,7 @@ const AddInfo = props => {
   const MaxNickname = e => {
     if (e.target.value.length > 4) {
       e.target.value = e.target.value.substr(0, 4);
-      dispatch(modalActions.setAlert());
+      setAlt(true);
     }
   };
 
@@ -80,17 +74,18 @@ const AddInfo = props => {
     console.log(area);
   };
 
+  // 닫기 버튼 함수
   const exit = () => {
-    dispatch(modalActions.ExitAlert());
+    setAlt(false);
   };
 
   return (
     <Body>
       <Grid>
         <Header>추가정보 입력하기</Header>
-        {YesAlert ? (
+        {Alt ? (
           <Alert check yes={exit}>
-            <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid padding="16px 8px 8px 24px">
               <Title>닉네임은 4자이내로 작성해주세요</Title>
             </Grid>
           </Alert>
@@ -187,11 +182,6 @@ const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 400;
   color: rgba(0, 0, 0, 0.87);
-`;
-const Content = styled.p`
-  font-size: ${props => props.theme.fontSizes.small};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default AddInfo;
