@@ -51,9 +51,11 @@ const AddIntro = props => {
   };
 
   const MaxIntro = e => {
-    if (e.target.value.length > 100) {
+    if (e.target.value.length >= 100) {
       e.target.value = e.target.value.substr(0, 100);
       setLimit(true);
+    } else {
+      setLimit(false);
     }
   };
 
@@ -64,7 +66,6 @@ const AddIntro = props => {
   // 취소 시 버튼 함수
   const exit = () => {
     setAlt(false);
-    setLimit(false);
   };
 
   return (
@@ -82,13 +83,7 @@ const AddIntro = props => {
           </Grid>
         </Alert>
       ) : null}
-      {Limit ? (
-        <Alert MyBit check yes={exit}>
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Title>100자 이내로 작성해주세요!</Title>
-          </Grid>
-        </Alert>
-      ) : null}
+
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">
           <IntroTitle>
@@ -100,6 +95,7 @@ const AddIntro = props => {
         </Grid>
       </Grid>
       <Grid row gap="8px" padding="48px 31px 0px 28px">
+        {Limit ? <CheckTxt>100자 이내로만 작성가능합니다!</CheckTxt> : null}
         <Input
           _onInput={MaxIntro}
           _type="textarea"
@@ -147,15 +143,13 @@ const ShowPage = styled.div`
     left: 0px;
   }
 `;
-const Title = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.87);
-`;
-const Content = styled.p`
-  font-size: ${props => props.theme.fontSizes.small};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
+
+const CheckTxt = styled.p`
+  position: absolute;
+  left: 35px;
+  top: 27px;
+  font-size: 12px;
+  color: #d41321;
 `;
 
 export default AddIntro;

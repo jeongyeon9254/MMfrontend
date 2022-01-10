@@ -12,9 +12,8 @@ import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { actionCreators as imageActions } from '../../../redux/modules/preview';
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
+
 import { delCookie } from '../../../shared/Cookie';
-import LoginNeed from '../../templates/LoginNeed';
 
 const Header = props => {
   const {

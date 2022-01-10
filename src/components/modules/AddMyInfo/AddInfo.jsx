@@ -30,9 +30,12 @@ const AddInfo = props => {
   const fileRef = useRef();
 
   const MaxNickname = e => {
-    if (e.target.value.length > 4) {
+    if (e.target.value.length >= 4) {
       e.target.value = e.target.value.substr(0, 4);
       setAlt(true);
+    }
+    if (e.target.value.length < 4) {
+      setAlt(false);
     }
   };
 
@@ -67,10 +70,6 @@ const AddInfo = props => {
   const PageControl = () => {
     setOpen(!Open);
   };
-  // 닫기 버튼 함수
-  const exit = () => {
-    setAlt(false);
-  };
   React.useEffect(() => {
     // if (data.signStatus) {
     //   history.push('/');
@@ -92,14 +91,6 @@ const AddInfo = props => {
         >
           추가정보 입력하기
         </Header>
-        {Alt ? (
-          <Alert check yes={exit}>
-            <Grid padding="16px 8px 8px 24px">
-              <Title>닉네임은 4자이내로 작성해주세요</Title>
-            </Grid>
-          </Alert>
-        ) : null}
-
         <Grid margin="47px 0px 17px 0px">
           <Image
             src={Preview}
@@ -120,6 +111,7 @@ const AddInfo = props => {
         <Grid row gap="20px">
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
+            {Alt ? <CheckTxt>닉네임은 4자이내로만 작성가능합니다. </CheckTxt> : null}
             <Input
               _onInput={MaxNickname}
               _value={nickname}
@@ -192,10 +184,12 @@ const BtnBox = styled.div`
   padding: 0px 9%;
 `;
 
-const Title = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.87);
+const CheckTxt = styled.p`
+  position: absolute;
+  left: 77px;
+  top: 2px;
+  font-size: 12px;
+  color: #d41321;
 `;
 
 export default AddInfo;
