@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 // reudx
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as listActions } from '../../../redux/modules/list';
 
 // Component
 import Null from '../../../shared/Null';
@@ -16,12 +15,12 @@ import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
   const dispatch = useDispatch();
-  const listState = useSelector(state => state.list.state);
   const lists = useSelector(state => state.main.list);
   const kategorie = useSelector(state => state.main.kategorie);
+  const { modal, outModal } = props;
 
   const offModal = () => {
-    dispatch(listActions.downList());
+    outModal();
   };
 
   // filter 기능
@@ -38,7 +37,7 @@ const MapList = props => {
   }
   return (
     <React.Fragment>
-      {listState ? (
+      {modal ? (
         <MapListStyle>
           <div className="downBtn">
             <img alt="리스트 닫기" src={arrow_bottom} onClick={offModal}></img>

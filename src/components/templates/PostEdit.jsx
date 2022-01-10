@@ -8,6 +8,7 @@ import { actionCreators as postActions } from '../../redux/modules/post';
 // component
 import { Button, Grid, Input } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
+import Spiner from '../../shared/Spiner';
 
 const PostEdit = props => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const PostEdit = props => {
 
   const contentData = info.length !== 0 ? info.content : '';
   const tagData = info.length !== 0 ? info.tag : null;
+  const loading = useSelector(state => state.post.loading);
 
   // 전송용 데이터
   const [text, setTest] = useState('');
@@ -86,6 +88,7 @@ const PostEdit = props => {
           게시글 수정하기
         </Button>
       </PostBox>
+      {loading ? <Spiner post /> : null}
     </>
   );
 };

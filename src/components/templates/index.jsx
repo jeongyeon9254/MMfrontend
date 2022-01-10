@@ -11,6 +11,7 @@ import PostEdit from './PostEdit';
 import KakaoCallback from './KakaoCallback';
 import Hidden from './Hidden';
 import NotPound from './NotPound';
+import Start from './Start';
 
 export {
   Main,
@@ -26,4 +27,5 @@ export {
   Hidden,
   KakaoCallback,
   NotPound,
+  Start,
 };

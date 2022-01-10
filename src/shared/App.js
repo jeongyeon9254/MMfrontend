@@ -15,6 +15,7 @@ import {
   KakaoCallback,
   NotPound,
   Chatroom,
+  Start,
 } from '../components/templates';
 import Profile from '../components/templates/Profile';
 import PrivateRoute from '../components/modules/PrivateRoute';
@@ -29,6 +30,7 @@ function App() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
+        <PrivateRoute exact path="/start" Component={Start} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PrivateRoute exact path="/" Component={Main} />
         <PrivateRoute exact path="/choice" Component={Choice} />

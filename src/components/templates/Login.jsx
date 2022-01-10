@@ -2,25 +2,32 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import imgfile from '../../img/kakaologin.png';
-import { Grid } from '../element/index';
+import { Grid, Image } from '../element/index';
 import Header from '../modules/layout/Header';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import Logo from '../../img/Icon/Start_logo.svg';
 const Login = () => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
     dispatch(userAction.logInDB());
     window.location.href =
       'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
+    // 'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://bizchemy.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code';
   };
 
   return (
     <>
       <Header main>로그인</Header>
-      <Grid height="100%" justify="center" align="center">
-        <LoginBox>
-          <p>카카오톡으로 간편로그인을 진행해주세요!</p>
-          <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
-        </LoginBox>
+      <Grid align="center" padding="203px 0px 0px 0px">
+        <Grid width="112px" height="110px">
+          <Image nobackground src={Logo}></Image>
+        </Grid>
+        <Grid margin="53px 0px 0px 0px">
+          <LoginBox>
+            <p>카카오톡으로 간편로그인을 진행해주세요!</p>
+            <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
+          </LoginBox>
+        </Grid>
       </Grid>
     </>
   );

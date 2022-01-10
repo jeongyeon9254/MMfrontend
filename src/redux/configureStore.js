@@ -6,7 +6,6 @@ import { connectRouter } from 'connected-react-router';
 import main from './modules/main';
 import chat from './modules/chat';
 import user from './modules/user';
-import list from './modules/list';
 import profile from './modules/profile';
 import preview from './modules/preview';
 import post from './modules/post';
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
   post: post,
   preview: preview,
   profile: profile,
-  list: list,
   main: main,
   chat: chat,
   user: user,

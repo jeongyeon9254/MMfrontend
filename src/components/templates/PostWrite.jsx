@@ -5,20 +5,24 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../../redux/modules/preview';
 import { actionCreators as postActions } from '../../redux/modules/post';
+import { actionCreators as modalActions } from '../../redux/modules/modal';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 
 // component
-import { Button, Grid, Input } from '../element/index.js';
+import { Button, Grid, Input, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 
 // Js
 import { history } from '../../redux/configureStore.js';
+import Spiner from '../../shared/Spiner';
 
-const PostWrite = () => {
+const PostWrite = props => {
   const dispatch = useDispatch();
+  // 모달
+  const YesAlert = useSelector(state => state.modal.Alert);
 
   // 버튼
   const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
@@ -59,8 +63,9 @@ const PostWrite = () => {
       };
     });
   };
-  console.log(images);
+
   const preview = useSelector(state => state.preview.preview);
+  const loading = useSelector(state => state.post.loading);
 
   const changeTag = e => {
     setTag(e.target.name);
@@ -93,8 +98,26 @@ const PostWrite = () => {
     dispatch(imageActions.resetPreview());
   };
 
+  const next = () => {
+    addPost();
+  };
+
+  const exit = () => {
+    dispatch(modalActions.ExitAlert());
+  };
+
   return (
     <>
+      {YesAlert ? (
+        <Alert MyBit isButton yes={next} no={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Title>작성을 완료할까요?</Title>
+            <Grid gap="4px">
+              <Content>완료시 게시물페이지로 이동합니다.</Content>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header>글 작성하기</Header>
       <PostBox>
         <Grid>
@@ -172,10 +195,17 @@ const PostWrite = () => {
             <span>/ 100</span>
           </div>
         </Grid>
-        <Button _onClick={addPost} BtnBottom width="83%">
+        <Button
+          _onClick={() => {
+            dispatch(modalActions.setAlert());
+          }}
+          BtnBottom
+          width="83%"
+        >
           게시글 올리기
         </Button>
       </PostBox>
+      {loading ? <Spiner post /> : null}
     </>
   );
 };
@@ -267,6 +297,17 @@ const RowDiv = styled.div`
     font-size: 16px;
     cursor: pointer;
   }
+`;
+
+const Title = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+`;
+const Content = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default PostWrite;
