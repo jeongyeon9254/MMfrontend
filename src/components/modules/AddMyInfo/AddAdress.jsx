@@ -7,8 +7,8 @@ import AddMBTI from './AddMBTI';
 import AddInfo from './AddInfo';
 
 const AddAdress = props => {
-  const { file, PageControl, Show } = props;
-  const [selecMBTI, setSelectMBIT] = useState(false);
+  const { file, Control, Show } = props;
+  const [Open, setOpen] = useState(false);
   const [BackAddinfo, BacksetAddinfo] = useState(false);
   const [local, setlocal] = useState('');
 
@@ -16,10 +16,14 @@ const AddAdress = props => {
     setlocal(locals);
   };
 
+  const PageControl = () => {
+    setOpen(!Open);
+  };
+
   return (
     <ShowPage className={Show ? 'open' : ''}>
-      {selecMBTI === true ? <AddMBTI file={file} local={local} /> : ''}
-      <Header Page point="absolute" _onClick={PageControl}>
+      <AddMBTI file={file} local={local} show={Open} Control={PageControl} />
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         추가정보 입력하기
       </Header>
       <Grid>
@@ -51,9 +55,7 @@ const AddAdress = props => {
           state={local === '' ? 'Inactive' : false}
           width="315px"
           BtnBottom
-          _onClick={() => {
-            setSelectMBIT(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>

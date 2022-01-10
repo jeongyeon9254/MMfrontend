@@ -23,8 +23,6 @@ const AddInfo = props => {
   const [Preview, setPreview] = useState(data.profileImage);
   const fileRef = useRef();
 
-  console.log(typeof profileImage);
-
   React.useEffect(() => {
     // if (data.signStatus) {
     //   history.push('/');
@@ -70,7 +68,6 @@ const AddInfo = props => {
   };
   const GetArea = area => {
     setArea(area.area);
-    console.log(area);
   };
   const PageControl = () => {
     setOpen(!Open);
@@ -78,7 +75,7 @@ const AddInfo = props => {
 
   return (
     <Body>
-      <AddAdress file={file} PageControl={PageControl} Show={Open} />
+      <AddAdress file={file} Control={PageControl} Show={Open} />
       <Grid>
         <Header
           Page

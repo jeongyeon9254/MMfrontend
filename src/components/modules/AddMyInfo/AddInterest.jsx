@@ -1,58 +1,46 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import Bit from '../Bit';
 import { Grid, Button } from '../../element/index';
 import AddIntro from './AddIntro';
-import AddMBTI from './AddMBTI';
+import { InterestList } from './needData';
 
 const AddInterest = props => {
-  const { file, local, mbti, Open } = props;
-  const InterestList = ['운동', '공부', '대화', '게임', '기타', '재테크'];
+  const { file, local, mbti, show, Control } = props;
 
-  const [Intro, setIntro] = useState(false);
-  const [BackMBTI, setBackMBTI] = useState(false);
+  const [Open, setOpen] = useState(false);
+
   const [duplicated, setDuplicated] = useState([]);
-  if (Intro === true) {
-    return (
-      <>
-        <AddIntro file={file} local={local} mbti={mbti} duplicated={duplicated} />
-      </>
-    );
-  } else if (BackMBTI === true) {
-    return (
-      <>
-        <AddMBTI />
-      </>
-    );
-  }
 
   const handleDuplicated = e => {
     const val = e.target.name;
-
-    const isIncludes = duplicated.find(el => el === val);
-
-    if (duplicated.length >= 2) {
-      alert('최대 2개까지만 선택 가능합니다. 다시 선택해주세요');
-      setDuplicated(duplicated.splice(0, 1));
-      return;
-    }
-
-    if (isIncludes) {
-      setDuplicated(duplicated.filter(el => el !== val));
-    } else if (0 < duplicated.length < 3) {
-      setDuplicated([...duplicated, val]);
+    if (!duplicated.includes(val)) {
+      return duplicated.length >= 2
+        ? alert('최대 2개까지만 선택 가능합니다. 다시 선택해주세요')
+        : setDuplicated([...duplicated, val]);
+    } else {
+      const index = duplicated.filter(x => {
+        return x !== val;
+      });
+      return setDuplicated(index);
     }
   };
+  //
+
+  const PageControl = () => {
+    setOpen(!Open);
+  };
   return (
-    <ShowPage className={Open ? 'open' : 'open'}>
-      <Header
-        Page
-        point="absolute"
-        _onClick={() => {
-          setBackMBTI(true);
-        }}
-      >
+    <ShowPage className={show ? 'open' : ''}>
+      <AddIntro
+        file={file}
+        local={local}
+        mbti={mbti}
+        show={Open}
+        duplicated={duplicated}
+        Control={PageControl}
+      />
+      <Header Page point="relative" zIndex="0" _onClick={Control}>
         관심사 설정하기
       </Header>
       <Grid padding="122px 30px 0px 30px">
@@ -85,9 +73,7 @@ const AddInterest = props => {
           width="315px"
           BtnBottom
           state={duplicated.length === 1 || duplicated.length === 2 ? false : 'Inactive'}
-          _onClick={() => {
-            setIntro(true);
-          }}
+          _onClick={PageControl}
         >
           다음으로
         </Button>
