@@ -24,16 +24,17 @@ const Profile = props => {
   }, []);
 
   const profile = useSelector(state => state.profile.list);
-  const YesAlert = useSelector(state => state.modal.Alert);
-  const AfterAlert = useSelector(state => state.modal.AfterAlert);
   const mbti = profile.interestList;
 
   console.log(profile);
 
   const [modal, setModal] = useState(false);
+  const [connect, setConnect] = useState(false);
+  const [Disconnect, setDisconnect] = useState(false);
 
   const exit = () => {
-    dispatch(modalActions.ExitAlert());
+    setConnect(false);
+    setDisconnect(false);
   };
   const guestInfo = {
     guestId: profile.username,
@@ -49,13 +50,14 @@ const Profile = props => {
   };
 
   const After = () => {
+    setDisconnect(true);
     setModal(false);
     exit();
   };
 
   return (
     <>
-      {YesAlert ? (
+      {connect ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>매칭을 신청하시겠습니까?</Title>
@@ -67,7 +69,7 @@ const Profile = props => {
         </Alert>
       ) : null}
 
-      {AfterAlert ? (
+      {Disconnect ? (
         <Alert MyBit isButton yes={After} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>매칭 친구를 끊을까요?</Title>
@@ -127,8 +129,7 @@ const Profile = props => {
             BtnBottom
             width="85%"
             _onClick={() => {
-              console.log('신청!');
-              dispatch(modalActions.setAlert());
+              setConnect(true);
             }}
           >
             매칭신청
@@ -141,8 +142,7 @@ const Profile = props => {
             _onClick={() => {
               // const userId = { userId: profile.userId };
               // dispatch(chatActions.postChatRoomListDB(userId));
-              dispatch(modalActions.AfterAlert());
-              // setModal(false);
+              setDisconnect(true);
             }}
           >
             매칭 친구 끊기

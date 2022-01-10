@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import Bit from '../Bit';
-import { Grid, Input, Button, Select } from '../../element/index';
+import { Grid, Input, Button } from '../../element/index';
 import Alert from '../../element/Alert';
 import AddInterest from './AddInterest';
-import { history } from '../../../redux/configureStore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
-import { actionCreators as modalActions } from '../../../redux/modules/modal';
-import axios from 'axios';
-import { getCookie } from '../../../shared/Cookie';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
+
   const { file, local, mbti, duplicated, show, Control } = props;
 
+
+  const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
 
-  const YesAlert = useSelector(state => state.modal.Alert);
+  // 모달창
+  const [Alt, setAlt] = useState(false);
+  const [Limit, setLimit] = useState(false);
 
   const userInfo = {
     nickname: file.nickname,
@@ -54,16 +54,18 @@ const AddIntro = props => {
   const MaxIntro = e => {
     if (e.target.value.length > 100) {
       e.target.value = e.target.value.substr(0, 100);
-      alert('100자 이내로 작성부탁드립니다');
+      setLimit(true);
     }
   };
 
+  // 확인시 버튼 함수
   const next = () => {
     ClickEvent();
   };
-
+  // 취소 시 버튼 함수
   const exit = () => {
-    dispatch(modalActions.ExitAlert());
+    setAlt(false);
+    setLimit(false);
   };
 
   return (
@@ -71,13 +73,20 @@ const AddIntro = props => {
       <Header Page point="relative" zIndex="0" _onClick={Control}>
         한줄 소개 작성하기
       </Header>
-      {YesAlert ? (
+      {Alt ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <IntroTitle>추가입력 작성을 완료할까요?</IntroTitle>
             <Grid gap="4px">
               <IntroCommet>확인 시 메인하면으로 이동합니다.</IntroCommet>
             </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
+      {Limit ? (
+        <Alert MyBit check yes={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Title>100자 이내로 작성해주세요!</Title>
           </Grid>
         </Alert>
       ) : null}
@@ -107,7 +116,7 @@ const AddIntro = props => {
           width="315px"
           BtnBottom
           _onClick={() => {
-            dispatch(modalActions.setAlert());
+            setAlt(true);
           }}
         >
           다음으로
@@ -126,6 +135,7 @@ const IntroCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
+
 const ShowPage = styled.div`
   position: fixed;
   width: 100%;
@@ -138,6 +148,15 @@ const ShowPage = styled.div`
   &.open {
     left: 0px;
   }
+const Title = styled.p`
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+`;
+const Content = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default AddIntro;

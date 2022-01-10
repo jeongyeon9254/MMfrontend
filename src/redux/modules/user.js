@@ -3,12 +3,6 @@ import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
 import { editMyinfoDB, getMyMbitInfo } from '../../api/modules/user';
-// 모달
-// import { Alert } from '../../components/element/index';
-// import { actionCreators as modalActions } from '../../../redux/modules/modal';
-
-// 모달
-// const YesAlert = useSelector(state => state.modal.Alert);
 
 const GET_MBTIINFO = 'GET_MBTIINFO';
 
@@ -30,10 +24,8 @@ const logInDB = code => {
 
     if (res.data.signStatus === false) {
       document.location.href = '/AddMyinfo';
-      window.alert('처음이신구요! 추가정보 입력 부탁드립니다!!');
     } else {
       document.location.href = '/';
-      window.alert('로그인 완료');
     }
   };
 };
