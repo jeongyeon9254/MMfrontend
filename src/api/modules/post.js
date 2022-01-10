@@ -2,10 +2,11 @@ import instance from '../instance';
 import axios from 'axios';
 import multi from '../multi';
 
-export const getPost = page => {
+export const getPost = code => {
   return instance({
     method: 'get',
-    url: `/api/post?page=${page}&size=3`,
+    url: `/api/post?page=${page}&size=10`,
+
   });
 };
 

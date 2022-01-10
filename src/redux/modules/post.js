@@ -26,7 +26,6 @@ const initialState = {
   postList: [],
   detail: [],
   loading: false,
-  page: 0,
 };
 
 const getPostDB = (page = null) => {
