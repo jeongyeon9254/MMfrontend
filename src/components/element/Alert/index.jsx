@@ -1,15 +1,16 @@
 import React from 'react';
-import { Grid } from '../index';
+import { Grid, Image } from '../index';
 import styled from 'styled-components';
 import { Yes, No } from '../../element/Alert/module.js';
 import Bit from '../../modules/Bit';
+import mergeBit from '../../../img/Icon/Logout_modal.svg';
 
 const Alert = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
   });
-  const { children, isButton, bg, display, color, check } = props;
+  const { children, isButton, bg, display, color, check, logout } = props;
 
   const styles = {
     display,
@@ -71,6 +72,43 @@ const Alert = props => {
                 }}
               >
                 확인
+              </Yes>
+            </Grid>
+          </AlertInBox>
+        </AlertBox>
+      </>
+    );
+  }
+  if (logout) {
+    return (
+      <>
+        <AlertBox>
+          <AlertInBox {...styles}>
+            {children}
+            <Grid justify="center" width="259px" height="144px">
+              <Image nobackground src={mergeBit}></Image>
+            </Grid>
+            <Grid
+              row
+              justify="flex-end"
+              gap="16px"
+              padding="0px 18px 0px 0px"
+              align="center"
+              height="36px"
+            >
+              <No
+                onClick={() => {
+                  props.no();
+                }}
+              >
+                아니요
+              </No>
+              <Yes
+                onClick={() => {
+                  props.yes();
+                }}
+              >
+                예
               </Yes>
             </Grid>
           </AlertInBox>

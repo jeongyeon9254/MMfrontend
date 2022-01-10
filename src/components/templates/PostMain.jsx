@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 // Component
@@ -29,6 +29,9 @@ const PostMain = () => {
 
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
+    return () => {
+      dispatch(postAcitions.getPostDB(0));
+    };
   }, []);
 
   const list = [...postList];
@@ -50,47 +53,69 @@ const PostMain = () => {
     filterLists = arr;
   }
 
+  let element = document.getElementById('allBox');
+  let element_2 = document.getElementById('scrollBox');
+
+  const aa = () => {
+    const SCROLLED_HEIGHT = element.scrollTop;
+    const WINDOW_HEIGHT = element_2.offsetHeight;
+    const DOC_TOTAL_HEIGHT = element.offsetHeight;
+    if (SCROLLED_HEIGHT + DOC_TOTAL_HEIGHT - 77 === WINDOW_HEIGHT) {
+      console.log('실행');
+      dispatch(postAcitions.getPostDB(page));
+    }
+  };
+
   return (
-    <PostBox>
+    <PostBox id="allBox" onScroll={aa}>
       <Header _on>커뮤니티</Header>
       <MapKategorieNav userInfo={userInfo} />
-      {postList ? (
-        filterLists.length > 0 ? (
-          filterLists.map((x, idx) => {
-            return (
-              <div
-                key={x.postId}
-                onClick={() => {
-                  history.push(`/postMain/${x.postId}`);
-                }}
-              >
-                <PostCard info={x} />
-                {x.commentList.length > 0 ? (
-                  x.commentList.length > 1 ? (
-                    <CommentBox>
-                      <MainComment info={x.commentList[0]} />
-                      <MainComment info={x.commentList[1]} />
-                    </CommentBox>
-                  ) : (
-                    <CommentBox>
-                      <MainComment info={x.commentList[0]} />
-                    </CommentBox>
-                  )
-                ) : null}
-                {x.commentList.length > 2 ? (
-                  <Grid width="20px;" margin="0 auto 20px auto">
-                    <img alt="더보기" src={icno_circle}></img>
-                  </Grid>
-                ) : null}
-              </div>
-            );
-          })
-        ) : (
-          <Grid padding="40px 0 0 0">
-            <Null post></Null>
-          </Grid>
-        )
-      ) : null}
+      <div id="scrollBox">
+        {postList.length !== 0 ? (
+          filterLists.length > 0 ? (
+            filterLists.map((x, idx) => {
+              return (
+                <div
+                  key={x.postId}
+                  onClick={() => {
+                    history.push(`/postMain/${x.postId}`);
+                  }}
+                >
+                  <PostCard info={x} />
+                  {x.commentList.length > 0 ? (
+                    x.commentList.length > 1 ? (
+                      <CommentBox>
+                        <MainComment info={x.commentList[0]} />
+                        <MainComment info={x.commentList[1]} />
+                      </CommentBox>
+                    ) : (
+                      <CommentBox>
+                        <MainComment info={x.commentList[0]} />
+                      </CommentBox>
+                    )
+                  ) : null}
+                  {x.commentList.length > 2 ? (
+                    <Grid width="20px;" margin="0 auto 20px auto">
+                      <img alt="더보기" src={icno_circle}></img>
+                    </Grid>
+                  ) : null}
+                </div>
+              );
+            })
+          ) : (
+            <Grid padding="40px 0 0 0">
+              <Null post></Null>
+            </Grid>
+          )
+        ) : null}
+      </div>
+      {/* <div
+        onClick={() => {
+          dispatch(postAcitions.getPostDB(page));
+        }}
+      >
+        다음으로갑시다잉
+      </div> */}
       <div className="postBtnBox">
         <Button
           BtnRound

@@ -15,12 +15,14 @@ const LOADING = 'LOADING';
 const GET_DETAIL = 'GET_DETAIL';
 const ADD_COMMENT = 'ADD_COMMENT';
 const ADD_LIKE = 'ADD_LIKE';
+const RESET = 'RESET';
 
-const getPostList = createAction(GET_POST, data => ({ data }));
+const getPostList = createAction(GET_POST, (data, page) => ({ data, page }));
 const loading = createAction(LOADING, data => ({ data }));
 const getPostDetail = createAction(GET_DETAIL, data => ({ data }));
 const addComments = createAction(ADD_COMMENT, data => ({ data }));
 const addLikes = createAction(ADD_LIKE, data => ({ data }));
+const reset = createAction(RESET, () => ({}));
 
 const initialState = {
   postList: [],
@@ -32,8 +34,10 @@ const initialState = {
 const getPostDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
+      console.log(page);
       const data = await getPost(page);
-      dispatch(getPostList(data.data));
+
+      dispatch(getPostList(data.data, page));
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +50,7 @@ const addPostDB = multipartFile => {
     try {
       await addPost(multipartFile);
       dispatch(loading(false));
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -59,6 +64,7 @@ const editPostDB = (postId, data) => {
     try {
       await editPost(postId, data);
       dispatch(loading(false));
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -70,6 +76,7 @@ const deletePostDB = (postId = null) => {
   return async function (dispatch, getState, { history }) {
     try {
       await deletePost(postId);
+      dispatch(reset());
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -132,7 +139,8 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, draft => {
-        draft.postList = action.payload.data;
+        draft.postList.push(...action.payload.data);
+        draft.page = action.payload.page + 1;
       }),
     [LOADING]: (state, action) =>
       produce(state, draft => {
@@ -150,6 +158,11 @@ export default handleActions(
       produce(state, draft => {
         draft.detail = action.payload.data;
       }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.postList = [];
+        draft.page = 0;
+      }),
   },
   initialState,
 );
@@ -164,6 +177,7 @@ const actionCreators = {
   deleteCommentsDB,
   addPostDB,
   editPostDB,
+  reset,
 };
 
 export { actionCreators };

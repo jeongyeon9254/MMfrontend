@@ -12,7 +12,7 @@ const PrivateRoute = ({ Component, ...rest }) => {
             <Component {...props}></Component>
           </Container>
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/LoginNeed" />
         )
       }
     ></Route>

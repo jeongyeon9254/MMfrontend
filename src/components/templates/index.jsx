@@ -12,6 +12,7 @@ import KakaoCallback from './KakaoCallback';
 import Hidden from './Hidden';
 import NotPound from './NotPound';
 import Start from './Start';
+import LoginNeed from './LoginNeed';
 
 export {
   Main,
@@ -28,4 +29,5 @@ export {
   KakaoCallback,
   NotPound,
   Start,
+  LoginNeed,
 };

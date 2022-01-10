@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Header from '../layout/Header';
 import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
 import AddAdress from './AddAdress';
@@ -9,34 +8,34 @@ import { history } from '../../../redux/configureStore';
 import { delCookie } from '../../../shared/Cookie';
 
 const AddInfo = props => {
-  const dispatch = useDispatch();
   const [Open, setOpen] = useState(false);
   const getUser = localStorage.getItem('userInfo');
   const data = JSON.parse(getUser);
 
-  //닉네임{nickname} 연령대(ageRange)  성별(male)
+  // 데이터
   const [nickname, setnickname] = useState(data.nickname);
   const [isarea, setArea] = useState(data.ageRange);
   const [gender, setgender] = useState(data.gender);
   const [profileImage, setProfileImage] = useState(data.profileImage);
   const [Preview, setPreview] = useState(data.profileImage);
-  const fileRef = useRef();
 
-  React.useEffect(() => {
-    // if (data.signStatus) {
-    //   history.push('/');
-    // }
-  });
   const file = {
     nickname: nickname,
     gender: gender,
     profileImage: profileImage,
     ageRange: isarea,
   };
+  // 모달창
+  const [Alt, setAlt] = useState(false);
+  const fileRef = useRef();
 
   const MaxNickname = e => {
-    if (e.target.value.length > 4) {
+    if (e.target.value.length >= 4) {
       e.target.value = e.target.value.substr(0, 4);
+      setAlt(true);
+    }
+    if (e.target.value.length < 4) {
+      setAlt(false);
     }
   };
 
@@ -67,10 +66,15 @@ const AddInfo = props => {
   const GetArea = area => {
     setArea(area.area);
   };
+
   const PageControl = () => {
     setOpen(!Open);
   };
-
+  React.useEffect(() => {
+    // if (data.signStatus) {
+    //   history.push('/');
+    // }
+  }, []);
   return (
     <Body>
       <AddAdress file={file} Control={PageControl} Show={Open} />
@@ -107,6 +111,7 @@ const AddInfo = props => {
         <Grid row gap="20px">
           <Grid margin="0px 30px">
             <AddText>닉네임 설정</AddText>
+            {Alt ? <CheckTxt>닉네임은 4자이내로만 작성가능합니다. </CheckTxt> : null}
             <Input
               _onInput={MaxNickname}
               _value={nickname}
@@ -177,6 +182,14 @@ const AddText = styled.p`
 `;
 const BtnBox = styled.div`
   padding: 0px 9%;
+`;
+
+const CheckTxt = styled.p`
+  position: absolute;
+  left: 77px;
+  top: 2px;
+  font-size: 12px;
+  color: #d41321;
 `;
 
 export default AddInfo;
