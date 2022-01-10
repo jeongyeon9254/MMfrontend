@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../../redux/modules/preview';
 import { actionCreators as postActions } from '../../redux/modules/post';
-import { actionCreators as modalActions } from '../../redux/modules/modal';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,7 +21,7 @@ import Spiner from '../../shared/Spiner';
 const PostWrite = props => {
   const dispatch = useDispatch();
   // 모달
-  const YesAlert = useSelector(state => state.modal.Alert);
+  const [Alt, setAlt] = useState(false);
 
   // 버튼
   const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
@@ -103,12 +102,12 @@ const PostWrite = props => {
   };
 
   const exit = () => {
-    dispatch(modalActions.ExitAlert());
+    setAlt(false);
   };
 
   return (
     <>
-      {YesAlert ? (
+      {Alt ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>작성을 완료할까요?</Title>
@@ -197,7 +196,7 @@ const PostWrite = props => {
         </Grid>
         <Button
           _onClick={() => {
-            dispatch(modalActions.setAlert());
+            setAlt(true);
           }}
           BtnBottom
           width="83%"

@@ -9,7 +9,6 @@ import user from './modules/user';
 import profile from './modules/profile';
 import preview from './modules/preview';
 import post from './modules/post';
-import modal from './modules/modal';
 
 export const history = createBrowserHistory();
 
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   main: main,
   chat: chat,
   user: user,
-  modal: modal,
   router: connectRouter(history),
 });
 

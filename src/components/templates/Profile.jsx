@@ -8,7 +8,6 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as chatActions } from '../../redux/modules/chat';
-import { actionCreators as modalActions } from '../../redux/modules/modal';
 
 // component
 import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
