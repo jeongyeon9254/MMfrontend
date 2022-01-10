@@ -5,15 +5,14 @@ import { getCookie } from '../../../shared/Cookie.js';
 
 // Js
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as listActions } from '../../../redux/modules/list';
 
 // Api
 import { getMyinfoDB } from '../../../api/modules/chemy.js';
 
 const { kakao } = window;
 
-const MapContainer = () => {
-  const dispatch = useDispatch();
+const MapContainer = props => {
+  const onModal = props.onModal;
 
   // kakao map 함수를 가지고 있음
   const [move, setMove] = useState(null);
@@ -45,7 +44,7 @@ const MapContainer = () => {
       position: markerPosition,
     });
     kakao.maps.event.addListener(marker, 'click', function () {
-      dispatch(listActions.upList());
+      onModal();
     });
     setMaker(marker);
     marker.setMap(map);
@@ -72,7 +71,7 @@ const MapContainer = () => {
       setMakers(marker);
       marker.setMap(move);
       kakao.maps.event.addListener(marker, 'click', function () {
-        dispatch(listActions.upList());
+        onModal();
       });
       return;
     }
@@ -81,7 +80,7 @@ const MapContainer = () => {
 
     // 마커 클릭시 리스트업 이벤트
     kakao.maps.event.addListener(marker, 'click', function () {
-      dispatch(listActions.upList());
+      onModal();
     });
   }, [locationInfo.gps]);
 
@@ -94,7 +93,7 @@ const MapContainer = () => {
 
 const Map = styled.div`
   width: 100%;
-  height: calc(100% - 70px);
+  height: calc(100% - 20px);
   position: fixed;
   margin-top: -90px;
 `;

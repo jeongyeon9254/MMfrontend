@@ -14,15 +14,10 @@ import { actionCreators as mainActions } from '../../../redux/modules/main.js';
 
 // JS
 import { history } from '../../../redux/configureStore';
-import { actionCreators as listActions } from '../../../redux/modules/list';
 
 //수정
 const Footer = props => {
   const dispatch = useDispatch();
-
-  const offModal = () => {
-    dispatch(listActions.downList());
-  };
 
   return (
     <FooterStyle>
@@ -30,7 +25,6 @@ const Footer = props => {
         <FooterBtn
           onClick={() => {
             history.push('/');
-            offModal();
           }}
         >
           <img alt="홈" src={home}></img>
@@ -39,7 +33,6 @@ const Footer = props => {
         <FooterBtn
           onClick={() => {
             history.push('/PostMain');
-            offModal();
             dispatch(mainActions.kategorieReset());
           }}
         >
@@ -49,7 +42,6 @@ const Footer = props => {
         <FooterBtn
           onClick={() => {
             history.push('/chat');
-            offModal();
           }}
         >
           <img alt="채팅" src={sns}></img>
@@ -58,7 +50,6 @@ const Footer = props => {
         <FooterBtn
           onClick={() => {
             history.push('/myinfo');
-            offModal();
           }}
         >
           <img alt="내정보" src={person}></img>

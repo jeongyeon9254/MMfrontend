@@ -1,6 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-
 import {
   getPost,
   getDetailPost,
@@ -12,11 +11,13 @@ import {
 import { addComment, deleteComment } from '../../api/modules/comment';
 
 const GET_POST = 'GET_POST';
+const LOADING = 'LOADING';
 const GET_DETAIL = 'GET_DETAIL';
 const ADD_COMMENT = 'ADD_COMMENT';
 const ADD_LIKE = 'ADD_LIKE';
 
 const getPostList = createAction(GET_POST, data => ({ data }));
+const loading = createAction(LOADING, data => ({ data }));
 const getPostDetail = createAction(GET_DETAIL, data => ({ data }));
 const addComments = createAction(ADD_COMMENT, data => ({ data }));
 const addLikes = createAction(ADD_LIKE, data => ({ data }));
@@ -24,6 +25,7 @@ const addLikes = createAction(ADD_LIKE, data => ({ data }));
 const initialState = {
   postList: [],
   detail: [],
+  loading: false,
 };
 
 const getPostDB = (data = null) => {
@@ -39,8 +41,10 @@ const getPostDB = (data = null) => {
 
 const addPostDB = multipartFile => {
   return async function (dispatch, getState, { history }) {
+    dispatch(loading(true));
     try {
       await addPost(multipartFile);
+      dispatch(loading(false));
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -50,8 +54,10 @@ const addPostDB = multipartFile => {
 
 const editPostDB = (postId, data) => {
   return async function (dispatch, getState, { history }) {
+    dispatch(loading(true));
     try {
       await editPost(postId, data);
+      dispatch(loading(false));
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
@@ -126,6 +132,10 @@ export default handleActions(
     [GET_POST]: (state, action) =>
       produce(state, draft => {
         draft.postList = action.payload.data;
+      }),
+    [LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = action.payload.data;
       }),
     [GET_DETAIL]: (state, action) =>
       produce(state, draft => {

@@ -20,8 +20,6 @@ const PostCard = props => {
   const info = props.info;
   const imgList = info.imageList;
 
-  console.log(info);
-
   const time = info.createdAt.split(' ');
 
   return (
