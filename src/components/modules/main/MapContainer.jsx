@@ -14,50 +14,56 @@ const { kakao } = window;
 
 const MapContainer = () => {
   const dispatch = useDispatch();
+
+  // kakao map 함수를 가지고 있음
   const [move, setMove] = useState(null);
   const [maker, setMaker] = useState(null);
   const [makers, setMakers] = useState(null);
 
+  // 로케이션 정보를 받아옵니다
   const locationInfo = useSelector(state => state.main.list);
 
-  useEffect(async () => {
+  // 최초 1회 맵 생성
+  useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-    let container = document.getElementById('map');
+    const container = document.getElementById('map');
 
-    let options = {
+    const options = {
       center: new window.kakao.maps.LatLng(userInfo.longitude, userInfo.latitude),
       level: 7,
     };
 
-    // 최초 1회 맵 생성
-    if (locationInfo.gps === null) {
-      let map = new window.kakao.maps.Map(container, options);
-      setMove(map);
+    const map = new window.kakao.maps.Map(container, options);
+    setMove(map);
 
-      // 마커 생성
-      let markerPosition = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
+    // 마커 생성
+    const markerPosition = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
 
-      // 마커를 생성
-      let marker = new kakao.maps.Marker({
-        position: markerPosition,
-      });
-      kakao.maps.event.addListener(marker, 'click', function () {
-        dispatch(listActions.upList());
-      });
-      setMaker(marker);
-      marker.setMap(map);
+    // 마커를 생성
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+    });
+    kakao.maps.event.addListener(marker, 'click', function () {
+      dispatch(listActions.upList());
+    });
+    setMaker(marker);
+    marker.setMap(map);
+  }, []);
+
+  // gps값 변경시에 맵 이동
+  useEffect(() => {
+    if (move === null) {
       return;
     }
-
     // 지도 이동
-    var moveLatLon = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
-    move.panTo(moveLatLon);
+    const moveLatLon = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
+    move.panTo(moveLatLon); // 여기서 사용합니다.
 
     // 마커 삭제후 재생성
     maker.setMap(null);
-    let markerPosition = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
-    let marker = new kakao.maps.Marker({
+    const markerPosition = new kakao.maps.LatLng(locationInfo.lng, locationInfo.lat);
+    const marker = new kakao.maps.Marker({
       position: markerPosition,
     });
     // 마커를 생성
