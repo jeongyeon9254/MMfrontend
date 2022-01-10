@@ -95,7 +95,7 @@ const IsSelect = styled.div`
   border-radius: 7px;
   border: 1px solid #e1e1e1;
   position: relative;
-  z-index: 9999;
+  z-index: 20;
   height: ${p => p.high};
 `;
 const Tiactive = styled.p`
@@ -120,7 +120,7 @@ const OptionBox = styled.div`
   left: 5px;
   height: 1px;
   overflow: hidden;
-  z-index: 999;
+  z-index: 10;
   &.on {
     width: 100%;
     left: 0px;
