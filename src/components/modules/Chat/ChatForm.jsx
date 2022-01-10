@@ -13,10 +13,23 @@ const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe } = props;
   const { userId, name, roomId } = props.data;
+  const scrollRef = React.useRef('');
   const msRef = React.useRef('');
   const [Chatting, setChatting] = React.useState('');
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatx = useSelector(state => state.chat.List);
+
+  //스크롤 엑션
+  const scrollTomBottom = () => {
+    if (scrollRef.current) {
+      console.log(scrollRef.current.scrollTop);
+      console.log(scrollRef.current.scrollHeight);
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+  React.useEffect(() => {
+    scrollTomBottom();
+  }, []);
 
   React.useEffect(() => {
     if (roomId) {
@@ -27,22 +40,19 @@ const ChatForm = props => {
     };
   }, [roomId]);
 
-  //스크롤 엑션
-  const scrollTomBottom = () => {};
-
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header Page point="absolute" _onClick={_onClick}>
         {name}
       </Header>
-      <ScrollBox>
+      <ScrollBox ref={scrollRef}>
         <Grid gap="19px" padding="19px 30px">
           {!Chatx
             ? ''
             : Chatx.map((x, idx) => {
                 switch (x.type) {
                   case 'TALK':
-                    return x.sender === userInfo.username ? (
+                    return x.senderName === userInfo.username ? (
                       <PartyMe key={idx} data={x}>
                         {x.message}
                       </PartyMe>

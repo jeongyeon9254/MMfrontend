@@ -20,9 +20,9 @@ const initialState = {
 };
 
 // 채팅방 만들기
-const postChatRoomListDB = userId => {
+const postChatRoomListDB = guestInfo => {
   return async function (dispatch, getState, { history }) {
-    const res = postChatRoomList(userId);
+    const res = postChatRoomList(guestInfo);
   };
 };
 
@@ -40,8 +40,8 @@ const getChatMsListDB = roomId => {
     try {
       console.log(roomId);
       const res = await getChatMsList(roomId);
-      console.log(res.data.chatMessageDtoList);
-      dispatch(LoadChatting(res.data.chatMessageDtoList));
+      console.log(res.data);
+      dispatch(LoadChatting(res.data));
     } catch (e) {
       console.log(e);
     }

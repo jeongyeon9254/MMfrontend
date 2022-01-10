@@ -35,12 +35,12 @@ function MyinfoHead(props) {
 const NewHeader = styled.div`
   background-color: #3f3f41;
   width: 100%;
-  height: 314px;
+  height: 300px;
   border-radius: 0px 0px 50px 0px;
   position: fixed;
   left: 0px;
   top: 0px;
-  padding-top: 23%;
+  padding-top: 20%;
 `;
 const ImgBit = styled.img`
   position: absolute;

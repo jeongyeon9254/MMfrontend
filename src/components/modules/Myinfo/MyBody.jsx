@@ -15,7 +15,7 @@ function MyBody() {
           <Myinterests Disable data={Info.interestList} />
         </MyPartBox>
         <MyPartBox title="한줄 소개">
-          <Box padding="12px 17px">{Info.intro ? Info.intro : ' '}</Box>
+          <Box padding="10px 17px">{Info.intro ? Info.intro : ' '}</Box>
         </MyPartBox>
       </Grid>
     </Body>
@@ -24,7 +24,7 @@ function MyBody() {
 const Body = styled.div`
   position: absolute;
   left: 0px;
-  top: 42%;
+  top: 39%;
   padding: 20px 30px;
   width: 100%;
 `;

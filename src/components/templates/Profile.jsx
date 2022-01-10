@@ -28,14 +28,22 @@ const Profile = props => {
   const AfterAlert = useSelector(state => state.modal.AfterAlert);
   const mbti = profile.interestList;
 
+  console.log(profile);
+
   const [modal, setModal] = useState(false);
 
   const exit = () => {
     dispatch(modalActions.ExitAlert());
   };
+  const guestInfo = {
+    guestId: profile.username,
+    guestMbti: profile.mbti,
+    guestNick: profile.nickname,
+    guestImg: profile.profileImage,
+  };
 
   const next = () => {
-    dispatch(chatActions.postChatRoomListDB(profile.userId));
+    dispatch(chatActions.postChatRoomListDB(guestInfo));
     setModal(true);
     exit();
   };
