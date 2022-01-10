@@ -24,11 +24,12 @@ const PostMain = () => {
   const dispatch = useDispatch();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  React.useEffect(() => {
-    dispatch(postAcitions.getPostDB());
-  }, []);
-
   const postList = useSelector(state => state.post.postList);
+  const page = useSelector(state => state.post.page);
+
+  React.useEffect(() => {
+    dispatch(postAcitions.getPostDB(page));
+  }, []);
 
   const list = [...postList];
 
@@ -48,8 +49,6 @@ const PostMain = () => {
   if (kategorie === null || kategorie === '전체보기') {
     filterLists = arr;
   }
-
-  console.log(postList);
 
   return (
     <PostBox>
