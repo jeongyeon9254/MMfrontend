@@ -23,7 +23,6 @@ const AddInterest = props => {
       return setDuplicated(index);
     }
   };
-  //
 
   const PageControl = () => {
     setOpen(!Open);
