@@ -58,29 +58,11 @@ const AddIntro = props => {
     }
   };
 
-  const next = () => {
-    ClickEvent();
-  };
-
-  const exit = () => {
-    dispatch(modalActions.ExitAlert());
-  };
-
   return (
     <ShowPage className={show ? 'open' : ''}>
       <Header Page point="relative" zIndex="0" _onClick={Control}>
         한줄 소개 작성하기
       </Header>
-      {YesAlert ? (
-        <Alert MyBit isButton yes={next} no={exit}>
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Title>추가입력 작성을 완료할까요?</Title>
-            <Grid gap="4px">
-              <Content>확인 시 메인하면으로 이동합니다.</Content>
-            </Grid>
-          </Grid>
-        </Alert>
-      ) : null}
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">
           <IntroTitle>
@@ -106,9 +88,7 @@ const AddIntro = props => {
           state={comment !== '' ? 'false' : 'Inactive'}
           width="315px"
           BtnBottom
-          _onClick={() => {
-            dispatch(modalActions.setAlert());
-          }}
+          _onClick={ClickEvent}
         >
           다음으로
         </Button>
@@ -126,7 +106,6 @@ const IntroCommet = styled.span`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 
-<<<<<<< HEAD
 const ShowPage = styled.div`
   position: fixed;
   width: 100%;
@@ -139,17 +118,6 @@ const ShowPage = styled.div`
   &.open {
     left: 0px;
   }
-=======
-const Title = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.87);
-`;
-const Content = styled.p`
-  font-size: ${props => props.theme.fontSizes.small};
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
->>>>>>> main
 `;
 
 export default AddIntro;
