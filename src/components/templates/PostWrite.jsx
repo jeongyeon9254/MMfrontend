@@ -17,6 +17,7 @@ import Header from '../../components/modules/layout/Header';
 
 // Js
 import { history } from '../../redux/configureStore.js';
+import Spiner from '../../shared/Spiner';
 
 const PostWrite = props => {
   const dispatch = useDispatch();
@@ -62,8 +63,9 @@ const PostWrite = props => {
       };
     });
   };
-  console.log(images);
+
   const preview = useSelector(state => state.preview.preview);
+  const loading = useSelector(state => state.post.loading);
 
   const changeTag = e => {
     setTag(e.target.name);
@@ -203,6 +205,7 @@ const PostWrite = props => {
           게시글 올리기
         </Button>
       </PostBox>
+      {loading ? <Spiner post /> : null}
     </>
   );
 };

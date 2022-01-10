@@ -15,21 +15,28 @@ import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
 import MapContainer from '../modules/Main/MapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
-import MainNoneLoing from '../modules/Main/MainNoneLoing';
 import Spiner from '../../shared/Spiner.jsx';
 
 const Main = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const [modal, setModal] = useState(false);
+  const [locationList, setLocationList] = useState(false);
   const [location, setLocation] = useState(userInfo.location);
-
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
 
+  const onLocation = () => {
+    if (locationList === false) setLocationList(true);
+    if (locationList === true) setLocationList(false);
+  };
+
+  const outModal = () => {
+    setModal(false);
+  };
+
   const onModal = () => {
-    if (modal === false) setModal(true);
-    if (modal === true) setModal(false);
+    setModal(true);
   };
 
   React.useEffect(() => {
@@ -40,12 +47,12 @@ const Main = props => {
     <React.Fragment>
       <Header main>메인화면</Header>
       <LocationBox>
-        <Button BtnTag _onClick={onModal}>
+        <Button BtnTag _onClick={onLocation}>
           서울 특별시 {location}
         </Button>
       </LocationBox>
       <MapKategorieNav userInfo={userInfo} />
-      <MapContainer />
+      <MapContainer onModal={onModal} />
       <CenterBtn>
         <Button
           _onClick={async () => {
@@ -66,9 +73,9 @@ const Main = props => {
           자동매칭
         </Button>
       </CenterBtn>
-      <MapList></MapList>
+      <MapList modal={modal} outModal={outModal} />
       <Footer />
-      {modal ? (
+      {locationList ? (
         <Modal>
           <div className="inner">
             {gpsLsit.map((list, idx) => {
@@ -76,7 +83,7 @@ const Main = props => {
                 <Button
                   _onClick={() => {
                     setLocation(list.location);
-                    setModal(false);
+                    setLocationList(false);
                     dispatch(mainActions.chemyListDB(idx + 1));
                     //지역 get 요청
                   }}
