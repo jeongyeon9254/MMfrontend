@@ -1,9 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-import { getMyinfoDB, getChemyDB, getGuestDB } from '../../api/modules/chemy';
+import { getMyinfoDB, getChemyDB, getGuestDB, getLocationChemy } from '../../api/modules/chemy';
 
 const GET_LIST = 'GET_LIST';
+const GET_LOCATION = 'GET_LOCATION';
 const GET_GUEST = 'GET_GUEST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
@@ -32,6 +33,18 @@ const getListDB = (data = null) => {
     getMyinfoDB()
       .then(res => {
         dispatch(getList(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+const getLocationDB = (locationId, InterestId) => {
+  return async function (dispatch, getState, { history }) {
+    getLocationChemy(locationId, InterestId)
+      .then(res => {
+        dispatch(chemyList(res.data));
       })
       .catch(err => {
         console.log(err);
@@ -117,6 +130,7 @@ const actionCreators = {
   setKategorie,
   kategorieReset,
   getGuestListDB,
+  getLocationDB,
 };
 
 export { actionCreators };
