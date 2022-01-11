@@ -32,6 +32,7 @@ const Header = props => {
     name,
     defaultName,
     Page,
+    sendStop,
   } = props;
 
   const styles = {
@@ -91,7 +92,7 @@ const Header = props => {
           alt=""
         />
       </Grid>
-      <Grid row justify="space-between">
+      <Grid row justify="space-between" align="center">
         {main ? null : (
           <div
             className="backBtn"
@@ -103,8 +104,8 @@ const Header = props => {
           </div>
         )}
         <TiTle {...styles}>{children}</TiTle>
-        {chat ? <Search src={icon_search} /> : ''}
-        {post ? <Exit>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
+        {/* {chat ? <Search src={icon_search} /> : ''} */}
+        {chat ? <Exit onClick={sendStop}>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
         {myinfo ? (
           <LogOut
             onClick={() => {
@@ -178,6 +179,7 @@ const Null = styled.div`
 const Exit = styled.div`
   font-size: 14px;
   color: #4e4e4e;
+  cursor: pointer;
 `;
 const Search = styled.img`
   height: 24px;

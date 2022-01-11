@@ -11,17 +11,16 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 
 const ChatForm = props => {
   const dispatch = useDispatch();
-  const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe } = props;
-  const { userId, name, roomId } = props.data;
-  const scrollRef = React.useRef('');
-  const msRef = React.useRef('');
-  const [Chatting, setChatting] = React.useState('');
+  const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop } = props;
+  const { guestNick, guestMbti, roomId } = props.data;
+  const scrollRef = React.useRef();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const Chatx = useSelector(state => state.chat.List);
+  const Chatting = useSelector(state => state.chat.List);
 
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {
+      console.log(scrollRef.current);
       console.log(scrollRef.current.scrollTop);
       console.log(scrollRef.current.scrollHeight);
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -29,27 +28,29 @@ const ChatForm = props => {
   };
   React.useEffect(() => {
     scrollTomBottom();
-  }, []);
+  }, [Chatting.length]);
 
   React.useEffect(() => {
     if (roomId) {
       dispatch(ChatAction.getChatMsListDB(roomId));
     }
     return () => {
-      wsDisConnectUnsubscribe();
+      if (roomId) {
+        wsDisConnectUnsubscribe();
+      }
     };
   }, [roomId]);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
-      <Header Page point="absolute" _onClick={_onClick}>
-        {name}
+      <Header Page point="absolute" _onClick={_onClick} sendStop={sendStop} chat>
+        {guestNick}
       </Header>
       <ScrollBox ref={scrollRef}>
         <Grid gap="19px" padding="19px 30px">
-          {!Chatx
+          {!Chatting
             ? ''
-            : Chatx.map((x, idx) => {
+            : Chatting.map((x, idx) => {
                 switch (x.type) {
                   case 'TALK':
                     return x.senderName === userInfo.username ? (
