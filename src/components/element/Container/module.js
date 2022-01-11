@@ -56,7 +56,7 @@ export const ContainerStyle = styled.div`
   @media only screen and (max-width: 450px) {
     position: absolute;
     max-width: 100%;
-    max-height: 828px;
+    max-height: 100vh;
     left: 0;
     top: 0;
     width: 100%;

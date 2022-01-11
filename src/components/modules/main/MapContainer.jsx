@@ -1,13 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getCookie } from '../../../shared/Cookie.js';
 
 // Js
-import { useDispatch, useSelector } from 'react-redux';
-
-// Api
-import { getMyinfoDB } from '../../../api/modules/chemy.js';
+import { useSelector } from 'react-redux';
 
 const { kakao } = window;
 

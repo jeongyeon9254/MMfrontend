@@ -18,6 +18,7 @@ import {
   Start,
   LoginNeed,
   Profile,
+  Sample,
 } from '../components/templates';
 import { PrivateRoute, PublicRoute, Bg } from '../components/modules/layout';
 // Redux 불러오기
@@ -33,6 +34,7 @@ function App() {
         <PrivateRoute exact path="/start" Component={Start} />
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
+        <PublicRoute exact path="/sample" Component={Sample} />
         <PrivateRoute exact path="/" Component={Main} />
         <PrivateRoute exact path="/choice" Component={Choice} />
         <PrivateRoute exact path="/chat" Component={Chat} />
@@ -51,6 +53,7 @@ function App() {
         />
         <PublicRoute exact restricted={true} path="*" Component={NotPound} />
       </Switch>
+
       {/* <Route exact path="/hidden" component={Hidden} /> */}
     </ConnectedRouter>
   );

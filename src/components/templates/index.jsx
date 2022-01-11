@@ -14,6 +14,7 @@ import NotPound from './NotPound';
 import Start from './Start';
 import LoginNeed from './LoginNeed';
 import Profile from './Profile';
+import Sample from './Sample';
 
 export {
   Main,
@@ -32,4 +33,5 @@ export {
   Start,
   LoginNeed,
   Profile,
+  Sample,
 };

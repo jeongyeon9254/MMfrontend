@@ -53,23 +53,24 @@ const PostMain = () => {
     filterLists = arr;
   }
 
-  let element = document.getElementById('allBox');
-  let element_2 = document.getElementById('scrollBox');
+  let allBox = document.getElementById('allBox');
+  let scrollBox = document.getElementById('scrollBox');
 
-  const aa = () => {
-    const SCROLLED_HEIGHT = element.scrollTop;
-    const WINDOW_HEIGHT = element_2.offsetHeight;
-    const DOC_TOTAL_HEIGHT = element.offsetHeight;
-    if (SCROLLED_HEIGHT + DOC_TOTAL_HEIGHT - 77 === WINDOW_HEIGHT) {
-      console.log('실행');
+  const infinityScroll = () => {
+    const recentHeight = allBox.scrollTop;
+    const scrollBoxHeight = scrollBox.offsetHeight;
+    const allBoxHeight = allBox.offsetHeight;
+    if (recentHeight + allBoxHeight - 77 === scrollBoxHeight) {
       dispatch(postAcitions.getPostDB(page));
     }
   };
 
   return (
-    <PostBox id="allBox" onScroll={aa}>
+    <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
-      <MapKategorieNav userInfo={userInfo} />
+      <div>
+        <MapKategorieNav userInfo={userInfo} />
+      </div>
       <div id="scrollBox">
         {postList.length !== 0 ? (
           filterLists.length > 0 ? (
@@ -109,13 +110,6 @@ const PostMain = () => {
           )
         ) : null}
       </div>
-      {/* <div
-        onClick={() => {
-          dispatch(postAcitions.getPostDB(page));
-        }}
-      >
-        다음으로갑시다잉
-      </div> */}
       <div className="postBtnBox">
         <Button
           BtnRound

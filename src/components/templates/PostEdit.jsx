@@ -46,6 +46,10 @@ const PostEdit = props => {
   };
 
   const editPost = async () => {
+    if (text === '') {
+      alert('게시글을 입력해주세요');
+      return;
+    }
     const data = {
       tag: tag,
       content: text,

@@ -196,6 +196,10 @@ const PostWrite = props => {
         </Grid>
         <Button
           _onClick={() => {
+            if (text === '') {
+              alert('게시글을 입력해주세요');
+              return;
+            }
             setAlt(true);
           }}
           BtnBottom
