@@ -4,7 +4,6 @@ import { produce } from 'immer';
 import { getMyinfoDB, getChemyDB, getGuestDB, getLocationChemy } from '../../api/modules/chemy';
 
 const GET_LIST = 'GET_LIST';
-const GET_LOCATION = 'GET_LOCATION';
 const GET_GUEST = 'GET_GUEST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
