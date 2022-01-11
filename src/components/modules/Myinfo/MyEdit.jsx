@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Input, Grid, Button, Image } from '../../element';
+import { Input, Grid, Button, Image, Alert } from '../../element';
 import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyLocation, MyImgFile } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
@@ -15,6 +15,8 @@ function MyEdit(props) {
   const [Int, SetInt] = React.useState([]);
   const [Img, SetImg] = React.useState(userInfo.profileImage);
   const [Location, SetLocation] = React.useState(userInfo.location);
+
+  const [Alt, setAlt] = React.useState(false);
 
   const SetEmit = item => {
     console.log(item);
@@ -73,9 +75,27 @@ function MyEdit(props) {
     }
     dispatch(userAction.userInfoPut(formData));
   };
+
+  const next = () => {
+    ClickEvent();
+  };
+
+  const exit = () => {
+    setAlt(false);
+  };
+
   return (
     <Body className={Open ? 'Open' : 'Close'}>
-      {' '}
+      {Alt ? (
+        <Alert MyBit isButton yes={next} no={exit}>
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Title>내정보 수정을 완료할까요?</Title>
+            <Grid gap="4px">
+              <Commet>확인 시 메인하면으로 이동합니다.</Commet>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header point="relative" Page _onClick={_onClick}>
         내 정보 수정하기
       </Header>
@@ -119,7 +139,13 @@ function MyEdit(props) {
           />
         </MyPartBox>
       </Grid>
-      <MyBottom _onClick={ClickEvent}>수정 완료하기</MyBottom>
+      <MyBottom
+        _onClick={() => {
+          setAlt(true);
+        }}
+      >
+        수정 완료하기
+      </MyBottom>
     </Body>
   );
 }
@@ -140,5 +166,14 @@ const Body = styled.div`
     opacity: 1;
     left: 0px;
   }
+`;
+
+const Title = styled.p`
+  font-weight: 400;
+  font-size: ${props => props.theme.fontSizes.xxl};
+`;
+
+const Commet = styled.p`
+  font-size: ${props => props.theme.fontSizes.small};
 `;
 export default MyEdit;

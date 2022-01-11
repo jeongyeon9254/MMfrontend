@@ -4,10 +4,17 @@ import styled from 'styled-components';
 import { Image, Grid } from '../element/index';
 import StartLogo from '../../img/Icon/Start_logo.svg';
 import StartTitle from '../../img/Icon/Start_title.svg';
+import history from '../../redux/configureStore';
 
 const Start = () => {
   return (
-    <Grid align="center" padding=" 203px 0px 0px 0px">
+    <Grid
+      align="center"
+      padding=" 203px 0px 0px 0px"
+      _onclick={() => {
+        history.push('/');
+      }}
+    >
       <Grid width="112px" height="110px">
         <Image nobackground src={StartLogo}></Image>
       </Grid>
