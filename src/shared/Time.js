@@ -11,7 +11,6 @@ export const returnTime = date => {
   };
   const Exceeding = InputDate.split(' ')[0].substring(4).split('-');
   const Date = Exceeding[1] + '월' + Exceeding[2] + '일';
-
   if (Time.minute > 60) {
     if (Time.hour > 24) {
       if (Time.day > 7) {
