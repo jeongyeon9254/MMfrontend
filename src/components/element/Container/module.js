@@ -13,7 +13,7 @@ export const ImgBg = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   @media only screen and (max-width: 1050px) {
-    left: 47%;
+    left: 50%;
     background-image: none;
     height: 100%;
   }
@@ -43,8 +43,13 @@ export const ContainerStyle = styled.div`
   top: 21px;
   transform: translateX(-50%);
   @media only screen and (max-width: 1050px) {
-    top: 47%;
-    transform: translate(-50%, -50%);
+    height: 100%;
+    max-height: 100%;
+    left: 0px;
+    transform: none;
+    top: 0px;
+    max-width: 100%;
+    border-radius: 0px;
   }
   @media only screen and (max-width: 450px) {
     position: absolute;
