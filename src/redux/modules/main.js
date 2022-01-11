@@ -1,15 +1,17 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-import { getMyinfoDB, getChemyDB } from '../../api/modules/chemy';
+import { getMyinfoDB, getChemyDB, getGuestDB } from '../../api/modules/chemy';
 
 const GET_LIST = 'GET_LIST';
+const GET_GUEST = 'GET_GUEST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
 const SET_KATEGORIE = 'SET_KATEGORIE';
 const RESET_KATEGORIE = 'RESET_KATEGORIE';
 
 const getList = createAction(GET_LIST, data => ({ data }));
+const getGuestList = createAction(GET_GUEST, data => ({ data }));
 const chemyList = createAction(CHEMY_LIST, data => ({ data }));
 const reset = createAction(RESET, () => ({}));
 const setKategorie = createAction(SET_KATEGORIE, name => ({ name }));
@@ -37,6 +39,19 @@ const getListDB = (data = null) => {
   };
 };
 
+const getGuestListDB = (data = null) => {
+  return async function (dispatch, getState, { history }) {
+    console.log('실행');
+    getGuestDB()
+      .then(res => {
+        dispatch(getGuestList(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
 const chemyListDB = locationID => {
   return async function (dispatch, getState, { history }) {
     getChemyDB(locationID)
@@ -55,6 +70,16 @@ export default handleActions(
       produce(state, draft => {
         const data = action.payload.data;
         draft.list.result = data.userList;
+      }),
+    [GET_GUEST]: (state, action) =>
+      produce(state, draft => {
+        const data = action.payload.data;
+
+        draft.list.result = data.userList;
+
+        draft.list.gps = data.location;
+        draft.list.lat = data.latitude;
+        draft.list.lng = data.longitude;
       }),
     [CHEMY_LIST]: (state, action) =>
       produce(state, draft => {
@@ -91,6 +116,7 @@ const actionCreators = {
   reset,
   setKategorie,
   kategorieReset,
+  getGuestListDB,
 };
 
 export { actionCreators };

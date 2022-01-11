@@ -6,6 +6,7 @@ import { Grid, Image } from '../element/index';
 import Header from '../modules/layout/Header';
 import { actionCreators as userAction } from '../../redux/modules/user';
 import Logo from '../../img/Icon/Start_logo.svg';
+import { history } from '../../redux/configureStore.js';
 const Login = () => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
@@ -26,6 +27,13 @@ const Login = () => {
           <LoginBox>
             <p>카카오톡으로 간편로그인을 진행해주세요!</p>
             <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
+            <SampleBtn
+              onClick={() => {
+                history.push('/sample');
+              }}
+            >
+              비즈케미 둘러보기
+            </SampleBtn>
           </LoginBox>
         </Grid>
       </Grid>
@@ -59,5 +67,19 @@ const LoginBox = styled.div`
   gap: 12px;
   transform: translateX(-50%);
 `;
-
+const SampleBtn = styled.button`
+  padding: 0;
+  margin: 0;
+  width: 300px;
+  height: 45px;
+  border: 1px solid transparent;
+  border-radius: 90px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
+  }
+`;
 export default Login;
