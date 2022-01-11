@@ -9,6 +9,10 @@ function MyEdit(props) {
   const dispatch = useDispatch();
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+  const [err, Seterr] = React.useState(false);
+  const [limt, Selimt] = React.useState(false);
+
   const [nickname, setNickname] = React.useState(userInfo.nickname);
   const [textarea, setTextarea] = React.useState(userInfo.intro);
   const [Mbti, SetMbti] = React.useState(userInfo.mbti);
@@ -39,8 +43,6 @@ function MyEdit(props) {
   const map = Int.map(x => {
     return { interest: x };
   });
-
-  console.log(Img);
 
   const AddInfo = {
     nickname: nickname,
@@ -101,7 +103,7 @@ function MyEdit(props) {
       </Header>
       <Grid padding="18px 30px" gap="20px">
         <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
-        <MyPartBox title="나의 이름" num={nickname.length} max="4" input>
+        <MyPartBox title="나의 이름" num={nickname.length} err={err} max="4" input>
           <Input
             _borderColor="#ECECEC"
             _bg="#ECECEC"
@@ -111,7 +113,7 @@ function MyEdit(props) {
               if (e.target.value.length <= 4) {
                 setNickname(e.target.value);
               } else {
-                alert('4자 이하로 부탁드립니다.');
+                Seterr(true);
               }
             }}
           />
@@ -125,7 +127,7 @@ function MyEdit(props) {
         <MyPartBox title="관심사 설정">
           <Myinterests Emit={Haddit}></Myinterests>
         </MyPartBox>
-        <MyPartBox title="한줄 소개" num={textarea.length} max="100" input>
+        <MyPartBox title="한줄 소개" num={textarea.length} max="100" input err={limt}>
           <Input
             _type="textarea"
             _value={textarea}
@@ -133,7 +135,7 @@ function MyEdit(props) {
               if (e.target.value.length <= 100) {
                 setTextarea(e.target.value);
               } else {
-                alert('100자 이하로 부탁드립니다.');
+                Selimt(true);
               }
             }}
           />
