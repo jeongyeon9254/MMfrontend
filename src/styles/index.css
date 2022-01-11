@@ -5,9 +5,10 @@ body {
     'Noto Sans KR', 'Segoe UI', 'Malgun Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eee;
+  background-color: #fff;
   position: relative;
-  height: 100vh;
+  height: 100vh !important;
+  overflow: hidden;
 }
 
 button {
@@ -16,4 +17,9 @@ button {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+@media only screen and (max-width: 1050px) {
+  body {
+    background-color: #000;
+  }
 }

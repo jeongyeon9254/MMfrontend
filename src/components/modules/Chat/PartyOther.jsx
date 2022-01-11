@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { history } from '../../../redux/configureStore';
 import { Grid, Image, Box } from '../../element';
+import { returnTime } from '../../../shared/Time';
 
 function PartyOther(props) {
-  const { children } = props;
+  const { children, data } = props;
   const { senderImg, senderId } = props.data;
+
+  const diffTime = returnTime(data.date);
+  console.log(diffTime);
   return (
     <Grid
       row
@@ -20,7 +24,7 @@ function PartyOther(props) {
         <Box width="80%" padding="7px 10px">
           {children}
         </Box>
-        <Date>오후 7:35</Date>
+        <Date>{diffTime}</Date>
       </Grid>
     </Grid>
   );
