@@ -13,6 +13,7 @@ import Hidden from './Hidden';
 import NotPound from './NotPound';
 import Start from './Start';
 import LoginNeed from './LoginNeed';
+import Profile from './Profile';
 
 export {
   Main,
@@ -30,4 +31,5 @@ export {
   NotPound,
   Start,
   LoginNeed,
+  Profile,
 };

@@ -9,9 +9,14 @@ export const ImgBg = styled.div`
   height: 876px;
   width: 427px;
   position: absolute;
-  left: 50%;
+  left: 62%;
   top: 50%;
   transform: translate(-50%, -50%);
+  @media only screen and (max-width: 1050px) {
+    left: 47%;
+    background-image: none;
+    height: 100%;
+  }
   @media only screen and (max-width: 450px) {
     background-image: none;
     position: relative;
@@ -37,6 +42,10 @@ export const ContainerStyle = styled.div`
   left: 50%;
   top: 21px;
   transform: translateX(-50%);
+  @media only screen and (max-width: 1050px) {
+    top: 47%;
+    transform: translate(-50%, -50%);
+  }
   @media only screen and (max-width: 450px) {
     position: absolute;
     max-width: 100%;
