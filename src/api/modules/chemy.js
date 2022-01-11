@@ -16,6 +16,14 @@ export const getChemyDB = locationId => {
   });
 };
 
+// 지역별캐미 mbti get 기능
+export const getLocationChemy = (locationId, InterestId) => {
+  return instance({
+    method: 'get',
+    url: `/api/chemy/list/${locationId}/${InterestId}`,
+  });
+};
+
 // 빠른매칭 기능
 export const getMatchingDB = () => {
   return instance({

@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 // Js
 import { useDispatch, useSelector } from 'react-redux';
-import { gpsLsit } from '../modules/Main/gpsList.js';
 import { actionCreators as mainActions } from '../../redux/modules/main';
-import { getMatchingDB } from '../../api/modules/chemy';
 import { history } from '../../redux/configureStore.js';
 
 // component
@@ -18,7 +16,6 @@ import MapKategorieNav from '../modules/Main/MapKategorieNav';
 
 const Sample = props => {
   // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const [locationList, setLocationList] = useState(false);
   const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -47,7 +44,7 @@ const Sample = props => {
 
   return (
     <React.Fragment>
-      <Header main>메인화면</Header>
+      <Header main>둘러보기</Header>
       <LocationBox>
         <Button BtnTag _onClick={needLogin}>
           서울 특별시 {locationInfo.gps}
@@ -83,50 +80,6 @@ const LocationBox = styled.div`
   z-index: 1;
   @media only screen and (max-width: 450px) {
     top: 120px;
-  }
-`;
-
-// 개선필요
-const Modal = styled.div`
-  position: absolute;
-  width: 60%;
-  height: 50%;
-  left: 50%;
-  margin-left: -30%;
-  background-color: ${props => props.theme.colors.white};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  top: 200px;
-  padding: 10px 20px;
-  z-index: 1;
-  animation: modal-show 0.3s;
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      margin-top: -5%;
-    }
-    to {
-      opacity: 1;
-      margin-top: 0;
-    }
-  }
-  .inner {
-    overflow: scroll;
-    height: 100%;
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
-  }
-  button {
-    padding: 14px;
-    border: none;
-    cursor: pointer;
-    color: ${props => props.theme.colors.gray_2};
-    font-weight: bold;
-    font-size: ${props => props.theme.fontSizes.lg};
-  }
-  @media only screen and (max-width: 450px) {
-    top: 160px;
   }
 `;
 
