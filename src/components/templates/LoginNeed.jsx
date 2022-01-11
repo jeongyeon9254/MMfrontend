@@ -8,7 +8,7 @@ import { history } from '../../redux/configureStore';
 const LoginNeed = props => {
   return (
     <>
-      <Header Page></Header>
+      <Header></Header>
       <NeedBox style={{ backgroundImage: `url(${LoginNeedBG})` }}>
         <Grid align="center" gap="28px" padding="207px 0px 0px 0px">
           <Title>로그인이 필요해요!</Title>

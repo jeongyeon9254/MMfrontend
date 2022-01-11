@@ -23,6 +23,7 @@ const Main = props => {
   const [location, setLocation] = useState(userInfo.location);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
+  const [gpsId, setGpsId] = useState('');
 
   const dispatch = useDispatch();
 
@@ -51,7 +52,7 @@ const Main = props => {
           서울 특별시 {location}
         </Button>
       </LocationBox>
-      <MapKategorieNav userInfo={userInfo} />
+      <MapKategorieNav userInfo={userInfo} gpsId={gpsId} />
       <MapContainer onModal={onModal} />
       <CenterBtn>
         <Button
@@ -85,6 +86,7 @@ const Main = props => {
                     setLocation(list.location);
                     setLocationList(false);
                     dispatch(mainActions.chemyListDB(idx + 1));
+                    setGpsId(idx + 1);
                     //지역 get 요청
                   }}
                   key={idx}
