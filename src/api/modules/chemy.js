@@ -31,3 +31,11 @@ export const getchemyDB = userId => {
     url: `/api/chemy/${userId}`,
   });
 };
+
+// 샘플 정보 가져오기 기능
+export const getGuestDB = () => {
+  return instance({
+    method: 'get',
+    url: `/api/chemy/guest`,
+  });
+};
