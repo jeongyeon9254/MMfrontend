@@ -17,12 +17,10 @@ import {
   Chatroom,
   Start,
   LoginNeed,
+  Profile,
   Sample,
 } from '../components/templates';
-import Profile from '../components/templates/Profile';
-import PrivateRoute from '../components/modules/PrivateRoute';
-import PublicRoute from '../components/modules/PublicRoute';
-
+import { PrivateRoute, PublicRoute, Bg } from '../components/modules/layout';
 // Redux 불러오기
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
@@ -31,6 +29,7 @@ import { Route, Switch } from 'react-router-dom';
 function App() {
   return (
     <ConnectedRouter history={history}>
+      <Bg></Bg>
       <Switch>
         <PrivateRoute exact path="/start" Component={Start} />
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
