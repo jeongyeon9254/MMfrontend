@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 // Component
@@ -27,11 +27,10 @@ const PostMain = () => {
   const postList = useSelector(state => state.post.postList);
   const page = useSelector(state => state.post.page);
 
+  const [kate, setKate] = useState(0);
+
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
-    return () => {
-      dispatch(postAcitions.getPostDB(0));
-    };
   }, []);
 
   const list = [...postList];
@@ -43,16 +42,6 @@ const PostMain = () => {
         })
       : [];
 
-  const kategorie = useSelector(state => state.main.kategorie);
-
-  let filterLists;
-  if (kategorie !== null) {
-    filterLists = arr.filter(x => x.tag === kategorie);
-  }
-  if (kategorie === null || kategorie === '전체보기') {
-    filterLists = arr;
-  }
-
   let allBox = document.getElementById('allBox');
   let scrollBox = document.getElementById('scrollBox');
 
@@ -61,54 +50,58 @@ const PostMain = () => {
     const scrollBoxHeight = scrollBox.offsetHeight;
     const allBoxHeight = allBox.offsetHeight;
     if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
-      dispatch(postAcitions.getPostDB(page));
+      if (kate === 0) {
+        dispatch(postAcitions.getPostScrollDB(page));
+      } else {
+        dispatch(postAcitions.getKategorScrolliDB(kate, page));
+      }
     }
   };
+
+  console.log(list);
 
   return (
     <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
       <div className="navBox">
-        <MapKategorieNav userInfo={userInfo} post />
+        <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
       </div>
       <div id="scrollBox">
-        {postList.length !== 0 ? (
-          filterLists.length > 0 ? (
-            filterLists.map((x, idx) => {
-              return (
-                <div
-                  key={x.postId}
-                  onClick={() => {
-                    history.push(`/postMain/${x.postId}`);
-                  }}
-                >
-                  <PostCard info={x} />
-                  {x.commentList.length > 0 ? (
-                    x.commentList.length > 1 ? (
-                      <CommentBox>
-                        <MainComment info={x.commentList[0]} />
-                        <MainComment info={x.commentList[1]} />
-                      </CommentBox>
-                    ) : (
-                      <CommentBox>
-                        <MainComment info={x.commentList[0]} />
-                      </CommentBox>
-                    )
-                  ) : null}
-                  {x.commentList.length > 2 ? (
-                    <Grid width="20px;" margin="0 auto 20px auto">
-                      <img alt="더보기" src={icno_circle}></img>
-                    </Grid>
-                  ) : null}
-                </div>
-              );
-            })
-          ) : (
-            <Grid padding="40px 0 0 0">
-              <Null post></Null>
-            </Grid>
-          )
-        ) : null}
+        {arr.length > 0 ? (
+          arr.map((x, idx) => {
+            return (
+              <div
+                key={x.postId}
+                onClick={() => {
+                  history.push(`/postMain/${x.postId}`);
+                }}
+              >
+                <PostCard info={x} />
+                {x.commentList.length > 0 ? (
+                  x.commentList.length > 1 ? (
+                    <CommentBox>
+                      <MainComment info={x.commentList[0]} />
+                      <MainComment info={x.commentList[1]} />
+                    </CommentBox>
+                  ) : (
+                    <CommentBox>
+                      <MainComment info={x.commentList[0]} />
+                    </CommentBox>
+                  )
+                ) : null}
+                {x.commentList.length > 2 ? (
+                  <Grid width="20px;" margin="0 auto 20px auto">
+                    <img alt="더보기" src={icno_circle}></img>
+                  </Grid>
+                ) : null}
+              </div>
+            );
+          })
+        ) : (
+          <Grid padding="40px 0 0 0">
+            <Null post></Null>
+          </Grid>
+        )}
       </div>
       <div className="postBtnBox">
         <Button

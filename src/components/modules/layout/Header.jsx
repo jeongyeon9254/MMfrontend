@@ -11,6 +11,7 @@ import icon_detail from '../../../img/Icon/icon_detail.svg';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
+import { actionCreators as postActions } from '../../../redux/modules/post';
 import { actionCreators as imageActions } from '../../../redux/modules/preview';
 
 import { delCookie } from '../../../shared/Cookie';
@@ -55,7 +56,7 @@ const Header = props => {
     console.log('home');
     history.push('/');
     dispatch(mainActions.reset());
-    dispatch(mainActions.kategorieReset());
+    dispatch(postActions.reset());
     dispatch(imageActions.resetPreview());
   };
 
@@ -63,7 +64,7 @@ const Header = props => {
     console.log('back');
     history.goBack();
     dispatch(mainActions.reset());
-    dispatch(mainActions.kategorieReset());
+    dispatch(postActions.reset());
     dispatch(imageActions.resetPreview());
   };
 

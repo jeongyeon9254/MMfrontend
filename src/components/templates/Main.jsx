@@ -63,7 +63,7 @@ const Main = props => {
               } else {
                 setLoading(true);
                 setTimeout(function () {
-                  history.push(`/profile/${res.data.userId}`);
+                  history.push(`/profile/fast/${res.data.userId}`);
                 }, 1500);
               }
             });

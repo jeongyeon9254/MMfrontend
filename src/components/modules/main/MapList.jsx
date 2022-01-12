@@ -21,8 +21,6 @@ const MapList = props => {
     outModal();
   };
 
-  console.log(lists.result);
-
   return (
     <React.Fragment>
       {modal ? (

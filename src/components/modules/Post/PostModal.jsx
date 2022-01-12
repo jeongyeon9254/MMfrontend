@@ -59,7 +59,7 @@ const ModalBox = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   z-index: 51;
   background-color: rgba(0, 0, 0, 0.5);
   animation: postModal-show 0.5s;

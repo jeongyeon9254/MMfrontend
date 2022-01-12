@@ -19,7 +19,8 @@ const Profile = props => {
   React.useEffect(() => {
     const pathName = history.location.pathname;
     const name = pathName.split('/');
-    dispatch(profileActions.getProfileDB(name[2]));
+    console.log(name);
+    dispatch(profileActions.getProfileDB(name[name.length - 1]));
   }, []);
 
   const profile = useSelector(state => state.profile.list);
@@ -92,7 +93,6 @@ const Profile = props => {
       ) : null}
       <ProfileStyle>
         <Header>프로필</Header>
-
         <Grid margin="30px 0 0 0">
           <Image round width="50%" src={profile.profileImage} mbti={profile.mbti}></Image>
           <div className="mbti">
