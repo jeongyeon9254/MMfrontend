@@ -32,11 +32,3 @@ export const getChatMsList = roomId => {
     url: `/chat/room/${roomId}`,
   });
 };
-
-// 채팅방 퇴장 => 퇴장시 방 유지
-// export const deleteOutRoom = roomId => {
-//   return instance({
-//     method: 'get',
-//     url: `/quit/${roomId}`,
-//   });
-// };

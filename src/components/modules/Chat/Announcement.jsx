@@ -5,10 +5,13 @@ import arrow_back from '../../../img/Icon/arrow_back.svg';
 import { history } from '../../../redux/configureStore';
 import { Grid, Box, Button } from '../../element';
 import { useSelector } from 'react-redux';
+
 function Announcement(props) {
-  const { num, bg, fontcolor, ws } = props;
+  const { bg, fontcolor, ws } = props;
   const styles = { fontcolor };
-  const roomGet = useSelector(state => state.chat.roomGet);
+  const Send = useSelector(state => state.matching.ListSend);
+  const Receive = useSelector(state => state.matching.ListReceive);
+  const num = Send && Receive ? Send.length + Receive.length : 0;
   return (
     <Grid padding="15px 30px 7px" Zindex="9999">
       <Button
@@ -23,9 +26,7 @@ function Announcement(props) {
         }}
       >
         <Grid row justify="space-between" align="center">
-          <Text {...styles}>
-            현재 {roomGet.length ? roomGet.length : 0}건의 오고 간 매칭 신청이 있습니다.
-          </Text>
+          <Text {...styles}>현재 {num}건의 오고 간 매칭 신청이 있습니다.</Text>
           <img src={ws ? arrow_back : arrow_back_ios} alt="" />
         </Grid>
       </Button>

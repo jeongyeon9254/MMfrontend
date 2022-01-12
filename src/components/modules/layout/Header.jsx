@@ -4,6 +4,7 @@ import { Grid, Alert } from '../../element';
 import arrow_left from '../../../img/Icon/arrow_left.svg';
 import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
 import icon_search from '../../../img/Icon/icon_search.svg';
+import icon_replay from '../../../img/Icon/icon_replay.svg';
 import Phone_head from '../../../img/Icon/phone_head.png';
 import Phone_head_w from '../../../img/Icon/phone_head_w.png';
 import icon_detail from '../../../img/Icon/icon_detail.svg';
@@ -11,6 +12,7 @@ import icon_detail from '../../../img/Icon/icon_detail.svg';
 import { history } from '../../../redux/configureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
+import { actionCreators as postActions } from '../../../redux/modules/post';
 import { actionCreators as imageActions } from '../../../redux/modules/preview';
 
 import { delCookie } from '../../../shared/Cookie';
@@ -25,6 +27,7 @@ const Header = props => {
     _on,
     bg,
     white,
+    fast,
     myinfo,
     detail,
     zIndex,
@@ -55,7 +58,7 @@ const Header = props => {
     console.log('home');
     history.push('/');
     dispatch(mainActions.reset());
-    dispatch(mainActions.kategorieReset());
+    dispatch(postActions.reset());
     dispatch(imageActions.resetPreview());
   };
 
@@ -63,7 +66,7 @@ const Header = props => {
     console.log('back');
     history.goBack();
     dispatch(mainActions.reset());
-    dispatch(mainActions.kategorieReset());
+    dispatch(postActions.reset());
     dispatch(imageActions.resetPreview());
   };
 
@@ -106,6 +109,7 @@ const Header = props => {
         <TiTle {...styles}>{children}</TiTle>
         {/* {chat ? <Search src={icon_search} /> : ''} */}
         {chat ? <Exit onClick={sendStop}>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
+        {fast ? <Detail alt="재시도" src={icon_replay} onClick={_onClick}></Detail> : null}
         {myinfo ? (
           <LogOut
             onClick={() => {

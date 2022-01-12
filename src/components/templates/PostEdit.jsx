@@ -71,6 +71,7 @@ const PostEdit = props => {
                   key={idx}
                   name={interest}
                   BtnTag
+                  size="12px"
                   _onClick={changeTag}
                   state={interest === tag ? 'active' : null}
                 >
@@ -88,7 +89,7 @@ const PostEdit = props => {
             <span>/ 100</span>
           </div>
         </Grid>
-        <Button _onClick={editPost} BtnBottom width="83%">
+        <Button _onClick={editPost} BtnBottom width="85%">
           게시글 수정하기
         </Button>
       </PostBox>
@@ -102,7 +103,7 @@ const PostBox = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 23px;
   img {
     width: 80px;
   }
@@ -142,7 +143,7 @@ const PostBox = styled.div`
   }
   .title {
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 `;
 
