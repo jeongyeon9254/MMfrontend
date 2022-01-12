@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,6 +67,8 @@ const PostWrite = props => {
   const preview = useSelector(state => state.preview.preview);
   const loading = useSelector(state => state.post.loading);
 
+  const date = moment();
+
   const changeTag = e => {
     setTag(e.target.name);
   };
@@ -76,6 +79,7 @@ const PostWrite = props => {
   };
 
   const addPost = async () => {
+    // console.log(date);
     let multipartFile = new FormData();
     const emptyFile = new File([''], 'empty');
     if (images.length === 0) {
@@ -88,6 +92,7 @@ const PostWrite = props => {
     }
 
     const data = {
+      // date: date,
       tag: tag,
       content: text,
     };
@@ -148,7 +153,7 @@ const PostWrite = props => {
                 </Grid>
               </label>
               {preview.length ? (
-                <RowDiv>
+                <Preview>
                   <button className="resetBtn" onClick={restPost}>
                     x
                   </button>
@@ -170,7 +175,7 @@ const PostWrite = props => {
                         : null}
                     </Swiper>
                   </div>
-                </RowDiv>
+                </Preview>
               ) : null}
             </Grid>
           </div>
@@ -260,7 +265,7 @@ const PostBox = styled.div`
   }
 `;
 
-const RowDiv = styled.div`
+const Preview = styled.div`
   background: #fff;
   width: 68%;
   border: 1px solid #a7a7a7;
