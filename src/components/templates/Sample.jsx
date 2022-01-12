@@ -14,8 +14,7 @@ import MapList from '../modules/Main/MapList.jsx';
 import SampleMapContainer from '../modules/Main/SampleMapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
 
-const Sample = props => {
-  // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+const Sample = () => {
   const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -50,14 +49,16 @@ const Sample = props => {
           서울 특별시 {locationInfo.gps}
         </Button>
       </LocationBox>
-      <MapKategorieNav sample userInfo={userInfo} />
+      <div onClick={needLogin}>
+        <MapKategorieNav sample userInfo={userInfo} />
+      </div>
       <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
       <CenterBtn>
         <Button BtnRound width="87px" _onClick={needLogin}>
           자동매칭
         </Button>
       </CenterBtn>
-      <MapList modal={modal} outModal={outModal} />
+      <MapList sample modal={modal} outModal={outModal} />
       <Footer />
     </React.Fragment>
   );
