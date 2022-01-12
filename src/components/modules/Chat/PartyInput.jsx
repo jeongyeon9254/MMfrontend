@@ -6,7 +6,7 @@ import moment from 'moment';
 function PartyInput(props) {
   const [Chatting, setChatting] = React.useState('');
   const { roomId, sendMessage } = props;
-  const date = moment().format('YYYY-MM-DD HH:mm');
+  const date = moment();
   // 보내는거
   const ChatPost = e => {
     setChatting(e.target.value);

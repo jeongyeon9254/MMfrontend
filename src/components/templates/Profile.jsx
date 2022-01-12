@@ -94,7 +94,7 @@ const Profile = props => {
         <Header>프로필</Header>
 
         <Grid margin="30px 0 0 0">
-          <Image round width="50%" src={profile.profileImage}></Image>
+          <Image round width="50%" src={profile.profileImage} mbti={profile.mbti}></Image>
           <div className="mbti">
             <Image round mbti={profile ? profile.mbti : 'INFJ'}></Image>
           </div>

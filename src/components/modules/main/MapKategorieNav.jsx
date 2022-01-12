@@ -30,6 +30,55 @@ const MapKategorieNav = props => {
 
   const [active, setActive] = useState(0);
 
+  if (props.post) {
+    return (
+      <RowDiv>
+        <Swiper
+          style={{ background: '#fff' }}
+          spaceBetween={10}
+          slidesPerView={4}
+          className="scroll-container"
+        >
+          {navList.map((list, index) => {
+            return (
+              <SwiperSlide className="slide" key={index}>
+                {index === 0 ? (
+                  <Button
+                    BtnTag
+                    state={active === index ? 'active' : false}
+                    _onClick={e => {
+                      setActive(index);
+                      dispatch(mainActions.chemyListDB(gpsId));
+                      dispatch(mainActions.setKategorie(list));
+                    }}
+                  >
+                    <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
+                    전체보기
+                  </Button>
+                ) : (
+                  <Button
+                    BtnTag
+                    state={active === index ? 'active' : false}
+                    _onClick={e => {
+                      setActive(index);
+                      dispatch(mainActions.getLocationDB(gpsId, index));
+                      dispatch(mainActions.setKategorie(list));
+                    }}
+                  >
+                    {list === '전체보기' ? (
+                      <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
+                    ) : null}
+                    {list}
+                  </Button>
+                )}
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </RowDiv>
+    );
+  }
+
   return (
     <RowDiv>
       <Swiper

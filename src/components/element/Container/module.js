@@ -9,16 +9,22 @@ export const ImgBg = styled.div`
   height: 876px;
   width: 427px;
   position: absolute;
-  left: 50%;
+  left: 62%;
   top: 50%;
   transform: translate(-50%, -50%);
+  overflow: hidden;
+  @media only screen and (max-width: 1050px) {
+    left: 50%;
+    background-image: none;
+    height: 100vh;
+  }
   @media only screen and (max-width: 450px) {
     background-image: none;
     position: relative;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     transform: none;
   }
 `;
@@ -37,6 +43,16 @@ export const ContainerStyle = styled.div`
   left: 50%;
   top: 21px;
   transform: translateX(-50%);
+  @media only screen and (max-width: 1050px) {
+    height: 100vh;
+    max-height: 100%;
+    left: 0px;
+    transform: none;
+    top: 0px;
+    max-width: 100%;
+    border-radius: 0px;
+    padding: 47px 0 87px 0;
+  }
   @media only screen and (max-width: 450px) {
     position: absolute;
     max-width: 100%;
@@ -47,6 +63,5 @@ export const ContainerStyle = styled.div`
     height: 100vh;
     transform: none;
     border-radius: 0px;
-    padding: 47px 0 87px 0;
   }
 `;

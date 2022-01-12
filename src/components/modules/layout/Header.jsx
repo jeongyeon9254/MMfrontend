@@ -155,7 +155,7 @@ const HeaderStyle = styled.header`
     cursor: pointer;
     background-color: transparent;
   }
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 1050px) {
     padding: 13px 23px;
     gap: 0;
     .mock {
