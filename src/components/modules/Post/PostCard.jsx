@@ -87,8 +87,9 @@ const PostCard = props => {
 const SwiperBox = styled.div`
   .swiper-pagination {
     font-size: 14px;
-    bottom: 16px;
+    bottom: 15px;
     letter-spacing: -1px;
+    color: #3f3f41;
   }
 `;
 

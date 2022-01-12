@@ -14,9 +14,10 @@ import icon_location from '../../../img/Icon/icon_location.svg';
 import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const lists = useSelector(state => state.main.list);
   const { modal, outModal } = props;
-
+  console.log(lists);
   const offModal = () => {
     outModal();
   };
@@ -28,6 +29,12 @@ const MapList = props => {
           <div className="downBtn">
             <img alt="리스트 닫기" src={arrow_bottom} onClick={offModal}></img>
           </div>
+          <Grid align="center" color="#fff">
+            <p>
+              "<b>{userInfo.nickname}</b> 님과 잘 통하는 사람이 <b>{lists.result.length}</b> 명
+              있습니다"
+            </p>
+          </Grid>
           {/* 카드리스트 */}
           <div className="inner">
             {lists.result.length > 0 ? (

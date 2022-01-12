@@ -89,7 +89,7 @@ const PostEdit = props => {
             <span>/ 100</span>
           </div>
         </Grid>
-        <Button _onClick={editPost} BtnBottom width="83%">
+        <Button _onClick={editPost} BtnBottom width="85%">
           게시글 수정하기
         </Button>
       </PostBox>
