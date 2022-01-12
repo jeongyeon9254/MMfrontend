@@ -42,13 +42,18 @@ const PostMain = () => {
         })
       : [];
 
-  let allBox = document.getElementById('allBox');
-  let scrollBox = document.getElementById('scrollBox');
+  const allBox = document.getElementById('allBox');
+  const scrollBox = document.getElementById('scrollBox');
+
+  console.log(scrollBox);
+
+  const aa = useRef();
 
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;
     const scrollBoxHeight = scrollBox.offsetHeight;
     const allBoxHeight = allBox.offsetHeight;
+
     if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
       if (kate === 0) {
         dispatch(postAcitions.getPostScrollDB(page));
@@ -58,10 +63,8 @@ const PostMain = () => {
     }
   };
 
-  console.log(list);
-
   return (
-    <PostBox id="allBox" onScroll={infinityScroll}>
+    <PostBox id="allBox" ref={aa} onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
       <div className="navBox">
         <MapKategorieNav userInfo={userInfo} setKate={setKate} post />

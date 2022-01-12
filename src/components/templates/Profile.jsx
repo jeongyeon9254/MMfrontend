@@ -8,13 +8,17 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as chatActions } from '../../redux/modules/chat';
+import { getMatchingDB } from '../../api/modules/chemy';
 
 // component
 import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
+import Spiner from '../../shared/Spiner';
 
 const Profile = props => {
   const dispatch = useDispatch();
+  const pathName = history.location.pathname;
+  const name = pathName.split('/');
 
   React.useEffect(() => {
     const pathName = history.location.pathname;
@@ -23,10 +27,9 @@ const Profile = props => {
     dispatch(profileActions.getProfileDB(name[name.length - 1]));
   }, []);
 
+  const [loading, setLoading] = useState(false);
   const profile = useSelector(state => state.profile.list);
   const mbti = profile.interestList;
-
-  console.log(profile);
 
   const [modal, setModal] = useState(false);
   const [connect, setConnect] = useState(false);
@@ -53,6 +56,16 @@ const Profile = props => {
     setDisconnect(true);
     setModal(false);
     exit();
+  };
+
+  const reTry = async () => {
+    setLoading(true);
+    await getMatchingDB().then(res => {
+      setTimeout(function () {
+        history.replace(`/profile/fast/${res.data.userId}`);
+        setLoading(false);
+      }, 1500);
+    });
   };
 
   return (
@@ -92,7 +105,13 @@ const Profile = props => {
         </MatchBox>
       ) : null}
       <ProfileStyle>
-        <Header>프로필</Header>
+        {name[2] === 'fast' ? (
+          <Header _on fast _onClick={reTry}>
+            프로필
+          </Header>
+        ) : (
+          <Header>프로필</Header>
+        )}
         <Grid margin="30px 0 0 0">
           <Image round width="50%" src={profile.profileImage} mbti={profile.mbti}></Image>
           <div className="mbti">
@@ -148,6 +167,7 @@ const Profile = props => {
           </Button>
         )}
       </ProfileStyle>
+      {loading ? <Spiner /> : null}
     </>
   );
 };

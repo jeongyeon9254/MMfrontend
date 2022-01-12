@@ -47,26 +47,29 @@ const PostCard = props => {
         </Grid>
       </Grid>
 
-      <Swiper
-        className="swiper-container"
-        style={{ width: '100%', position: 'relative' }}
-        pagination={{
-          type: 'fraction',
-        }}
-      >
-        {imgList
-          ? imgList[0].imageLink === ''
-            ? null
-            : imgList.map((list, idx) => {
-                return (
-                  <SwiperSlide key={list.imageId}>
-                    <Image src={list.imageLink} />
-                  </SwiperSlide>
-                );
-              })
-          : null}
-        <PaginationBakc />
-      </Swiper>
+      <SwiperBox>
+        <Swiper
+          className="swiper-container"
+          style={{ width: '100%', position: 'relative' }}
+          pagination={{
+            type: 'fraction',
+            fontSize: '12px',
+          }}
+        >
+          {imgList
+            ? imgList[0].imageLink === ''
+              ? null
+              : imgList.map((list, idx) => {
+                  return (
+                    <SwiperSlide key={list.imageId}>
+                      <Image src={list.imageLink} />
+                    </SwiperSlide>
+                  );
+                })
+            : null}
+          <PaginationBakc />
+        </Swiper>
+      </SwiperBox>
 
       <Grid padding="17px 44px 16px 33px">
         <Text>{info.content}</Text>
@@ -80,6 +83,14 @@ const PostCard = props => {
     </Grid>
   );
 };
+
+const SwiperBox = styled.div`
+  .swiper-pagination {
+    font-size: 14px;
+    bottom: 16px;
+    letter-spacing: -1px;
+  }
+`;
 
 const NameText = styled.p`
   font-weight: 700;
@@ -114,16 +125,16 @@ const Text = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
 `;
 const PaginationBakc = styled.div`
-  width: 80px;
-  height: 25px;
+  width: 53px;
+  height: 19px;
   background: #fff;
   position: absolute;
-  bottom: 6px;
+  bottom: 13px;
   z-index: 1;
   border-radius: 50px;
   opacity: 0.5;
   left: 50%;
-  margin-left: -40px;
+  margin-left: -26.5px;
 `;
 
 export default PostCard;
