@@ -45,10 +45,6 @@ const PostMain = () => {
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
 
-  console.log(scrollBox);
-
-  const aa = useRef();
-
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;
     const scrollBoxHeight = scrollBox.offsetHeight;
@@ -64,7 +60,7 @@ const PostMain = () => {
   };
 
   return (
-    <PostBox id="allBox" ref={aa} onScroll={infinityScroll}>
+    <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
       <div className="navBox">
         <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
