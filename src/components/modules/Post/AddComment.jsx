@@ -19,6 +19,10 @@ const AddComment = props => {
   const [comment, setComment] = useState();
 
   const addComment = () => {
+    if (comment === '') {
+      alert('코멘트를 입력해주세요');
+      return false;
+    }
     dispatch(postActions.addCommentsDB(postId, comment));
     setComment('');
   };

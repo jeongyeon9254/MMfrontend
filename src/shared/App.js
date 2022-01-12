@@ -15,7 +15,6 @@ import {
   KakaoCallback,
   NotPound,
   Chatroom,
-  Start,
   LoginNeed,
   Profile,
   Sample,
@@ -31,7 +30,6 @@ function App() {
     <ConnectedRouter history={history}>
       <Bg></Bg>
       <Switch>
-        <PrivateRoute exact path="/start" Component={Start} />
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PublicRoute exact path="/sample" Component={Sample} />
@@ -41,6 +39,7 @@ function App() {
         <PrivateRoute exact path="/AddMyinfo" Component={AddMyinfo} />
         <PrivateRoute exact path="/myinfo" Component={Myinfo} />
         <PrivateRoute exact path="/profile/:userId" Component={Profile} />/
+        <PrivateRoute exact path="/profile/fast/:userId" Component={Profile} />/
         <PrivateRoute exact path="/postMain" Component={PostMain} />
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />

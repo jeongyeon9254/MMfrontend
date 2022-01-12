@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +16,6 @@ import { Button, Grid, Input, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 
 // Js
-import { history } from '../../redux/configureStore.js';
 import Spiner from '../../shared/Spiner';
 
 const PostWrite = props => {
@@ -66,6 +66,8 @@ const PostWrite = props => {
   const preview = useSelector(state => state.preview.preview);
   const loading = useSelector(state => state.post.loading);
 
+  const date = moment();
+
   const changeTag = e => {
     setTag(e.target.name);
   };
@@ -76,6 +78,7 @@ const PostWrite = props => {
   };
 
   const addPost = async () => {
+    // console.log(date);
     let multipartFile = new FormData();
     const emptyFile = new File([''], 'empty');
     if (images.length === 0) {
@@ -88,6 +91,7 @@ const PostWrite = props => {
     }
 
     const data = {
+      // date: date,
       tag: tag,
       content: text,
     };
@@ -126,6 +130,7 @@ const PostWrite = props => {
               return (
                 <Button
                   key={idx}
+                  size="12px"
                   name={interest}
                   BtnTag
                   _onClick={changeTag}
@@ -144,11 +149,11 @@ const PostWrite = props => {
               <label htmlFor="file">
                 <Grid align="center" justify="center" height="100%">
                   <p className="plus">+</p>
-                  <p>{preview.length}/8</p>
+                  <p className="num">{preview.length}/8</p>
                 </Grid>
               </label>
               {preview.length ? (
-                <RowDiv>
+                <Preview>
                   <button className="resetBtn" onClick={restPost}>
                     x
                   </button>
@@ -170,7 +175,7 @@ const PostWrite = props => {
                         : null}
                     </Swiper>
                   </div>
-                </RowDiv>
+                </Preview>
               ) : null}
             </Grid>
           </div>
@@ -218,7 +223,7 @@ const PostBox = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 23px;
 
   .limit {
     position: absolute;
@@ -254,13 +259,16 @@ const PostBox = styled.div`
     font-size: 45px;
     color: #c8c8c8;
   }
+  .num {
+    font-size: ${props => props.theme.fontSizes.small};
+  }
   .title {
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 `;
 
-const RowDiv = styled.div`
+const Preview = styled.div`
   background: #fff;
   width: 68%;
   border: 1px solid #a7a7a7;

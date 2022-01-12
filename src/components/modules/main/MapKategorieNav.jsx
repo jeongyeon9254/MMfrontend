@@ -13,7 +13,8 @@ import { Mybit } from '../Bit';
 
 // Redux
 import { actionCreators as mainActions } from '../../../redux/modules/main';
-import { useDispatch } from 'react-redux';
+import { actionCreators as postActions } from '../../../redux/modules/post';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { gpsLsit } from './gpsList';
 
@@ -21,6 +22,7 @@ const MapKategorieNav = props => {
   const dispatch = useDispatch();
   const mbti = Mybit(props.userInfo.mbti);
   const location = props.userInfo.location;
+  const setKate = props.setKate;
   const gpsIndex = gpsLsit.findIndex(x => {
     return x.location === location;
   });
@@ -29,6 +31,55 @@ const MapKategorieNav = props => {
   const navList = ['전체보기', '운동', '공부', '대화', '제테크', '게임', '기타'];
 
   const [active, setActive] = useState(0);
+
+  if (props.post) {
+    return (
+      <RowDiv>
+        <Swiper
+          style={{ background: '#fff' }}
+          spaceBetween={10}
+          slidesPerView={4}
+          className="scroll-container"
+        >
+          {navList.map((list, index) => {
+            return (
+              <SwiperSlide className="slide" key={index}>
+                {index === 0 ? (
+                  <Button
+                    BtnTag
+                    state={active === index ? 'active' : false}
+                    _onClick={e => {
+                      setActive(index);
+                      setKate(index);
+                      dispatch(postActions.getPostDB(0));
+                    }}
+                  >
+                    <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
+                    전체보기
+                  </Button>
+                ) : (
+                  <Button
+                    BtnTag
+                    state={active === index ? 'active' : false}
+                    _onClick={e => {
+                      setActive(index);
+                      setKate(index);
+                      dispatch(postActions.getKategoriDB(index, 0));
+                    }}
+                  >
+                    {list === '전체보기' ? (
+                      <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
+                    ) : null}
+                    {list}
+                  </Button>
+                )}
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </RowDiv>
+    );
+  }
 
   return (
     <RowDiv>
@@ -48,7 +99,6 @@ const MapKategorieNav = props => {
                   _onClick={e => {
                     setActive(index);
                     dispatch(mainActions.chemyListDB(gpsId));
-                    dispatch(mainActions.setKategorie(list));
                   }}
                 >
                   <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
@@ -61,7 +111,6 @@ const MapKategorieNav = props => {
                   _onClick={e => {
                     setActive(index);
                     dispatch(mainActions.getLocationDB(gpsId, index));
-                    dispatch(mainActions.setKategorie(list));
                   }}
                 >
                   {list === '전체보기' ? (
