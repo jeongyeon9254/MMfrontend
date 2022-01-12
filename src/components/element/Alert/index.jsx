@@ -152,6 +152,8 @@ const AlertBox = styled.div`
       margin-top: 0;
     }
   }
+  @media only screen and (max-width: 1050px) {
+    height:100%;
 `;
 
 const AlertInBox = styled.div`

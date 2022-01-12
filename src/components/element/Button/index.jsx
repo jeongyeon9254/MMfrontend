@@ -1,7 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 import { BtnAddStyle, BtnBottomStyle, BtnRoundStyle, BtnTagStyle, ButtonStyle } from './module';
 import { getCookie } from '../../../shared/Cookie.js';
 import Bit from '../../modules/Bit';
+import { Grid, Alert } from '../index';
 
 const Button = props => {
   // const userInfo = getCookie('');
@@ -50,6 +52,7 @@ const Button = props => {
     opacity,
     position,
   };
+  const [Alt, setAlt] = React.useState(false);
 
   if (BtnAdd) {
     switch (state) {
@@ -74,21 +77,33 @@ const Button = props => {
         );
     }
   }
+  const exit = () => {
+    setAlt(false);
+  };
 
   if (BtnBottom) {
     switch (state) {
       case 'Inactive':
         return (
-          <BtnBottomStyle
-            name={name}
-            style={{ backgroundColor: '#A7A7A7' }}
-            {...styles}
-            onClick={() => {
-              alert('아직 사용하지 못합니다.');
-            }}
-          >
-            {children}
-          </BtnBottomStyle>
+          <>
+            <BtnBottomStyle
+              name={name}
+              style={{ backgroundColor: '#A7A7A7' }}
+              {...styles}
+              onClick={() => {
+                setAlt(true);
+              }}
+            >
+              {children}
+            </BtnBottomStyle>
+            {Alt ? (
+              <Alert check yes={exit}>
+                <Grid gap="15px" padding="16px 8px 8px 24px">
+                  <Title>아직 사용하지 못합니다!</Title>
+                </Grid>
+              </Alert>
+            ) : null}
+          </>
         );
       case 'Wait':
         return (
@@ -161,5 +176,10 @@ Button.defaultProps = {
   padding: null,
   opacity: 1,
 };
+
+const Title = styled.span`
+  font-weight: 400;
+  font-size: ${props => props.theme.fontSizes.xxxl};
+`;
 
 export default Button;
