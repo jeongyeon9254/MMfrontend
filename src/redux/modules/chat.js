@@ -13,8 +13,6 @@ const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
 
 const initialState = {
-  roomGet: [],
-  roomPost: [],
   List: [],
   Room: [],
 };

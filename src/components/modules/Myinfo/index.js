@@ -10,8 +10,10 @@ import MyEdit from './MyEdit';
 import Mymbtibtn from './Mymbtibtn';
 import MyLocation from './MyLocation';
 import MyImgFile from './MyImgFile';
+import Mypost from './Mypost';
 
 export {
+  Mypost,
   MyinfoBit,
   MyPartBox,
   MyinfoHead,

@@ -5,8 +5,8 @@ export const ImgBg = styled.div`
   background-image: url(${Phone});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
-  height: 876px;
+  background-size: contain;
+  height: 858px;
   width: 427px;
   position: absolute;
   left: 62%;
@@ -31,8 +31,8 @@ export const ImgBg = styled.div`
 export const ContainerStyle = styled.div`
   box-sizing: border-box;
   width: 100%;
-  max-width: 377px;
-  max-height: 828px;
+  max-width: 376px;
+  max-height: 810px;
   height: 100%;
   padding-top: 82px;
   padding-bottom: 89px;

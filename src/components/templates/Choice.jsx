@@ -5,63 +5,79 @@ import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
 import { Grid } from '../element';
 import { Listfrom, ListHead, UserPage } from '../modules/Choice';
+
+import { actionCreators as MatchingAction } from '../../redux/modules/matching';
 import { history } from '../../redux/configureStore';
 const Choice = () => {
-  const roomGet = useSelector(state => state.chat.roomGet);
-  const roomPost = useSelector(state => state.chat.roomPost);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(MatchingAction.getMatchingSendCheckDB());
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(MatchingAction.getMatchingReceiveCheckDB());
+  }, []);
+
+  const SendList = useSelector(state => state.matching.ListSend);
+  const ReceiveList = useSelector(state => state.matching.ListReceive);
 
   const [open, setOpen] = React.useState(true);
   const [open2, setOpen2] = React.useState(true);
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
 
-  const dispatch = useDispatch();
-  React.useEffect(() => {}, [Data]);
+  console.log(SendList, ReceiveList);
+
   return (
     <div>
       <Header>요청 목록</Header>
       <Grid height="100%">
         <ListHead
-          Text={'내가 받은 매칭 신청 목록 ' + roomGet.length + '개'}
+          Text={'내가 받은 매칭 신청 목록 ' + 0 + '개'}
           OnClick={() => {
             setOpen(!open);
           }}
           boo={open}
         />
         <Boad className={open ? 'Open' : ''}>
-          {roomGet.map((x, idx) => {
-            return (
-              <Listfrom
-                OnClick={e => {
-                  //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
-                  setPaging(!Paging);
-                  setData(x);
-                }}
-                data={x}
-                key={idx}
-              ></Listfrom>
-            );
-          })}
+          {SendList
+            ? SendList.map((x, idx) => {
+                return (
+                  <Listfrom
+                    OnClick={e => {
+                      //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
+                      setPaging(!Paging);
+                      setData(x);
+                    }}
+                    data={x}
+                    key={idx}
+                  ></Listfrom>
+                );
+              })
+            : ''}
         </Boad>
         <ListHead
-          Text={'내가 보낸 매칭 신청 목록 ' + roomPost.length + '개'}
+          Text={'내가 보낸 매칭 신청 목록 ' + 0 + '개'}
           OnClick={() => {
             setOpen2(!open2);
           }}
           boo={open2}
         />
         <Boad className={open2 ? 'Open' : ''}>
-          {roomPost.map((x, idx) => {
-            return (
-              <Listfrom
-                OnClick={e => {
-                  history.push('/');
-                }}
-                key={idx}
-                data={x}
-              ></Listfrom>
-            );
-          })}
+          {SendList
+            ? SendList.map((x, idx) => {
+                return (
+                  <Listfrom
+                    OnClick={e => {
+                      history.push(`/profile/${x.guestId}`);
+                    }}
+                    key={idx}
+                    data={x}
+                  ></Listfrom>
+                );
+              })
+            : ''}
         </Boad>
       </Grid>
       <UserPage

@@ -7,7 +7,7 @@ import arrow_right from '../../img/Icon/arrow_right.svg';
 import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
-import { actionCreators as chatActions } from '../../redux/modules/chat';
+import { actionCreators as matchingActions } from '../../redux/modules/matching.js';
 
 // component
 import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
@@ -35,15 +35,9 @@ const Profile = props => {
     setConnect(false);
     setDisconnect(false);
   };
-  const guestInfo = {
-    guestId: profile.username,
-    guestMbti: profile.mbti,
-    guestNick: profile.nickname,
-    guestImg: profile.profileImage,
-  };
 
   const next = () => {
-    dispatch(chatActions.postChatRoomListDB(guestInfo));
+    dispatch(matchingActions.postMatchingDB(profile.userId));
     setModal(true);
     exit();
   };
