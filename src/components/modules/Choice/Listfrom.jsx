@@ -19,7 +19,7 @@ const Listfrom = props => {
         </Grid>
         <div>
           <Text>{intro}</Text>
-          {intro.length >= 30 ? <Dot>...</Dot> : ''}
+          {intro ? intro.length >= 30 ? <Dot>...</Dot> : '' : ''}
         </div>
       </Grid>
     </Grid>

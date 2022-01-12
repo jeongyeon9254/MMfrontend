@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MyPartBox, MyinfoBit, Myinterests } from './index';
+import { MyPartBox, MyinfoBit, Myinterests, Mypost } from './index';
 import { Grid, Box } from '../../element';
 
 function MyBody() {
@@ -17,6 +17,9 @@ function MyBody() {
         <MyPartBox title="한줄 소개">
           <Box padding="10px 17px">{Info.intro ? Info.intro : ' '}</Box>
         </MyPartBox>
+        <MyPartBox title="한줄 소개">
+          <Mypost />
+        </MyPartBox>
       </Grid>
     </Body>
   );
@@ -27,5 +30,7 @@ const Body = styled.div`
   top: 39%;
   padding: 20px 30px;
   width: 100%;
+  height: 35.9vh;
+  overflow-y: scroll;
 `;
 export default MyBody;

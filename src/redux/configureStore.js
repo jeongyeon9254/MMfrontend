@@ -9,10 +9,12 @@ import user from './modules/user';
 import profile from './modules/profile';
 import preview from './modules/preview';
 import post from './modules/post';
+import matching from './modules/matching';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  matching: matching,
   post: post,
   preview: preview,
   profile: profile,

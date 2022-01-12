@@ -1,16 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../element';
+import { useDispatch } from 'react-redux';
+import { actionCreators as ChatAction } from '../../../redux/modules/chat';
+import { actionCreators as matchingAction } from '../../../redux/modules/matching';
 
 function UserButton(props) {
-  const { userId } = props;
+  const { guestId } = props;
+  const dispatch = useDispatch();
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+  const guestInfo = {
+    guestId: userInfo.username,
+    guestMbti: userInfo.mbti,
+    guestNick: userInfo.nickname,
+    guestImg: userInfo.profileImage,
+  };
 
   const ClickRefusal = () => {
-    console.log(`거절하겠습니다: ${userId}`);
+    console.log(`거절하겠습니다: ${guestId}`);
+    dispatch(matchingAction.deleteMatchingChatDB());
   };
 
   const ClickAccept = () => {
-    console.log(`수락하겠습니다: ${userId}`);
+    console.log(`수락하겠습니다: ${guestId}`);
+    dispatch(ChatAction.postChatRoomListDB(guestInfo));
   };
   return (
     <Fiexd>
