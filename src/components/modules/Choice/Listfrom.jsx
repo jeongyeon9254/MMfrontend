@@ -4,16 +4,16 @@ import { Grid, Image, Tag } from '../../element';
 
 const Listfrom = props => {
   const { OnClick } = props;
-  const { nickname, mbti, profileImg, roomId, intro, date } = props.data;
+  const { guestNick, guestMbti, guestImg, roomId, intro, date } = props.data;
 
   return (
     <Grid list _onClick={OnClick} Btop="0px" gap="11px">
-      <Image src={profileImg} round mbti={mbti} width="50px" margin="0px" />
+      <Image src={guestImg} round mbti={guestMbti} width="50px" margin="0px" />
       <Grid gap="12px" width="80%">
         <Grid row align="center" gap="6px">
-          <Name>{nickname}</Name>{' '}
-          <Tag mbti={mbti} _type="black">
-            {mbti}
+          <Name>{guestNick}</Name>{' '}
+          <Tag mbti={guestMbti} _type="black">
+            {guestMbti}
           </Tag>
           <Date>{date}</Date>
         </Grid>
