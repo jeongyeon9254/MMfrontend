@@ -15,7 +15,6 @@ import {
   KakaoCallback,
   NotPound,
   Chatroom,
-  Start,
   LoginNeed,
   Sample,
 } from '../components/templates';
@@ -32,7 +31,6 @@ function App() {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <PrivateRoute exact path="/start" Component={Start} />
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PublicRoute exact path="/sample" Component={Sample} />
