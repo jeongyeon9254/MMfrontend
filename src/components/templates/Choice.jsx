@@ -41,8 +41,8 @@ const Choice = () => {
           boo={open}
         />
         <Boad className={open ? 'Open' : ''}>
-          {SendList
-            ? SendList.map((x, idx) => {
+          {ReceiveList
+            ? ReceiveList.map((x, idx) => {
                 return (
                   <Listfrom
                     OnClick={e => {
