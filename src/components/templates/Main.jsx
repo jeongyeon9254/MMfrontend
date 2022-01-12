@@ -59,7 +59,7 @@ const Main = props => {
           _onClick={async () => {
             getMatchingDB().then(res => {
               if (res.data.userId === -1) {
-                console.log('맞는 유저가 없습니다.');
+                alert('맞는 유저가 없습니다.');
               } else {
                 setLoading(true);
                 setTimeout(function () {
