@@ -60,7 +60,7 @@ const PostMain = () => {
     const recentHeight = allBox.scrollTop;
     const scrollBoxHeight = scrollBox.offsetHeight;
     const allBoxHeight = allBox.offsetHeight;
-    if (recentHeight + allBoxHeight - 77 === scrollBoxHeight) {
+    if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
       dispatch(postAcitions.getPostDB(page));
     }
   };
@@ -68,8 +68,8 @@ const PostMain = () => {
   return (
     <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
-      <div>
-        <MapKategorieNav userInfo={userInfo} />
+      <div className="navBox">
+        <MapKategorieNav userInfo={userInfo} post />
       </div>
       <div id="scrollBox">
         {postList.length !== 0 ? (
@@ -135,6 +135,15 @@ const PostBox = styled.div`
     bottom: 25px;
     right: 30px;
     z-index: 2;
+  }
+  .navBox {
+    position: fixed;
+    background: #fff;
+    z-index: 3;
+  }
+  #scrollBox {
+    padding-top: 60px;
+    box-sizing: border-box;
   }
 `;
 

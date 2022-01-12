@@ -1,11 +1,17 @@
 import instance from '../instance';
-import axios from 'axios';
 import multi from '../multi';
 
 export const getPost = page => {
   return instance({
     method: 'get',
     url: `/api/post?page=${page}&size=4 `,
+  });
+};
+
+export const getKategoriPost = (interestId, page) => {
+  return instance({
+    method: 'get',
+    url: `/api/post/interest/${interestId}?page=${page}&size=4`,
   });
 };
 

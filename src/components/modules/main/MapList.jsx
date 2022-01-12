@@ -21,6 +21,8 @@ const MapList = props => {
     outModal();
   };
 
+  console.log(lists.result);
+
   return (
     <React.Fragment>
       {modal ? (
@@ -41,7 +43,13 @@ const MapList = props => {
                       offModal();
                     }}
                   >
-                    <Image round width="53px" margin="0" src={list.profileImage}></Image>
+                    <Image
+                      round
+                      width="53px"
+                      margin="0"
+                      src={list.profileImage}
+                      mbti={list.mbti}
+                    ></Image>
                     <Grid width="37%" justify="center" gap="5px">
                       <Grid row gap="3px">
                         <p className="name">{list.nickname}</p>
