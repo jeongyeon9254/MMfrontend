@@ -19,7 +19,7 @@ function UserButton(props) {
 
   const ClickRefusal = () => {
     console.log(`거절하겠습니다: ${guestId}`);
-    dispatch(matchingAction.deleteMatchingChatDB());
+    dispatch(matchingAction.deleteMatchingChatDB(guestId));
   };
 
   const ClickAccept = () => {
