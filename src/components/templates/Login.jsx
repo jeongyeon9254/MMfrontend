@@ -4,21 +4,38 @@ import styled from 'styled-components';
 import imgfile from '../../img/kakaologin.png';
 import { Grid, Image } from '../element/index';
 import Header from '../modules/layout/Header';
+import Start from '../modules/Start';
 import { actionCreators as userAction } from '../../redux/modules/user';
 import Logo from '../../img/Icon/Start_logo.svg';
 import { history } from '../../redux/configureStore.js';
-const Login = () => {
+import { set } from 'lodash';
+const Login = props => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
+    clearTimeout(myTimer);
     dispatch(userAction.logInDB());
     window.location.href =
       'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
     // 'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://bizchemy.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code';
   };
+  const [open, setopen] = React.useState(false);
+
+  React.useEffect(() => {
+    setopen(true);
+  }, []);
+
+  const no = () => {
+    setopen(false);
+  };
+
+  const myTimer = setTimeout(() => {
+    setopen(false);
+  }, 4000);
 
   return (
     <>
       <Header main>로그인</Header>
+      {open ? <Start No={no} /> : null}
       <Grid align="center" padding="203px 0px 0px 0px">
         <Grid width="112px" height="110px">
           <Image nobackground src={Logo}></Image>
@@ -29,6 +46,7 @@ const Login = () => {
             <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
             <SampleBtn
               onClick={() => {
+                clearTimeout(myTimer);
                 history.push('/sample');
               }}
             >
