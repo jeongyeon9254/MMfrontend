@@ -1,5 +1,4 @@
 import instance from '../instance';
-import axios from 'axios';
 
 export const addComment = (postId, comment) => {
   return instance({

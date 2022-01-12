@@ -2,6 +2,7 @@ import moment from 'moment';
 
 export const returnTime = date => {
   const now = moment();
+  console.log(now);
   const InputDate = date ? date : '';
   const Time = {
     day: Math.round(moment.duration(now.diff(date)).asDays()),

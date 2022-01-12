@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 
 const UserPage = props => {
   const { Boo, _onClick } = props;
-  const { userId, nickname, profileImg, mbti } = props.data;
+  const { guestId, nickname, profileImg, mbti } = props.data;
+  console.log(props.data);
   return (
     <PageShadows className={Boo ? 'open' : ''}>
       <Header point="absolute" _on={_onClick}>
@@ -17,7 +18,7 @@ const UserPage = props => {
         <UserBox data={props.data} />
         <UserPre nickname={nickname} profileImg={profileImg} mbti={mbti} />
       </Grid>
-      <UserButton userId={userId} />
+      <UserButton guestId={guestId} />
     </PageShadows>
   );
 };
