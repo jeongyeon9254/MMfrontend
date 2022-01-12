@@ -208,7 +208,7 @@ const PostWrite = props => {
             setAlt(true);
           }}
           BtnBottom
-          width="83%"
+          width="85%"
         >
           게시글 올리기
         </Button>
