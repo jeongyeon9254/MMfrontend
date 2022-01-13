@@ -12,7 +12,6 @@ import { set } from 'lodash';
 const Login = props => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
-    clearTimeout(myTimer);
     dispatch(userAction.logInDB());
     window.location.href =
       'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
@@ -28,10 +27,6 @@ const Login = props => {
     setopen(false);
   };
 
-  const myTimer = setTimeout(() => {
-    setopen(false);
-  }, 4000);
-
   return (
     <>
       <Header main>로그인</Header>
@@ -46,7 +41,6 @@ const Login = props => {
             <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
             <SampleBtn
               onClick={() => {
-                clearTimeout(myTimer);
                 history.push('/sample');
               }}
             >
