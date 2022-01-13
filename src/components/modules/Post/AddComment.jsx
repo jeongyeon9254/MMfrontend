@@ -36,7 +36,7 @@ const AddComment = props => {
 
   return (
     <CommentBox>
-      <Grid row gap="10px">
+      <Grid row width="100%" gap="10px">
         <Image src={data.profileImage} round width="37px" margin="0"></Image>
         <input
           ref={textRef}
@@ -63,7 +63,7 @@ const CommentBox = styled.div`
   border-top: 1px solid #eee;
   padding: 16px 28px;
   input {
-    width: 70%;
+    width: calc(100% - 94px);
     border-radius: 30px;
     outline: none;
     border: none;
@@ -75,6 +75,7 @@ const CommentBox = styled.div`
     line-height: 1.6;
   }
   button {
+    width: 37px;
     border: none;
     box-sizing: border-box;
     border-radius: 15px;

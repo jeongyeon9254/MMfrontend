@@ -41,7 +41,9 @@ const PostDetail = props => {
   const mbti = detailInfo.mbti;
   const imgList = detailInfo.imageList;
   const comment = detailInfo.commentList;
-  const time = detailInfo.createdAt;
+  const time = detailInfo.createdAt ? detailInfo.createdAt.split(' ')[0].split('-') : 0;
+
+  console.log(time);
 
   React.useEffect(() => {
     dispatch(postActions.getDetailDB(boardId[2]));
@@ -90,7 +92,9 @@ const PostDetail = props => {
                 {detailInfo.mbti}
               </Tag>
             </Grid>
-            <TimeText>{time ? time.split(' ')[0] : null}</TimeText>
+            <TimeText>
+              {Number(time[1])}월 {time[2]}일
+            </TimeText>
           </Grid>
           <Grid gap="9px" justify="center" align="flex-end" width="60%">
             <LocalText>
