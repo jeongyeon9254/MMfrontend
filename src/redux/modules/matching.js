@@ -11,6 +11,8 @@ const POST_MATCHING = 'POST_MATCHING';
 const GET_MATCHINGLIST = 'GET_MATCHINGLIST';
 const GET_MATCHINGLISTSEND = 'GET_MATCHINGLISTSEND';
 const Delet_MATCHING = 'Delet_MATCHING';
+const LOADING = 'LOADING';
+const RESET = 'RESET';
 
 // 매칭 신청
 const postMatching = createAction(POST_MATCHING, stute => ({ stute }));
@@ -18,6 +20,9 @@ const ListMatchingSend = createAction(GET_MATCHINGLISTSEND, Matching => ({ Match
 // 신청 내역 조회
 const ListMatchingReceive = createAction(GET_MATCHINGLIST, Matching => ({ Matching }));
 const DeletMatchingList = createAction(Delet_MATCHING, guestId => ({ guestId }));
+
+const LoadingAction = createAction(LOADING, () => ({}));
+const resetAction = createAction(RESET, () => ({}));
 
 const initialState = {
   ListSend: '',
@@ -86,6 +91,15 @@ export default handleActions(
           return x.guestId !== guestId;
         });
         draft.ListSend = rest;
+      }),
+    [LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = true;
+      }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = false;
+        draft.list = {};
       }),
   },
   initialState,

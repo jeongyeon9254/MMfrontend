@@ -1,14 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Input, Grid } from '../element';
 import { Box, Image, Tag, Button, Select } from '../element/index';
 import Pen from '../../img/Icon/icon_create.svg';
 import Bit from '../modules/Bit';
-// import Alert from '../element/Alert';
+import Skeleton from '../modules/Choice/Skeleton';
+
 const Hidden = () => {
   return (
-    <div>
+    <Scroll>
       <Grid border="1px solid #000" height="100%" padding="30px" gap="40px" align="flex-start">
         <h4 style={{ fontSize: '50px' }}> Element 정리 페이지</h4>
+
+        <Skeleton type="List"></Skeleton>
         <Select></Select>
         <Grid gap="20px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>
@@ -152,8 +156,12 @@ const Hidden = () => {
         </Button>
       </Grid>
       {/* <Alert /> */}
-    </div>
+    </Scroll>
   );
 };
 
+const Scroll = styled.div`
+  overflow-y: scroll;
+  height: 100%;
+`;
 export default Hidden;

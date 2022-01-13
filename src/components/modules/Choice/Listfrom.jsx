@@ -4,22 +4,22 @@ import { Grid, Image, Tag } from '../../element';
 
 const Listfrom = props => {
   const { OnClick } = props;
-  const { guestNick, guestMbti, guestImg, roomId, intro, date } = props.data;
+  const { partnerNick, partnerMbti, partnerImg, roomId, partnerIntro, date } = props.data;
 
   return (
     <Grid list _onClick={OnClick} Btop="0px" gap="11px">
-      <Image src={guestImg} round mbti={guestMbti} width="50px" margin="0px" />
+      <Image src={partnerImg} round mbti={partnerMbti} width="50px" margin="0px" />
       <Grid gap="12px" width="80%">
         <Grid row align="center" gap="6px">
-          <Name>{guestNick}</Name>{' '}
-          <Tag mbti={guestMbti} _type="black">
-            {guestMbti}
+          <Name>{partnerNick}</Name>{' '}
+          <Tag mbti={partnerMbti} _type="black">
+            {partnerMbti}
           </Tag>
           <Date>{date}</Date>
         </Grid>
         <div>
-          <Text>{intro}</Text>
-          {intro ? intro.length >= 30 ? <Dot>...</Dot> : '' : ''}
+          <Text>{partnerIntro}</Text>
+          {partnerIntro ? partnerIntro.length >= 30 ? <Dot>...</Dot> : '' : ''}
         </div>
       </Grid>
     </Grid>

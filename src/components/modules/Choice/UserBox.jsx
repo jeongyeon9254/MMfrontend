@@ -6,7 +6,7 @@ import fmd_good from '../../../img/Icon/fmd_good.svg';
 import Bit from '../Bit';
 
 function UserBox(props) {
-  const { date, interestList, intro, mbti, nickname, profileImg, roomId, userId, location } =
+  const { date, interestList, intro, mbti, nickname, profileImage, roomId, userId, location } =
     props.data;
   const myMbti = Bit.find(x => {
     return x.name === mbti;
@@ -19,7 +19,7 @@ function UserBox(props) {
         <Grid row gap="14px">
           <Image
             round
-            src={profileImg}
+            src={profileImage}
             mbti={mbti}
             _border="1px solid #555"
             width="60px"
@@ -30,7 +30,7 @@ function UserBox(props) {
               <Name>{nickname}</Name>
               <Grid align="center" width="auto" row gap="2px">
                 <img src={fmd_good} alt={location} />
-                <Date>{location}</Date>
+                <Date>서울특별시 {location}</Date>
               </Grid>
               <Grid row gap="7px">
                 <img
@@ -45,7 +45,7 @@ function UserBox(props) {
                 {List.map((x, idx) => {
                   return (
                     <Tag mbti={myMbti.name} key={idx} padding="3px 15px">
-                      {x.interest}
+                      {x}
                     </Tag>
                   );
                 })}

@@ -6,15 +6,20 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const Delet_CHAT = 'Delet_CHAT';
+const LOADING = 'LOADING';
+const RESET = 'RESET';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
+const resetList = createAction(RESET, () => ({}));
+const LoadingList = createAction(LOADING, boo => ({ boo }));
 
 const initialState = {
   List: [],
   Room: [],
+  loading: false,
 };
 
 // 채팅방 만들기
@@ -27,8 +32,13 @@ const postChatRoomListDB = guestInfo => {
 // 채팅방 리스트 가지고 오기
 const getChatRoomListDB = () => {
   return async function (dispatch, getState, { history }) {
-    const res = await getChatRoomList();
-    dispatch(ListChatRoom(res.data));
+    try {
+      const res = await getChatRoomList();
+      dispatch(ListChatRoom(res.data));
+      dispatch(LoadingList(true));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -36,9 +46,7 @@ const getChatRoomListDB = () => {
 const getChatMsListDB = roomId => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(roomId);
       const res = await getChatMsList(roomId);
-      console.log(res.data);
       dispatch(LoadChatting(res.data));
     } catch (e) {
       console.log(e);
@@ -74,6 +82,16 @@ export default handleActions(
       produce(state, draft => {
         draft.List = [];
       }),
+    [LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = true;
+      }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = false;
+        draft.List = [];
+        draft.Room = [];
+      }),
   },
   initialState,
 );
@@ -85,6 +103,7 @@ const actionCreators = {
   postChatRoomListDB,
   getChatMsListDB,
   DeletMsList,
+  resetList,
 };
 
 export { actionCreators };

@@ -3,20 +3,33 @@ import styled from 'styled-components';
 import Header from '../layout/Header';
 import { Grid, Button } from '../../element';
 import { UserBox, UserPre, UserButton } from './index';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as profileAction } from '../../../redux/modules/profile';
 
 const UserPage = props => {
+  const dispatch = useDispatch();
   const { Boo, _onClick } = props;
-  const { guestId, nickname, profileImg, mbti } = props.data;
-  console.log(props.data);
+  const { hostId, guestId } = props.data;
+  const hostInfo = useSelector(state => state.profile.list);
+
+  React.useEffect(() => {
+    if (hostId) {
+      dispatch(profileAction.getProfileDB(hostId));
+    }
+  }, [hostId]);
+
   return (
     <PageShadows className={Boo ? 'open' : ''}>
-      <Header point="absolute" _on={_onClick}>
-        {nickname}
+      <Header point="absolute" Page _onClick={_onClick}>
+        {hostInfo.nickname}
       </Header>
       <Grid padding="18px 30px" gap="19px">
-        <UserBox data={props.data} />
-        <UserPre nickname={nickname} profileImg={profileImg} mbti={mbti} />
+        <UserBox data={hostInfo} />
+        <UserPre
+          nickname={hostInfo.nickname}
+          profileImg={hostInfo.profileImage}
+          mbti={hostInfo.mbti}
+        />
       </Grid>
       <UserButton guestId={guestId} />
     </PageShadows>
