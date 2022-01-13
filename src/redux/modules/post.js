@@ -36,6 +36,7 @@ const initialState = {
   detail: [],
   loading: false,
   page: 0,
+  spiner: false,
 };
 
 const getPostDB = (page = null) => {

@@ -27,7 +27,7 @@ const PostMain = () => {
   const postList = useSelector(state => state.post.postList);
   const page = useSelector(state => state.post.page);
 
-  const [kate, setKate] = useState(0);
+  const [kategori, setKategori] = useState(0);
 
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
@@ -51,10 +51,10 @@ const PostMain = () => {
     const allBoxHeight = allBox.offsetHeight;
 
     if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
-      if (kate === 0) {
+      if (kategori === 0) {
         dispatch(postAcitions.getPostScrollDB(page));
       } else {
-        dispatch(postAcitions.getKategorScrolliDB(kate, page));
+        dispatch(postAcitions.getKategorScrolliDB(kategori, page));
       }
     }
   };
@@ -63,7 +63,7 @@ const PostMain = () => {
     <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
       <div className="navBox">
-        <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
+        <MapKategorieNav userInfo={userInfo} setKate={setKategori} post />
       </div>
       <div id="scrollBox">
         {arr.length > 0 ? (
