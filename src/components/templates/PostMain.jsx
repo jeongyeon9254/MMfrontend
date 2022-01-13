@@ -58,7 +58,7 @@ const PostMain = () => {
       }
     }
   };
-
+  console.log('a');
   return (
     <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
