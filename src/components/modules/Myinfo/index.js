@@ -11,6 +11,7 @@ import Mymbtibtn from './Mymbtibtn';
 import MyLocation from './MyLocation';
 import MyImgFile from './MyImgFile';
 import Mypost from './Mypost';
+import MySetting from './MySetting';
 
 export {
   Mypost,
@@ -26,4 +27,5 @@ export {
   Mymbtibtn,
   MyLocation,
   MyImgFile,
+  MySetting,
 };

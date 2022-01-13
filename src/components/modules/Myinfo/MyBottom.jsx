@@ -7,7 +7,7 @@ function MyBottom(props) {
   return (
     <>
       <BottomBox>
-        <Button BtnBottom width="315px" _onClick={_onClick}>
+        <Button position="relative" bottom="0px" BtnBottom width="315px" _onClick={_onClick}>
           {children}
         </Button>
       </BottomBox>
@@ -15,6 +15,6 @@ function MyBottom(props) {
   );
 }
 const BottomBox = styled.div`
-  padding: 20px 30px;
+  padding: 32px 0px 20px;
 `;
 export default MyBottom;
