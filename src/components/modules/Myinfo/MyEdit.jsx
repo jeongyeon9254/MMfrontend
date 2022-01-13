@@ -101,53 +101,55 @@ function MyEdit(props) {
       <Header point="relative" Page _onClick={_onClick}>
         내 정보 수정하기
       </Header>
-      <Grid padding="18px 30px" gap="20px">
-        <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
-        <MyPartBox title="나의 이름" num={nickname.length} err={err} max="4" input>
-          <Input
-            _borderColor="#ECECEC"
-            _bg="#ECECEC"
-            _padding="8px 14px"
-            _value={nickname}
-            _onChange={e => {
-              if (e.target.value.length <= 4) {
-                setNickname(e.target.value);
-              } else {
-                Seterr(true);
-              }
+      <ScrollContainer>
+        <Grid padding="18px 30px" gap="20px">
+          <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
+          <MyPartBox title="나의 이름" num={nickname.length} err={err} max="4" input>
+            <Input
+              _borderColor="#ECECEC"
+              _bg="#ECECEC"
+              _padding="8px 14px"
+              _value={nickname}
+              _onChange={e => {
+                if (e.target.value.length <= 4) {
+                  setNickname(e.target.value);
+                } else {
+                  Seterr(true);
+                }
+              }}
+            />
+          </MyPartBox>
+          <MyPartBox title="나의 주소">
+            <MyLocation Location={Location} Emit={ActiveLocal}></MyLocation>
+          </MyPartBox>
+          <MyPartBox title="나의 MBTI">
+            <Mymbtibtn mbti={userInfo.mbti} Emit={SetEmit}></Mymbtibtn>
+          </MyPartBox>
+          <MyPartBox title="관심사 설정">
+            <Myinterests Emit={Haddit}></Myinterests>
+          </MyPartBox>
+          <MyPartBox title="한줄 소개" num={textarea.length} max="100" input err={limt}>
+            <Input
+              _type="textarea"
+              _value={textarea}
+              _onChange={e => {
+                if (e.target.value.length <= 100) {
+                  setTextarea(e.target.value);
+                } else {
+                  Selimt(true);
+                }
+              }}
+            />
+          </MyPartBox>
+          <MyBottom
+            _onClick={() => {
+              setAlt(true);
             }}
-          />
-        </MyPartBox>
-        <MyPartBox title="나의 주소">
-          <MyLocation Location={Location} Emit={ActiveLocal}></MyLocation>
-        </MyPartBox>
-        <MyPartBox title="나의 MBTI">
-          <Mymbtibtn mbti={userInfo.mbti} Emit={SetEmit}></Mymbtibtn>
-        </MyPartBox>
-        <MyPartBox title="관심사 설정">
-          <Myinterests Emit={Haddit}></Myinterests>
-        </MyPartBox>
-        <MyPartBox title="한줄 소개" num={textarea.length} max="100" input err={limt}>
-          <Input
-            _type="textarea"
-            _value={textarea}
-            _onChange={e => {
-              if (e.target.value.length <= 100) {
-                setTextarea(e.target.value);
-              } else {
-                Selimt(true);
-              }
-            }}
-          />
-        </MyPartBox>
-      </Grid>
-      <MyBottom
-        _onClick={() => {
-          setAlt(true);
-        }}
-      >
-        수정 완료하기
-      </MyBottom>
+          >
+            수정 완료하기
+          </MyBottom>
+        </Grid>
+      </ScrollContainer>
     </Body>
   );
 }
@@ -168,6 +170,11 @@ const Body = styled.div`
     opacity: 1;
     left: 0px;
   }
+`;
+
+const ScrollContainer = styled.div`
+  overflow-y: scroll;
+  height: 86%;
 `;
 
 const Title = styled.p`

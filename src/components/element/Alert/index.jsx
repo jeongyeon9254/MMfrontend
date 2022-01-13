@@ -139,7 +139,7 @@ const AlertBox = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(22, 22, 22, 0.69);
-  z-index: 55;
+  z-index: 9999;
   transition: all 0.2s;
   animation: modal-show 0.3s;
   @keyframes modal-show {
