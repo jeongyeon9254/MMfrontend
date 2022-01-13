@@ -35,8 +35,8 @@ function MyBody() {
 const Body = styled.div`
   position: absolute;
   left: 0px;
-  top: 39%;
-  padding: 20px 30px;
+  top: 42%;
+  padding: 0px 30px 40px;
   width: 100%;
   height: 43.9vh;
   overflow-y: scroll;
