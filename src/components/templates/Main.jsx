@@ -116,9 +116,9 @@ const LocationBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  top: 158px;
+  top: 20%;
   z-index: 1;
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 1050px) {
     top: 120px;
   }
 `;
