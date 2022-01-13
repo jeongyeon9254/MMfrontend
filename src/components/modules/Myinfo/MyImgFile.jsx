@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Image, Grid } from '../../element';
+import icon_edit from '../../../img/Icon/icon_edit.svg';
 function MyImgFile(props) {
   const { Img, mbti, Emit } = props;
   const [active, SetActive] = React.useState('string');
@@ -29,17 +30,18 @@ function MyImgFile(props) {
   };
 
   return (
-    <Grid>
+    <Grid gap="10px">
+      <Ti>프로필 사진</Ti>
       <Image
         photoRound
-        width="70px"
+        width="139px"
         mbti={mbti}
         src={Preview}
         pointer
         _onClick={handleFileUploadClick}
       ></Image>
       <Point>
-        <Image border radius="100%" width="30px" mbti={mbti} />
+        <img src={icon_edit} />
       </Point>
       <input
         ref={fileRef}
@@ -59,7 +61,12 @@ MyImgFile.defaultProps = {
 
 const Point = styled.div`
   position: absolute;
-  left: 54%;
-  bottom: 0px;
+  left: 57%;
+  bottom: -4px;
+`;
+const Ti = styled.p`
+  text-align: center;
+  font-size: ${p => p.theme.fontSizes.small};
+  font-weight: bold;
 `;
 export default MyImgFile;

@@ -19,6 +19,7 @@ import { actionCreators as postAcitions } from '../../redux/modules/post.js';
 import { Button, Grid } from '../element/index.js';
 import MainComment from '../../components/modules/Post/MainComment';
 import Null from '../../shared/Null';
+import Skeleton from '../../shared/Skeleton';
 
 const PostMain = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,13 @@ const PostMain = () => {
 
   const postList = useSelector(state => state.post.postList);
   const page = useSelector(state => state.post.page);
+  const loading = useSelector(state => state.post.loading);
 
   const [kate, setKate] = useState(0);
 
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
+    document.getElementById('allBox').scrollTop = 0;
   }, []);
 
   const list = [...postList];
@@ -44,10 +47,6 @@ const PostMain = () => {
 
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
-
-  console.log(scrollBox);
-
-  const aa = useRef();
 
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;
@@ -64,12 +63,13 @@ const PostMain = () => {
   };
 
   return (
-    <PostBox id="allBox" ref={aa} onScroll={infinityScroll}>
+    <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
       <div className="navBox">
         <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
       </div>
       <div id="scrollBox">
+        {loading ? <Skeleton></Skeleton> : null}
         {arr.length > 0 ? (
           arr.map((x, idx) => {
             return (
