@@ -125,8 +125,8 @@ const Profile = props => {
           {mbti
             ? mbti.map((x, idx) => {
                 return (
-                  <Tag key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
-                    {profile ? mbti[idx].interest : null}
+                  <Tag size="12px" key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
+                    {mbti[idx]}
                   </Tag>
                 );
               })
