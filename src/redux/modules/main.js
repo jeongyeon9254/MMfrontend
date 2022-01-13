@@ -53,7 +53,6 @@ const getLocationDB = (locationId, InterestId) => {
 
 const getGuestListDB = (data = null) => {
   return async function (dispatch, getState, { history }) {
-    console.log('실행');
     getGuestDB()
       .then(res => {
         dispatch(getGuestList(res.data));

@@ -8,7 +8,7 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as matchingActions } from '../../redux/modules/matching.js';
-
+import { getMatchingDB } from '../../api/modules/chemy';
 // component
 import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';

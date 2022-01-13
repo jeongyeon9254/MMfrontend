@@ -30,7 +30,6 @@ function App() {
     <ConnectedRouter history={history}>
       <Bg></Bg>
       <Switch>
-        <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PublicRoute exact path="/sample" Component={Sample} />
         <PrivateRoute exact path="/" Component={Main} />
@@ -50,6 +49,7 @@ function App() {
           path="/user/kakao/callback"
           Component={KakaoCallback}
         />
+        <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="*" Component={NotPound} />
       </Switch>
 
