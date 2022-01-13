@@ -20,7 +20,7 @@ const PostCard = props => {
   const info = props.info;
   const imgList = info.imageList;
 
-  const time = info.createdAt.split(' ');
+  const time = info.createdAt.split(' ')[0].split('-');
 
   return (
     <Grid>
@@ -35,7 +35,9 @@ const PostCard = props => {
               {info.mbti}
             </Tag>
           </Grid>
-          <TimeText>{time[0]}</TimeText>
+          <TimeText>
+            {Number(time[1])}월 {time[2]}일
+          </TimeText>
         </Grid>
         <Grid gap="9px" justify="center" align="flex-end" width="60%">
           <LocalText>
