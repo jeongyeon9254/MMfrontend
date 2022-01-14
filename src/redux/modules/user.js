@@ -58,9 +58,6 @@ const getMyPostDB = (page = null) => {
     } catch (err) {
       console.log(err);
     }
-    // const res = await getMyPost(page);
-    // dispatch(GetMypost(res.data, page));
-    // console.log(res.data);
   };
 };
 
