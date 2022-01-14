@@ -4,11 +4,11 @@ import { Grid, Image, Box } from '../../element';
 import { returnTime } from '../../../shared/Time';
 function PartyMe(props) {
   const { children, data } = props;
-  const diffTime = returnTime(data.date);
+
   return (
     <Grid row width="100%" gap="7px" justify="flex-end">
       <Grid width="80%" row gap="4px" align="end" justify="end">
-        <Date>{diffTime}</Date>
+        <Date>{data.date}</Date>
         <Box width="80%" padding="7px 10px" black>
           {children}
         </Box>

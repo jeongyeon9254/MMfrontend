@@ -43,6 +43,7 @@ function App() {
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />
         <PrivateRoute exact path="/postEdit/:postId" Component={PostEdit} />
+        <PrivateRoute exact path="/hidden" Component={Hidden} />
         <PublicRoute
           exact
           restricted={true}
@@ -52,8 +53,6 @@ function App() {
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="*" Component={NotPound} />
       </Switch>
-
-      {/* <Route exact path="/hidden" component={Hidden} /> */}
     </ConnectedRouter>
   );
 }

@@ -37,8 +37,8 @@ function MySetting(props) {
           </Grid>
         </Alert>
       ) : null}
-      <TabBg className={Open ? 'open' : ''} onClick={_onClick}></TabBg>
-      <TabNav className={Open ? 'open' : ''}>
+      <TabBg className={Open ? 'open' : 'close'} onClick={_onClick}></TabBg>
+      <TabNav className={Open ? 'open' : 'close'}>
         <TabHead>
           <Grid row padding="22px 30px" justify="space-between">
             <CloseBtn src={close} alt="닫기버튼" onClick={_onClick} />
@@ -71,6 +71,9 @@ const TabBg = styled.div`
   &.open {
     display: block;
   }
+  &.close {
+    display: none;
+  }
 `;
 
 const TabNav = styled.div`
@@ -80,13 +83,20 @@ const TabNav = styled.div`
   position: fixed;
   left: 0px;
   bottom: -100%;
-  height: 1px;
+  height: 0px;
+  opacity: 0;
   z-index: 100;
   padding-bottom: 32px;
   transition: all ease-out 0.3s;
   &.open {
     bottom: 0;
     height: auto;
+    opacity: 1;
+  }
+  &.close {
+    bottom: -100%;
+    height: 0px;
+    opacity: 0;
   }
 `;
 

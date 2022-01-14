@@ -1,30 +1,44 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Image, Tag } from '../../element';
+import { Skeleton } from './index';
 
 const ChatList = props => {
   const { OnClick } = props;
-  const { guestImg, guestMbti, guestNick, roomId } = props.data;
+  const { guestImg, guestMbti, guestNick } = props.data;
   const LastChat = '여기는 마지막 채팅글 보일거요 여기는 마지막 채팅글 보일거요';
-
-  return (
-    <Grid list _onClick={OnClick} gap="11px" Btop="0px" pad="17px 30px">
-      <Image src={guestImg} round mbti={guestMbti} width="56px" margin="0px" />
-      <Grid gap="12px" width="80%">
-        <Grid row align="center" gap="6px">
-          <Name>{guestNick}</Name>{' '}
-          <Tag mbti={guestMbti} _type="black">
-            {guestMbti}
-          </Tag>
-          {/* <Date>{date}</Date> */}
+  const loading = useSelector(state => state.chat.loading);
+  console.log(loading);
+  if (loading) {
+    return (
+      <Grid list _onClick={OnClick} gap="11px" Btop="0px" pad="17px 30px">
+        <Image src={guestImg} round mbti={guestMbti} width="56px" margin="0px" />
+        <Grid gap="12px" width="80%">
+          <Grid row align="center" gap="6px">
+            <Name>{guestNick}</Name>{' '}
+            <Tag mbti={guestMbti} _type="black">
+              {guestMbti}
+            </Tag>
+          </Grid>
+          <div>
+            <Text>{LastChat}</Text>
+            {LastChat.length >= 30 ? <Dot>...</Dot> : ''}
+          </div>
         </Grid>
-        <div>
-          <Text>{LastChat}</Text>
-          {LastChat.length >= 30 ? <Dot>...</Dot> : ''}
-        </div>
       </Grid>
-    </Grid>
-  );
+    );
+  } else {
+    return (
+      <>
+        <Skeleton type="List" />
+        <Skeleton type="List" />
+        <Skeleton type="List" />
+        <Skeleton type="List" />
+        <Skeleton type="List" />
+      </>
+    );
+  }
 };
 const Date = styled.p`
   margin: 0px 0px 0px auto;
