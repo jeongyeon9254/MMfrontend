@@ -10,6 +10,7 @@ const Start = props => {
   const click = () => {
     props.No(false);
   };
+
   return (
     <Body className="open" onClick={click}>
       <Grid align="center" padding=" 289px 0px 0px 0px">
@@ -24,6 +25,7 @@ const Start = props => {
           <Thin>으로 한</Thin>
           <Thick>매칭 서비스</Thick>
         </Grid>
+        <ClickTxt className="blink">화면을 터치해주세요</ClickTxt>
       </Grid>
     </Body>
   );
@@ -34,19 +36,18 @@ const Body = styled.div`
   height: 100%;
   position: absolute;
   top: 0px;
-  z-index:50;
+  z-index: 50;
   background-color: white;
- 
-  &.open:hover  {
-    animation fadeout 4s;
-  }
-  @keyframes fadeout {
+  transition: all 0.2s;
+  animation: modal-show 0.3s;
+  @keyframes modal-show {
     from {
-      opacity: 1;
+      opacity: 0;
+      margin-top: -5%;
     }
     to {
-      opacity: 0;
-    
+      opacity: 1;
+      margin-top: 0;
     }
   }
 `;
@@ -58,6 +59,22 @@ const Thick = styled.p`
 const Thin = styled.p`
   font-weight: 400;
   font-size: ${props => props.theme.fontSizes.small};
+`;
+
+const ClickTxt = styled.p`
+  position: absolute;
+  bottom: -74px;
+  left: 99px;
+  font-size: ${props => props.theme.fontSizes.xxl};
+  font-weight: 400;
+  @keyframes blink-effect {
+    50% {
+      opacity: 0;
+    }
+  }
+  & {
+    animation: blink-effect 1.5s step-end infinite;
+  }n-o
 `;
 
 export default Start;

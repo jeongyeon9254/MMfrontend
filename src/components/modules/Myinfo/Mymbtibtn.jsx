@@ -24,7 +24,7 @@ function Mymbtibtn(props) {
 
       <Line />
       <Grid row width="75%">
-        <Swiper slidesPerView={4} spaceBetween={40} className="scroll-container">
+        <Swiper slidesPerView={3.5} spaceBetween={7} className="scroll-container">
           {Bit.map((x, idx) => {
             return (
               <SwiperSlide className="slide" key={idx}>
