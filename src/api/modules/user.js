@@ -24,3 +24,11 @@ export const getMyMbitInfo = () => {
     url: '/api/profile/mbti',
   });
 };
+
+// 내가 올린 게시물 정보 가져오기
+export const getMyPost = page => {
+  return instance({
+    method: 'get',
+    url: `/api/profile/mywrite?page=${page}&size=6`,
+  });
+};

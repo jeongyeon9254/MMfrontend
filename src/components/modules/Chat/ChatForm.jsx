@@ -16,7 +16,8 @@ const ChatForm = props => {
   const scrollRef = React.useRef();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
-
+  const loading = useSelector(state => state.chat.loading);
+  console.log(loading);
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {

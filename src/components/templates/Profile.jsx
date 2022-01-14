@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 // Js
 import icon_location from '../../img/Icon/icon_location.svg';
-import arrow_right from '../../img/Icon/arrow_right.svg';
 import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as matchingActions } from '../../redux/modules/matching.js';
 import { getMatchingDB } from '../../api/modules/chemy';
 // component
-import { Button, Image, Grid, Box, Tag, Alert } from '../element/index.js';
-import Header from '../../components/modules/layout/Header';
+import { Image, Grid, Box, Tag, Alert } from '../element/index.js';
+import Header from '../modules/layout/Header';
+import ProfileBar from '../modules/Profile/ProfileModalBar';
 import Spiner from '../../shared/Spiner';
 
 const Profile = props => {
@@ -28,6 +28,7 @@ const Profile = props => {
 
   const [loading, setLoading] = useState(false);
   const profile = useSelector(state => state.profile.list);
+  const status = useSelector(state => state.matching.status);
   const mbti = profile.interestList;
 
   const [modal, setModal] = useState(false);
@@ -63,6 +64,15 @@ const Profile = props => {
     });
   };
 
+  const MadalOn = () => {
+    setDisconnect(true);
+  };
+
+  const MadalSet = () => {
+    setConnect(true);
+  };
+
+  const State = status ? status : '';
   return (
     <>
       {connect ? (
@@ -89,16 +99,7 @@ const Profile = props => {
         </Alert>
       ) : null}
 
-      {modal ? (
-        <MatchBox
-          onClick={() => {
-            history.push('/choice');
-          }}
-        >
-          <p>이미 {profile.nickname}님께 신청을 보냈어요</p>
-          <img alt="화살표" src={arrow_right}></img>
-        </MatchBox>
-      ) : null}
+      {modal ? <ProfileBar Bar type={State} nickname={profile.nickname} /> : null}
       <ProfileStyle>
         {name[2] === 'fast' ? (
           <Header _on fast _onClick={reTry}>
@@ -138,28 +139,9 @@ const Profile = props => {
           {profile.intro}
         </Box>
         {!modal ? (
-          <Button
-            BtnBottom
-            width="85%"
-            _onClick={() => {
-              setConnect(true);
-            }}
-          >
-            매칭신청
-          </Button>
+          <ProfileBar Btn _onClick={MadalSet} />
         ) : (
-          <Button
-            BtnBottom
-            width="85%"
-            color="#EC6464"
-            _onClick={() => {
-              // const userId = { userId: profile.userId };
-              // dispatch(chatActions.postChatRoomListDB(userId));
-              setDisconnect(true);
-            }}
-          >
-            매칭 친구 끊기
-          </Button>
+          <ProfileBar Btn type={State} _onClick={MadalOn} />
         )}
       </ProfileStyle>
       {loading ? <Spiner /> : null}
@@ -197,27 +179,6 @@ const ProfileStyle = styled.div`
     font-size: ${props => props.theme.fontSizes.small};
     color: #9b9b9b;
     line-height: 1.3;
-  }
-`;
-
-const MatchBox = styled.div`
-  display: flex;
-  position: relative;
-  top: -2px;
-  width: 100%;
-  justify-content: space-between;
-  background: #f3d7d7;
-  color: #ec6464;
-  padding: 23px 30px;
-  cursor: pointer;
-  animation: match-down 0.5s;
-  @keyframes match-down {
-    from {
-      margin-top: -62px;
-    }
-    to {
-      margin-top: 0;
-    }
   }
 `;
 

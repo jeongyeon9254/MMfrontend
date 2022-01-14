@@ -14,10 +14,10 @@ import {
   Hidden,
   KakaoCallback,
   NotPound,
-  Chatroom,
   LoginNeed,
   Profile,
   Sample,
+  MyPost,
 } from '../components/templates';
 import { PrivateRoute, PublicRoute, Bg } from '../components/modules/layout';
 // Redux 불러오기
@@ -43,6 +43,8 @@ function App() {
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />
         <PrivateRoute exact path="/postEdit/:postId" Component={PostEdit} />
+        <PrivateRoute exact path="/hidden" Component={Hidden} />
+        <PrivateRoute exact path="/mypost" Component={MyPost} />
         <PublicRoute
           exact
           restricted={true}
@@ -52,8 +54,6 @@ function App() {
         <PublicRoute exact restricted={true} path="/loginNeed" Component={LoginNeed} />
         <PublicRoute exact restricted={true} path="*" Component={NotPound} />
       </Switch>
-
-      {/* <Route exact path="/hidden" component={Hidden} /> */}
     </ConnectedRouter>
   );
 }

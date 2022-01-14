@@ -12,6 +12,7 @@ const Button = props => {
     return x.name === userInfo.mbti;
   });
   const {
+    shadow,
     position,
     name,
     fontcolor,
@@ -38,6 +39,7 @@ const Button = props => {
   } = props;
 
   const styles = {
+    shadow,
     bottom,
     width,
     color,
