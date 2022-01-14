@@ -45,8 +45,6 @@ const PostMain = () => {
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
 
-  console.log(scrollBox);
-
   const aa = useRef();
 
   const infinityScroll = () => {
