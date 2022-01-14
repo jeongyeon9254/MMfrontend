@@ -6,9 +6,11 @@ import { editMyinfoDB, getMyMbitInfo, getMyPost } from '../../api/modules/user';
 
 const GET_MBTIINFO = 'GET_MBTIINFO';
 const GET_MYPOST = 'GET_MYPOST';
+const RESET = 'RESET';
 
 const UpMbtiInfo = createAction(GET_MBTIINFO, info => ({ info }));
 const GetMypost = createAction(GET_MYPOST, (data, page) => ({ data, page }));
+const reset = createAction(RESET, () => ({}));
 
 const initialState = {
   mbti: {},
@@ -52,6 +54,7 @@ const AddMyinfoDB = () => {
 const getMyPostDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
+      dispatch(reset());
       const data = await getMyPost(page);
       dispatch(GetMypost(data.data, page));
       console.log(data);
@@ -72,6 +75,11 @@ export default handleActions(
         draft.MypostList = action.payload.data;
         draft.page = 0;
         draft.page = action.payload.page + 1;
+      }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.postList = [];
+        draft.page = 0;
       }),
   },
   initialState,
