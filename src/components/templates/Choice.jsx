@@ -35,54 +35,55 @@ const Choice = () => {
   return (
     <div>
       <Header>요청 목록</Header>
-      <Grid height="100%">
-        <ListHead
-          Text={`내가 받은 매칭 신청 목록 ${ReceiveList ? ReceiveList.length : '0'}개`}
-          OnClick={() => {
-            setOpen(!open);
-          }}
-          boo={open}
-        />
-        <Boad className={open ? 'Open' : ''}>
-          {ReceiveList
-            ? ReceiveList.map((x, idx) => {
-                return (
-                  <Listfrom
-                    OnClick={e => {
-                      //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
-                      setPaging(!Paging);
-                      setData(x);
-                    }}
-                    data={x}
-                    key={idx}
-                  ></Listfrom>
-                );
-              })
-            : ''}
-        </Boad>
-        <ListHead
-          Text={`내가 보낸 매칭 신청 목록 ${ReceiveList ? ReceiveList.length : '0'} 개`}
-          OnClick={() => {
-            setOpen2(!open2);
-          }}
-          boo={open2}
-        />
-        <Boad className={open2 ? 'Open' : ''}>
-          {SendList
-            ? SendList.map((x, idx) => {
-                return (
-                  <Listfrom
-                    OnClick={e => {
-                      history.push(`/profile/${x.guestId}`);
-                    }}
-                    key={idx}
-                    data={x}
-                  ></Listfrom>
-                );
-              })
-            : ''}
-        </Boad>
-      </Grid>
+      <ScrollBox>
+        <Grid height="auto">
+          <ListHead
+            Text={`내가 받은 매칭 신청 목록 ${ReceiveList ? ReceiveList.length : '0'}개`}
+            OnClick={() => {
+              setOpen(!open);
+            }}
+            boo={open}
+          />
+          <Boad className={open ? 'Open' : ''}>
+            {ReceiveList.map((x, idx) => {
+              return (
+                <Listfrom
+                  OnClick={e => {
+                    //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
+                    setPaging(!Paging);
+                    setData(x);
+                  }}
+                  data={x}
+                  key={idx}
+                ></Listfrom>
+              );
+            })}
+          </Boad>
+          <ListHead
+            Text={`내가 보낸 매칭 신청 목록 ${SendList ? SendList.length : '0'} 개`}
+            OnClick={() => {
+              setOpen2(!open2);
+            }}
+            boo={open2}
+          />
+          <Boad className={open2 ? 'Open' : ''}>
+            {SendList
+              ? SendList.map((x, idx) => {
+                  return (
+                    <Listfrom
+                      OnClick={e => {
+                        history.push(`/profile/${x.guestId}`);
+                      }}
+                      key={idx}
+                      data={x}
+                    ></Listfrom>
+                  );
+                })
+              : ''}
+          </Boad>
+        </Grid>
+      </ScrollBox>
+
       <UserPage Boo={Paging} data={Data !== {} ? Data : ''} _onClick={ListHeadClick}></UserPage>
       <Footer />
     </div>
@@ -96,7 +97,7 @@ const Boad = styled.div`
   left: 0px;
   z-index: 1;
   opacity: 0;
-  transition: all ease-out 0.2s;
+  transition: ease-out 0.2s;
   &.Open {
     height: inherit;
     overflow: auto;
@@ -104,5 +105,9 @@ const Boad = styled.div`
     top: 0px;
   }
 `;
-
+const ScrollBox = styled.div`
+  overflow-y: scroll;
+  height: 62vh;
+  padding-bottom: 96px;
+`;
 export default Choice;

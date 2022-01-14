@@ -3,19 +3,13 @@ import styled from 'styled-components';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
-function SkeletonStyle(props) {
+function SkeletonFile(props) {
   const { type } = props;
   switch (type) {
-    case 'List':
+    case 'photo':
       return (
         <List>
-          <Stack alignItems="center" direction="row" spacing={1} style={{ width: '100%' }}>
-            <Skeleton variant="circular" width={52} height={52} animation="wave" />
-            <Stack spacing={1} style={{ width: '80%' }}>
-              <Skeleton variant="rectangular" width="50%" height={20} animation="wave" />
-              <Skeleton variant="rectangular" width="100%" height={15} animation="wave" />
-            </Stack>
-          </Stack>
+          <Skeleton variant="circular" width="130px" height="130px" animation="wave" />
         </List>
       );
     case 'box':
@@ -46,8 +40,9 @@ function SkeletonStyle(props) {
   }
 }
 const List = styled.div`
-  padding: 16px 30px;
+  padding: 0px;
   width: 100%;
+  margin: 0 auto;
 `;
 
 const Box = styled.div`
@@ -57,4 +52,4 @@ const Box = styled.div`
   border-radius: 6px;
 `;
 
-export default SkeletonStyle;
+export default SkeletonFile;

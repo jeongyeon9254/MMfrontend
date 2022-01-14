@@ -5,14 +5,17 @@ import { Box, Image, Tag, Button, Select } from '../element/index';
 import Pen from '../../img/Icon/icon_create.svg';
 import Bit from '../modules/Bit';
 import Skeleton from '../modules/Choice/Skeleton';
+import Skeletons from '../modules/Profile/Skeleton';
 
 const Hidden = () => {
   return (
     <Scroll>
       <Grid border="1px solid #000" height="100%" padding="30px" gap="40px" align="flex-start">
         <h4 style={{ fontSize: '50px' }}> Element 정리 페이지</h4>
-
         <Skeleton type="List"></Skeleton>
+        <Skeleton type="box"></Skeleton>
+        <Skeleton type="chat"></Skeleton>
+        <Skeletons type="photo" />
         <Select></Select>
         <Grid gap="20px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>

@@ -21,9 +21,9 @@ function MyBody() {
         <MyPartBox title="한줄 소개">
           <Box padding="10px 17px">{Info.intro ? Info.intro : ' '}</Box>
         </MyPartBox>
-        <MyPartBox title="내가 올린 게시물">
+        {/* <MyPartBox title="내가 올린 게시물">
           <Mypost />
-        </MyPartBox>
+        </MyPartBox> */}
         <MyEdit Open={Open} _onClick={ClickEvent}></MyEdit>
         <MyBottom Edit _onClick={ClickEvent}>
           내 정보 수정하기

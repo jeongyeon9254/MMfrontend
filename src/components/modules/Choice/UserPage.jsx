@@ -45,7 +45,7 @@ const PageShadows = styled.div`
   top: 0px;
   z-index: 99;
   padding-top: 85px;
-  transition: all ease 0.3s;
+  transition: ease-out 0.2s;
   &.open {
     left: 0px;
   }

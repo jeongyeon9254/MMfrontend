@@ -6,19 +6,19 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const Delet_CHAT = 'Delet_CHAT';
-const LOADING = 'LOADING';
-const RESET = 'RESET';
+const LOADING_CHAT = 'LOADING_CHAT';
+const RESET_CHAT = 'RESET_CHAT';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
-const resetList = createAction(RESET, () => ({}));
-const LoadingList = createAction(LOADING, boo => ({ boo }));
+const resetList = createAction(RESET_CHAT, () => ({}));
+const LoadingList = createAction(LOADING_CHAT, () => ({}));
 
 const initialState = {
-  List: [],
-  Room: [],
+  List: [{}],
+  Room: [{}],
   loading: false,
 };
 
@@ -35,7 +35,7 @@ const getChatRoomListDB = () => {
     try {
       const res = await getChatRoomList();
       dispatch(ListChatRoom(res.data));
-      dispatch(LoadingList(true));
+      dispatch(LoadingList());
     } catch (err) {
       console.log(err);
     }
@@ -82,11 +82,11 @@ export default handleActions(
       produce(state, draft => {
         draft.List = [];
       }),
-    [LOADING]: (state, action) =>
+    [LOADING_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.loading = true;
       }),
-    [RESET]: (state, action) =>
+    [RESET_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.loading = false;
         draft.List = [];

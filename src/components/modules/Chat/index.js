@@ -5,5 +5,15 @@ import PartyOther from './PartyOther';
 import PartyInput from './PartyInput';
 import Announcement from './Announcement';
 import ChatEmoticon from './ChatEmoticon';
+import Skeleton from './Skeleton';
 
-export { ChatForm, ChatList, PartyMe, PartyOther, PartyInput, Announcement, ChatEmoticon };
+export {
+  ChatForm,
+  ChatList,
+  PartyMe,
+  PartyOther,
+  PartyInput,
+  Announcement,
+  ChatEmoticon,
+  Skeleton,
+};

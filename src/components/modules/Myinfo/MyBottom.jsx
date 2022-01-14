@@ -15,6 +15,6 @@ function MyBottom(props) {
   );
 }
 const BottomBox = styled.div`
-  padding: 32px 0px 20px;
+  padding: 22px 0px 20px;
 `;
 export default MyBottom;

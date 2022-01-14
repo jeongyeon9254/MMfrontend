@@ -4,12 +4,12 @@ import { produce } from 'immer';
 import { getchemyDB } from '../../api/modules/chemy';
 
 const GET_PROFILE = 'GET_PROFILE';
-const LOADING = 'LOADING';
-const RESET = 'RESET';
+const ISLOADING = 'ISLOADING';
+const ISRESET = 'ISRESET';
 
 const getProfile = createAction(GET_PROFILE, data => ({ data }));
-const LoadingAction = createAction(LOADING, () => ({}));
-const resetAction = createAction(RESET, () => ({}));
+const LoadingAction = createAction(ISLOADING, () => ({}));
+const resetAction = createAction(ISRESET, () => ({}));
 
 const initialState = {
   list: {},
@@ -34,11 +34,11 @@ export default handleActions(
       produce(state, draft => {
         draft.list = { ...action.payload.data };
       }),
-    [LOADING]: (state, action) =>
+    [ISLOADING]: (state, action) =>
       produce(state, draft => {
         draft.loading = true;
       }),
-    [RESET]: (state, action) =>
+    [ISRESET]: (state, action) =>
       produce(state, draft => {
         draft.loading = false;
         draft.list = {};

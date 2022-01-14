@@ -31,10 +31,6 @@ export const BtnBottomStyle = styled.button`
   font-weight: 500;
   position: ${props => (props.position ? props.position : 'fixed')};
   bottom: ${props => (props.bottom ? props.bottom : '44px')};
-
-  @media only screen and (max-width: 1050px) {
-    margin: 0px 0px 0px 23px;
-  }
 `;
 
 export const BtnRoundStyle = styled.button`
