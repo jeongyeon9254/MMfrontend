@@ -1,4 +1,5 @@
 import React from 'react';
+import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as MypostActions } from '../../redux/modules/user';
 import styled from 'styled-components';
@@ -14,7 +15,6 @@ const MyPost = () => {
 
   React.useEffect(() => {
     dispatch(MypostActions.getMyPostDB(page));
-    console.log(postList);
   }, []);
 
   return (
@@ -23,7 +23,14 @@ const MyPost = () => {
       {postList.length > 0 ? (
         postList.map((x, idx) => {
           return (
-            <Grid padding="15px 29px 0px 30px" key={x.postId}>
+            <Grid
+              gap="10px"
+              padding="15px 29px 0px 30px"
+              key={x.postId}
+              _onClick={() => {
+                history.push(`/postMain/${x.postId}`);
+              }}
+            >
               <MyPostCard postList={x} />
             </Grid>
           );
