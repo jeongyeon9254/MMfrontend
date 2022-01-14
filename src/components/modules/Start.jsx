@@ -38,18 +38,6 @@ const Body = styled.div`
   top: 0px;
   z-index: 50;
   background-color: white;
-  transition: all 0.2s;
-  animation: modal-show 0.3s;
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      margin-top: -5%;
-    }
-    to {
-      opacity: 1;
-      margin-top: 0;
-    }
-  }
 `;
 
 const Thick = styled.p`
@@ -64,9 +52,10 @@ const Thin = styled.p`
 const ClickTxt = styled.p`
   position: absolute;
   bottom: -74px;
-  left: 99px;
+  left: 49%;
   font-size: ${props => props.theme.fontSizes.xxl};
   font-weight: 400;
+  transform: translate(-50%);
   @keyframes blink-effect {
     50% {
       opacity: 0;
@@ -74,7 +63,7 @@ const ClickTxt = styled.p`
   }
   & {
     animation: blink-effect 1.5s step-end infinite;
-  }n-o
+  }
 `;
 
 export default Start;

@@ -48,6 +48,8 @@ const PostMain = () => {
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
 
+  const aa = useRef();
+
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;
     const scrollBoxHeight = scrollBox.offsetHeight;
