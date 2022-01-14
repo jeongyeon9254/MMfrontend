@@ -5,24 +5,34 @@ import styled from 'styled-components';
 import Header from '../modules/layout/Header';
 import MyPostCard from '../modules/Post/MyPostCard';
 import { Grid } from '../element/index';
+import Null from '../../shared/Null';
 
 const MyPost = () => {
   const dispatch = useDispatch();
   const postList = useSelector(state => state.user.MypostList);
   const page = useSelector(state => state.user.page);
 
-  const Mylist = [...postList];
-
   React.useEffect(() => {
     dispatch(MypostActions.getMyPostDB(page));
+    console.log(postList);
   }, []);
 
   return (
     <MyPostBox>
       <Header>내가 올린 게시물</Header>
-      <Grid gap="10px" padding="14px 29px 15px 30px">
-        <MyPostCard Mylist={Mylist} />
-      </Grid>
+      {postList.length > 0 ? (
+        postList.map((x, idx) => {
+          return (
+            <Grid padding="15px 29px 0px 30px" key={x.postId}>
+              <MyPostCard postList={x} />
+            </Grid>
+          );
+        })
+      ) : (
+        <Grid padding="40px 0 0 0">
+          <Null mypost></Null>
+        </Grid>
+      )}
     </MyPostBox>
   );
 };

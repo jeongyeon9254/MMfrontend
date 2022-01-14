@@ -7,8 +7,8 @@ import { ReactComponent as Sms } from '../../../img/Icon/chat_bubble.svg';
 import { Grid, Image } from '../../element/index';
 
 const MyPostCard = props => {
-  const info = props.Mylist;
-
+  const mypost = props.postList;
+  // const img = info.imageList[0];
   return (
     <MyPost>
       <Grid row wrap="nowrap" gap="13px">
@@ -17,7 +17,7 @@ const MyPostCard = props => {
         </Grid>
         <Grid>
           <Grid padding="10px 21px 0px 0px">
-            <Title>{info.content}</Title>
+            <Title>{mypost.content}</Title>
           </Grid>
           <Grid row wrap="nowrap" margin="6px 0px 0px 0px">
             <Grid>
