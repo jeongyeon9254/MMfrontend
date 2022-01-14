@@ -15,7 +15,8 @@ const initialState = {
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
     const res = await kakaoLogin(code);
-
+    console.log(res);
+    console.log(res.data);
     const token = res.headers.authorization;
 
     setCookie('authorization ', token);

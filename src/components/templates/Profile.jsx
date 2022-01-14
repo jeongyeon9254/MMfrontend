@@ -34,6 +34,8 @@ const Profile = props => {
   const [connect, setConnect] = useState(false);
   const [Disconnect, setDisconnect] = useState(false);
 
+  console.log(profile);
+
   const exit = () => {
     setConnect(false);
     setDisconnect(false);

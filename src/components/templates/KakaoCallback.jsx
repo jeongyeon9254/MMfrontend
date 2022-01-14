@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreators as useAction } from '../../redux/modules/user';
+import Spiner from '../../shared/Spiner';
 const KakaoCallback = props => {
   const dispatch = useDispatch();
 
@@ -11,7 +12,11 @@ const KakaoCallback = props => {
     await dispatch(useAction.logInDB(code));
   }, []);
 
-  return <p>로딩중입니다.</p>;
+  return (
+    <>
+      <Spiner loading></Spiner>
+    </>
+  );
 };
 
 export default KakaoCallback;
