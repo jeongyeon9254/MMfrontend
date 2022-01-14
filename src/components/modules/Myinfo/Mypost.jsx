@@ -36,22 +36,22 @@ function Mypost() {
 
 const MypostPage = styled.div`
   .scroll-container {
-    padding: 0px 0px 6px;
+    padding: 6px 0px;
   }
 `;
 const MypostBox = styled.div`
   width: 82px;
   height: 82px;
-  background-color: #eee;
-  border-radius: 8px;
+  background-color: #c4c4c4;
+  border-radius: 4px;
   cursor: pointer;
 `;
 const MypostMore = styled.div`
   cursor: pointer;
   width: 82px;
   height: 82px;
-  background-color: #999;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 4px;
   box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
@@ -59,5 +59,8 @@ const MypostMore = styled.div`
   gap: 8px;
   flex-direction: column;
   font-size: ${p => p.theme.fontSizes.maxSmall};
+  &:hover {
+    background-color: #eee;
+  }
 `;
 export default Mypost;

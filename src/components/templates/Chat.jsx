@@ -107,36 +107,40 @@ const Chat = () => {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
+
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
     if (roomNum) {
       wsConnectSubscribe(roomNum);
     }
   }, [roomNum]);
+
   return (
     <div>
       <Header>채팅</Header>
       <Announcement></Announcement>
       <Grid height="100%">
-        <Boad className={open ? 'Open' : ''}>
-          {Room.map((x, idx) => {
-            return (
-              <ChatList
-                OnClick={e => {
-                  //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
-                  setPaging(!Paging);
-                  setData(x);
-                  //입장한 채팅방 메세지 정보 가져 오기
-                  setroomNum(x.roomId);
-                  dispatch(ChatAction.getChatMsListDB(x.roomId));
-                  //채팅방 입장 잘때
-                }}
-                data={x}
-                key={idx}
-              ></ChatList>
-            );
-          })}
-        </Boad>
+        <ScrollBox>
+          <Boad className={open ? 'Open' : ''}>
+            {Room.map((x, idx) => {
+              return (
+                <ChatList
+                  OnClick={e => {
+                    //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
+                    setPaging(!Paging);
+                    setData(x);
+                    //입장한 채팅방 메세지 정보 가져 오기
+                    setroomNum(x.roomId);
+                    dispatch(ChatAction.getChatMsListDB(x.roomId));
+                    //채팅방 입장 잘때
+                  }}
+                  data={x}
+                  key={idx}
+                ></ChatList>
+              );
+            })}
+          </Boad>
+        </ScrollBox>
       </Grid>
       <ChatForm
         sendStop={sendStop}
@@ -169,6 +173,11 @@ const Boad = styled.div`
     opacity: 1;
     top: 0px;
   }
+`;
+const ScrollBox = styled.div`
+  width: 100%;
+  height: 546px;
+  overflow-y: scroll;
 `;
 
 export default Chat;

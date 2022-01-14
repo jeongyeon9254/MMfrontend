@@ -9,7 +9,6 @@ function MyEdit(props) {
   const dispatch = useDispatch();
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
   const [err, Seterr] = React.useState(false);
   const [limt, Selimt] = React.useState(false);
 
@@ -23,26 +22,18 @@ function MyEdit(props) {
   const [Alt, setAlt] = React.useState(false);
 
   const SetEmit = item => {
-    console.log(item);
     SetMbti(item);
   };
 
   const Haddit = item => {
-    console.log(item);
     SetInt(item);
   };
   const ImgCheck = item => {
-    console.log(item);
     SetImg(item);
   };
   const ActiveLocal = item => {
     SetLocation(item);
-    console.log(Location);
   };
-
-  const map = Int.map(x => {
-    return { interest: x };
-  });
 
   const AddInfo = {
     nickname: nickname,
@@ -51,7 +42,7 @@ function MyEdit(props) {
     intro: textarea,
     location: Location.location ? Location.location : Location,
     mbti: Mbti,
-    interestList: map,
+    interestList: Int,
   };
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
