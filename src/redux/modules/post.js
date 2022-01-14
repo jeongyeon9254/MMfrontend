@@ -36,14 +36,17 @@ const initialState = {
   detail: [],
   loading: false,
   page: 0,
+  spiner: false,
 };
 
 const getPostDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
+      dispatch(loading(true));
       dispatch(reset());
       const data = await getPost(page);
       dispatch(getPostList(data.data, page));
+      dispatch(loading(false));
     } catch (err) {
       console.log(err);
     }
@@ -64,9 +67,11 @@ const getPostScrollDB = (page = null) => {
 const getKategoriDB = (interestId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
+      dispatch(loading(true));
       dispatch(reset());
       const data = await getKategoriPost(interestId, page);
       dispatch(getKategoriList(data.data, page));
+      dispatch(loading(false));
     } catch (err) {
       console.log(err);
     }

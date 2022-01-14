@@ -17,7 +17,7 @@ const MapList = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const lists = useSelector(state => state.main.list);
   const { modal, outModal } = props;
-  console.log(lists);
+
   const offModal = () => {
     outModal();
   };
@@ -29,14 +29,15 @@ const MapList = props => {
           <div className="downBtn">
             <img alt="리스트 닫기" src={arrow_bottom} onClick={offModal}></img>
           </div>
-          <Grid align="center" color="#fff">
-            <p>
-              "<b>{userInfo.nickname}</b> 님과 잘 통하는 사람이 <b>{lists.result.length}</b> 명
-              있습니다"
-            </p>
-          </Grid>
+
           {/* 카드리스트 */}
           <div className="inner">
+            <Grid padding="10px 0 0 0 " align="center" color="#fff">
+              <p>
+                "<b>{props.sample ? '게스트' : userInfo.nickname}</b> 님과 잘 통하는 사람이{' '}
+                <b>{lists.result.length}</b> 명 있습니다"
+              </p>
+            </Grid>
             {lists.result.length > 0 ? (
               lists.result.map((list, idx) => {
                 return (
@@ -86,7 +87,7 @@ const MapList = props => {
 const MapListStyle = styled.div`
   position: fixed;
   width: 100%;
-  height: 410px;
+  height: 465px;
   bottom: 89px;
   z-index: 2;
   animation: list-show 0.5s;
