@@ -14,7 +14,6 @@ import {
   Hidden,
   KakaoCallback,
   NotPound,
-  Chatroom,
   LoginNeed,
   Profile,
   Sample,
@@ -44,11 +43,8 @@ function App() {
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />
         <PrivateRoute exact path="/postWrite" Component={PostWrite} />
         <PrivateRoute exact path="/postEdit/:postId" Component={PostEdit} />
-
         <PrivateRoute exact path="/hidden" Component={Hidden} />
-
         <PrivateRoute exact path="/mypost" Component={MyPost} />
-
         <PublicRoute
           exact
           restricted={true}
