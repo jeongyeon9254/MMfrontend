@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-const common = `
-text-align: center;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border: none;
-cursor: pointer;
-font-weight: 500;
-`;
-
 export const BtnAddStyle = styled.button`
   color: ${props => (props.fontcolor ? props.fontcolor : props.theme.colors.white)};
   background-color: ${props => (props.color ? props.color : props.theme.colors.gray_2)};
@@ -16,7 +8,10 @@ export const BtnAddStyle = styled.button`
   margin: ${props => props.margin};
   padding: ${props => (props.padding ? props.padding : '14px')};
   border-radius: ${props => (props.radius ? props.radius : '7px')};
-  ${common};
+  text-align: center;
+  box-shadow: ${props => (props.shadow ? props.shadow : '0px 4px 4px rgba(0, 0, 0, 0.25)')};
+  border: none;
+  cursor: pointer;
   font-weight: bold;
   border-top: 1px solid #eee;
 `;
@@ -29,13 +24,13 @@ export const BtnBottomStyle = styled.button`
   padding: 16px;
   width: ${props => props.width};
   border-radius: 30px;
-  ${common};
+  text-align: center;
+  box-shadow: ${props => (props.shadow ? props.shadow : '0px 4px 4px rgba(0, 0, 0, 0.25)')};
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
   position: ${props => (props.position ? props.position : 'fixed')};
   bottom: ${props => (props.bottom ? props.bottom : '44px')};
-
-  @media only screen and (max-width: 1050px) {
-    margin: 0px 0px 0px 23px;
-  }
 `;
 
 export const BtnRoundStyle = styled.button`
@@ -47,7 +42,7 @@ export const BtnRoundStyle = styled.button`
   text-align: center;
   // 박스 설정
   box-sizing: border-box;
-  box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.33);
+  box-shadow: ${props => (props.shadow ? props.shadow : '4px 6px 4px rgba(0, 0, 0, 0.33)')};
   width: ${props => props.width};
   height: ${props => props.width};
   border: none;
@@ -65,7 +60,7 @@ export const BtnTagStyle = styled.button`
   text-align: center;
   width: ${props => props.width};
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${props => (props.shadow ? props.shadow : '0px 4px 4px rgba(0, 0, 0, 0.25)')};
   border: none;
   margin: ${props => props.margin};
   padding: 7px 20px;

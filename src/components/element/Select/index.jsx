@@ -5,7 +5,7 @@ import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
 import { gpsLsit } from '../../modules/Main/gpsList';
 function Select(props) {
   const { width, Emit, Data, Area, height, padding, high, fontsize, defult } = props;
-  console.log(`defult: ${defult}`);
+
   const [active, SetActive] = React.useState(defult);
   const [OnOff, SetOnOff] = React.useState(false);
 

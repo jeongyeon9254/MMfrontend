@@ -21,9 +21,9 @@ function MyBody() {
         <MyPartBox title="한줄 소개">
           <Box padding="10px 17px">{Info.intro ? Info.intro : ' '}</Box>
         </MyPartBox>
-        <MyPartBox title="내가 올린 게시물">
+        {/* <MyPartBox title="내가 올린 게시물">
           <Mypost />
-        </MyPartBox>
+        </MyPartBox> */}
         <MyEdit Open={Open} _onClick={ClickEvent}></MyEdit>
         <MyBottom Edit _onClick={ClickEvent}>
           내 정보 수정하기
@@ -35,8 +35,8 @@ function MyBody() {
 const Body = styled.div`
   position: absolute;
   left: 0px;
-  top: 39%;
-  padding: 20px 30px;
+  top: 42%;
+  padding: 0px 30px 40px;
   width: 100%;
   height: 43.9vh;
   overflow-y: scroll;
