@@ -6,15 +6,15 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 import { actionCreators as matchingAction } from '../../../redux/modules/matching';
 
 function UserButton(props) {
-  const { guestId } = props;
+  const { guestId, hostInfo } = props;
   const dispatch = useDispatch();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const guestInfo = {
-    guestId: userInfo.username,
-    guestMbti: userInfo.mbti,
-    guestNick: userInfo.nickname,
-    guestImg: userInfo.profileImage,
+    guestEmail: hostInfo.username,
+    guestMbti: hostInfo.mbti,
+    guestNick: hostInfo.nickname,
+    guestImg: hostInfo.profileImage,
   };
 
   const ClickRefusal = () => {

@@ -1,28 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as userAction } from '../../../redux/modules/user';
+import { history } from '../../../redux/configureStore';
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 
 import cross from '../../../img/Icon/cross.svg';
 function Mypost() {
-  const postings = Array.from('tests');
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(userAction.getMyPostDB(0));
+  }, []);
+
+  const postings = useSelector(state => state.user.MypostList);
   return (
     <MypostPage>
       <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
-        {postings.map((x, idx) => {
-          return (
-            <SwiperSlide key={idx}>
-              <MypostBox>
-                <img src="" alt="게시물 이미지" />
-              </MypostBox>
-            </SwiperSlide>
-          );
-        })}
+        {postings
+          ? postings.map((x, idx) => {
+              return (
+                <SwiperSlide key={idx}>
+                  <MypostBox>
+                    <img src={x.imageList[0].imageLink} alt="게시물 이미지" />
+                  </MypostBox>
+                </SwiperSlide>
+              );
+            })
+          : ''}
         <SwiperSlide>
           <MypostMore
             onClick={() => {
-              console.log('내가 올린 게시물 페이지로 이동');
+              history.push('/mypost');
             }}
           >
             <img src={cross} alt="더보기" />
@@ -42,9 +53,13 @@ const MypostPage = styled.div`
 const MypostBox = styled.div`
   width: 82px;
   height: 82px;
-  background-color: #c4c4c4;
+  background-color: #999;
   border-radius: 4px;
   cursor: pointer;
+  overflow: hidden;
+  img {
+    height: 100%;
+  }
 `;
 const MypostMore = styled.div`
   cursor: pointer;
