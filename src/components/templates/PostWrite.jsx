@@ -22,6 +22,7 @@ const PostWrite = props => {
   const dispatch = useDispatch();
   // 모달
   const [Alt, setAlt] = useState(false);
+  const [textAlt, setTextAlt] = useState(false);
 
   // 버튼
   const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
@@ -122,6 +123,21 @@ const PostWrite = props => {
           </Grid>
         </Alert>
       ) : null}
+      {textAlt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setTextAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>글을 작성해 주세요.</p>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header>글 작성하기</Header>
       <PostBox>
         <Grid>
@@ -203,7 +219,7 @@ const PostWrite = props => {
         <Button
           _onClick={() => {
             if (text === '') {
-              alert('게시글을 입력해주세요');
+              setTextAlt(true);
               return;
             }
             setAlt(true);

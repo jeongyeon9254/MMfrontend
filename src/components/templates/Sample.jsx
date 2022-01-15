@@ -59,7 +59,9 @@ const Sample = () => {
         </Button>
       </CenterBtn>
       <MapList sample modal={modal} outModal={outModal} />
-      <Footer />
+      <div onClick={needLogin}>
+        <Footer />
+      </div>
     </React.Fragment>
   );
 };
