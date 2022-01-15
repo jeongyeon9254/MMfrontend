@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
 
 // component
-import { Button, Grid, Input } from '../element/index.js';
+import { Button, Grid, Input, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Spiner from '../../shared/Spiner';
 
 const PostEdit = props => {
   const dispatch = useDispatch();
-
+  const [textAlt, setTextAlt] = useState(false);
   // path
   const pathName = props.location.pathname;
   const boardId = pathName.split('/');
@@ -47,7 +47,7 @@ const PostEdit = props => {
 
   const editPost = async () => {
     if (text === '') {
-      alert('게시글을 입력해주세요');
+      setTextAlt(true);
       return;
     }
     const data = {
@@ -60,6 +60,21 @@ const PostEdit = props => {
 
   return (
     <>
+      {textAlt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setTextAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>글을 작성해 주세요.</p>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header>글 수정하기</Header>
       <PostBox>
         <Grid>

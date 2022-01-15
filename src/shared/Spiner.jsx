@@ -5,7 +5,19 @@ import styled from 'styled-components';
 import spiner_img from '../img/Icon/spiner_img.svg';
 
 const Spiner = props => {
-  const post = props.post;
+  const { post, loading } = props;
+
+  if (loading) {
+    return (
+      <SpinerBox>
+        <p className="spiner_title">로그인중입니다!</p>
+        <p className="spiner_text">잠시만 기다려주세요!</p>
+        <div>
+          <img className="rolling" alt="스피너" src={spiner_img}></img>
+        </div>
+      </SpinerBox>
+    );
+  }
 
   if (post) {
     return (

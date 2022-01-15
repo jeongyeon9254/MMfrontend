@@ -16,6 +16,17 @@ const Null = props => {
       </NullBox>
     );
   }
+  if (props.mypost) {
+    return (
+      <NullBox>
+        <p className="null_title">지금 올리신 게시물이 없네요</p>
+        <p className="null_title">게시물을 작성해주세요!</p>
+        <div className="img_box">
+          <img src={null_img} alt="포스트가 없습니다"></img>
+        </div>
+      </NullBox>
+    );
+  }
 
   return (
     <NullBox>

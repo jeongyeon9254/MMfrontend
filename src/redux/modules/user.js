@@ -2,20 +2,27 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { kakaoLogin } from '../../api/modules/user';
 import { setCookie } from '../../shared/Cookie';
-import { editMyinfoDB, getMyMbitInfo } from '../../api/modules/user';
+import { editMyinfoDB, getMyMbitInfo, getMyPost } from '../../api/modules/user';
 
 const GET_MBTIINFO = 'GET_MBTIINFO';
+const GET_MYPOST = 'GET_MYPOST';
+const RESET = 'RESET';
 
 const UpMbtiInfo = createAction(GET_MBTIINFO, info => ({ info }));
+const GetMypost = createAction(GET_MYPOST, (data, page) => ({ data, page }));
+const reset = createAction(RESET, () => ({}));
 
 const initialState = {
   mbti: {},
+  MypostList: [],
+  page: 0,
 };
 
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
     const res = await kakaoLogin(code);
-
+    console.log(res);
+    console.log(res.data);
     const token = res.headers.authorization;
 
     setCookie('authorization ', token);
@@ -45,11 +52,35 @@ const AddMyinfoDB = () => {
   };
 };
 
+const getMyPostDB = (page = null) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      dispatch(reset());
+      const data = await getMyPost(page);
+      dispatch(GetMypost(data.data, page));
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export default handleActions(
   {
     [GET_MBTIINFO]: (state, action) =>
       produce(state, draft => {
         draft.mbti = action.payload.info;
+      }),
+    [GET_MYPOST]: (state, action) =>
+      produce(state, draft => {
+        draft.MypostList = action.payload.data;
+        draft.page = 0;
+        draft.page = action.payload.page + 1;
+      }),
+    [RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.postList = [];
+        draft.page = 0;
       }),
   },
   initialState,
@@ -59,6 +90,7 @@ const actionCreators = {
   logInDB,
   AddMyinfoDB,
   userInfoPut,
+  getMyPostDB,
 };
 
 export { actionCreators };

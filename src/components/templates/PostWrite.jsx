@@ -22,6 +22,7 @@ const PostWrite = props => {
   const dispatch = useDispatch();
   // 모달
   const [Alt, setAlt] = useState(false);
+  const [textAlt, setTextAlt] = useState(false);
 
   // 버튼
   const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
@@ -103,6 +104,7 @@ const PostWrite = props => {
 
   const next = () => {
     addPost();
+    exit();
   };
 
   const exit = () => {
@@ -117,6 +119,21 @@ const PostWrite = props => {
             <Title>작성을 완료할까요?</Title>
             <Grid gap="4px">
               <Content>완료시 게시물페이지로 이동합니다.</Content>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
+      {textAlt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setTextAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>글을 작성해 주세요.</p>
             </Grid>
           </Grid>
         </Alert>
@@ -202,7 +219,7 @@ const PostWrite = props => {
         <Button
           _onClick={() => {
             if (text === '') {
-              alert('게시글을 입력해주세요');
+              setTextAlt(true);
               return;
             }
             setAlt(true);

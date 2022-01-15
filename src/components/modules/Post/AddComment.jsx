@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Grid, Image, Box, Input } from '../../element/index';
+import { Grid, Image, Alert } from '../../element/index';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { actionCreators as postActions } from '../../../redux/modules/post';
 
 const AddComment = props => {
   const dispatch = useDispatch();
+  const [textAlt, setTextAlt] = useState(false);
 
   // 유저 정보
   const getUser = localStorage.getItem('userInfo');
@@ -16,11 +17,11 @@ const AddComment = props => {
 
   // 코멘트
   const textRef = useRef();
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState('');
 
   const addComment = () => {
     if (comment === '') {
-      alert('코멘트를 입력해주세요');
+      setTextAlt(true);
       return false;
     }
     dispatch(postActions.addCommentsDB(postId, comment));
@@ -29,13 +30,27 @@ const AddComment = props => {
 
   const enterkey = () => {
     if (window.event.keyCode == 13) {
-      dispatch(postActions.addCommentsDB(postId, comment));
-      setComment('');
+      addComment();
     }
   };
 
   return (
     <CommentBox>
+      {textAlt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setTextAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>댓글을 작성해 주세요.</p>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Grid row width="100%" gap="10px">
         <Image src={data.profileImage} round width="37px" margin="0"></Image>
         <input

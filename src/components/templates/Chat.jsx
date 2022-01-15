@@ -40,8 +40,6 @@ const Chat = () => {
       ws.connect({ token: TOKEN }, () => {
         ws.subscribe(`/sub/chat/room/${Id}`, data => {
           let recv = JSON.parse(data.body);
-          console.log('구독후 새로운 메세지 data :' + recv);
-          console.log(recv);
           dispatch(ChatAction.PostChatting(recv));
         });
       });
