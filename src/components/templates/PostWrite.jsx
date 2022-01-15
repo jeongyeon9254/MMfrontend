@@ -103,6 +103,7 @@ const PostWrite = props => {
 
   const next = () => {
     addPost();
+    exit();
   };
 
   const exit = () => {
