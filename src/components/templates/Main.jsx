@@ -9,7 +9,7 @@ import { getMatchingDB } from '../../api/modules/chemy';
 import { history } from '../../redux/configureStore.js';
 
 // component
-import { Button } from '../element/index.js';
+import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
@@ -44,8 +44,26 @@ const Main = props => {
     dispatch(mainActions.getListDB());
   }, []);
 
+  // 모달
+  const [Alt, setAlt] = useState(false);
+
   return (
     <React.Fragment>
+      {Alt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>맞는 유저가 없습니다.</p>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header main>메인화면</Header>
       <LocationBox>
         <Button BtnTag _onClick={onLocation}>
@@ -59,7 +77,7 @@ const Main = props => {
           _onClick={async () => {
             getMatchingDB().then(res => {
               if (res.data.userId === -1) {
-                alert('맞는 유저가 없습니다.');
+                setAlt(true);
               } else {
                 setLoading(true);
                 setTimeout(function () {
