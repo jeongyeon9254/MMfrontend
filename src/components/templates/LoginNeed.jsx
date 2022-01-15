@@ -9,7 +9,7 @@ const LoginNeed = props => {
   return (
     <>
       <Header></Header>
-      <NeedBox style={{ backgroundImage: `url(${LoginNeedBG})` }}>
+      <NeedBox style={{ backgroundImage: `url(${LoginNeedBG})`, backgroundSize: 'cover' }}>
         <Grid align="center" gap="28px" padding="207px 0px 0px 0px">
           <Title>로그인이 필요해요!</Title>
           <Grid align="center" gap="4px">
