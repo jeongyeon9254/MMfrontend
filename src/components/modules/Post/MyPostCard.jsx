@@ -8,12 +8,17 @@ import { Grid, Image } from '../../element/index';
 
 const MyPostCard = props => {
   const mypost = props.postList;
-  // const img = info.imageList[0];
+  const img = mypost.imageList[0];
+
+  const time = mypost.createdAt.split(' ')[0].split('-');
+
+  console.log(time);
+
   return (
     <MyPost>
       <Grid row wrap="nowrap" gap="13px">
         <Grid row width="96px" height="96px" margin="12px 0px 11px 12px">
-          <Image border radius="4px" width="96px" height="96px" />
+          <Image src={img.imageLink} border radius="4px" width="96px" height="96px" />
         </Grid>
         <Grid>
           <Grid padding="10px 21px 0px 0px">
@@ -21,13 +26,15 @@ const MyPostCard = props => {
           </Grid>
           <Grid row wrap="nowrap" margin="6px 0px 0px 0px">
             <Grid>
-              <Cnt style={{ color: 'rgba(155, 155, 155, 1)' }}></Cnt>
+              <Cnt style={{ color: 'rgba(155, 155, 155, 1)' }}>
+                {time[1]}월 {time[2]}일
+              </Cnt>
             </Grid>
             <Grid row gap="4px" align="center" wrap="nowrap">
               <Heart />
-              <Cnt></Cnt>
+              <Cnt>{mypost.likesCount}</Cnt>
               <Sms style={{ margin: '0px 0px 0px 14px' }} />
-              <Cnt></Cnt>
+              <Cnt>{mypost.commentList.length}</Cnt>
             </Grid>
           </Grid>
         </Grid>
@@ -38,6 +45,7 @@ const MyPostCard = props => {
 
 const MyPost = styled.div`
   border: 1px solid #e3e3e3;
+  cursor: pointer;
 `;
 
 const Title = styled.p`

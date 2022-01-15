@@ -25,7 +25,13 @@ const initialState = {
 // 채팅방 만들기
 const postChatRoomListDB = guestInfo => {
   return async function (dispatch, getState, { history }) {
-    const res = postChatRoomList(guestInfo);
+    try {
+      const res = postChatRoomList(guestInfo);
+      console.log(res);
+      history.push('/chat');
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 

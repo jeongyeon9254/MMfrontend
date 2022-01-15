@@ -17,14 +17,13 @@ const ChatForm = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
   const loading = useSelector(state => state.chat.loading);
-  console.log(loading);
+
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {
-      console.log(scrollRef.current);
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       console.log(scrollRef.current.scrollTop);
       console.log(scrollRef.current.scrollHeight);
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   };
   React.useEffect(() => {
@@ -66,7 +65,7 @@ const ChatForm = props => {
                   case 'ENTER':
                     return <Alarm key={idx}> {x.message}</Alarm>;
                   default:
-                    return;
+                    return '';
                 }
               })}
         </Grid>
