@@ -5,6 +5,8 @@ import { delCookie } from '../../../shared/Cookie';
 import { history } from '../../../redux/configureStore';
 import close from '../../../img/Icon/close.svg';
 
+import { deleteUser } from '../../../api/modules/user.js';
+
 function MySetting(props) {
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -25,6 +27,12 @@ function MySetting(props) {
     logOutBack();
     exit();
   };
+
+  const deleteMe = () => {
+    deleteUser();
+    logOutBack();
+  };
+
   return (
     <div>
       {Alt ? (
@@ -46,7 +54,6 @@ function MySetting(props) {
             <img src={close} style={{ opacity: 0 }} />
           </Grid>
         </TabHead>
-        <TabList>버전 정보 1.0.0</TabList>
         <TabList
           style={{ cursor: 'pointer' }}
           onClick={() => {
@@ -55,6 +62,8 @@ function MySetting(props) {
         >
           로그아웃
         </TabList>
+        <TabList>버전 정보 1.0.0</TabList>
+        <TabList onClick={deleteMe}>회원탈퇴</TabList>
       </TabNav>
     </div>
   );

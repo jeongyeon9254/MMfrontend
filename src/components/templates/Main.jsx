@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// Js
-import { useDispatch } from 'react-redux';
-import { gpsLsit } from '../modules/Main/gpsList.js';
-import { actionCreators as mainActions } from '../../redux/modules/main';
+// Api
 import { getMatchingDB } from '../../api/modules/chemy';
+
+// Redux
+import { useDispatch } from 'react-redux';
+import { actionCreators as mainActions } from '../../redux/modules/main';
 import { history } from '../../redux/configureStore.js';
 
 // component
@@ -16,35 +17,43 @@ import MapList from '../modules/Main/MapList.jsx';
 import MapContainer from '../modules/Main/MapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
 import Spiner from '../../shared/Spiner.jsx';
+import MainModal from '../modules/Main/MainModal.jsx';
 
-const Main = props => {
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const [locationList, setLocationList] = useState(false);
-  const [location, setLocation] = useState(userInfo.location);
-  const [loading, setLoading] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [gpsId, setGpsId] = useState('');
-
+const Main = () => {
   const dispatch = useDispatch();
 
+  // 로컬스토리지에서 내정보를 가져옵니다
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+  const [locationList, setLocationList] = useState(false); // ㅇㅇ
+  const [loading, setLoading] = useState(false);
+
+  // 로케이션 모달창 관리
   const onLocation = () => {
     if (locationList === false) setLocationList(true);
     if (locationList === true) setLocationList(false);
   };
+  const outLocation = () => {
+    setLocationList(false);
+  };
 
+  // 맵리스트 모달창 관리
+  const [location, setLocation] = useState(userInfo.location);
+  const [gpsId, setGpsId] = useState('');
+  const [modal, setModal] = useState(false);
+  const onModal = () => {
+    setModal(true);
+  };
   const outModal = () => {
     setModal(false);
   };
 
-  const onModal = () => {
-    setModal(true);
-  };
-
+  // 렌더링시 지도 정보를 받아옵니다.
   React.useEffect(() => {
     dispatch(mainActions.getListDB());
   }, []);
 
-  // 모달
+  // 알럿창 관리
   const [Alt, setAlt] = useState(false);
 
   return (
@@ -95,26 +104,11 @@ const Main = props => {
       <MapList modal={modal} outModal={outModal} />
       <Footer />
       {locationList ? (
-        <Modal>
-          <div className="inner">
-            {gpsLsit.map((list, idx) => {
-              return (
-                <Button
-                  _onClick={() => {
-                    setLocation(list.location);
-                    setLocationList(false);
-                    dispatch(mainActions.chemyListDB(idx + 1));
-                    setGpsId(idx + 1);
-                    //지역 get 요청
-                  }}
-                  key={idx}
-                >
-                  {list.location}
-                </Button>
-              );
-            })}
-          </div>
-        </Modal>
+        <MainModal
+          outLocation={outLocation}
+          setLocation={setLocation}
+          setGpsId={setGpsId}
+        ></MainModal>
       ) : null}
       {loading ? <Spiner /> : null}
     </React.Fragment>
@@ -138,50 +132,6 @@ const LocationBox = styled.div`
   z-index: 1;
   @media only screen and (max-width: 1050px) {
     top: 120px;
-  }
-`;
-
-// 개선필요
-const Modal = styled.div`
-  position: absolute;
-  width: 60%;
-  height: 50%;
-  left: 50%;
-  margin-left: -30%;
-  background-color: ${props => props.theme.colors.white};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  top: 200px;
-  padding: 10px 20px;
-  z-index: 1;
-  animation: modal-show 0.3s;
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      margin-top: -5%;
-    }
-    to {
-      opacity: 1;
-      margin-top: 0;
-    }
-  }
-  .inner {
-    overflow: scroll;
-    height: 100%;
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
-  }
-  button {
-    padding: 14px;
-    border: none;
-    cursor: pointer;
-    color: ${props => props.theme.colors.gray_2};
-    font-weight: bold;
-    font-size: ${props => props.theme.fontSizes.lg};
-  }
-  @media only screen and (max-width: 450px) {
-    top: 160px;
   }
 `;
 

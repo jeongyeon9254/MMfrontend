@@ -25,7 +25,7 @@ const AddMBTI = props => {
   };
 
   const CheckMBTI = () => {
-    window.location.href = 'https://www.16personalities.com/ko/';
+    window.open('https://www.16personalities.com/ko/');
   };
 
   return (

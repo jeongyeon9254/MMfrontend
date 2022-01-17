@@ -17,10 +17,10 @@ const Grid = props => {
     align,
     gap,
     border,
+    // 추가 props
     borderTop,
     borderBot,
     list,
-    page,
     Btop,
     pad,
     wrap,
@@ -37,15 +37,16 @@ const Grid = props => {
     justify,
     align,
     gap,
-    Btop,
     border,
+    // 추가 css
+    Btop,
     borderTop,
     borderBot,
-    _onClick,
     wrap,
     Zindex,
   };
 
+  // flex row grid
   if (row) {
     return (
       <RowGridStyle {...styles} onClick={_onClick}>
@@ -53,6 +54,7 @@ const Grid = props => {
       </RowGridStyle>
     );
   }
+
   if (list) {
     return (
       <RowGridList onClick={_onClick} {...styles}>
@@ -62,6 +64,7 @@ const Grid = props => {
     );
   }
 
+  // flex colum grid
   return (
     <GridStyle {...styles} onClick={_onClick}>
       {children}

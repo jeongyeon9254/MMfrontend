@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import Phone from '../../../img/Icon/phone.png';
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+window.addEventListener('resize', () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 export const ImgBg = styled.div`
   background-image: url(${Phone});
   background-repeat: no-repeat;
@@ -25,6 +32,7 @@ export const ImgBg = styled.div`
     top: 0;
     width: 100%;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     transform: none;
   }
 `;
@@ -60,7 +68,8 @@ export const ContainerStyle = styled.div`
     left: 0;
     top: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
     transform: none;
     border-radius: 0px;
   }

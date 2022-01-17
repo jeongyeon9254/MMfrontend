@@ -32,3 +32,11 @@ export const getMyPost = page => {
     url: `/api/profile/mywrite?page=${page}&size=6`,
   });
 };
+
+// 회원탈퇴
+export const deleteUser = () => {
+  return instance({
+    method: 'delete',
+    url: `/api/profile`,
+  });
+};
