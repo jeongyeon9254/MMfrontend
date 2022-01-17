@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { history } from '../../redux/configureStore';
+import IPadress from '../../shared/Ipadress';
 import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
@@ -28,8 +28,8 @@ const Chat = () => {
   const [roomNum, setroomNum] = React.useState('');
   const [Data, setData] = React.useState({});
 
-  const env = process.env.NODE_ENV;
-  const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
+  const IP = IPadress();
+  const devTarget = `${IP}/ws-stomp`;
   const TOKEN = getCookie('authorization');
   const sock = new SockJS(devTarget);
   const ws = Stomp.over(sock);

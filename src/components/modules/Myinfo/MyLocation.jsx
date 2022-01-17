@@ -11,9 +11,11 @@ function MyLocation(props) {
     // console.log(item);
     SetActive(item);
   };
+
   React.useEffect(() => {
     Emit(active);
   }, [active]);
+
   return (
     <Grid row gap="8px" padding="3px 0" align="center" justify="space-between">
       <Box width="119px" padding="11px" align="center">
