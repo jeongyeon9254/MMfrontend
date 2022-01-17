@@ -3,22 +3,28 @@ import styled from 'styled-components';
 
 // Js
 import icon_location from '../../img/Icon/icon_location.svg';
+
+// Redux
 import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as matchingActions } from '../../redux/modules/matching.js';
 import { getMatchingDB } from '../../api/modules/chemy';
+
 // component
 import { Image, Grid, Box, Tag, Alert } from '../element/index.js';
 import Header from '../modules/layout/Header';
 import ProfileBar from '../modules/Profile/ProfileModalBar';
 import Spiner from '../../shared/Spiner';
 
-const Profile = props => {
+const Profile = () => {
   const dispatch = useDispatch();
+
+  // 주소에서 유저 ID를 받아옵니다
   const pathName = history.location.pathname;
   const name = pathName.split('/');
 
+  // 렌더링시 주소에서 유저 ID를 받아오고
   React.useEffect(() => {
     const pathName = history.location.pathname;
     const name = pathName.split('/');
@@ -74,7 +80,7 @@ const Profile = props => {
 
   const State = status ? status : '';
   return (
-    <>
+    <React.Fragment>
       {connect ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
@@ -145,7 +151,7 @@ const Profile = props => {
         )}
       </ProfileStyle>
       {loading ? <Spiner /> : null}
-    </>
+    </React.Fragment>
   );
 };
 

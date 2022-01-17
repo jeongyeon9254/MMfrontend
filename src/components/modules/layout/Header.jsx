@@ -126,6 +126,7 @@ const HeaderStyle = styled.header`
   }
   @media only screen and (max-width: 1050px) {
     padding: 13px 23px;
+    border-radius: 0px;
     gap: 0;
     .mock {
       display: none;
