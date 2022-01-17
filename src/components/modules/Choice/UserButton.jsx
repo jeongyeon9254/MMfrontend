@@ -24,7 +24,7 @@ function UserButton(props) {
 
   const ClickAccept = () => {
     console.log(`수락하겠습니다: ${guestId}`);
-    dispatch(ChatAction.postChatRoomListDB(guestInfo));
+    dispatch(ChatAction.postChatRoomListDB(guestInfo, hostInfo.userId));
   };
   return (
     <Fiexd>

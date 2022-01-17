@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { history } from '../../redux/configureStore';
+import IPadress from '../../shared/Ipadress';
 import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
@@ -24,12 +24,13 @@ const Chat = () => {
   // const rooms = useSelector(state => state.chat.room);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [open, setOpen] = React.useState(true);
+  const [enter, SetEnter] = React.useState(false);
   const [Paging, setPaging] = React.useState(false);
   const [roomNum, setroomNum] = React.useState('');
   const [Data, setData] = React.useState({});
 
-  const env = process.env.NODE_ENV;
-  const devTarget = env === 'development' ? 'http://13.209.76.178/ws-stomp' : '';
+  const IP = IPadress();
+  const devTarget = `${IP}/ws-stomp`;
   const TOKEN = getCookie('authorization');
   const sock = new SockJS(devTarget);
   const ws = Stomp.over(sock);
@@ -106,10 +107,32 @@ const Chat = () => {
     }
   };
 
+  const sendStart = () => {
+    try {
+      const ms = {
+        type: 'ENTER',
+        roomId: roomNum,
+        message: '방에 입장 하였습니다.',
+      };
+      waitForConnection(ws, () => {
+        ws.debug = null;
+        sendMessage(ms);
+        console.log('메세지전송 상태', ws.ws.readyState);
+      });
+    } catch (e) {
+      console.log('메세지 소켓 함수 에러', e);
+      console.log('메세지전송 상태', ws.ws.readyState);
+    }
+  };
+
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
     if (roomNum) {
-      wsConnectSubscribe(roomNum);
+      try {
+        wsConnectSubscribe(roomNum);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, [roomNum]);
 
@@ -150,6 +173,7 @@ const Chat = () => {
           setPaging(!Paging);
           setData({});
           dispatch(ChatAction.DeletMsList());
+          setroomNum('');
         }}
       ></ChatForm>
       <Footer />

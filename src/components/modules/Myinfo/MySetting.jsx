@@ -46,8 +46,9 @@ function MySetting(props) {
             <img src={close} style={{ opacity: 0 }} />
           </Grid>
         </TabHead>
-        <TabList>버그 정보</TabList>
+        <TabList>버전 정보 1.0.0</TabList>
         <TabList
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             setAlt(true);
           }}
@@ -111,7 +112,6 @@ const TabHead = styled.div`
 const TabList = styled.div`
   font-size: ${p => p.theme.fontSizes.xl};
   padding: 20px 30px;
-  cursor: pointer;
   &:hover {
     color: #ec6464;
   }

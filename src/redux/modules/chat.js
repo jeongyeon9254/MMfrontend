@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
+import { actionCreators as matchingAction } from './matching';
 
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
@@ -23,11 +24,11 @@ const initialState = {
 };
 
 // 채팅방 만들기
-const postChatRoomListDB = guestInfo => {
+const postChatRoomListDB = (guestInfo, hostId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = postChatRoomList(guestInfo);
-      console.log(res);
+      await postChatRoomList(guestInfo);
+      dispatch(matchingAction.PutMatchingList(hostId));
       history.push('/chat');
     } catch (e) {
       console.log(e);
