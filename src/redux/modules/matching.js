@@ -68,12 +68,11 @@ const getMatchingReceiveCheckDB = () => {
 };
 
 // 신청 삭제
-const deleteMatchingChatDB = guestId => {
+const deleteMatchingChatDB = hostId => {
   return async function (dispatch, getState, { history }) {
     try {
-      await deleteMatchingChat(guestId);
-      dispatch(DeletMatchingList(guestId));
-      history.push('/choice');
+      await deleteMatchingChat(hostId);
+      dispatch(PutMatchingList(hostId));
     } catch (e) {
       console.log(e);
     }

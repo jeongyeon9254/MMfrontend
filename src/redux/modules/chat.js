@@ -21,6 +21,7 @@ const initialState = {
   List: [{}],
   Room: [{}],
   loading: false,
+  page: 1,
 };
 
 // 채팅방 만들기
@@ -49,11 +50,23 @@ const getChatRoomListDB = () => {
   };
 };
 
-// 채팅 메세지 목록 가져오기
-const getChatMsListDB = roomId => {
+// 첫 채팅 목록 가지고 오기
+const getRecentlyMsListDB = (roomId, page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = await getChatMsList(roomId);
+      const res = await getChatMsList(roomId, page);
+      dispatch(LoadChatting(res.data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+// 채팅 메세지 목록 가져오기
+const getChatMsListDB = (roomId, page) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const res = await getChatMsList(roomId, page);
       dispatch(LoadChatting(res.data));
     } catch (e) {
       console.log(e);
@@ -111,6 +124,7 @@ const actionCreators = {
   getChatMsListDB,
   DeletMsList,
   resetList,
+  getRecentlyMsListDB,
 };
 
 export { actionCreators };

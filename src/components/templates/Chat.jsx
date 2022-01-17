@@ -130,6 +130,9 @@ const Chat = () => {
     if (roomNum) {
       try {
         wsConnectSubscribe(roomNum);
+        if (enter) {
+          sendStart();
+        }
       } catch (e) {
         console.log(e);
       }
@@ -154,6 +157,7 @@ const Chat = () => {
                     setroomNum(x.roomId);
                     dispatch(ChatAction.getChatMsListDB(x.roomId));
                     //채팅방 입장 잘때
+                    SetEnter(true);
                   }}
                   data={x}
                   key={idx}

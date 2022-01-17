@@ -12,7 +12,7 @@ export const getApproveDB = userId => {
 export const getChatRoomList = () => {
   return instance({
     method: 'get',
-    url: '/chat/rooms',
+    url: `/chat/rooms`,
   });
 };
 
@@ -26,9 +26,9 @@ export const postChatRoomList = guestinfo => {
 };
 
 //채팅방에 메세지 리스트 가져오기 버튼을 눌렸을때
-export const getChatMsList = roomId => {
+export const getChatMsList = (roomId, page) => {
   return instance({
     method: 'get',
-    url: `/chat/room/${roomId}`,
+    url: `/chat/room/${roomId}?page=${page}&size=50`,
   });
 };
