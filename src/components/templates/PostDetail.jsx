@@ -18,6 +18,7 @@ import { ReactComponent as CommentIcon } from '../../img/Icon/chat_bubble.svg';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
+import { actionCreators as userAction } from '../../redux/modules/user';
 import PostModal from '../modules/Post/PostModal';
 import AddComment from '../modules/Post/AddComment';
 
@@ -48,6 +49,11 @@ const PostDetail = props => {
   React.useEffect(() => {
     dispatch(postActions.getDetailDB(boardId[2]));
   }, []);
+
+  React.useEffect(() => {
+    dispatch(userAction.getMyPostBoxDB());
+  }, []);
+
   const [modal, setModal] = useState(false);
   const [commentState, setCommentState] = useState(false);
 

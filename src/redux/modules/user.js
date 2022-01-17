@@ -6,14 +6,21 @@ import { editMyinfoDB, getMyMbitInfo, getMyPost } from '../../api/modules/user';
 
 const GET_MBTIINFO = 'GET_MBTIINFO';
 const GET_MYPOST = 'GET_MYPOST';
-const RESET = 'RESET';
+const GET_MYPOST_BOX = 'GET_MYPOST_BOX';
+const GET_MYPOST_SCROLL = 'GET_MYPOST_SCROLL';
+const RESET_USER = 'RESET_USER';
+const LOADING = 'LOADING';
 
 const UpMbtiInfo = createAction(GET_MBTIINFO, info => ({ info }));
 const GetMypost = createAction(GET_MYPOST, (data, page) => ({ data, page }));
-const reset = createAction(RESET, () => ({}));
+const GetMypostBox = createAction(GET_MYPOST_BOX, data => ({ data }));
+const getMyPost_Scroll = createAction(GET_MYPOST_SCROLL, (data, page) => ({ data, page }));
+const resetUser = createAction(RESET_USER, () => ({}));
+const loading = createAction(LOADING, data => ({ data }));
 
 const initialState = {
   mbti: {},
+  loading: false,
   MypostList: [],
   page: 0,
 };
@@ -54,14 +61,28 @@ const AddMyinfoDB = () => {
 
 const getMyPostDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
-    try {
-      dispatch(reset());
-      const data = await getMyPost(page);
-      dispatch(GetMypost(data.data, page));
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(loading(true));
+    dispatch(resetUser());
+    const data = await getMyPost(page);
+    dispatch(GetMypost(data.data, page));
+    dispatch(loading(false));
+  };
+};
+
+const getMyPostBoxDB = (page = 0) => {
+  return async function (dispatch, getState, { history }) {
+    dispatch(resetUser());
+    const data = await getMyPost(page);
+    dispatch(GetMypostBox(data.data));
+  };
+};
+
+const getMypostScrollDB = (page = null) => {
+  return async function (dispatch, getState, { history }) {
+    const data = await getMyPost(page);
+    console.log(data);
+    dispatch(getMyPost_Scroll(data.data, page));
+    console.log(page);
   };
 };
 
@@ -77,9 +98,22 @@ export default handleActions(
         draft.page = 0;
         draft.page = action.payload.page + 1;
       }),
-    [RESET]: (state, action) =>
+    [GET_MYPOST_BOX]: (state, action) =>
       produce(state, draft => {
-        draft.postList = [];
+        draft.MypostList = action.payload.data;
+      }),
+    [GET_MYPOST_SCROLL]: (state, action) =>
+      produce(state, draft => {
+        draft.MypostList.push(...action.payload.data);
+        draft.page = action.payload.page + 1;
+      }),
+    [LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft.loading = action.payload.data;
+      }),
+    [RESET_USER]: (state, action) =>
+      produce(state, draft => {
+        draft.MypostList = [];
         draft.page = 0;
       }),
   },
@@ -91,6 +125,9 @@ const actionCreators = {
   AddMyinfoDB,
   userInfoPut,
   getMyPostDB,
+  getMypostScrollDB,
+  resetUser,
+  getMyPostBoxDB,
 };
 
 export { actionCreators };

@@ -46,6 +46,9 @@ const MyPostCard = props => {
 const MyPost = styled.div`
   border: 1px solid #e3e3e3;
   cursor: pointer;
+  :hover {
+    background-color: #eee;
+  }
 `;
 
 const Title = styled.p`

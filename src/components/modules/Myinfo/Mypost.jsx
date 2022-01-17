@@ -12,7 +12,7 @@ function Mypost() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(userAction.getMyPostDB(0));
+    dispatch(userAction.getMyPostBoxDB());
   }, []);
 
   const postings = useSelector(state => state.user.MypostList);

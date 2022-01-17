@@ -26,6 +26,7 @@ const ChatForm = props => {
       console.log(scrollRef.current.scrollHeight);
     }
   };
+
   React.useEffect(() => {
     scrollTomBottom();
   }, [Chatting.length]);
@@ -62,8 +63,12 @@ const ChatForm = props => {
                         {x.message}
                       </PartyOther>
                     );
+                  case 'QUIT':
+                    return <Alarm key={idx}> {x.message}</Alarm>;
                   case 'ENTER':
                     return <Alarm key={idx}> {x.message}</Alarm>;
+                  case 'Emoticon':
+                    return <img key={idx} src={x.image} />;
                   default:
                     return '';
                 }

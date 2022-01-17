@@ -46,6 +46,7 @@ const getPostDB = (page = null) => {
       dispatch(reset());
       const data = await getPost(page);
       dispatch(getPostList(data.data, page));
+      console.log(page);
       dispatch(loading(false));
     } catch (err) {
       console.log(err);
@@ -81,7 +82,6 @@ const getKategoriDB = (interestId, page) => {
 const getKategorScrolliDB = (interestId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(page);
       const data = await getKategoriPost(interestId, page);
       dispatch(getKategoriList_Scroll(data.data, page));
     } catch (err) {

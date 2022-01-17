@@ -4,14 +4,24 @@ import arrow_back_ios from '../../../img/Icon/arrow_back_ios_new.svg';
 import arrow_back from '../../../img/Icon/arrow_back.svg';
 import { history } from '../../../redux/configureStore';
 import { Grid, Box, Button } from '../../element';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as MatAction } from '../../../redux/modules/matching';
 
 function Announcement(props) {
+  const dispatch = useDispatch();
   const { bg, fontcolor, ws } = props;
   const styles = { fontcolor };
   const Send = useSelector(state => state.matching.ListSend);
   const Receive = useSelector(state => state.matching.ListReceive);
   const num = Send && Receive ? Send.length + Receive.length : 0;
+
+  React.useEffect(() => {
+    dispatch(MatAction.getMatchingSendCheckDB());
+  }, []);
+  React.useEffect(() => {
+    dispatch(MatAction.getMatchingReceiveCheckDB());
+  }, []);
+
   return (
     <Grid padding="15px 30px 7px" Zindex="9999">
       <Button

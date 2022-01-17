@@ -55,13 +55,14 @@ function MySetting(props) {
           </Grid>
         </TabHead>
         <TabList
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             setAlt(true);
           }}
         >
           로그아웃
         </TabList>
-        <TabList>버전정보</TabList>
+        <TabList>버전 정보 1.0.0</TabList>
         <TabList onClick={deleteMe}>회원탈퇴</TabList>
       </TabNav>
     </div>
@@ -120,7 +121,6 @@ const TabHead = styled.div`
 const TabList = styled.div`
   font-size: ${p => p.theme.fontSizes.xl};
   padding: 20px 30px;
-  cursor: pointer;
   &:hover {
     color: #ec6464;
   }
