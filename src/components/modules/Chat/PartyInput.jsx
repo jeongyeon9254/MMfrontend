@@ -30,8 +30,8 @@ function PartyInput(props) {
         message: Chatting,
         date: date,
       };
-      // sendMessage(ms);
-      console.log(ms);
+      sendMessage(ms);
+      // console.log(ms);
       setChatting('');
     }
   };
@@ -43,8 +43,8 @@ function PartyInput(props) {
       roomId: roomId,
       message: Emoticon.number,
     };
-    // sendMessage(icon);
-    console.log(icon);
+    sendMessage(icon);
+    // console.log(icon);
     SetPreview(false);
   };
 

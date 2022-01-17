@@ -5,12 +5,12 @@ import { Emoticons } from '../../../img/emoticon';
 function ChatEmoticon(props) {
   const { Open, click, Emit, On, EmoticonSend } = props;
   const ClickEvent = data => {
-    if (On) {
-      EmoticonSend();
-    } else {
-      click(true);
-      Emit(data);
-    }
+    // if (On) {
+    //   EmoticonSend();
+    // } else {
+    //   click(true);
+    //   Emit(data);
+    // }
   };
   return (
     <EmoticonBox className={Open ? 'open' : 'close'}>

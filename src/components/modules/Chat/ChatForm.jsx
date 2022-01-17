@@ -63,6 +63,8 @@ const ChatForm = props => {
                         {x.message}
                       </PartyOther>
                     );
+                  case 'QUIT':
+                    return <Alarm key={idx}> {x.message}</Alarm>;
                   case 'ENTER':
                     return <Alarm key={idx}> {x.message}</Alarm>;
                   case 'Emoticon':
