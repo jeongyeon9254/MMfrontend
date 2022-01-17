@@ -39,7 +39,7 @@ function PartyInput(props) {
   // 이모티콘 전송 sendEvent
   const EmoticonSend = () => {
     const icon = {
-      type: 'Emoticon',
+      type: 'EMO',
       roomId: roomId,
       message: Emoticon.number,
     };

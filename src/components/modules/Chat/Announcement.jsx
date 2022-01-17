@@ -9,11 +9,6 @@ import { actionCreators as MatAction } from '../../../redux/modules/matching';
 
 function Announcement(props) {
   const dispatch = useDispatch();
-  const { bg, fontcolor, ws } = props;
-  const styles = { fontcolor };
-  const Send = useSelector(state => state.matching.ListSend);
-  const Receive = useSelector(state => state.matching.ListReceive);
-  const num = Send && Receive ? Send.length + Receive.length : 0;
 
   React.useEffect(() => {
     dispatch(MatAction.getMatchingSendCheckDB());
@@ -21,6 +16,12 @@ function Announcement(props) {
   React.useEffect(() => {
     dispatch(MatAction.getMatchingReceiveCheckDB());
   }, []);
+
+  const { bg, fontcolor, ws } = props;
+  const styles = { fontcolor };
+  const Send = useSelector(state => state.matching.ListSend);
+  const Receive = useSelector(state => state.matching.ListReceive);
+  const num = Send && Receive ? Send.length + Receive.length : 0;
 
   return (
     <Grid padding="15px 30px 7px" Zindex="9999">
