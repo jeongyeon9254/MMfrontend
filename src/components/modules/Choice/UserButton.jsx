@@ -6,7 +6,7 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 import { actionCreators as matchingAction } from '../../../redux/modules/matching';
 
 function UserButton(props) {
-  const { guestId, hostInfo } = props;
+  const { guestId, hostInfo, _onClick } = props;
   const dispatch = useDispatch();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -19,7 +19,8 @@ function UserButton(props) {
 
   const ClickRefusal = () => {
     console.log(`거절하겠습니다: ${guestId}`);
-    dispatch(matchingAction.deleteMatchingChatDB(guestId));
+    dispatch(matchingAction.deleteMatchingChatDB(hostInfo.userId));
+    _onClick();
   };
 
   const ClickAccept = () => {

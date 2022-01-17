@@ -83,6 +83,7 @@ const Choice = () => {
           </Boad>
         </Grid>
       </ScrollBox>
+
       <UserPage Boo={Paging} data={Data !== {} ? Data : ''} _onClick={ListHeadClick}></UserPage>
       <Footer />
     </div>
