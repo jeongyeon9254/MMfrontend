@@ -34,6 +34,7 @@ const Header = props => {
     defaultName,
     Page,
     sendStop,
+    deleteChatroomAction,
   } = props;
 
   const styles = {
@@ -85,7 +86,20 @@ const Header = props => {
         )}
         <TiTle {...styles}>{children}</TiTle>
         {/* {chat ? <Search src={icon_search} /> : ''} */}
-        {chat ? <Exit onClick={sendStop}>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
+        {chat ? (
+          <Exit
+            onClick={() => {
+              sendStop();
+              deleteChatroomAction();
+            }}
+          >
+            방 나가기
+          </Exit>
+        ) : chat || myinfo ? (
+          ''
+        ) : (
+          <Null></Null>
+        )}
         {fast ? <Detail alt="재시도" src={icon_replay} onClick={_onClick}></Detail> : null}
         {myinfo ? (
           <LogOut onClick={_onClick}>
