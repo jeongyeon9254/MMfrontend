@@ -24,24 +24,23 @@ const Profile = () => {
   const pathName = history.location.pathname;
   const name = pathName.split('/');
 
-  // 렌더링시 주소에서 유저 ID를 받아오고
+  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
   React.useEffect(() => {
-    const pathName = history.location.pathname;
-    const name = pathName.split('/');
-    console.log(name);
     dispatch(profileActions.getProfileDB(name[name.length - 1]));
   }, []);
 
+  // 빠른 매칭 스피너
   const [loading, setLoading] = useState(false);
+
+  // 데이터 관리
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
   const mbti = profile.interestList;
 
+  // 모달창 관리
   const [modal, setModal] = useState(false);
   const [connect, setConnect] = useState(false);
   const [Disconnect, setDisconnect] = useState(false);
-
-  console.log(profile);
 
   const exit = () => {
     setConnect(false);
@@ -60,6 +59,7 @@ const Profile = () => {
     exit();
   };
 
+  // 빠른매칭 재시작 관리
   const reTry = async () => {
     setLoading(true);
     await getMatchingDB().then(res => {
@@ -79,6 +79,7 @@ const Profile = () => {
   };
 
   const State = status ? status : '';
+
   return (
     <React.Fragment>
       {connect ? (

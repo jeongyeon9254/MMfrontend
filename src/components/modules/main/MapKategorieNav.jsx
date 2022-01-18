@@ -10,26 +10,31 @@ import Button from '../../element/Button';
 
 // Js
 import { Mybit } from '../Bit';
+import { gpsLsit } from './gpsList';
 
 // Redux
 import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { actionCreators as postActions } from '../../../redux/modules/post';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { gpsLsit } from './gpsList';
+import { useDispatch } from 'react-redux';
 
 const MapKategorieNav = props => {
   const dispatch = useDispatch();
+
+  // props
   const mbti = Mybit(props.userInfo.mbti);
   const location = props.userInfo.location;
   const setKate = props.setKate;
+
+  // gps ID를 찾습니다
   const gpsIndex = gpsLsit.findIndex(x => {
     return x.location === location;
   });
   const gpsId = props.gpsId ? props.gpsId : gpsIndex + 1;
 
+  // nav 리스트 목록
   const navList = ['전체보기', '운동', '공부', '대화', '제테크', '게임', '기타'];
 
+  // 버튼 클릭시 active 검은색
   const [active, setActive] = useState(0);
 
   if (props.post) {

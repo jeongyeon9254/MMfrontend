@@ -25,8 +25,8 @@ const Main = () => {
   // 로컬스토리지에서 내정보를 가져옵니다
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  const [locationList, setLocationList] = useState(false); // ㅇㅇ
-  const [loading, setLoading] = useState(false);
+  const [locationList, setLocationList] = useState(false); // 로케이션 모달창 관리
+  const [loading, setLoading] = useState(false); // 빠른매칭 스피너 로딩
 
   // 로케이션 모달창 관리
   const onLocation = () => {

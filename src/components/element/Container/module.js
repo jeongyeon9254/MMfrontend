@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Phone from '../../../img/Icon/phone.png';
 
+// 크롬 ios 주소창까지 포함한 height값
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 window.addEventListener('resize', () => {

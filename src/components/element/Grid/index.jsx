@@ -92,6 +92,7 @@ const GridStyle = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: relative;
   border: ${props => props.border};
   width: ${props => props.width};
   height: ${props => props.height};
@@ -101,7 +102,6 @@ const GridStyle = styled.div`
   justify-content: ${props => (props.justify ? props.justify : 'flex-start')};
   align-items: ${props => (props.align ? props.align : 'stretch ')};
   gap: ${props => (props.gap ? props.gap : '0')};
-  position: relative;
   z-index: ${props => props.Zindex};
   border-bottom: ${props => props.borderBot};
   border-top: ${props => props.borderTop};

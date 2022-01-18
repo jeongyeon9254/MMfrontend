@@ -91,6 +91,8 @@ const MapListStyle = styled.div`
   bottom: 89px;
   z-index: 2;
   animation: list-show 0.5s;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
   @keyframes list-show {
     from {
       margin-bottom: -450px;
