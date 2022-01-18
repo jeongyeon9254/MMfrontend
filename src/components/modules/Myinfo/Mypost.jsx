@@ -22,7 +22,7 @@ function Mypost() {
   };
   return (
     <MypostPage>
-      {!postings ? (
+      {postings ? (
         <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
           {postings.map((x, idx) => {
             return (
