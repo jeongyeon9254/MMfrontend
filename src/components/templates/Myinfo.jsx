@@ -18,9 +18,9 @@ const Myinfo = () => {
       <Header bg="transparent" white myinfo _onClick={settingEvent}>
         내 정보
       </Header>
-      <MyinfoHead></MyinfoHead>
+      <MyinfoHead OnEvent={OnEvent}></MyinfoHead>
       <MyBody></MyBody>
-      <MySetting Open={Open} _onClick={settingEvent} OnEvent={OnEvent}></MySetting>
+      <MySetting Open={Open} _onClick={settingEvent}></MySetting>
       <MyEdit Open={On} _onClick={OnEvent}></MyEdit>
     </>
   );
