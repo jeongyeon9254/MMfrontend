@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Js
@@ -84,7 +84,7 @@ const Modal = styled.div`
     font-weight: bold;
     font-size: ${props => props.theme.fontSizes.lg};
   }
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 1050px) {
     top: 160px;
   }
 `;
