@@ -82,31 +82,6 @@ const Profile = () => {
 
   return (
     <React.Fragment>
-      {connect ? (
-        <Alert MyBit isButton yes={next} no={exit}>
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Title>매칭을 신청하시겠습니까?</Title>
-            <Grid gap="4px">
-              <Content>{profile.nickname}님께 매치을 신청할까요?</Content>
-              <Content>나와 딱 맞는 친구일지 몰라요!</Content>
-            </Grid>
-          </Grid>
-        </Alert>
-      ) : null}
-
-      {Disconnect ? (
-        <Alert MyBit isButton yes={After} no={exit}>
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Title>매칭 친구를 끊을까요?</Title>
-            <Grid gap="4px">
-              <Content>{profile.nickname} 님과의 매칭을 끊을까요?</Content>
-              <Content>나와 딱 맞는 친구일지 몰라요!</Content>
-            </Grid>
-          </Grid>
-        </Alert>
-      ) : null}
-
-      {modal ? <ProfileBar Bar type={State} nickname={profile.nickname} /> : null}
       <ProfileStyle>
         {name[2] === 'fast' ? (
           <Header _on fast _onClick={reTry}>
@@ -145,13 +120,38 @@ const Profile = () => {
         <Box profile margin="25px 0 0 0">
           {profile.intro}
         </Box>
+
+        {/* 모달창 및 스피너 관리 */}
+        {connect ? (
+          <Alert MyBit isButton yes={next} no={exit}>
+            <Grid gap="15px" padding="16px 8px 8px 24px">
+              <Title>매칭을 신청하시겠습니까?</Title>
+              <Grid gap="4px">
+                <Content>{profile.nickname}님께 매치을 신청할까요?</Content>
+                <Content>나와 딱 맞는 친구일지 몰라요!</Content>
+              </Grid>
+            </Grid>
+          </Alert>
+        ) : null}
+        {Disconnect ? (
+          <Alert MyBit isButton yes={After} no={exit}>
+            <Grid gap="15px" padding="16px 8px 8px 24px">
+              <Title>매칭 친구를 끊을까요?</Title>
+              <Grid gap="4px">
+                <Content>{profile.nickname} 님과의 매칭을 끊을까요?</Content>
+                <Content>나와 딱 맞는 친구일지 몰라요!</Content>
+              </Grid>
+            </Grid>
+          </Alert>
+        ) : null}
+        {modal ? <ProfileBar Bar type={State} nickname={profile.nickname} /> : null}
         {!modal ? (
           <ProfileBar Btn _onClick={MadalSet} />
         ) : (
           <ProfileBar Btn type={State} _onClick={MadalOn} />
         )}
+        {loading ? <Spiner /> : null}
       </ProfileStyle>
-      {loading ? <Spiner /> : null}
     </React.Fragment>
   );
 };

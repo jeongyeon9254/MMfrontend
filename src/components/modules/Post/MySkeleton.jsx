@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Component
 import { Grid, Image } from '../../element/index';
 
-const MySkeleton = props => {
+const MySkeleton = () => {
   // 포스트 스켈레톤 UI
   return (
     <Box>

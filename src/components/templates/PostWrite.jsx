@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Redux
@@ -6,37 +6,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../../redux/modules/preview';
 import { actionCreators as postActions } from '../../redux/modules/post';
 
-// Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css';
-
 // component
-import { Button, Grid, Input, Alert } from '../element/index.js';
+import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
+import SetKategori from '../modules/Post/SetKategori';
+import SetPreview from '../modules/Post/SetPreview';
+import SetText from '../modules/Post/SetText';
 
 // Js
 import Spiner from '../../shared/Spiner';
 
-const PostWrite = props => {
+const PostWrite = () => {
   const dispatch = useDispatch();
+
   // 모달
   const [Alt, setAlt] = useState(false);
   const [textAlt, setTextAlt] = useState(false);
 
-  // 버튼
-  const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
-
   // 전송용 데이터
-  const [text, setTest] = useState('');
-  const [tag, setTag] = useState('운동');
-  const [images, setImages] = React.useState([]);
+  const [text, setTest] = useState(''); // 콘텐츠
+  const [tag, setTag] = useState('운동'); // 태그 기본값->운동
+  const [images, setImages] = React.useState([]); // 이미지
 
+  // 텍스트 저장
   const changeText = e => {
     setTest(e.target.value);
   };
 
-  const photoInput = useRef();
+  // 태그 저장
+  const changeTag = e => {
+    setTag(e.target.name);
+  };
 
+  // 이미지 파일 저장
   const selectFile = e => {
     if (images.length !== 0) {
       setImages([...images, e.target.files]);
@@ -47,6 +49,7 @@ const PostWrite = props => {
     const obj = { ...e.target.files };
     const fileList = Object.entries(obj);
 
+    // 8개 넘어갈시 리턴
     if (fileList.length > 8) {
       alert('최대 8개까지 가능합니다');
       return false;
@@ -63,33 +66,35 @@ const PostWrite = props => {
     });
   };
 
-  const preview = useSelector(state => state.preview.preview);
+  // 스피너용 로딩상태관리
   const loading = useSelector(state => state.post.loading);
 
-  const changeTag = e => {
-    setTag(e.target.name);
-  };
-
-  const restPost = () => {
+  // 이미지파일 및 프리뷰 리셋
+  const resetPost = () => {
     setImages([]);
     dispatch(imageActions.resetPreview());
   };
 
-  const addPost = async () => {
-    // console.log(date);
+  // 등록!!
+  const addPost = () => {
+    // 폼데이터 생성
     let multipartFile = new FormData();
     const emptyFile = new File([''], 'empty');
+
+    // 이미지 등록 안할시 빈파일을 넣어줍니다
     if (images.length === 0) {
       multipartFile.append('multipartFile', emptyFile);
     }
+
+    // 이미지가 있을시 차례대로 한개씩 집어넣습니다
     if (images.length > 0) {
       for (let i = 0; i < images.length; i++) {
         multipartFile.append('multipartFile', images[i]);
       }
     }
 
+    // 전송용 데이터를 집어넣습니다.
     const data = {
-      // date: date,
       tag: tag,
       content: text,
     };
@@ -99,17 +104,46 @@ const PostWrite = props => {
     dispatch(imageActions.resetPreview());
   };
 
+  // 모달 액션
   const next = () => {
     addPost();
     exit();
   };
-
   const exit = () => {
     setAlt(false);
   };
 
   return (
-    <>
+    <React.Fragment>
+      <Header>글 작성하기</Header>
+
+      <PostBox>
+        {/* 카테고리 선택 */}
+        <SetKategori tag={tag} changeTag={changeTag} />
+
+        {/* 이미지 선택 */}
+        <SetPreview selectFile={selectFile} resetPost={resetPost} />
+
+        {/* 글 작성 */}
+        <SetText text={text} changeText={changeText} />
+
+        {/* 등록 버튼 */}
+        <Button
+          _onClick={() => {
+            if (text === '') {
+              setTextAlt(true);
+              return;
+            }
+            setAlt(true);
+          }}
+          BtnBottom
+          width="85%"
+        >
+          게시글 올리기
+        </Button>
+      </PostBox>
+
+      {/* 모달창 관리 */}
       {Alt ? (
         <Alert MyBit isButton yes={next} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
@@ -135,100 +169,8 @@ const PostWrite = props => {
           </Grid>
         </Alert>
       ) : null}
-      <Header>글 작성하기</Header>
-      <PostBox>
-        <Grid>
-          <p className="title">카테고리 선택하기</p>
-          <Grid row gap="8px">
-            {InterestList.map((interest, idx) => {
-              return (
-                <Button
-                  key={idx}
-                  size="12px"
-                  name={interest}
-                  BtnTag
-                  _onClick={changeTag}
-                  state={interest === tag ? 'active' : null}
-                >
-                  {interest}
-                </Button>
-              );
-            })}
-          </Grid>
-        </Grid>
-        <Grid>
-          <p className="title">사진 첨부하기</p>
-          <div>
-            <Grid wrap="none-wrap" row gap="20px;">
-              <label htmlFor="file">
-                <Grid align="center" justify="center" height="100%">
-                  <p className="plus">+</p>
-                  <p className="num">{preview.length}/8</p>
-                </Grid>
-              </label>
-              {preview.length ? (
-                <Preview>
-                  <button className="resetBtn" onClick={restPost}>
-                    x
-                  </button>
-                  <div style={{ overflow: 'hidden', borderRadius: '10px' }}>
-                    <Swiper
-                      style={{ background: '#fff' }}
-                      spaceBetween={10}
-                      slidesPerView={2}
-                      className="scroll-container"
-                    >
-                      {preview.length > 0
-                        ? preview.map((src, idx) => {
-                            return (
-                              <SwiperSlide className="slide" key={idx}>
-                                <img alt="이미지" src={src} key={idx}></img>{' '}
-                              </SwiperSlide>
-                            );
-                          })
-                        : null}
-                    </Swiper>
-                  </div>
-                </Preview>
-              ) : null}
-            </Grid>
-          </div>
-          <Grid row gap="10px"></Grid>
-          <input
-            className="file-input"
-            id="file"
-            type="file"
-            accept="image/jpg, image/jpeg, image/png"
-            encType="multipart/form-data"
-            multiple
-            ref={photoInput}
-            onChange={selectFile}
-          />
-        </Grid>
-        <Grid>
-          <p className="title">내용 작성하기</p>
-          <Input _onChange={changeText} _type="posting"></Input>
-          <div className="limit">
-            <span className="recent">{text.length} </span>
-            <span>/ 100</span>
-          </div>
-        </Grid>
-        <Button
-          _onClick={() => {
-            if (text === '') {
-              setTextAlt(true);
-              return;
-            }
-            setAlt(true);
-          }}
-          BtnBottom
-          width="85%"
-        >
-          게시글 올리기
-        </Button>
-      </PostBox>
       {loading ? <Spiner post /> : null}
-    </>
+    </React.Fragment>
   );
 };
 
@@ -238,90 +180,6 @@ const PostBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 23px;
-
-  .limit {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: ${props => props.theme.fontSizes.small};
-  }
-  .limit .recent {
-    color: #aaa;
-  }
-  .photoBoxDelete {
-    position: absolute;
-    background: red;
-    width: 30px;
-    height: 30px;
-  }
-  .photoPreview {
-    width: 100px;
-  }
-  .file-input {
-    display: none;
-  }
-  label {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: #fff;
-    border: 1.5px solid #a7a7a7;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-  .plus {
-    font-size: 45px;
-    color: #c8c8c8;
-  }
-  .num {
-    font-size: ${props => props.theme.fontSizes.small};
-  }
-  .title {
-    font-weight: 700;
-    margin-bottom: 15px;
-  }
-`;
-
-const Preview = styled.div`
-  background: #fff;
-  width: 68%;
-  border: 1px solid #a7a7a7;
-  padding: 1px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  /* overflow: hidden; */
-  position: relative;
-  img {
-    height: ${props => props.theme.fontSizes.base};
-    margin-right: 10px;
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-  }
-  .scroll-container {
-    height: 100%;
-    display: flex;
-    box-sizing: border-box;
-  }
-  .slide {
-    width: auto !important;
-    height: 75px;
-  }
-  .resetBtn {
-    width: 24px;
-    height: 24px;
-    background: #a7a7a7;
-    border: none;
-    border-radius: 50%;
-    color: #fff;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    z-index: 10;
-    font-size: 16px;
-    cursor: pointer;
-  }
 `;
 
 const Title = styled.p`
