@@ -42,6 +42,7 @@ function PartyInput(props) {
       type: 'EMO',
       roomId: roomId,
       message: Emoticon.number,
+      date: date,
     };
     sendMessage(icon);
     // console.log(icon);
