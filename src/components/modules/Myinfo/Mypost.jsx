@@ -22,26 +22,21 @@ function Mypost() {
   };
   return (
     <MypostPage>
-      <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
-        {postings
-          ? postings.map((x, idx) => {
-              return (
-                <SwiperSlide key={idx}>
-                  <MypostBox
-                    onClick={() => {
-                      ClickDetail(x.postId);
-                    }}
-                  >
-                    <img src={x.imageList[0].imageLink} alt="게시물 이미지" />
-                  </MypostBox>
-                </SwiperSlide>
-              );
-            })
-          : ''}
-        <SwiperSlide>
-          <MypostBox>안녀</MypostBox>
-        </SwiperSlide>
-        {postings ? (
+      {!postings ? (
+        <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
+          {postings.map((x, idx) => {
+            return (
+              <SwiperSlide key={idx}>
+                <MypostBox
+                  onClick={() => {
+                    ClickDetail(x.postId);
+                  }}
+                >
+                  <img src={x.imageList[0].imageLink} alt="게시물 이미지" />
+                </MypostBox>
+              </SwiperSlide>
+            );
+          })}
           <SwiperSlide>
             <MypostMore
               onClick={() => {
@@ -52,12 +47,22 @@ function Mypost() {
               <span>더보기</span>
             </MypostMore>
           </SwiperSlide>
-        ) : (
+        </Swiper>
+      ) : (
+        <Swiper slidesPerView={1} spaceBetween={1} className="scroll-container">
           <SwiperSlide>
-            <MypostBox onClick={() => {}}>{/* <img alt="게시물 이미지" /> */}</MypostBox>
+            <MypostMore
+              style={{ width: '100%', boxShadow: 'none', backgroundColor: '#eee' }}
+              onClick={() => {
+                history.push('/postWrite');
+              }}
+            >
+              <img src={cross} alt="게시물 작성하기" />
+              <span>게시물 작성하기</span>
+            </MypostMore>
           </SwiperSlide>
-        )}
-      </Swiper>
+        </Swiper>
+      )}
     </MypostPage>
   );
 }
@@ -83,6 +88,7 @@ const MypostBox = styled.div`
     transform: translateX(-50%);
   }
 `;
+
 const MypostMore = styled.div`
   cursor: pointer;
   width: 82px;
