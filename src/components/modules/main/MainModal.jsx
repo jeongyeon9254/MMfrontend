@@ -10,9 +10,12 @@ import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { Button } from '../../element/index';
 
 const MainModal = props => {
-  const { outLocation, setLocation, setGpsId } = props;
   const dispatch = useDispatch();
 
+  // props
+  const { outLocation, setLocation, setGpsId } = props;
+
+  // 모달창 해제
   const outModal = () => {
     outLocation();
   };

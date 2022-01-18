@@ -30,10 +30,10 @@ const Chat = () => {
   const [Data, setData] = React.useState({});
 
   const env = process.env.NODE_ENV;
-  const devTarget = env === 'development' ? 'http://13.124.242.158/ws-stomp' : '';
+  // const devTarget = env === 'development' ? 'http://13.124.242.158/ws-stomp' : '';
   // const devTarget = env === 'development' ? 'https://sixzombies.shop/ws-stomp' : '';
-  // const IP = IPadress();
-  // const devTarget = `${IP}/ws-stomp`;
+  const IP = IPadress();
+  const devTarget = `${IP}/ws-stomp`;
   const TOKEN = getCookie('authorization');
   const sock = new SockJS(devTarget);
   const ws = Stomp.over(sock);

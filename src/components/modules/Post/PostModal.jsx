@@ -9,13 +9,17 @@ import { actionCreators as postActions } from '../../../redux/modules/post';
 import { history } from '../../../redux/configureStore';
 
 const PostModal = props => {
-  const { boardId, out, commentState, commenttId } = props;
   const dispatch = useDispatch();
 
+  // props값 관리
+  const { boardId, out, commentState, commenttId } = props;
+
+  // 게시물 삭제
   const deletePost = () => {
     dispatch(postActions.deletePostDB(boardId));
   };
 
+  // 댓글 삭제
   const deleteComment = () => {
     dispatch(postActions.deleteCommentsDB(boardId, commenttId));
     out();
@@ -54,6 +58,7 @@ const PostModal = props => {
     </>
   );
 };
+
 const ModalBox = styled.div`
   position: absolute;
   bottom: 0;

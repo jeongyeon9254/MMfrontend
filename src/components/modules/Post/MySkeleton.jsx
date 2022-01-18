@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+
+// Component
 import { Grid, Image } from '../../element/index';
 
 const MySkeleton = props => {
+  // 포스트 스켈레톤 UI
   return (
     <Box>
       <Grid row wrap="nowrap" gap="20px" color="#EEEEEE">
