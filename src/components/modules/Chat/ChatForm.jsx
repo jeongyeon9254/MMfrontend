@@ -44,6 +44,9 @@ const ChatForm = props => {
   //     }
   //   }
   // };
+  const deleteChatroomAction = () => {
+    dispatch(ChatAction.deleteChatroomDB(roomId));
+  };
 
   React.useEffect(() => {
     scrollTomBottom();
@@ -59,7 +62,14 @@ const ChatForm = props => {
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
-      <Header Page point="absolute" _onClick={_onClick} sendStop={sendStop} chat>
+      <Header
+        Page
+        point="absolute"
+        _onClick={_onClick}
+        sendStop={sendStop}
+        deleteChatroomAction={deleteChatroomAction}
+        chat
+      >
         {guestNick}
       </Header>
       <ScrollBox

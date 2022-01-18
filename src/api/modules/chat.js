@@ -32,3 +32,11 @@ export const getChatMsList = (roomId, page) => {
     url: `/chat/room/${roomId}?page=${page}&size=50`,
   });
 };
+
+//채팅방 삭제
+export const deleteChatroom = roomId => {
+  return instance({
+    method: 'put',
+    url: `/chat/room/${roomId}`,
+  });
+};

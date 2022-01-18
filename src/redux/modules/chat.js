@@ -1,6 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
+import {
+  getChatRoomList,
+  postChatRoomList,
+  getChatMsList,
+  deleteChatroom,
+} from '../../api/modules/chat';
 import { actionCreators as matchingAction } from './matching';
 
 const PUSH_CHAT = 'PUSH_CHAT';
@@ -81,7 +86,15 @@ const getChatMsListDB = (roomId, page) => {
 // 채팅 메세지 보내기
 const PostChatting = req => {
   return async function (dispatch, getState, { history }) {
-    dispatch(pushChatting(req));
+    await dispatch(pushChatting(req));
+  };
+};
+
+// 채팅방 삭제
+const deleteChatroomDB = roomId => {
+  return async function (dispatch, getState, { history }) {
+    await deleteChatroom(roomId);
+    // history.push('/');
   };
 };
 
@@ -136,6 +149,7 @@ const actionCreators = {
   DeletMsList,
   resetList,
   getRecentlyMsListDB,
+  deleteChatroomDB,
 };
 
 export { actionCreators };

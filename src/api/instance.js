@@ -5,10 +5,6 @@ const IP = IPAdress();
 const TOKEN = getCookie('authorization');
 
 const instance = axios.create({
-  // baseURL: 'http://13.124.242.158',
-  // baseURL: 'http://13.209.76.178',
-  // baseURL: 'http://13.125.248.25',
-  // baseURL: 'https://sixzombies.shop',
   baseURL: `${IP}`,
   timeout: 5000,
   headers: {

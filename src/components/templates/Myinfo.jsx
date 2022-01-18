@@ -2,12 +2,17 @@ import React from 'react';
 import Header from '../modules/layout/Header';
 import Bit from '../modules/Bit';
 
-import { MyinfoHead, MyBody, MySetting } from '../modules/Myinfo';
+import { MyinfoHead, MyBody, MySetting, MyEdit } from '../modules/Myinfo';
 const Myinfo = () => {
   const [Open, SetOpen] = React.useState(false);
   const settingEvent = () => {
     SetOpen(!Open);
   };
+  const [On, setOn] = React.useState('');
+  const OnEvent = e => {
+    setOn(!On);
+  };
+
   return (
     <>
       <Header bg="transparent" white myinfo _onClick={settingEvent}>
@@ -15,7 +20,8 @@ const Myinfo = () => {
       </Header>
       <MyinfoHead></MyinfoHead>
       <MyBody></MyBody>
-      <MySetting Open={Open} _onClick={settingEvent}></MySetting>
+      <MySetting Open={Open} _onClick={settingEvent} OnEvent={OnEvent}></MySetting>
+      <MyEdit Open={On} _onClick={OnEvent}></MyEdit>
     </>
   );
 };
