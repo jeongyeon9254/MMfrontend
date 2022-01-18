@@ -120,6 +120,16 @@ const MapContainer = props => {
     // 지도에 원을 표시합니다
     circle.setMap(move);
 
+    const geocoder = new kakao.maps.services.Geocoder();
+
+    const callback = function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        console.log(result);
+      }
+    };
+
+    geocoder.addressSearch('충청도', callback);
+
     if (makers === null) {
       setMakers(marker);
       marker.setMap(move);
