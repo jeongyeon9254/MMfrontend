@@ -4,6 +4,7 @@ import Bit from '../Bit';
 import { Grid, Image } from '../../element';
 import { Announcement } from '../Chat';
 import icon_location_w from '../../../img/Icon/icon_location_w.svg';
+import edit from '../../../img/Icon/edit.svg';
 
 function MyinfoHead(props) {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -67,6 +68,7 @@ const Mename = styled.h2`
 const Local = styled.div`
   font-size: 14px;
   color: #e0e0e0;
+  display: flex;
 `;
 
 export default MyinfoHead;
