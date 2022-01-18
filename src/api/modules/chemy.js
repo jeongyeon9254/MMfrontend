@@ -8,7 +8,7 @@ export const getMyinfoDB = () => {
   });
 };
 
-// 캐미 mbti get 기능
+// 지역별 mbti 전체 get 기능
 export const getChemyDB = locationId => {
   return instance({
     method: 'get',
@@ -16,7 +16,7 @@ export const getChemyDB = locationId => {
   });
 };
 
-// 지역별캐미 mbti get 기능
+// 지역별캐미 mbti 필터 get 기능
 export const getLocationChemy = (locationId, InterestId) => {
   return instance({
     method: 'get',
@@ -40,7 +40,7 @@ export const getchemyDB = userId => {
   });
 };
 
-// 샘플 정보 가져오기 기능
+// 샘플페이지 정보 가져오기 기능
 export const getGuestDB = () => {
   return instance({
     method: 'get',

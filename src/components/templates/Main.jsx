@@ -58,29 +58,22 @@ const Main = () => {
 
   return (
     <React.Fragment>
-      {Alt ? (
-        <Alert
-          MyBit
-          check
-          yes={() => {
-            setAlt(false);
-          }}
-        >
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Grid gap="4px">
-              <p>맞는 유저가 없습니다.</p>
-            </Grid>
-          </Grid>
-        </Alert>
-      ) : null}
       <Header main>메인화면</Header>
+
+      {/* 지역 선택 버튼 */}
       <LocationBox>
         <Button BtnTag _onClick={onLocation}>
           서울 특별시 {location}
         </Button>
       </LocationBox>
+
+      {/* 카테고리 선택 버튼 */}
       <MapKategorieNav userInfo={userInfo} gpsId={gpsId} />
+
+      {/* 카카오 맵 컨테이너 */}
       <MapContainer onModal={onModal} />
+
+      {/* 빠른 매칭 버튼 */}
       <CenterBtn>
         <Button
           _onClick={async () => {
@@ -101,14 +94,37 @@ const Main = () => {
           자동매칭
         </Button>
       </CenterBtn>
-      <MapList modal={modal} outModal={outModal} />
+
+      {/* 푸터 */}
       <Footer />
+
+      {/* 유저 리스트 모달 */}
+      {modal ? <MapList outModal={outModal} /> : null}
+
+      {/* 지역 선택 모달 */}
       {locationList ? (
         <MainModal
           outLocation={outLocation}
           setLocation={setLocation}
           setGpsId={setGpsId}
         ></MainModal>
+      ) : null}
+
+      {/* 스피너 및  기타 모달창 관리 */}
+      {Alt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>맞는 유저가 없습니다.</p>
+            </Grid>
+          </Grid>
+        </Alert>
       ) : null}
       {loading ? <Spiner /> : null}
     </React.Fragment>

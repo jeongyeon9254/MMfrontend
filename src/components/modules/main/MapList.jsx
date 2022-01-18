@@ -16,7 +16,7 @@ import { history } from '../../../redux/configureStore';
 const MapList = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const lists = useSelector(state => state.main.list);
-  const { modal, outModal } = props;
+  const { outModal } = props;
 
   const offModal = () => {
     outModal();
@@ -24,62 +24,60 @@ const MapList = props => {
 
   return (
     <React.Fragment>
-      {modal ? (
-        <MapListStyle>
-          <div className="downBtn">
-            <img alt="리스트 닫기" src={arrow_bottom} onClick={offModal}></img>
-          </div>
+      <MapListStyle>
+        <div className="downBtn">
+          <img alt="리스트 닫기" src={arrow_bottom} onClick={offModal}></img>
+        </div>
 
-          {/* 카드리스트 */}
-          <div className="inner">
-            <Grid padding="10px 0 0 0 " align="center" color="#fff">
-              <p>
-                "<b>{props.sample ? '게스트' : userInfo.nickname}</b> 님과 잘 통하는 사람이{' '}
-                <b>{lists.result.length}</b> 명 있습니다"
-              </p>
-            </Grid>
-            {lists.result.length > 0 ? (
-              lists.result.map((list, idx) => {
-                return (
-                  <div
-                    className="card"
-                    key={idx}
-                    onClick={() => {
-                      history.push(`/profile/${list.userId}`);
-                      offModal();
-                    }}
-                  >
-                    <Image
-                      round
-                      width="53px"
-                      margin="0"
-                      src={list.profileImage}
-                      mbti={list.mbti}
-                    ></Image>
-                    <Grid width="37%" justify="center" gap="5px">
-                      <Grid row gap="3px">
-                        <p className="name">{list.nickname}</p>
-                        <Tag mbti={list.mbti} _type="black" size="10px" icon>
-                          {list.mbti}
-                        </Tag>
-                      </Grid>
-                      <Grid row width="auto">
-                        <img className="icon" alt="주소" src={icon_location}></img>
-                        <p className="location">서울특별시 {list.location}</p>
-                      </Grid>
+        {/* 카드리스트 */}
+        <div className="inner">
+          <Grid padding="10px 0 0 0 " align="center" color="#fff">
+            <p>
+              "<b>{props.sample ? '게스트' : userInfo.nickname}</b> 님과 잘 통하는 사람이{' '}
+              <b>{lists.result.length}</b> 명 있습니다"
+            </p>
+          </Grid>
+          {lists.result.length > 0 ? (
+            lists.result.map((list, idx) => {
+              return (
+                <div
+                  className="card"
+                  key={idx}
+                  onClick={() => {
+                    history.push(`/profile/${list.userId}`);
+                    offModal();
+                  }}
+                >
+                  <Image
+                    round
+                    width="53px"
+                    margin="0"
+                    src={list.profileImage}
+                    mbti={list.mbti}
+                  ></Image>
+                  <Grid width="37%" justify="center" gap="5px">
+                    <Grid row gap="3px">
+                      <p className="name">{list.nickname}</p>
+                      <Tag mbti={list.mbti} _type="black" size="10px" icon>
+                        {list.mbti}
+                      </Tag>
                     </Grid>
-                    <Box width="40%" padding="6px 9px">
-                      <div className="textBox">{list.intro}</div>
-                    </Box>
-                  </div>
-                );
-              })
-            ) : (
-              <Null></Null>
-            )}
-          </div>
-        </MapListStyle>
-      ) : null}
+                    <Grid row width="auto">
+                      <img className="icon" alt="주소" src={icon_location}></img>
+                      <p className="location">서울특별시 {list.location}</p>
+                    </Grid>
+                  </Grid>
+                  <Box width="40%" padding="6px 9px">
+                    <div className="textBox">{list.intro}</div>
+                  </Box>
+                </div>
+              );
+            })
+          ) : (
+            <Null></Null>
+          )}
+        </div>
+      </MapListStyle>
     </React.Fragment>
   );
 };
