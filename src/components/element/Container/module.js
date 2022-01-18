@@ -9,14 +9,17 @@ export const ImgBg = styled.div`
   height: 858px;
   width: 427px;
   position: absolute;
-  left: 62%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 58%;
+  top: 54%;
   overflow: hidden;
+  margin: -429px 0 0 -213px;
   @media only screen and (max-width: 1050px) {
     left: 50%;
+    top: 50%;
     background-image: none;
     height: 100vh;
+    transform: translate(-50%, -50%);
+    margin: 0px;
   }
   @media only screen and (max-width: 450px) {
     background-image: none;

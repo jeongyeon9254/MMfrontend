@@ -10,7 +10,7 @@ function PartyInput(props) {
   const [Open, SetOpen] = React.useState(false);
   const [Emoticon, SetEmoticon] = React.useState('');
   const [Preview, SetPreview] = React.useState(false);
-  const { roomId, sendMessage } = props;
+  const { roomId, sendMessage, Emit, scrollTomBottom } = props;
   const date = `${moment().hours()}:${moment().minutes()}`;
   // 보내는거
   const ChatPost = e => {
@@ -55,6 +55,7 @@ function PartyInput(props) {
     } else {
       TxtSend();
     }
+    scrollTomBottom();
   };
 
   // enter event
@@ -80,6 +81,7 @@ function PartyInput(props) {
           <EmoticonBtn
             onClick={() => {
               SetOpen(!Open);
+              Emit(!Open);
             }}
           >
             <img src={mood} alt="이모티콘 버튼" />

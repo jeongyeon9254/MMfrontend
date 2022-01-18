@@ -6,13 +6,15 @@ import { actionCreators as matchingAction } from './matching';
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
+const ADD_CHATTING = 'ADD_CHATTING';
 const Delet_CHAT = 'Delet_CHAT';
 const LOADING_CHAT = 'LOADING_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
-const LoadChatting = createAction(LOAD_CHATTING, chatting => ({ chatting }));
+const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
+const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const resetList = createAction(RESET_CHAT, () => ({}));
 const LoadingList = createAction(LOADING_CHAT, () => ({}));
@@ -21,7 +23,7 @@ const initialState = {
   List: [{}],
   Room: [{}],
   loading: false,
-  page: 1,
+  page: 0,
 };
 
 // 채팅방 만들기
@@ -54,8 +56,9 @@ const getChatRoomListDB = () => {
 const getRecentlyMsListDB = (roomId, page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
+      console.log('// 첫 채팅 목록 가지고 오기');
       const res = await getChatMsList(roomId, page);
-      dispatch(LoadChatting(res.data));
+      dispatch(LoadChatting(res.data, page));
     } catch (e) {
       console.log(e);
     }
@@ -66,8 +69,9 @@ const getRecentlyMsListDB = (roomId, page = null) => {
 const getChatMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
+      console.log('// 채팅 메세지 목록 가져오기');
       const res = await getChatMsList(roomId, page);
-      dispatch(LoadChatting(res.data));
+      dispatch(AddChatting(res.data, page));
     } catch (e) {
       console.log(e);
     }
@@ -95,8 +99,16 @@ export default handleActions(
       }),
     [LOAD_CHATTING]: (state, action) =>
       produce(state, draft => {
-        const { chatting } = action.payload;
+        const { chatting, page } = action.payload;
         draft.List = chatting;
+        draft.page = 0;
+        draft.page = page + 1;
+      }),
+    [ADD_CHATTING]: (state, action) =>
+      produce(state, draft => {
+        const { chatting, page } = action.payload;
+        draft.List.unshift(...chatting);
+        draft.page = page + 1;
       }),
     [Delet_CHAT]: (state, action) =>
       produce(state, draft => {
@@ -118,7 +130,6 @@ export default handleActions(
 
 const actionCreators = {
   getChatRoomListDB,
-  pushChatting,
   PostChatting,
   postChatRoomListDB,
   getChatMsListDB,

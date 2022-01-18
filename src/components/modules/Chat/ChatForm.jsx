@@ -13,13 +13,13 @@ const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop } = props;
   const { guestNick, guestMbti, roomId } = props.data;
-  const scrollRef = React.useRef();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
   const loading = useSelector(state => state.chat.loading);
-  const high = 60;
+  const page = useSelector(state => state.chat.page);
+  const [height, setHeight] = React.useState(null);
 
-  const [Height, SetHeight] = React.useState(1500);
+  const [On, SetOn] = React.useState(false);
 
   //스크롤 엑션
   const scrollTomBottom = () => {
@@ -28,24 +28,28 @@ const ChatForm = props => {
     }
   };
 
-  const InfinitesScrolling = () => {
-    if (roomId) {
-      if (scrollRef.current.scrollTop <= Height) {
-        console.log('안녕');
-        console.log(scrollRef.current.scrollTop);
-        SetHeight(Height - 1500);
-      }
+  const scrollRef = React.useCallback(x => {
+    if (x !== null) {
+      setHeight(x.getBoundingClientRect().height);
     }
-  };
+  });
+
+  console.log(height);
+
+  // const InfinitesScrolling = () => {
+  //   if (roomId) {
+  //     if (scrollRef.current.scrollTop <= Height) {
+  //       dispatch(ChatAction.getChatMsListDB(roomId, page));
+  //       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  //     }
+  //   }
+  // };
 
   React.useEffect(() => {
     scrollTomBottom();
   }, [Chatting.length]);
 
   React.useEffect(() => {
-    if (roomId) {
-      dispatch(ChatAction.getChatMsListDB(roomId));
-    }
     return () => {
       if (roomId) {
         wsDisConnectUnsubscribe();
@@ -58,7 +62,12 @@ const ChatForm = props => {
       <Header Page point="absolute" _onClick={_onClick} sendStop={sendStop} chat>
         {guestNick}
       </Header>
-      <ScrollBox ref={scrollRef} onScroll={InfinitesScrolling}>
+      <ScrollBox
+        id="ScrollBox"
+        ref={scrollRef}
+        // onScroll={InfinitesScrolling}
+        className={On ? 'on' : ''}
+      >
         <Grid gap="19px" padding="19px 30px">
           {!Chatting
             ? ''
@@ -75,6 +84,8 @@ const ChatForm = props => {
                       </PartyOther>
                     );
                   case 'ENTER':
+                    return <Alarm key={idx}> {x.message}</Alarm>;
+                  case 'QUIT':
                     return <Alarm key={idx}> {x.message}</Alarm>;
                   case 'EMO':
                     return x.senderName === userInfo.username ? (
@@ -96,7 +107,12 @@ const ChatForm = props => {
               })}
         </Grid>
       </ScrollBox>
-      <PartyInput sendMessage={sendMessage} roomId={roomId}></PartyInput>
+      <PartyInput
+        sendMessage={sendMessage}
+        roomId={roomId}
+        Emit={SetOn}
+        scrollTomBottom={scrollTomBottom}
+      ></PartyInput>
     </PageShadows>
   );
 };
@@ -115,10 +131,14 @@ const PageShadows = styled.div`
     left: 0px;
   }
 `;
+
 const ScrollBox = styled.div`
   width: 100%;
   height: 89%;
   overflow-y: scroll;
+  &.on {
+    height: 54%;
+  }
 `;
 
 const EmoticonImgBox = styled.div`
