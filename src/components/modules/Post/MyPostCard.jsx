@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Js
 import { ReactComponent as Heart } from '../../../img/Icon/icon_heart_no.svg';
 import { ReactComponent as Sms } from '../../../img/Icon/chat_bubble.svg';
 
+// Component
 import { Grid, Image } from '../../element/index';
 
 const MyPostCard = props => {
@@ -11,8 +13,6 @@ const MyPostCard = props => {
   const img = mypost.imageList[0];
 
   const time = mypost.createdAt.split(' ')[0].split('-');
-
-  console.log(time);
 
   return (
     <MyPost>

@@ -1,31 +1,63 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Button, Input } from '../../element';
-import { ChatEmoticon } from './index';
+import { ChatEmoticon, ChatPreview } from './index';
 import mood from '../../../img/Icon/mood.svg';
 import moment from 'moment';
 
 function PartyInput(props) {
   const [Chatting, setChatting] = React.useState('');
   const [Open, SetOpen] = React.useState(false);
+  const [Emoticon, SetEmoticon] = React.useState('');
+  const [Preview, SetPreview] = React.useState(false);
   const { roomId, sendMessage } = props;
   const date = `${moment().hours()}:${moment().minutes()}`;
   // 보내는거
   const ChatPost = e => {
     setChatting(e.target.value);
   };
-
-  const ClickEvent = () => {
-    // send할 데이터
-    const ms = {
-      type: 'TALK',
-      roomId: roomId,
-      message: Chatting,
-      date: date,
-    };
-    sendMessage(ms);
-    setChatting('');
+  const GetEmoticon = data => {
+    SetEmoticon(data);
   };
+
+  // 문자 전송 sendEvent
+  const TxtSend = () => {
+    if (Chatting !== '') {
+      // send할 데이터
+      const ms = {
+        type: 'TALK',
+        roomId: roomId,
+        message: Chatting,
+        date: date,
+      };
+      sendMessage(ms);
+      // console.log(ms);
+      setChatting('');
+    }
+  };
+
+  // 이모티콘 전송 sendEvent
+  const EmoticonSend = () => {
+    const icon = {
+      type: 'EMO',
+      roomId: roomId,
+      message: Emoticon.number,
+    };
+    sendMessage(icon);
+    // console.log(icon);
+    SetPreview(false);
+  };
+
+  // 전송이벤트
+  const ClickEvent = () => {
+    if (Preview) {
+      EmoticonSend();
+    } else {
+      TxtSend();
+    }
+  };
+
+  // enter event
   const Pressevent = e => {
     if (e.key === 'Enter') {
       ClickEvent();
@@ -64,7 +96,14 @@ function PartyInput(props) {
           전송
         </Button>
       </Grid>
-      <ChatEmoticon Open={Open}></ChatEmoticon>
+      {Preview ? <ChatPreview On={Preview} click={SetPreview} data={Emoticon}></ChatPreview> : ''}
+      <ChatEmoticon
+        Open={Open}
+        On={Preview}
+        EmoticonSend={EmoticonSend}
+        click={SetPreview}
+        Emit={GetEmoticon}
+      ></ChatEmoticon>
     </BottomInput>
   );
 }

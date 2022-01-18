@@ -16,6 +16,10 @@ function Mypost() {
   }, []);
 
   const postings = useSelector(state => state.user.MypostList);
+
+  const ClickDetail = postId => {
+    history.push(`postMain/${postId}`);
+  };
   return (
     <MypostPage>
       <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
@@ -23,7 +27,11 @@ function Mypost() {
           ? postings.map((x, idx) => {
               return (
                 <SwiperSlide key={idx}>
-                  <MypostBox>
+                  <MypostBox
+                    onClick={() => {
+                      ClickDetail(x.postId);
+                    }}
+                  >
                     <img src={x.imageList[0].imageLink} alt="게시물 이미지" />
                   </MypostBox>
                 </SwiperSlide>
@@ -31,15 +39,24 @@ function Mypost() {
             })
           : ''}
         <SwiperSlide>
-          <MypostMore
-            onClick={() => {
-              history.push('/mypost');
-            }}
-          >
-            <img src={cross} alt="더보기" />
-            <span>더보기</span>
-          </MypostMore>
+          <MypostBox>안녀</MypostBox>
         </SwiperSlide>
+        {postings ? (
+          <SwiperSlide>
+            <MypostMore
+              onClick={() => {
+                history.push('/mypost');
+              }}
+            >
+              <img src={cross} alt="더보기" />
+              <span>더보기</span>
+            </MypostMore>
+          </SwiperSlide>
+        ) : (
+          <SwiperSlide>
+            <MypostBox onClick={() => {}}>{/* <img alt="게시물 이미지" /> */}</MypostBox>
+          </SwiperSlide>
+        )}
       </Swiper>
     </MypostPage>
   );
@@ -57,8 +74,13 @@ const MypostBox = styled.div`
   border-radius: 4px;
   cursor: pointer;
   overflow: hidden;
+  position: relative;
   img {
     height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    transform: translateX(-50%);
   }
 `;
 const MypostMore = styled.div`

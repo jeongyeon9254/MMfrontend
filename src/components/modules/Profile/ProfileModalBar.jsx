@@ -38,7 +38,7 @@ function ProfileBar(props) {
             <img alt="화살표" src={arrow_right}></img>
           </MatchBox>
         );
-      case '이미 채팅 중입니다.':
+      case '대화 중인 상대입니다.':
         return (
           <MatchBox
             className="Already"

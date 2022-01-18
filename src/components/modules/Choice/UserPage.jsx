@@ -31,7 +31,7 @@ const UserPage = props => {
           mbti={hostInfo.mbti}
         />
       </Grid>
-      <UserButton guestId={guestId} hostInfo={hostInfo} />
+      <UserButton guestId={guestId} hostInfo={hostInfo} _onClick={_onClick} />
     </PageShadows>
   );
 };

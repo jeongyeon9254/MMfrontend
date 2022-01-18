@@ -4,9 +4,11 @@ import appicon from '../../../img/appIcon.png';
 import background from '../../../img/webBg.png';
 import chemy from '../../../img/chemy.svg';
 import { Grid } from '../../element';
+
 function Bg() {
   return (
     <>
+      <BgImg src={background} alt="background" />
       <BgPoint>
         <Grid gap="56px">
           <Grid row gap="40px" align="center">
@@ -26,6 +28,13 @@ function Bg() {
               <NormalTi>BIZ Chemy를 통해 여러분과 잘 맞는 친구를 찾아보세요!</NormalTi>
               <NormalTi>친구와의 소통을 통해 한층 즐거운 스스로를 발견할 수 있을거에요.</NormalTi>
             </Grid>
+            <FeedbackBtn
+              onClick={() => {
+                window.open('https://forms.gle/CMmcrrSgWg66TtCr6');
+              }}
+            >
+              설문조사하고 선물 받기
+            </FeedbackBtn>
           </Grid>
         </Grid>
       </BgPoint>
@@ -37,6 +46,7 @@ const BgPoint = styled.div`
   position: absolute;
   left: 162px;
   top: 215px;
+  z-index: 99;
   @media only screen and (max-width: 1550px) {
     transform: scale(0.7);
     left: 10px;
@@ -77,6 +87,20 @@ const Line = styled.div`
   left: 0px;
   top: -11px;
   opacity: 0.5;
+`;
+
+const FeedbackBtn = styled.div`
+  padding: 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  width: 200px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  background-color: #fff;
+  &:hover {
+    background-color: red;
+  }
 `;
 
 const BgImg = styled.img`

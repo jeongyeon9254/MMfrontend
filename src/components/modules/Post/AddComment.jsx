@@ -1,13 +1,17 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+
+// Component
 import { Grid, Image, Alert } from '../../element/index';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../../../redux/modules/post';
 
 const AddComment = props => {
   const dispatch = useDispatch();
+
+  // 콘텐츠 내용 관리
   const [textAlt, setTextAlt] = useState(false);
 
   // 유저 정보
@@ -19,6 +23,7 @@ const AddComment = props => {
   const textRef = useRef();
   const [comment, setComment] = useState('');
 
+  // 글 작성 이벤트
   const addComment = () => {
     if (comment === '') {
       setTextAlt(true);
@@ -28,6 +33,7 @@ const AddComment = props => {
     setComment('');
   };
 
+  // 엔터키 이벤트
   const enterkey = () => {
     if (window.event.keyCode == 13) {
       addComment();

@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { getChatRoomList, postChatRoomList, getChatMsList } from '../../api/modules/chat';
+import { actionCreators as matchingAction } from './matching';
 
 const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
@@ -20,14 +21,15 @@ const initialState = {
   List: [{}],
   Room: [{}],
   loading: false,
+  page: 1,
 };
 
 // 채팅방 만들기
-const postChatRoomListDB = guestInfo => {
+const postChatRoomListDB = (guestInfo, hostId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = postChatRoomList(guestInfo);
-      console.log(res);
+      await postChatRoomList(guestInfo);
+      dispatch(matchingAction.PutMatchingList(hostId));
       history.push('/chat');
     } catch (e) {
       console.log(e);
@@ -48,11 +50,23 @@ const getChatRoomListDB = () => {
   };
 };
 
-// 채팅 메세지 목록 가져오기
-const getChatMsListDB = roomId => {
+// 첫 채팅 목록 가지고 오기
+const getRecentlyMsListDB = (roomId, page = null) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = await getChatMsList(roomId);
+      const res = await getChatMsList(roomId, page);
+      dispatch(LoadChatting(res.data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+// 채팅 메세지 목록 가져오기
+const getChatMsListDB = (roomId, page) => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const res = await getChatMsList(roomId, page);
       dispatch(LoadChatting(res.data));
     } catch (e) {
       console.log(e);
@@ -110,6 +124,7 @@ const actionCreators = {
   getChatMsListDB,
   DeletMsList,
   resetList,
+  getRecentlyMsListDB,
 };
 
 export { actionCreators };

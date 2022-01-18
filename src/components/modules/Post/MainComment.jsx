@@ -6,13 +6,16 @@ import { Grid, Image, Box, Tag } from '../../element/index';
 import icon_downCircle from '../../../img/Icon/icon_downCircle.svg';
 
 const MainComment = props => {
+  // 유저 정보를 가져옵니다
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+  // props값 관리
   const info = props.info;
   const out = props.out;
   const set = props.set;
   const commenttId = info.commentId;
 
+  // 모달창 닫기
   const onModal = () => {
     set(commenttId);
     out();
@@ -35,7 +38,7 @@ const MainComment = props => {
               </Grid>
               <TimeText>{info.createdAt.split(' ')[0]}</TimeText>
               {userInfo.nickname === info.nickname ? (
-                <Circl onClick={onModal} alt="댓글삭제" src={icon_downCircle}></Circl>
+                <Circle onClick={onModal} alt="댓글삭제" src={icon_downCircle}></Circle>
               ) : null}
             </Grid>
             <Text>{info.comment}</Text>
@@ -45,6 +48,7 @@ const MainComment = props => {
     </Grid>
   );
 };
+
 const NameText = styled.p`
   font-weight: 700;
   font-size: ${props => props.theme.fontSizes.small};
@@ -61,7 +65,7 @@ const Text = styled.p`
   white-space: normal;
 `;
 
-const Circl = styled.img`
+const Circle = styled.img`
   display: inline-block;
   margin: 0 0 0 auto;
   cursor: pointer;

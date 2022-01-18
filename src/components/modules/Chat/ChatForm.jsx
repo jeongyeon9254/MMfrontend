@@ -17,15 +17,27 @@ const ChatForm = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
   const loading = useSelector(state => state.chat.loading);
+  const high = 60;
+
+  const [Height, SetHeight] = React.useState(1500);
 
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-      console.log(scrollRef.current.scrollTop);
-      console.log(scrollRef.current.scrollHeight);
     }
   };
+
+  const InfinitesScrolling = () => {
+    if (roomId) {
+      if (scrollRef.current.scrollTop <= Height) {
+        console.log('안녕');
+        console.log(scrollRef.current.scrollTop);
+        SetHeight(Height - 1500);
+      }
+    }
+  };
+
   React.useEffect(() => {
     scrollTomBottom();
   }, [Chatting.length]);
@@ -46,7 +58,7 @@ const ChatForm = props => {
       <Header Page point="absolute" _onClick={_onClick} sendStop={sendStop} chat>
         {guestNick}
       </Header>
-      <ScrollBox ref={scrollRef}>
+      <ScrollBox ref={scrollRef} onScroll={InfinitesScrolling}>
         <Grid gap="19px" padding="19px 30px">
           {!Chatting
             ? ''
@@ -64,6 +76,20 @@ const ChatForm = props => {
                     );
                   case 'ENTER':
                     return <Alarm key={idx}> {x.message}</Alarm>;
+                  case 'EMO':
+                    return x.senderName === userInfo.username ? (
+                      <EmoticonImgBox key={idx}>
+                        <Grid row justify="end">
+                          <img src={x.message} alt="이모티콘" />
+                        </Grid>
+                      </EmoticonImgBox>
+                    ) : (
+                      <EmoticonImgBox key={idx}>
+                        <Grid row>
+                          <img src={x.message} alt="이모티콘" />
+                        </Grid>
+                      </EmoticonImgBox>
+                    );
                   default:
                     return '';
                 }
@@ -93,6 +119,13 @@ const ScrollBox = styled.div`
   width: 100%;
   height: 89%;
   overflow-y: scroll;
+`;
+
+const EmoticonImgBox = styled.div`
+  height: 100px;
+  img {
+    height: 100%;
+  }
 `;
 
 const Alarm = styled.p`

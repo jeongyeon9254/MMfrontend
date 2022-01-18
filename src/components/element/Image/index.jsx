@@ -6,16 +6,19 @@ import Bit from '../../modules/Bit';
 
 const Image = props => {
   const {
+    // props
+    _onClick,
+    src,
+    mbti,
+    // css
     width,
     margin,
-    _onClick,
     round,
     border,
-    src,
-    photoRound,
-    mbti,
     _border,
     pointer,
+    // 분기 name
+    photoRound,
     radius,
     nobackground,
   } = props;

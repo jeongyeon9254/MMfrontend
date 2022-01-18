@@ -9,6 +9,7 @@ body {
   position: relative;
   height: 100vh !important;
   overflow: hidden;
+  width: 100%;
 }
 
 button {
@@ -21,5 +22,11 @@ code {
 @media only screen and (max-width: 1050px) {
   body {
     background-color: #eee;
+  }
+}
+@media only screen and (max-width: 450px) {
+  body {
+    background-color: #eee;
+    height: 100% !important;
   }
 }

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const { kakao } = window;
 
 const SampleMapContainer = props => {
+  // 가짜 데이터로 만든 샘플 맵 컨테이너
   const { locationInfo, onModal } = props;
 
   useEffect(() => {

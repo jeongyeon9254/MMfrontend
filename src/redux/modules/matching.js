@@ -11,6 +11,7 @@ const POST_MATCHING = 'POST_MATCHING';
 const GET_MATCHINGLIST = 'GET_MATCHINGLIST';
 const GET_MATCHINGLISTSEND = 'GET_MATCHINGLISTSEND';
 const Delet_MATCHING = 'Delet_MATCHING';
+const PUT_MATCH = 'PUT_MATCH';
 const THATLOADING = 'THATLOADING';
 const THATRESET = 'THATRESET';
 
@@ -20,6 +21,7 @@ const ListMatchingSend = createAction(GET_MATCHINGLISTSEND, Matching => ({ Match
 // 신청 내역 조회
 const ListMatchingReceive = createAction(GET_MATCHINGLIST, Matching => ({ Matching }));
 const DeletMatchingList = createAction(Delet_MATCHING, guestId => ({ guestId }));
+const PutMatchingList = createAction(PUT_MATCH, hostId => ({ hostId }));
 
 const LoadingAction = createAction(THATLOADING, () => ({}));
 const resetAction = createAction(THATRESET, () => ({}));
@@ -66,12 +68,11 @@ const getMatchingReceiveCheckDB = () => {
 };
 
 // 신청 삭제
-const deleteMatchingChatDB = guestId => {
+const deleteMatchingChatDB = hostId => {
   return async function (dispatch, getState, { history }) {
     try {
-      await deleteMatchingChat(guestId);
-      dispatch(DeletMatchingList(guestId));
-      history.push('/choice');
+      await deleteMatchingChat(hostId);
+      dispatch(PutMatchingList(hostId));
     } catch (e) {
       console.log(e);
     }
@@ -104,6 +105,14 @@ export default handleActions(
         });
         draft.ListSend = rest;
       }),
+    [PUT_MATCH]: (state, action) =>
+      produce(state, draft => {
+        const { hostId } = action.payload;
+        const rest = state.ListReceive.filter(x => {
+          return x.hostId !== hostId;
+        });
+        draft.ListReceive = rest;
+      }),
     [THATLOADING]: (state, action) =>
       produce(state, draft => {
         draft.loading = true;
@@ -123,6 +132,7 @@ const actionCreators = {
   deleteMatchingChatDB,
   postMatchingDB,
   getMatchingReceiveCheckDB,
+  PutMatchingList,
   resetAction,
 };
 
