@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,8 +65,6 @@ const PostWrite = props => {
 
   const preview = useSelector(state => state.preview.preview);
   const loading = useSelector(state => state.post.loading);
-
-  const date = moment();
 
   const changeTag = e => {
     setTag(e.target.name);

@@ -5,11 +5,14 @@ import { delCookie } from '../../../shared/Cookie';
 import { history } from '../../../redux/configureStore';
 import close from '../../../img/Icon/close.svg';
 
+import { deleteUser } from '../../../api/modules/user.js';
+
 function MySetting(props) {
   const { Open, _onClick } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   // 모달창
   const [Alt, setAlt] = React.useState(false);
+  const [userAlt, setUserAlt] = React.useState(false);
 
   const logOutBack = () => {
     delCookie('authorization');
@@ -19,12 +22,19 @@ function MySetting(props) {
 
   const exit = () => {
     setAlt(false);
+    setUserAlt(false);
   };
 
   const next = () => {
     logOutBack();
     exit();
   };
+
+  const deleteMe = () => {
+    deleteUser();
+    logOutBack();
+  };
+
   return (
     <div>
       {Alt ? (
@@ -37,6 +47,14 @@ function MySetting(props) {
           </Grid>
         </Alert>
       ) : null}
+      {userAlt ? (
+        <Alert MyBit logout yes={deleteMe} no={exit}>
+          <Grid gap="15px" padding="16px 51px 8px 24px">
+            <AltTitle>회원탈퇴를 하시겠습니까?</AltTitle>
+            <AltContent>{userInfo.nickname}님 많이 그리울거에요..</AltContent>
+          </Grid>
+        </Alert>
+      ) : null}
       <TabBg className={Open ? 'open' : 'close'} onClick={_onClick}></TabBg>
       <TabNav className={Open ? 'open' : 'close'}>
         <TabHead>
@@ -46,14 +64,20 @@ function MySetting(props) {
             <img src={close} style={{ opacity: 0 }} />
           </Grid>
         </TabHead>
-        <TabList>버전 정보 1.0.0</TabList>
         <TabList
-          style={{ cursor: 'pointer' }}
           onClick={() => {
             setAlt(true);
           }}
         >
           로그아웃
+        </TabList>
+        <TabList>버전 정보 1.0.0</TabList>
+        <TabList
+          onClick={() => {
+            setUserAlt(true);
+          }}
+        >
+          회원탈퇴
         </TabList>
       </TabNav>
     </div>
@@ -112,6 +136,7 @@ const TabHead = styled.div`
 const TabList = styled.div`
   font-size: ${p => p.theme.fontSizes.xl};
   padding: 20px 30px;
+  cursor: pointer;
   &:hover {
     color: #ec6464;
   }

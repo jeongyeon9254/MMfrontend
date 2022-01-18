@@ -14,6 +14,9 @@ const Box = props => {
     color,
     margin,
     padding,
+    align,
+    fontColor,
+    fontSize,
     // 분기name
     bg,
     myChat,
@@ -21,9 +24,6 @@ const Box = props => {
     profile,
     comment,
     black,
-    fontColor,
-    fontSize,
-    align,
   } = props;
 
   const styles = {

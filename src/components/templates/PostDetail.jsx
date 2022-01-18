@@ -44,8 +44,6 @@ const PostDetail = props => {
   const comment = detailInfo.commentList;
   const time = detailInfo.createdAt ? detailInfo.createdAt.split(' ')[0].split('-') : 0;
 
-  console.log(time);
-
   React.useEffect(() => {
     dispatch(postActions.getDetailDB(boardId[2]));
   }, []);

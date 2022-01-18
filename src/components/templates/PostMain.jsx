@@ -1,11 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-// Component
-import MapKategorieNav from '../modules/Main/MapKategorieNav';
-import Header from '../modules/layout/Header';
-import PostCard from '../modules/Post/PostCard';
-
 // JS
 import { history } from '../../redux/configureStore';
 import icon_pen from '../../img/Icon/icon_pen.svg';
@@ -17,6 +12,9 @@ import { actionCreators as postAcitions } from '../../redux/modules/post.js';
 
 // component
 import { Button, Grid } from '../element/index.js';
+import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import Header from '../modules/layout/Header';
+import PostCard from '../modules/Post/PostCard';
 import MainComment from '../../components/modules/Post/MainComment';
 import Null from '../../shared/Null';
 import Skeleton from '../../shared/Skeleton';
@@ -47,8 +45,6 @@ const PostMain = () => {
 
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
-
-  const aa = useRef();
 
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;

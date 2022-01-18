@@ -17,9 +17,10 @@ import icon_location from '../../../img/Icon/icon_location.svg';
 const PostCard = props => {
   // 페이지 네이션 사용
   SwiperCore.use([Pagination]);
+
+  // props값 관리
   const info = props.info;
   const imgList = info.imageList;
-
   const time = info.createdAt.split(' ')[0].split('-');
 
   return (
@@ -48,7 +49,7 @@ const PostCard = props => {
           </Tag>
         </Grid>
       </Grid>
-
+      {/* 이미지 슬라이드 스와이퍼는 컴포넌트로 만들어도 되지않을까..? */}
       <SwiperBox>
         <Swiper
           className="swiper-container"
@@ -58,7 +59,7 @@ const PostCard = props => {
             fontSize: '12px',
           }}
         >
-          {imgList
+          {imgList.length !== 0
             ? imgList[0].imageLink === ''
               ? null
               : imgList.map((list, idx) => {
