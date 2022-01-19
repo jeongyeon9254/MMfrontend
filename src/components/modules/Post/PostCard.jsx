@@ -20,15 +20,18 @@ const PostCard = props => {
 
   // props값 관리
   const info = props.info;
+  const addlike = props.addlike;
   const imgList = info.imageList;
   const time = info.createdAt.split(' ')[0].split('-');
 
   return (
     <Grid>
+      {/* 상단 정보창 */}
       <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 30px" gap="10px">
         <Grid width="auto">
           <Image src={info.profileImage} photoRound width="50px" margin="0" />
         </Grid>
+
         <Grid gap="10px" justify="center">
           <Grid row gap="13px">
             <NameText>{info.nickname}</NameText>
@@ -40,6 +43,7 @@ const PostCard = props => {
             {Number(time[1])}월 {time[2]}일
           </TimeText>
         </Grid>
+
         <Grid gap="9px" justify="center" align="flex-end" width="60%">
           <LocalText>
             <img alt="마커" src={icon_location}></img>서울특별시 {info.location}
@@ -49,7 +53,8 @@ const PostCard = props => {
           </Tag>
         </Grid>
       </Grid>
-      {/* 이미지 슬라이드 스와이퍼는 컴포넌트로 만들어도 되지않을까..? */}
+
+      {/* 이미지 슬라이드 스와이퍼 */}
       <SwiperBox>
         <Swiper
           className="swiper-container"
@@ -74,10 +79,15 @@ const PostCard = props => {
         </Swiper>
       </SwiperBox>
 
+      {/* 하단 댓글과 좋아요 버튼 */}
       <Grid padding="17px 44px 16px 33px">
         <Text>{info.content}</Text>
         <Grid row padding="16px 0px 0px 0px" align="center">
-          {info.likeStatus ? <OnHeartIcon /> : <HeartIcon />}
+          {info.likeStatus ? (
+            <OnHeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+          ) : (
+            <HeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+          )}
           <Count>{info.likesCount}</Count>
           <CommentIcon style={{ margin: '0px 0px 0px 14px' }} />
           <Count>{info.commentList.length}</Count>

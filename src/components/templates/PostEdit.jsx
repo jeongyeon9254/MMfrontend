@@ -6,60 +6,84 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
 
 // component
-import { Button, Grid, Input, Alert } from '../element/index.js';
+import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Spiner from '../../shared/Spiner';
+import SetKategori from '../modules/Post/SetKategori';
+import SetText from '../modules/Post/SetText';
 
 const PostEdit = props => {
   const dispatch = useDispatch();
-  const [textAlt, setTextAlt] = useState(false);
-  // path
+
+  // 포스트 id를 가져옵니다
   const pathName = props.location.pathname;
   const boardId = pathName.split('/');
 
+  // 유저 정보를 가져옵니다
   const info = useSelector(state => state.post.detail);
+  const editText = info.content;
 
+  // 알럿창 관리
+  const [textAlt, setTextAlt] = useState(false);
+
+  // 데이터 관리
+  const loading = useSelector(state => state.post.loading);
   const contentData = info.length !== 0 ? info.content : '';
   const tagData = info.length !== 0 ? info.tag : null;
-  const loading = useSelector(state => state.post.loading);
 
   // 전송용 데이터
   const [text, setTest] = useState('');
   const [tag, setTag] = useState('');
 
+  // 렌더링시 디테일 페이지 정보를 가져오고 태그와 텍스트를 넣습니다.
   useEffect(() => {
     dispatch(postActions.getDetailDB(boardId[2]));
-    console.log(contentData, tagData);
     setTag(tagData);
     setTest(contentData);
   }, [contentData, tagData]);
 
-  // 버튼
-  const InterestList = ['운동', '공부', '대화', '게임', '재테크', '기타'];
-
+  // 텍스트와 태그 온체인지
   const changeText = e => {
     setTest(e.target.value);
   };
-
   const changeTag = e => {
     setTag(e.target.name);
   };
 
+  // 수정!!
   const editPost = async () => {
     if (text === '') {
       setTextAlt(true);
       return;
     }
+
     const data = {
       tag: tag,
       content: text,
     };
-    console.log(data);
+
     dispatch(postActions.editPostDB(boardId[2], data));
   };
 
   return (
-    <>
+    <React.Fragment>
+      <Header>글 수정하기</Header>
+
+      <PostBox>
+        {/* 카테고리 선택 */}
+        <SetKategori tag={tag} changeTag={changeTag} />
+
+        {/* 글 작성 */}
+        <SetText text={text} editText={editText} changeText={changeText} />
+
+        {/* 수정하기 버튼 */}
+        <Button _onClick={editPost} BtnBottom width="85%">
+          게시글 수정하기
+        </Button>
+      </PostBox>
+
+      {/* 모달창 관리 */}
+      {loading ? <Spiner post /> : null}
       {textAlt ? (
         <Alert
           MyBit
@@ -75,41 +99,7 @@ const PostEdit = props => {
           </Grid>
         </Alert>
       ) : null}
-      <Header>글 수정하기</Header>
-      <PostBox>
-        <Grid>
-          <p className="title">카테고리 수정하기</p>
-          <Grid row gap="8px">
-            {InterestList.map((interest, idx) => {
-              return (
-                <Button
-                  key={idx}
-                  name={interest}
-                  BtnTag
-                  size="12px"
-                  _onClick={changeTag}
-                  state={interest === tag ? 'active' : null}
-                >
-                  {interest}
-                </Button>
-              );
-            })}
-          </Grid>
-        </Grid>
-        <Grid>
-          <p className="title">내용 수정하기</p>
-          <Input _onChange={changeText} _defaultValue={info.content} _type="posting"></Input>
-          <div className="limit">
-            <span className="recent">{text.length} </span>
-            <span>/ 100</span>
-          </div>
-        </Grid>
-        <Button _onClick={editPost} BtnBottom width="85%">
-          게시글 수정하기
-        </Button>
-      </PostBox>
-      {loading ? <Spiner post /> : null}
-    </>
+    </React.Fragment>
   );
 };
 
@@ -119,47 +109,6 @@ const PostBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 23px;
-  img {
-    width: 80px;
-  }
-  .limit {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: ${props => props.theme.fontSizes.small};
-  }
-  .limit .recent {
-    color: #aaa;
-  }
-  .photoBoxDelete {
-    position: absolute;
-    background: red;
-    width: 30px;
-    height: 30px;
-  }
-  .photoPreview {
-    width: 100px;
-  }
-  .file-input {
-    display: none;
-  }
-  label {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: #fff;
-    border: 1.5px solid #a7a7a7;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-  .plus {
-    font-size: 45px;
-    color: #c8c8c8;
-  }
-  .title {
-    font-weight: 700;
-    margin-bottom: 15px;
-  }
 `;
 
 export default PostEdit;

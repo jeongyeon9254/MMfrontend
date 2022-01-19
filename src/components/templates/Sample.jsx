@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// Js
+// Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mainActions } from '../../redux/modules/main';
 import { history } from '../../redux/configureStore.js';
@@ -15,28 +15,31 @@ import SampleMapContainer from '../modules/Main/SampleMapContainer';
 import MapKategorieNav from '../modules/Main/MapKategorieNav';
 
 const Sample = () => {
-  const [modal, setModal] = useState(false);
-
   const dispatch = useDispatch();
 
-  const needLogin = () => {
-    history.push(`/LoginNeed`);
-  };
-
-  const outModal = () => {
-    setModal(false);
-  };
-
-  const onModal = () => {
-    setModal(true);
-  };
-
+  // 샘플 정보를 받아옵니다
   React.useEffect(() => {
     dispatch(mainActions.getGuestListDB());
   }, []);
 
+  // 샘플 정보를 가져옵니다
   const locationInfo = useSelector(state => state.main.list);
 
+  // 로그인 필요페이지 이동
+  const needLogin = () => {
+    history.push(`/LoginNeed`);
+  };
+
+  // 모달 관리
+  const [modal, setModal] = useState(false);
+  const onModal = () => {
+    setModal(true);
+  };
+  const outModal = () => {
+    setModal(false);
+  };
+
+  // 더미 mbti
   const userInfo = {
     mbti: 'INFJ',
   };

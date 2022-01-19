@@ -93,7 +93,6 @@ const Profile = () => {
           </Grid>
         </Alert>
       ) : null}
-
       {Disconnect ? (
         <Alert MyBit isButton yes={After} no={exit}>
           <Grid gap="15px" padding="16px 8px 8px 24px">
@@ -105,7 +104,6 @@ const Profile = () => {
           </Grid>
         </Alert>
       ) : null}
-
       {modal ? <ProfileBar Bar type={State} nickname={profile.nickname} /> : null}
       <ProfileStyle>
         {name[2] === 'fast' ? (
@@ -145,13 +143,16 @@ const Profile = () => {
         <Box profile margin="25px 0 0 0">
           {profile.intro}
         </Box>
+
+        {/* 모달창 및 스피너 관리 */}
+
         {!modal ? (
           <ProfileBar Btn _onClick={MadalSet} />
         ) : (
           <ProfileBar Btn type={State} _onClick={MadalOn} />
         )}
+        {loading ? <Spiner /> : null}
       </ProfileStyle>
-      {loading ? <Spiner /> : null}
     </React.Fragment>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // JS
@@ -21,21 +21,26 @@ import Skeleton from '../../shared/Skeleton';
 
 const PostMain = () => {
   const dispatch = useDispatch();
+
+  // 유저 정보를 가져옵니다
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+  // 리덕스 정보 관리
   const postList = useSelector(state => state.post.postList);
   const page = useSelector(state => state.post.page);
   const loading = useSelector(state => state.post.loading);
 
+  // 카테고리 필터
   const [kate, setKate] = useState(0);
 
+  // 처음 0페이지를 받아오고 스크롤을 최상단으로 위치시킵니다
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
     document.getElementById('allBox').scrollTop = 0;
   }, []);
 
+  // 리스트 id순(생성순)으로 정렬
   const list = [...postList];
-
   const arr =
     list !== []
       ? list.sort((a, b) => {
@@ -43,9 +48,9 @@ const PostMain = () => {
         })
       : [];
 
+  // 무한스크롤 관리
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
-
   const infinityScroll = () => {
     const recentHeight = allBox.scrollTop;
     const scrollBoxHeight = scrollBox.offsetHeight;
@@ -63,9 +68,13 @@ const PostMain = () => {
   return (
     <PostBox id="allBox" onScroll={infinityScroll}>
       <Header _on>커뮤니티</Header>
+
+      {/* 카테고리 선택 버튼 */}
       <div className="navBox">
         <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
       </div>
+
+      {/* 포스트 슬라이드 */}
       <div id="scrollBox">
         {loading ? <Skeleton></Skeleton> : null}
         {arr.length > 0 ? (
@@ -104,6 +113,8 @@ const PostMain = () => {
           </Grid>
         )}
       </div>
+
+      {/* 게시글 작성 버튼 */}
       <div className="postBtnBox">
         <Button
           BtnRound

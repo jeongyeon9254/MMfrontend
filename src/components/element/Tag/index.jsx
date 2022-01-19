@@ -39,7 +39,7 @@ const Tag = props => {
           </Grid>
         </TagBlack>
       );
-    case 'myDefult':
+    case 'my':
       return (
         <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
           <Grid

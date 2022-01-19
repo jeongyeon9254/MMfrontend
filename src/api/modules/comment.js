@@ -1,5 +1,6 @@
 import instance from '../instance';
 
+// 댓글등록
 export const addComment = (postId, comment) => {
   return instance({
     data: comment,
@@ -8,6 +9,7 @@ export const addComment = (postId, comment) => {
   });
 };
 
+// 댓글삭제
 export const deleteComment = (postId, commentId) => {
   return instance({
     method: 'delete',
