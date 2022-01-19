@@ -19,12 +19,17 @@ import MapKategorieNav from '../modules/Main/MapKategorieNav';
 import Spiner from '../../shared/Spiner.jsx';
 import MainModal from '../modules/Main/MainModal.jsx';
 
+// Js
+import { bigGpsList, smallGpsList } from '../modules/Main/gpsList.js';
+const { kakao } = window;
+
 const Main = () => {
   const dispatch = useDispatch();
 
   // 로컬스토리지에서 내정보를 가져옵니다
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+  const [bigLocationList, setBigLocationList] = useState(false); // 로케이션 모달창 관리
   const [locationList, setLocationList] = useState(false); // 로케이션 모달창 관리
   const [loading, setLoading] = useState(false); // 빠른매칭 스피너 로딩
 
@@ -32,12 +37,22 @@ const Main = () => {
   const onLocation = () => {
     if (locationList === false) setLocationList(true);
     if (locationList === true) setLocationList(false);
+    setBigLocationList(false);
   };
   const outLocation = () => {
     setLocationList(false);
   };
+  const onBigLocation = () => {
+    if (bigLocationList === false) setBigLocationList(true);
+    if (bigLocationList === true) setBigLocationList(false);
+    setLocationList(false);
+  };
+  const outBigLocation = () => {
+    setBigLocationList(false);
+  };
 
   // 맵리스트 모달창 관리
+  const [bigLocation, setBigLocation] = useState('서울특별시'); // 이후 유저인포로 수정 필요
   const [location, setLocation] = useState(userInfo.location);
   const [gpsId, setGpsId] = useState('');
   const [modal, setModal] = useState(false);
@@ -62,16 +77,15 @@ const Main = () => {
 
       {/* 지역 선택 버튼 */}
       <LocationBox>
-        <Button BtnTag _onClick={onLocation}>
-          서울 특별시 {location}
-        </Button>
+        <button onClick={onBigLocation}>{bigLocation}</button>
+        <button onClick={onLocation}>{location}</button>
       </LocationBox>
 
       {/* 카테고리 선택 버튼 */}
       <MapKategorieNav userInfo={userInfo} gpsId={gpsId} />
 
       {/* 카카오 맵 컨테이너 */}
-      <MapContainer onModal={onModal} />
+      <MapContainer onModal={onModal} bigLocation={bigLocation} location={location} />
 
       {/* 빠른 매칭 버튼 */}
       <CenterBtn>
@@ -102,8 +116,19 @@ const Main = () => {
       {modal ? <MapList outModal={outModal} /> : null}
 
       {/* 지역 선택 모달 */}
+      {bigLocationList ? (
+        <MainModal
+          big
+          bigLocation={bigLocation}
+          setLocation={setLocation}
+          outBigLocation={outBigLocation}
+          setBigLocation={setBigLocation}
+          setGpsId={setGpsId}
+        ></MainModal>
+      ) : null}
       {locationList ? (
         <MainModal
+          bigLocation={bigLocation}
           outLocation={outLocation}
           setLocation={setLocation}
           setGpsId={setGpsId}
@@ -142,10 +167,25 @@ const CenterBtn = styled.div`
 const LocationBox = styled.div`
   position: absolute;
   display: flex;
-  width: 100%;
+  width: 60%;
   justify-content: center;
   top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0%);
   z-index: 1;
+  padding: 8px 10px;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: ${props => (props.shadow ? props.shadow : '0px 4px 4px rgba(0, 0, 0, 0.25)')};
+  button {
+    width: auto;
+    border: none;
+    background-color: #f9f9f9;
+    font-weight: 700;
+    color: #313131;
+    font-size: ${props => (props.size ? props.size : props.theme.fontSizes.small)};
+    cursor: pointer;
+  }
   @media only screen and (max-width: 1050px) {
     top: 120px;
   }
