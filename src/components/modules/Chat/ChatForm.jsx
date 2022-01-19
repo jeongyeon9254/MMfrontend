@@ -34,22 +34,21 @@ const ChatForm = props => {
   //   }
   // });
 
-  console.log(height);
-
   const InfinitesScrolling = () => {
-    // if (roomId) {
-    //   if (scrollRef.current.scrollTop <= 0) {
-    //     dispatch(ChatAction.getChatMsListDB(roomId, page));
-    //   }
-    // }
+    if (roomId) {
+      if (scrollRef.current.scrollTop <= 0) {
+        dispatch(ChatAction.getChatMsListDB(roomId, page));
+      }
+    }
   };
+
   const deleteChatroomAction = () => {
-    // try {
-    //   dispatch(ChatAction.deleteChatroomDB(roomId));
-    //   _onClick();
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    try {
+      dispatch(ChatAction.deleteChatroomDB(roomId));
+      _onClick();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   React.useEffect(() => {
@@ -104,7 +103,8 @@ const ChatForm = props => {
                   case 'EMO':
                     return x.senderName === userInfo.username ? (
                       <EmoticonImgBox key={idx}>
-                        <Grid row justify="end">
+                        <Grid row justify="end" align="end" gap="10px">
+                          <Date>{x.date}</Date>
                           <img src={x.message} alt="이모티콘" />
                         </Grid>
                       </EmoticonImgBox>
@@ -113,6 +113,7 @@ const ChatForm = props => {
                         <Grid row align="end" gap="10px">
                           <Image round src={x.senderImg} width="40px" margin="0" />
                           <img src={x.message} alt="이모티콘" />
+                          <Date>{x.date}</Date>
                         </Grid>
                       </EmoticonImgBox>
                     );
@@ -155,7 +156,10 @@ const ScrollBox = styled.div`
     height: 54%;
   }
 `;
-
+const Date = styled.p`
+  font-size: 9px;
+  color: #9b9b9b;
+`;
 const EmoticonImgBox = styled.div`
   height: 100px;
   img {
