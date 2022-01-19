@@ -61,7 +61,7 @@ const Bit = [
   {
     name: 'ESTJ',
     image: ESTJ,
-    color: '#14149A',
+    color: '#3c3cd3',
     title: '엄격한 관리자',
     virtue: '품격있음',
   },
