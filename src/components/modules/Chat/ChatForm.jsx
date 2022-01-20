@@ -16,6 +16,7 @@ const ChatForm = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
   const loading = useSelector(state => state.chat.listloading);
+  const total = useSelector(state => state.chat.total);
   const page = useSelector(state => state.chat.page);
   const scrollRef = React.useRef(null);
   const BoxRef = React.useRef({});
@@ -40,9 +41,11 @@ const ChatForm = props => {
   };
   const InfiniteStairs = () => {
     if (roomId) {
-      if (scrollRef.current.scrollTop === 0) {
-        dispatch(ChatAction.getChatMsListDB(roomId, page));
-        console.log('By');
+      if (Chatting.length <= total) {
+        if (scrollRef.current.scrollTop === 0) {
+          dispatch(ChatAction.getChatMsListDB(roomId, page));
+          console.log('By');
+        }
       }
     }
   };

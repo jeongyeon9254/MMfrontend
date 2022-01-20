@@ -18,11 +18,14 @@ const MS_LOADING = 'MS_LOADING';
 const MS_RESET = 'MS_RESET';
 const LOADING_CHAT = 'LOADING_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
+const ToTalNum = 'ToTalNum';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
+const total_number = createAction(ToTalNum, num => ({ num }));
+
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
 const resetList = createAction(RESET_CHAT, () => ({}));
@@ -36,6 +39,7 @@ const initialState = {
   loading: false,
   listloading: false,
   page: 0,
+  total: 0,
 };
 
 // 채팅방 만들기
@@ -87,6 +91,7 @@ const getChatMsListDB = (roomId, page) => {
       console.log(res);
       dispatch(AddChatting(res.data, page));
       dispatch(ms_loadingList());
+      dispatch(total_number(res.data[0].totalnumber));
     } catch (e) {
       console.log(e);
     }
@@ -131,6 +136,11 @@ export default handleActions(
         const { chatting, page } = action.payload;
         draft.List[page] = chatting;
         draft.page = page + 1;
+      }),
+    [ToTalNum]: (state, action) =>
+      produce(state, draft => {
+        const { num } = action.payload;
+        draft.total = num;
       }),
     [Delet_CHAT]: (state, action) =>
       produce(state, draft => {
