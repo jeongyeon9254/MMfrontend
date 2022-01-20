@@ -52,11 +52,15 @@ const KakaoAddress = props => {
         const addressName = results[0].address.address_name;
         const location = results[0].address.region_1depth_name;
         const locDetail = results[0].address.region_2depth_name;
+        const ArrLocDetail = locDetail.split(' ');
+        const ArrLocDetail_1 = ArrLocDetail[0];
+        console.log(ArrLocDetail_1);
         const x = results[0].address.x;
         const y = results[0].address.y;
+        console.log(results[0]);
         setFull(addressName);
         setLo(location);
-        setDe(locDetail);
+        setDe(ArrLocDetail_1);
         setX(x);
         setY(y);
         props.setKakaoadr(false);
