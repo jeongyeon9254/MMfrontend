@@ -107,7 +107,7 @@ const Main = () => {
         </Alert>
       ) : null}
       <Header main setMyInfo={setMyInfo}>
-        자동배포
+        자동배포 다시
       </Header>
 
       {/* 지역 선택 버튼 */}
