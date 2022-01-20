@@ -9,7 +9,7 @@ import { actionCreators as postActions } from '../../redux/modules/post';
 // component
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
-import SetKategori from '../modules/Post/SetKategori';
+import SetCategory from '../modules/Post/SetCategory';
 import SetPreview from '../modules/Post/SetPreview';
 import SetText from '../modules/Post/SetText';
 
@@ -119,7 +119,7 @@ const PostWrite = () => {
 
       <PostBox>
         {/* 카테고리 선택 */}
-        <SetKategori tag={tag} changeTag={changeTag} />
+        <SetCategory tag={tag} changeTag={changeTag} />
 
         {/* 이미지 선택 */}
         <SetPreview selectFile={selectFile} resetPost={resetPost} />

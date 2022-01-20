@@ -12,7 +12,7 @@ import { actionCreators as postAcitions } from '../../redux/modules/post.js';
 
 // component
 import { Button, Grid } from '../element/index.js';
-import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import MapCategoryNav from '../modules/Main/MapCategoryNav';
 import Header from '../modules/layout/Header';
 import PostCard from '../modules/Post/PostCard';
 import MainComment from '../../components/modules/Post/MainComment';
@@ -31,7 +31,7 @@ const PostMain = () => {
   const loading = useSelector(state => state.post.loading);
 
   // 카테고리 필터
-  const [kate, setKate] = useState(0);
+  const [category, setCategory] = useState(0);
 
   // 처음 0페이지를 받아오고 스크롤을 최상단으로 위치시킵니다
   React.useEffect(() => {
@@ -57,10 +57,10 @@ const PostMain = () => {
     const allBoxHeight = allBox.offsetHeight;
 
     if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
-      if (kate === 0) {
+      if (category === 0) {
         dispatch(postAcitions.getPostScrollDB(page));
       } else {
-        dispatch(postAcitions.getKategorScrolliDB(kate, page));
+        dispatch(postAcitions.getKategorScrolliDB(category, page));
       }
     }
   };
@@ -71,7 +71,7 @@ const PostMain = () => {
 
       {/* 카테고리 선택 버튼 */}
       <div className="navBox">
-        <MapKategorieNav userInfo={userInfo} setKate={setKate} post />
+        <MapCategoryNav userInfo={userInfo} setCategory={setCategory} post />
       </div>
 
       {/* 포스트 슬라이드 */}

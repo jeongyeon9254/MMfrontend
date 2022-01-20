@@ -15,7 +15,7 @@ import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
 import MapContainer from '../modules/Main/MapContainer';
-import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import MapCategoryNav from '../modules/Main/MapCategoryNav';
 import Spiner from '../../shared/Spiner.jsx';
 import MainModal from '../modules/Main/MainModal.jsx';
 
@@ -87,16 +87,16 @@ const Main = () => {
 
   // 알럿창 관리
   const [Alt, setAlt] = useState(false);
-  const [kategoriAlt, setKategoriAlt] = useState(false);
+  const [categoryAlt, setCategoryAlt] = useState(false);
 
   return (
     <React.Fragment>
-      {kategoriAlt ? (
+      {categoryAlt ? (
         <Alert
           MyBit
           check
           yes={() => {
-            setKategoriAlt(false);
+            setCategoryAlt(false);
           }}
         >
           <Grid gap="15px" padding="16px 8px 8px 24px">
@@ -117,12 +117,12 @@ const Main = () => {
       </LocationBox>
 
       {/* 카테고리 선택 버튼 */}
-      <MapKategorieNav
+      <MapCategoryNav
         userInfo={userInfo}
         bigNum={bigNum}
         smallNum={smallNum}
         location={location}
-        setKategoriAlt={setKategoriAlt}
+        setCategoryAlt={setCategoryAlt}
       />
 
       {/* 카카오 맵 컨테이너 */}

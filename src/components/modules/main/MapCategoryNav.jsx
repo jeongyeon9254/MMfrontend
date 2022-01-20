@@ -16,12 +16,12 @@ import { actionCreators as mainActions } from '../../../redux/modules/main';
 import { actionCreators as postActions } from '../../../redux/modules/post';
 import { useDispatch } from 'react-redux';
 
-const MapKategorieNav = props => {
+const MapCategoryNav = props => {
   const dispatch = useDispatch();
 
   // props
   const mbti = Mybit(props.userInfo.mbti);
-  const { bigNum, smallNum, location, setKategoriAlt } = props;
+  const { bigNum, smallNum, location, setCategoryAlt } = props;
 
   // nav 리스트 목록
   const navList = ['전체보기', '운동', '공부', '대화', '제테크', '게임', '기타'];
@@ -32,7 +32,7 @@ const MapKategorieNav = props => {
   // 버튼 클릭시 불러오기
   const getAllKategori = index => {
     if (location === '시-군-구') {
-      setKategoriAlt(true);
+      setCategoryAlt(true);
       return false;
     }
     setActive(index);
@@ -40,7 +40,7 @@ const MapKategorieNav = props => {
   };
   const getKategori = index => {
     if (location === '시-군-구') {
-      setKategoriAlt(true);
+      setCategoryAlt(true);
       return false;
     }
     setActive(index);
@@ -161,4 +161,4 @@ const RowDiv = styled.div`
   }
 `;
 
-export default MapKategorieNav;
+export default MapCategoryNav;
