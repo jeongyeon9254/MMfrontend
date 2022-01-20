@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const TagBlack = styled.div`
   display: inline-block;
   padding: ${props => (props.padding ? props.padding : '4px 9px')};
-  background-color: #000;
+  background-color: ${props => props.theme.colors.gray_2};
   border: ${props => props.border};
   color: ${props => props.color};
   font-size: ${props => (props.size ? props.size : props.theme.fontSizes.maxSmall)};
