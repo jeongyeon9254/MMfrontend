@@ -12,7 +12,7 @@ import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
 import SampleMapContainer from '../modules/Main/SampleMapContainer';
-import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import MapCategoryNav from '../modules/Main/MapCategoryNav';
 
 const Sample = () => {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const Sample = () => {
             서울 종로구
           </Button>
         </LocationBox>
-        <MapKategorieNav sample userInfo={userInfo} />
+        <MapCategoryNav sample userInfo={userInfo} />
       </div>
       <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
       <div onClick={needLogin}>

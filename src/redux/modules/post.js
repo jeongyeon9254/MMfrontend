@@ -7,13 +7,13 @@ import {
   addLike,
   addPost,
   editPost,
-  getKategoriPost,
+  getCategoryPost,
 } from '../../api/modules/post';
 import { addComment, deleteComment } from '../../api/modules/comment';
 
 const GET_POST = 'GET_POST';
-const GET_KATEGORI = 'GET_KATEGORI';
-const GET_KATEGORI_SCROLL = 'GET_KATEGORI_SCROLL';
+const GET_CATEGORY = 'GET_CATEGORY';
+const GET_CATEGORY_SCROLL = 'GET_CATEGORY_SCROLL';
 const GET_POST_SCROLL = 'GET_POST_SCROLL';
 const LOADING = 'LOADING';
 const GET_DETAIL = 'GET_DETAIL';
@@ -23,8 +23,8 @@ const RESET = 'RESET';
 
 const getPostList = createAction(GET_POST, (data, page) => ({ data, page }));
 const getPostList_Scroll = createAction(GET_POST_SCROLL, (data, page) => ({ data, page }));
-const getKategoriList = createAction(GET_KATEGORI, (data, page) => ({ data, page }));
-const getKategoriList_Scroll = createAction(GET_KATEGORI_SCROLL, (data, page) => ({ data, page }));
+const getCategoryList = createAction(GET_CATEGORY, (data, page) => ({ data, page }));
+const getCategoryList_Scroll = createAction(GET_CATEGORY_SCROLL, (data, page) => ({ data, page }));
 const loading = createAction(LOADING, data => ({ data }));
 const getPostDetail = createAction(GET_DETAIL, data => ({ data }));
 const addComments = createAction(ADD_COMMENT, data => ({ data }));
@@ -65,13 +65,13 @@ const getPostScrollDB = (page = null) => {
   };
 };
 
-const getKategoriDB = (interestId, page) => {
+const getCategoryDB = (interestId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
       dispatch(loading(true));
       dispatch(reset());
-      const data = await getKategoriPost(interestId, page);
-      dispatch(getKategoriList(data.data, page));
+      const data = await getCategoryPost(interestId, page);
+      dispatch(getCategoryList(data.data, page));
       dispatch(loading(false));
     } catch (err) {
       console.log(err);
@@ -79,11 +79,11 @@ const getKategoriDB = (interestId, page) => {
   };
 };
 
-const getKategorScrolliDB = (interestId, page) => {
+const getCategoryScrollDB = (interestId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const data = await getKategoriPost(interestId, page);
-      dispatch(getKategoriList_Scroll(data.data, page));
+      const data = await getCategoryPost(interestId, page);
+      dispatch(getCategoryList_Scroll(data.data, page));
     } catch (err) {
       console.log(err);
     }
@@ -194,13 +194,13 @@ export default handleActions(
         draft.postList.push(...action.payload.data);
         draft.page = action.payload.page + 1;
       }),
-    [GET_KATEGORI]: (state, action) =>
+    [GET_CATEGORY]: (state, action) =>
       produce(state, draft => {
         draft.postList = action.payload.data;
         draft.page = 0;
         draft.page = action.payload.page + 1;
       }),
-    [GET_KATEGORI_SCROLL]: (state, action) =>
+    [GET_CATEGORY_SCROLL]: (state, action) =>
       produce(state, draft => {
         draft.postList.push(...action.payload.data);
         draft.page = action.payload.page + 1;
@@ -241,9 +241,9 @@ const actionCreators = {
   addPostDB,
   editPostDB,
   reset,
-  getKategoriDB,
+  getCategoryDB,
   getPostScrollDB,
-  getKategorScrolliDB,
+  getCategoryScrollDB,
 };
 
 export { actionCreators };

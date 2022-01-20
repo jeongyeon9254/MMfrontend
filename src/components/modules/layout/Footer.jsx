@@ -33,7 +33,7 @@ const Footer = props => {
         <FooterBtn
           onClick={() => {
             history.push('/PostMain');
-            dispatch(mainActions.kategorieReset());
+            dispatch(mainActions.CategoryReset());
           }}
         >
           <img alt="커뮤니티" src={feed}></img>
