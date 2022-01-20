@@ -31,6 +31,7 @@ const getListDB = (data = null) => {
   return async function (dispatch, getState, { history }) {
     getMyinfoDB()
       .then(res => {
+        console.log(res.data);
         dispatch(getList(res.data));
       })
       .catch(err => {
@@ -39,10 +40,11 @@ const getListDB = (data = null) => {
   };
 };
 
-const getLocationDB = (locationId, InterestId) => {
+const getLocationDB = (locationId, locDetailId, InterestId) => {
   return async function (dispatch, getState, { history }) {
-    getLocationChemy(locationId, InterestId)
+    getLocationChemy(locationId, locDetailId, InterestId)
       .then(res => {
+        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {
@@ -63,9 +65,9 @@ const getGuestListDB = (data = null) => {
   };
 };
 
-const chemyListDB = locationID => {
+const chemyListDB = (locationId, locDetailId) => {
   return async function (dispatch, getState, { history }) {
-    getChemyDB(locationID)
+    getChemyDB(locationId, locDetailId)
       .then(res => {
         dispatch(chemyList(res.data));
       })

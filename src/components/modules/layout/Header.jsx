@@ -86,6 +86,19 @@ const Header = props => {
         <TiTle {...styles}>{children}</TiTle>
         {/* {chat ? <Search src={icon_search} /> : ''} */}
         {chat ? <Exit onClick={sendStop}>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
+        {main ? (
+          <MyLocation
+            onClick={() => {
+              dispatch(mainActions.getListDB());
+            }}
+          >
+            내 위치
+          </MyLocation>
+        ) : chat || myinfo ? (
+          ''
+        ) : (
+          <Null></Null>
+        )}
         {fast ? <Detail alt="재시도" src={icon_replay} onClick={_onClick}></Detail> : null}
         {myinfo ? (
           <LogOut onClick={_onClick}>
@@ -150,6 +163,12 @@ const Exit = styled.div`
   font-size: 14px;
   color: #4e4e4e;
   cursor: pointer;
+`;
+const MyLocation = styled.div`
+  font-size: 14px;
+  color: #4e4e4e;
+  cursor: pointer;
+  font-weight: 700;
 `;
 const Detail = styled.img`
   height: 24px;

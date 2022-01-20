@@ -9,18 +9,18 @@ export const getMyinfoDB = () => {
 };
 
 // 지역별 mbti 전체 get 기능
-export const getChemyDB = locationId => {
+export const getChemyDB = (locationId, locDetailId) => {
   return instance({
     method: 'get',
-    url: `/api/chemy/list/${locationId}`,
+    url: `/api/chemy/list/${locationId}/${locDetailId}`,
   });
 };
 
 // 지역별캐미 mbti 필터 get 기능
-export const getLocationChemy = (locationId, InterestId) => {
+export const getLocationChemy = (locationId, locDetailId, InterestId) => {
   return instance({
     method: 'get',
-    url: `/api/chemy/list/${locationId}/${InterestId}`,
+    url: `/api/chemy/list/${locationId}/${locDetailId}/${InterestId}`,
   });
 };
 

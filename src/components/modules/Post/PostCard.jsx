@@ -24,6 +24,8 @@ const PostCard = props => {
   const imgList = info.imageList;
   const time = info.createdAt.split(' ')[0].split('-');
 
+  console.log(info);
+
   return (
     <Grid>
       {/* 상단 정보창 */}
@@ -46,7 +48,8 @@ const PostCard = props => {
 
         <Grid gap="9px" justify="center" align="flex-end" width="60%">
           <LocalText>
-            <img alt="마커" src={icon_location}></img>서울특별시 {info.location}
+            <img alt="마커" src={icon_location}></img>
+            {info.location} {info.locDetail}
           </LocalText>
           <Tag mbti={info.mbti} padding="4px 10px" size="12px">
             {info.tag}
