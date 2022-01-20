@@ -109,6 +109,7 @@ const SwiperBox = styled.div`
 
 const NameText = styled.p`
   font-weight: 700;
+  color: ${props => props.theme.colors.gray_2};
   font-size: ${props => props.theme.fontSizes.xl};
 `;
 
@@ -129,6 +130,7 @@ const LocalText = styled.p`
 const Count = styled.p`
   font-weight: 500;
   font-size: ${props => props.theme.fontSizes.small};
+  color: ${props => props.theme.colors.gray_2};
   margin: 0px 0px 0px 4px;
 `;
 
@@ -137,6 +139,7 @@ const Text = styled.p`
   word-break: break-all;
   line-height: 1.5;
   font-weight: 500;
+  color: ${props => props.theme.colors.gray_2};
   font-size: ${props => props.theme.fontSizes.small};
 `;
 const PaginationBakc = styled.div`
@@ -150,6 +153,7 @@ const PaginationBakc = styled.div`
   opacity: 0.5;
   left: 50%;
   margin-left: -26.5px;
+  color: ${props => props.theme.colors.gray_2};
 `;
 
 export default PostCard;
