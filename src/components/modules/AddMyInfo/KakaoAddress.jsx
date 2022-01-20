@@ -67,19 +67,10 @@ const KakaoAddress = props => {
       }
     });
   };
-  const modalStyle = {
-    position: 'absolute',
-    top: 50,
-    left: '0px',
-    zIndex: '100',
-    border: '1px solid #d4c8c8',
-    overflow: 'hidden',
-    height: '450px',
-  };
 
   return (
-    <div style={{ width: '100%' }}>
-      <DaumPostcode style={modalStyle} onComplete={handleComplete} />;
+    <div>
+      <DaumPostcode onComplete={handleComplete} />
     </div>
   );
 };

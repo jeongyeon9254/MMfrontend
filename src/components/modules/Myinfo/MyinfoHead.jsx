@@ -27,8 +27,10 @@ function MyinfoHead(props) {
             </Grid>
             <Local>
               <Grid row gap="6px" align="center">
-                <img src={icon_location_w} alt="" />{' '}
-                <span>서울특별시 {userInfo.location ? userInfo.location : userInfo.location}</span>
+                <img src={icon_location_w} alt="" />
+                <span>
+                  {userInfo.location} {userInfo.locDetail}
+                </span>
               </Grid>
             </Local>
           </Grid>

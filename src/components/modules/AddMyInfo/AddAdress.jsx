@@ -56,15 +56,18 @@ const AddAdress = props => {
           >
             주소 찾기
           </Button>
+
           {Kakaoadr ? (
-            <KakaoAddress
-              setFull={setFull}
-              setLo={setLo}
-              setDe={setDe}
-              setX={setX}
-              setY={setY}
-              setKakaoadr={setKakaoadr}
-            />
+            <KakaoAdrBox>
+              <KakaoAddress
+                setFull={setFull}
+                setLo={setLo}
+                setDe={setDe}
+                setX={setX}
+                setY={setY}
+                setKakaoadr={setKakaoadr}
+              />
+            </KakaoAdrBox>
           ) : null}
         </Grid>
       </Grid>
@@ -106,6 +109,17 @@ const ShowPage = styled.div`
   &.open {
     left: 0px;
   }
+`;
+
+const KakaoAdrBox = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 61px;
+  z-index: 100;
+  border: 1px solid #d4c8c8;
+  overflow: hidden;
+  height: 450px;
+  width: 100%;
 `;
 
 export default AddAdress;
