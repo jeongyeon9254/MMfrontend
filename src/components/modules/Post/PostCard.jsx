@@ -24,8 +24,6 @@ const PostCard = props => {
   const imgList = info.imageList;
   const time = info.createdAt.split(' ')[0].split('-');
 
-  console.log(info);
-
   return (
     <Grid>
       {/* 상단 정보창 */}

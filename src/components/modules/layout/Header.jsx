@@ -35,6 +35,7 @@ const Header = props => {
     Page,
     sendStop,
     deleteChatroomAction,
+    setMyInfo,
   } = props;
 
   const styles = {
@@ -108,6 +109,16 @@ const Header = props => {
         ) : (
           ''
         )}
+        {main ? (
+          <MyLocation
+            onClick={() => {
+              dispatch(mainActions.getMyListDB());
+              setMyInfo();
+            }}
+          >
+            내 위치
+          </MyLocation>
+        ) : null}
         {detail ? (
           name === defaultName ? (
             <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail>
@@ -175,6 +186,12 @@ const LogOut = styled.div`
   color: #999;
   cursor: pointer;
   line-height: 24px;
+`;
+const MyLocation = styled.div`
+  font-size: 14px;
+  color: #4e4e4e;
+  cursor: pointer;
+  font-weight: 700;
 `;
 
 export default Header;

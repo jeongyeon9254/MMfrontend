@@ -42,6 +42,7 @@ const Main = () => {
   const [bigLocationList, setBigLocationList] = useState(false); // 로케이션 모달창 관리
   const [locationList, setLocationList] = useState(false); // 로케이션 모달창 관리
   const [loading, setLoading] = useState(false); // 빠른매칭 스피너 로딩
+
   const onLocation = () => {
     if (locationList === false) setLocationList(true);
     if (locationList === true) setLocationList(false);
@@ -60,8 +61,8 @@ const Main = () => {
   };
 
   // 로케이션 정보
-  const [bigLocation, setBigLocation] = useState(userInfo.location);
-  const [location, setLocation] = useState(userInfo.locDetail);
+  const [bigLocation, setBigLocation] = useState('지역을');
+  const [location, setLocation] = useState('선택해주세요');
 
   // 맵리스트 모달창 관리
   const [modal, setModal] = useState(false);
@@ -76,6 +77,13 @@ const Main = () => {
   React.useEffect(() => {
     dispatch(mainActions.getListDB());
   }, []);
+
+  const setMyInfo = () => {
+    setBigNum(userLocation + 1);
+    setSmallNum(userDetailLocation + 1);
+    setBigLocation('지역을');
+    setLocation('선택해주세요');
+  };
 
   // 알럿창 관리
   const [Alt, setAlt] = useState(false);
@@ -98,7 +106,9 @@ const Main = () => {
           </Grid>
         </Alert>
       ) : null}
-      <Header main>메인화면</Header>
+      <Header main setMyInfo={setMyInfo}>
+        메인화면
+      </Header>
 
       {/* 지역 선택 버튼 */}
       <LocationBox>

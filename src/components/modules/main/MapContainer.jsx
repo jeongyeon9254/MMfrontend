@@ -7,20 +7,26 @@ import icon_marker_2 from '../../../img/Icon/icon_marker_2.svg';
 import icon_marker_1 from '../../../img/Icon/icon_marker_1.svg';
 import Bit from '../Bit';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 const { kakao } = window;
 
 const MapContainer = props => {
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const myInfo = useSelector(state => state.main.myInfo);
   const { onModal, bigLocation, location } = props;
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
   });
 
   // kakao map 함수를 가지고 있음
   const [move, setMove] = useState(null);
+
   // 마커 생성 및 삭제용
   const [maker, setMaker] = useState(null);
   const [makers, setMakers] = useState(null);
+
   // 원 생성 및 삭제
   const [circles, setCircles] = useState(null);
 
@@ -68,6 +74,7 @@ const MapContainer = props => {
       fillOpacity: 0.7,
     });
     setCircles(circle);
+
     // 지도에 원을 표시합니다
     circle.setMap(map);
   }, []);
@@ -153,6 +160,23 @@ const MapContainer = props => {
     // 지도 축소
     move.setLevel(7);
   }, [location]);
+
+  // 내 위치 클릭시 위치 이동
+  useEffect(() => {
+    if (myInfo) {
+      maker.setMap(move);
+      circles.setMap(move);
+
+      let moveLatLon = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
+      move.setCenter(moveLatLon);
+      move.setLevel(7);
+
+      if (makers === null) {
+        return;
+      }
+      makers.setMap(null);
+    }
+  }, [myInfo]);
 
   return (
     <React.Fragment>
