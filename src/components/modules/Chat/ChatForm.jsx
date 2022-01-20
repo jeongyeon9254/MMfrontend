@@ -41,7 +41,7 @@ const ChatForm = props => {
     }
   };
   const InfiniteStairs = () => {
-    if (roomId) {
+    if (loading) {
       if (nowNum < total) {
         if (scrollRef.current.scrollTop === 0) {
           dispatch(ChatAction.getChatMsListDB(roomId, page));
@@ -51,10 +51,12 @@ const ChatForm = props => {
     }
   };
   const changeNum = () => {
-    if (page > 0) {
-      const Num = `${page - 1}`;
-      const children = BoxRef.current[Num];
-      SetChildTop(children.clientHeight);
+    if (loading) {
+      if (page > 0) {
+        const Num = `${page - 1}`;
+        const children = BoxRef.current[Num];
+        SetChildTop(children.clientHeight);
+      }
     }
   };
 

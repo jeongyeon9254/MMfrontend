@@ -7,9 +7,6 @@ import { returnTime } from '../../../shared/Time';
 function PartyOther(props) {
   const { children, data } = props;
   const { senderImg, senderId } = props.data;
-
-  const diffTime = returnTime(data.date);
-  console.log(diffTime);
   return (
     <Grid
       row

@@ -97,7 +97,9 @@ const FeedbackBtn = styled.div`
   transition: all ease 0.3s;
   background-color: #fff;
   &:hover {
-    background-color: red;
+    background-color: #7860b3;
+    color: #fff;
+    border: 2px solid #fff;
   }
 `;
 
