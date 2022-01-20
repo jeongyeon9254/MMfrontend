@@ -37,7 +37,7 @@ const MapContainer = props => {
     const container = document.getElementById('map');
 
     const options = {
-      center: new window.kakao.maps.LatLng(userInfo.longitude, userInfo.latitude),
+      center: new window.kakao.maps.LatLng(userInfo.latitude, userInfo.longitude),
       level: 7,
     };
 
@@ -49,7 +49,7 @@ const MapContainer = props => {
     const imageSize = new kakao.maps.Size(64, 69);
     const imageOption = { offset: new kakao.maps.Point(30, 50) };
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    const markerPosition = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
+    const markerPosition = new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude);
 
     // 마커를 생성
     const marker = new kakao.maps.Marker({
@@ -64,13 +64,13 @@ const MapContainer = props => {
 
     // 폴리라인 생성
     const circle = new kakao.maps.Circle({
-      center: new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude),
+      center: new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude),
       radius: 2200,
       strokeWeight: 3,
-      strokeColor: MyBit.color,
+      strokeColor: 'rgba(255, 205, 253, 0.8)',
       strokeOpacity: 1,
       strokeStyle: 'line',
-      fillColor: MyBit.color,
+      fillColor: 'rgba(255, 205, 253, 0.3)',
       fillOpacity: 0.7,
     });
     setCircles(circle);
@@ -167,7 +167,7 @@ const MapContainer = props => {
       maker.setMap(move);
       circles.setMap(move);
 
-      let moveLatLon = new kakao.maps.LatLng(userInfo.longitude, userInfo.latitude);
+      let moveLatLon = new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude);
       move.setCenter(moveLatLon);
       move.setLevel(7);
 
