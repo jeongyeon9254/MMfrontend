@@ -6,7 +6,7 @@ import AddIntro from './AddIntro';
 import { InterestList } from './needData';
 
 const AddInterest = props => {
-  const { file, local, mbti, show, Control } = props;
+  const { file, data, mbti, show, Control } = props;
 
   const [Open, setOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const AddInterest = props => {
     <ShowPage className={show ? 'open' : ''}>
       <AddIntro
         file={file}
-        local={local}
+        data={data}
         mbti={mbti}
         show={Open}
         duplicated={duplicated}

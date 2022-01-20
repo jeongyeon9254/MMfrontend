@@ -10,10 +10,10 @@ export const getPost = page => {
 };
 
 // 포스트페이지 무한스크롤 기능
-export const getKategoriPost = (interestId, page) => {
+export const getCategoryPost = (interestId, page) => {
   return instance({
     method: 'get',
-    url: `/api/post/interest/${interestId}?page=${page}&size=4`,
+    url: `/api/post/interest/${interestId}?page=${page}&size=5`,
   });
 };
 

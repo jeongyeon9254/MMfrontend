@@ -12,7 +12,7 @@ import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
 import MapList from '../modules/Main/MapList.jsx';
 import SampleMapContainer from '../modules/Main/SampleMapContainer';
-import MapKategorieNav from '../modules/Main/MapKategorieNav';
+import MapCategoryNav from '../modules/Main/MapCategoryNav';
 
 const Sample = () => {
   const dispatch = useDispatch();
@@ -46,23 +46,23 @@ const Sample = () => {
 
   return (
     <React.Fragment>
-      <Header main>둘러보기</Header>
-      <LocationBox>
-        <Button BtnTag _onClick={needLogin}>
-          서울 특별시 {locationInfo.gps}
-        </Button>
-      </LocationBox>
       <div onClick={needLogin}>
-        <MapKategorieNav sample userInfo={userInfo} />
+        <Header main>둘러보기</Header>
+        <LocationBox>
+          <Button BtnTag _onClick={needLogin}>
+            서울 종로구
+          </Button>
+        </LocationBox>
+        <MapCategoryNav sample userInfo={userInfo} />
       </div>
       <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
-      <CenterBtn>
-        <Button BtnRound width="87px" _onClick={needLogin}>
-          자동매칭
-        </Button>
-      </CenterBtn>
-      <MapList sample modal={modal} outModal={outModal} />
       <div onClick={needLogin}>
+        <CenterBtn>
+          <Button BtnRound width="87px" _onClick={needLogin}>
+            자동매칭
+          </Button>
+        </CenterBtn>
+        {/* {modal ? <MapList sample outModal={outModal} /> : null} */}
         <Footer />
       </div>
     </React.Fragment>

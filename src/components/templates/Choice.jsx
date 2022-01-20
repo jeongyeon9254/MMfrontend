@@ -25,8 +25,6 @@ const Choice = () => {
   const [Paging, setPaging] = React.useState(false);
   const [Data, setData] = React.useState({});
 
-  console.log(SendList, ReceiveList);
-
   const ListHeadClick = () => {
     setPaging(!Paging);
     setData({});

@@ -4,18 +4,20 @@ import { produce } from 'immer';
 import { getMyinfoDB, getChemyDB, getGuestDB, getLocationChemy } from '../../api/modules/chemy';
 
 const GET_LIST = 'GET_LIST';
+const GET_MYLIST = 'GET_MYLIST';
 const GET_GUEST = 'GET_GUEST';
 const CHEMY_LIST = 'CHEMY_LIST';
 const RESET = 'RESET';
-const SET_KATEGORIE = 'SET_KATEGORIE';
-const RESET_KATEGORIE = 'RESET_KATEGORIE';
+const SET_CATEGORY = 'SET_CATEGORY';
+const RESET_CATEGORY = 'RESET_CATEGORY';
 
 const getList = createAction(GET_LIST, data => ({ data }));
+const getMyList = createAction(GET_MYLIST, data => ({ data }));
 const getGuestList = createAction(GET_GUEST, data => ({ data }));
 const chemyList = createAction(CHEMY_LIST, data => ({ data }));
 const reset = createAction(RESET, () => ({}));
-const setKategorie = createAction(SET_KATEGORIE, name => ({ name }));
-const kategorieReset = createAction(RESET_KATEGORIE, () => ({}));
+const setCategory = createAction(SET_CATEGORY, name => ({ name }));
+const CategoryReset = createAction(RESET_CATEGORY, () => ({}));
 
 const initialState = {
   list: {
@@ -24,13 +26,15 @@ const initialState = {
     lng: null,
     result: [],
   },
-  kategorie: null,
+  Category: null,
+  myInfo: false,
 };
 
-const getListDB = (data = null) => {
+const getListDB = () => {
   return async function (dispatch, getState, { history }) {
     getMyinfoDB()
       .then(res => {
+        console.log(res.data);
         dispatch(getList(res.data));
       })
       .catch(err => {
@@ -39,10 +43,24 @@ const getListDB = (data = null) => {
   };
 };
 
-const getLocationDB = (locationId, InterestId) => {
+const getMyListDB = () => {
   return async function (dispatch, getState, { history }) {
-    getLocationChemy(locationId, InterestId)
+    getMyinfoDB()
       .then(res => {
+        console.log(res.data);
+        dispatch(getMyList(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+const getLocationDB = (locationId, locDetailId, InterestId) => {
+  return async function (dispatch, getState, { history }) {
+    getLocationChemy(locationId, locDetailId, InterestId)
+      .then(res => {
+        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {
@@ -51,10 +69,11 @@ const getLocationDB = (locationId, InterestId) => {
   };
 };
 
-const getGuestListDB = (data = null) => {
+const getGuestListDB = () => {
   return async function (dispatch, getState, { history }) {
     getGuestDB()
       .then(res => {
+        console.log(res.data);
         dispatch(getGuestList(res.data));
       })
       .catch(err => {
@@ -63,10 +82,11 @@ const getGuestListDB = (data = null) => {
   };
 };
 
-const chemyListDB = locationID => {
+const chemyListDB = (locationId, locDetailId) => {
   return async function (dispatch, getState, { history }) {
-    getChemyDB(locationID)
+    getChemyDB(locationId, locDetailId)
       .then(res => {
+        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {
@@ -81,12 +101,19 @@ export default handleActions(
       produce(state, draft => {
         const data = action.payload.data;
         draft.list.result = data.userList;
+        draft.myInfo = false;
+      }),
+    [GET_MYLIST]: (state, action) =>
+      produce(state, draft => {
+        const data = action.payload.data;
+        draft.list.result = data.userList;
+        draft.myInfo = true;
       }),
     [GET_GUEST]: (state, action) =>
       produce(state, draft => {
         const data = action.payload.data;
 
-        draft.list.result = data.userList;
+        draft.list.result = [...data.userList];
 
         draft.list.gps = data.location;
         draft.list.lat = data.latitude;
@@ -100,6 +127,7 @@ export default handleActions(
         draft.list.gps = data.location;
         draft.list.lat = data.latitude;
         draft.list.lng = data.longitude;
+        draft.myInfo = false;
       }),
     [RESET]: (state, action) =>
       produce(state, draft => {
@@ -107,14 +135,15 @@ export default handleActions(
         draft.list.gps = null;
         draft.list.lat = null;
         draft.list.lng = null;
+        draft.myInfo = false;
       }),
-    [SET_KATEGORIE]: (state, action) =>
+    [SET_CATEGORY]: (state, action) =>
       produce(state, draft => {
-        draft.kategorie = action.payload.name;
+        draft.Category = action.payload.name;
       }),
-    [RESET_KATEGORIE]: (state, action) =>
+    [RESET_CATEGORY]: (state, action) =>
       produce(state, draft => {
-        draft.kategorie = null;
+        draft.Category = null;
       }),
   },
   initialState,
@@ -125,10 +154,11 @@ const actionCreators = {
   getList,
   chemyListDB,
   reset,
-  setKategorie,
-  kategorieReset,
+  setCategory,
+  CategoryReset,
   getGuestListDB,
   getLocationDB,
+  getMyListDB,
 };
 
 export { actionCreators };

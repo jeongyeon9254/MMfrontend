@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // component
 import { Button, Grid } from '../../element/index';
 
-const SetKategori = props => {
+const SetCategory = props => {
   // props관리
   const { tag, changeTag } = props;
 
@@ -39,4 +39,4 @@ const Title = styled.h3`
   margin-bottom: 15px;
 `;
 
-export default SetKategori;
+export default SetCategory;
