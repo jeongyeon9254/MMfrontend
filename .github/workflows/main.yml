@@ -1,11 +1,10 @@
  name: Deploy to Production
+ on:
+   push:
+     branches:
+       - main
 
-    on:
-      push:
-        branches:
-          - main
-
-    jobs:
+ jobs:
       deploy:
         name: Build, Deploy to S3 bucket
         runs-on: [ubuntu-latest]
