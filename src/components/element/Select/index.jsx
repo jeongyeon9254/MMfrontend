@@ -4,9 +4,9 @@ import { Grid } from '../../element';
 import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
 import { gpsLsit } from '../../modules/Main/gpsList';
 function Select(props) {
-  const { width, Emit, Data, Area, height, padding, high, fontsize, defult } = props;
+  const { width, Emit, Data, Area, height, padding, high, fontsize, commend } = props;
 
-  const [active, SetActive] = React.useState(defult);
+  const [active, SetActive] = React.useState(commend);
   const [OnOff, SetOnOff] = React.useState(false);
 
   const styles = {
@@ -73,7 +73,7 @@ Select.defaultProps = {
   Emit: e => {
     console.log(e);
   },
-  defult: '',
+  commend: '',
 };
 const Frame = styled.div`
   position: relative;

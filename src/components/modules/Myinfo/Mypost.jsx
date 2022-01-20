@@ -20,9 +20,10 @@ function Mypost() {
   const ClickDetail = postId => {
     history.push(`postMain/${postId}`);
   };
+  console.log(postings.length);
   return (
     <MypostPage>
-      {postings ? (
+      {postings.length !== 0 ? (
         <Swiper slidesPerView={3.3} spaceBetween={3} className="scroll-container">
           {postings.map((x, idx) => {
             return (

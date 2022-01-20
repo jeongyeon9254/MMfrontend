@@ -6,14 +6,14 @@ import { Input, Grid } from '../../element/index';
 
 const SetText = props => {
   // props관리
-  const { text, changeText, edifText } = props;
+  const { text, changeText, editText } = props;
 
   return (
     <Grid>
       <Title>내용 작성하기</Title>
       <Input
         _onChange={changeText}
-        _defaultValue={edifText ? edifText : null}
+        _defaultValue={editText ? editText : null}
         _type="posting"
       ></Input>
       <Limit>

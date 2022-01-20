@@ -13,6 +13,7 @@ const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const ADD_CHATTING = 'ADD_CHATTING';
 const Delet_CHAT = 'Delet_CHAT';
+const Delet_RoomLIST = 'Delet_RoomLIST';
 const LOADING_CHAT = 'LOADING_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
 
@@ -21,6 +22,7 @@ const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
+const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
 const resetList = createAction(RESET_CHAT, () => ({}));
 const LoadingList = createAction(LOADING_CHAT, () => ({}));
 
@@ -94,7 +96,7 @@ const PostChatting = req => {
 const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
-    // history.push('/');
+    dispatch(DeletRoomList(roomId));
   };
 };
 
@@ -126,6 +128,14 @@ export default handleActions(
     [Delet_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.List = [];
+      }),
+    [Delet_RoomLIST]: (state, action) =>
+      produce(state, draft => {
+        const { roomId } = action.payload;
+        const putList = state.Room.filter(x => {
+          return x.roomId !== roomId;
+        });
+        draft.Room = putList;
       }),
     [LOADING_CHAT]: (state, action) =>
       produce(state, draft => {

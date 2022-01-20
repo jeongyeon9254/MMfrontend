@@ -25,11 +25,11 @@ const MapKategorieNav = props => {
   const location = props.userInfo.location;
   const setKate = props.setKate;
 
-  // gps ID를 찾습니다
-  const gpsIndex = gpsLsit.findIndex(x => {
-    return x.location === location;
-  });
-  const gpsId = props.gpsId ? props.gpsId : gpsIndex + 1;
+  // // gps ID를 찾습니다
+  // const gpsIndex = gpsLsit.findIndex(x => {
+  //   return x.location === location;
+  // });
+  // const gpsId = props.gpsId ? props.gpsId : gpsIndex + 1;
 
   // nav 리스트 목록
   const navList = ['전체보기', '운동', '공부', '대화', '제테크', '게임', '기타'];
@@ -103,7 +103,7 @@ const MapKategorieNav = props => {
                   state={active === index ? 'active' : false}
                   _onClick={e => {
                     setActive(index);
-                    dispatch(mainActions.chemyListDB(gpsId));
+                    // dispatch(mainActions.chemyListDB(gpsId));
                   }}
                 >
                   <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
@@ -115,7 +115,7 @@ const MapKategorieNav = props => {
                   state={active === index ? 'active' : false}
                   _onClick={e => {
                     setActive(index);
-                    dispatch(mainActions.getLocationDB(gpsId, index));
+                    // dispatch(mainActions.getLocationDB(gpsId, index));
                   }}
                 >
                   {list === '전체보기' ? (

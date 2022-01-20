@@ -6,7 +6,8 @@ import PartyInput from './PartyInput';
 import Announcement from './Announcement';
 import ChatEmoticon from './ChatEmoticon';
 import ChatPreview from './ChatPreview';
-import Skeleton from './Skeleton';
+import ChatRoomLast from './ChatRoomLast';
+import SkeletonChat from './Skeleton';
 
 export {
   ChatForm,
@@ -16,6 +17,7 @@ export {
   PartyInput,
   Announcement,
   ChatEmoticon,
-  Skeleton,
+  SkeletonChat,
   ChatPreview,
+  ChatRoomLast,
 };
