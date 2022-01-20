@@ -46,23 +46,23 @@ const Sample = () => {
 
   return (
     <React.Fragment>
-      <Header main>둘러보기</Header>
-      <LocationBox>
-        <Button BtnTag _onClick={needLogin}>
-          서울 특별시 {locationInfo.gps}
-        </Button>
-      </LocationBox>
       <div onClick={needLogin}>
+        <Header main>둘러보기</Header>
+        <LocationBox>
+          <Button BtnTag _onClick={needLogin}>
+            서울 종로구
+          </Button>
+        </LocationBox>
         <MapKategorieNav sample userInfo={userInfo} />
       </div>
       <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
-      <CenterBtn>
-        <Button BtnRound width="87px" _onClick={needLogin}>
-          자동매칭
-        </Button>
-      </CenterBtn>
-      <MapList sample modal={modal} outModal={outModal} />
       <div onClick={needLogin}>
+        <CenterBtn>
+          <Button BtnRound width="87px" _onClick={needLogin}>
+            자동매칭
+          </Button>
+        </CenterBtn>
+        {/* {modal ? <MapList sample outModal={outModal} /> : null} */}
         <Footer />
       </div>
     </React.Fragment>
