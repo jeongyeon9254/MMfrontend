@@ -18,6 +18,7 @@ const ChatForm = props => {
   const loading = useSelector(state => state.chat.listloading);
   const total = useSelector(state => state.chat.total);
   const page = useSelector(state => state.chat.page);
+  const nowNum = useSelector(state => state.chat.now);
   const scrollRef = React.useRef(null);
   const BoxRef = React.useRef({});
   const [On, SetOn] = React.useState(false);
@@ -41,7 +42,7 @@ const ChatForm = props => {
   };
   const InfiniteStairs = () => {
     if (roomId) {
-      if (Chatting.length <= total) {
+      if (nowNum < total) {
         if (scrollRef.current.scrollTop === 0) {
           dispatch(ChatAction.getChatMsListDB(roomId, page));
           console.log('By');
@@ -57,13 +58,18 @@ const ChatForm = props => {
     }
   };
 
+  const ScrollAction = top => {
+    console.log(top);
+    scrollRef.current.scrollTo({ top: top, left: 0, behavior: 'auto' });
+  };
+
   React.useEffect(() => {
     changeNum();
   }, [Chatting.length]);
 
   React.useEffect(() => {
-    scrollRef.current.scrollTo({ top: ChildTop, left: 0, behavior: 'smooth' });
-  }, [ChildTop]);
+    ScrollAction(ChildTop);
+  }, [ChildTop, Chatting.length]);
 
   React.useEffect(() => {
     Emit(scrollRef);
@@ -101,7 +107,7 @@ const ChatForm = props => {
                 return (
                   <Grid
                     gap="19px"
-                    padding="19px 30px"
+                    padding="19px 30px 0px"
                     key={index}
                     _ref={ref => (BoxRef.current[index] = ref)}
                   >
@@ -151,7 +157,7 @@ const ScrollBox = styled.div`
     background-color: #fff;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #999;
+    background-color: #d8d8d8;
     border-radius: 30px;
   }
   ::-webkit-scrollbar-button:start:decrement,

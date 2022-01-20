@@ -19,12 +19,14 @@ const MS_RESET = 'MS_RESET';
 const LOADING_CHAT = 'LOADING_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
 const ToTalNum = 'ToTalNum';
+const NowNum = 'NowNum';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
 const total_number = createAction(ToTalNum, num => ({ num }));
+const now_number = createAction(NowNum, num => ({ num }));
 
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
@@ -40,6 +42,7 @@ const initialState = {
   listloading: false,
   page: 0,
   total: 0,
+  now: 0,
 };
 
 // 채팅방 만들기
@@ -74,8 +77,11 @@ const getRecentlyMsListDB = (roomId, page) => {
     try {
       console.log('// 첫 채팅 목록 가지고 오기');
       const res = await getChatMsList(roomId, page);
+      console.log(res);
       dispatch(LoadChatting(res.data, page));
       dispatch(ms_loadingList());
+      dispatch(total_number(res.data[0].totalMessage));
+      dispatch(now_number(res.data.length));
     } catch (e) {
       console.log(e);
     }
@@ -91,7 +97,7 @@ const getChatMsListDB = (roomId, page) => {
       console.log(res);
       dispatch(AddChatting(res.data, page));
       dispatch(ms_loadingList());
-      dispatch(total_number(res.data[0].totalnumber));
+      dispatch(now_number(res.data.length));
     } catch (e) {
       console.log(e);
     }
@@ -142,6 +148,11 @@ export default handleActions(
         const { num } = action.payload;
         draft.total = num;
       }),
+    [NowNum]: (state, action) =>
+      produce(state, draft => {
+        const { num } = action.payload;
+        draft.now = state.now + num;
+      }),
     [Delet_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.List = [];
@@ -166,6 +177,8 @@ export default handleActions(
       produce(state, draft => {
         draft.listloading = false;
         draft.List = [{}];
+        draft.now = 0;
+        draft.total = 0;
       }),
     [RESET_CHAT]: (state, action) =>
       produce(state, draft => {
