@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Js
 import { useDispatch } from 'react-redux';
-import { gpsLsit } from '../../modules/Main/gpsList';
+import { bigGpsList, smallGpsList } from '../../modules/Main/gpsList';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
 
 // component
@@ -13,30 +13,69 @@ const MainModal = props => {
   const dispatch = useDispatch();
 
   // props
-  const { outLocation, setLocation, setGpsId } = props;
+  const { outLocation, setLocation, bigLocation, setBigLocation, outBigLocation, big } = props;
 
   // 모달창 해제
   const outModal = () => {
     outLocation();
   };
+  const outBigModal = () => {
+    outBigLocation();
+  };
+
+  const list = smallGpsList.filter(x => {
+    return x.name === bigLocation;
+  });
+
+  if (big) {
+    return (
+      <React.Fragment>
+        <Modal>
+          <div className="inner">
+            {bigGpsList.map((list, idx) => {
+              return (
+                <Button
+                  _onClick={() => {
+                    setBigLocation(list);
+                    setLocation('시-군-구');
+                    outBigModal();
+                    // dispatch(mainActions.chemyListDB(idx + 1));
+                    // setGpsId(idx + 1);
+                    //지역 get 요청
+                  }}
+                  key={idx}
+                >
+                  {list}
+                </Button>
+              );
+            })}
+          </div>
+        </Modal>
+      </React.Fragment>
+    );
+  }
 
   return (
     <React.Fragment>
       <Modal>
         <div className="inner">
-          {gpsLsit.map((list, idx) => {
+          {list.map((list, idx) => {
             return (
               <Button
                 _onClick={() => {
-                  setLocation(list.location);
+                  setLocation(list.gps);
                   outModal();
-                  dispatch(mainActions.chemyListDB(idx + 1));
-                  setGpsId(idx + 1);
+                  const num = smallGpsList.findIndex(x => {
+                    return x.gps === list.gps;
+                  });
+                  console.log(num + 1);
+                  // dispatch(mainActions.chemyListDB(idx + 1));
+                  // setGpsId(idx + 1);
                   //지역 get 요청
                 }}
                 key={idx}
               >
-                {list.location}
+                {list.gps}
               </Button>
             );
           })}
@@ -55,7 +94,7 @@ const Modal = styled.div`
   background-color: ${props => props.theme.colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  top: 200px;
+  top: 210px;
   padding: 10px 20px;
   z-index: 1;
   animation: modal-show 0.3s;
@@ -85,7 +124,7 @@ const Modal = styled.div`
     font-size: ${props => props.theme.fontSizes.lg};
   }
   @media only screen and (max-width: 1050px) {
-    top: 160px;
+    top: 170px;
   }
 `;
 

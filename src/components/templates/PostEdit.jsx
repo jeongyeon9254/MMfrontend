@@ -21,7 +21,7 @@ const PostEdit = props => {
 
   // 유저 정보를 가져옵니다
   const info = useSelector(state => state.post.detail);
-  const edifText = info.content;
+  const editText = info.content;
 
   // 알럿창 관리
   const [textAlt, setTextAlt] = useState(false);
@@ -74,7 +74,7 @@ const PostEdit = props => {
         <SetKategori tag={tag} changeTag={changeTag} />
 
         {/* 글 작성 */}
-        <SetText text={text} edifText={edifText} changeText={changeText} />
+        <SetText text={text} editText={editText} changeText={changeText} />
 
         {/* 수정하기 버튼 */}
         <Button _onClick={editPost} BtnBottom width="85%">

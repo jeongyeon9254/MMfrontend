@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import Header from '../layout/Header';
-import { Grid } from '../../element';
+import { Grid, Image } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
@@ -18,7 +18,7 @@ const ChatForm = props => {
   const loading = useSelector(state => state.chat.loading);
   const page = useSelector(state => state.chat.page);
   const [height, setHeight] = React.useState(null);
-
+  const scrollRef = React.useRef();
   const [On, SetOn] = React.useState(false);
 
   //스크롤 엑션
@@ -28,24 +28,27 @@ const ChatForm = props => {
     }
   };
 
-  const scrollRef = React.useCallback(x => {
-    if (x !== null) {
-      setHeight(x.getBoundingClientRect().height);
-    }
-  });
-
-  console.log(height);
-
-  // const InfinitesScrolling = () => {
-  //   if (roomId) {
-  //     if (scrollRef.current.scrollTop <= Height) {
-  //       dispatch(ChatAction.getChatMsListDB(roomId, page));
-  //       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  //     }
+  // const scrollRef = React.useCallback(x => {
+  //   if (x !== null) {
+  //     setHeight(x.getBoundingClientRect().height);
   //   }
-  // };
+  // });
+
+  const InfinitesScrolling = () => {
+    if (roomId) {
+      if (scrollRef.current.scrollTop <= 0) {
+        dispatch(ChatAction.getChatMsListDB(roomId, page));
+      }
+    }
+  };
+
   const deleteChatroomAction = () => {
-    dispatch(ChatAction.deleteChatroomDB(roomId));
+    try {
+      dispatch(ChatAction.deleteChatroomDB(roomId));
+      _onClick();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   React.useEffect(() => {
@@ -75,7 +78,7 @@ const ChatForm = props => {
       <ScrollBox
         id="ScrollBox"
         ref={scrollRef}
-        // onScroll={InfinitesScrolling}
+        onScroll={InfinitesScrolling}
         className={On ? 'on' : ''}
       >
         <Grid gap="19px" padding="19px 30px">
@@ -100,14 +103,17 @@ const ChatForm = props => {
                   case 'EMO':
                     return x.senderName === userInfo.username ? (
                       <EmoticonImgBox key={idx}>
-                        <Grid row justify="end">
+                        <Grid row justify="end" align="end" gap="10px">
+                          <Date>{x.date}</Date>
                           <img src={x.message} alt="이모티콘" />
                         </Grid>
                       </EmoticonImgBox>
                     ) : (
                       <EmoticonImgBox key={idx}>
-                        <Grid row>
+                        <Grid row align="end" gap="10px">
+                          <Image round src={x.senderImg} width="40px" margin="0" />
                           <img src={x.message} alt="이모티콘" />
+                          <Date>{x.date}</Date>
                         </Grid>
                       </EmoticonImgBox>
                     );
@@ -150,7 +156,10 @@ const ScrollBox = styled.div`
     height: 54%;
   }
 `;
-
+const Date = styled.p`
+  font-size: 9px;
+  color: #9b9b9b;
+`;
 const EmoticonImgBox = styled.div`
   height: 100px;
   img {

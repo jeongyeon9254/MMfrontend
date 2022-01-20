@@ -26,7 +26,7 @@ function MyLocation(props) {
         padding="5px 10px 5px 17px"
         fontsize="14px"
         high="36px"
-        defult={Location}
+        default={Location}
         Emit={LocationFuc}
       ></Select>
     </Grid>
