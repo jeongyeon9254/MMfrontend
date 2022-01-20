@@ -8,7 +8,6 @@ window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-
 export const ImgBg = styled.div`
   background-image: url(${Phone});
   background-repeat: no-repeat;
@@ -19,8 +18,9 @@ export const ImgBg = styled.div`
   position: absolute;
   left: 58%;
   top: 54%;
-  overflow: hidden;
   margin: -429px 0 0 -213px;
+  z-index: 99;
+  overflow: hidden;
   @media only screen and (max-width: 1050px) {
     left: 50%;
     top: 50%;
@@ -76,5 +76,15 @@ export const ContainerStyle = styled.div`
     height: calc(var(--vh, 1vh) * 100);
     transform: none;
     border-radius: 0px;
+  }
+`;
+
+export const BgImg = styled.img`
+  position: absolute;
+  left: 57%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  @media only screen and (max-width: 1050px) {
+    display: none;
   }
 `;

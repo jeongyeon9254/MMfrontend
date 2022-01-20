@@ -5,40 +5,29 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import Header from '../layout/Header';
 import { Grid, Image } from '../../element';
 import { useSelector } from 'react-redux';
-import { PartyOther, PartyMe, PartyInput } from './index';
+import { PartyInput, ChatListform } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 
 const ChatForm = props => {
   const dispatch = useDispatch();
-  const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop } = props;
-  const { guestNick, guestMbti, roomId } = props.data;
+  const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop, Emit } = props;
+  const { guestNick, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
-  const loading = useSelector(state => state.chat.loading);
+  const loading = useSelector(state => state.chat.listloading);
+  const total = useSelector(state => state.chat.total);
   const page = useSelector(state => state.chat.page);
-  const [height, setHeight] = React.useState(null);
-  const scrollRef = React.useRef();
+  const scrollRef = React.useRef(null);
+  const BoxRef = React.useRef({});
   const [On, SetOn] = React.useState(false);
+  const [ChildTop, SetChildTop] = React.useState('');
 
+  console.log(BoxRef);
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  };
-
-  // const scrollRef = React.useCallback(x => {
-  //   if (x !== null) {
-  //     setHeight(x.getBoundingClientRect().height);
-  //   }
-  // });
-
-  const InfinitesScrolling = () => {
-    if (roomId) {
-      if (scrollRef.current.scrollTop <= 0) {
-        dispatch(ChatAction.getChatMsListDB(roomId, page));
-      }
     }
   };
 
@@ -50,10 +39,35 @@ const ChatForm = props => {
       console.log(e);
     }
   };
+  const InfiniteStairs = () => {
+    if (roomId) {
+      if (Chatting.length <= total) {
+        if (scrollRef.current.scrollTop === 0) {
+          dispatch(ChatAction.getChatMsListDB(roomId, page));
+          console.log('By');
+        }
+      }
+    }
+  };
+  const changeNum = () => {
+    if (page > 0) {
+      const Num = `${page - 1}`;
+      const children = BoxRef.current[Num];
+      SetChildTop(children.clientHeight);
+    }
+  };
 
   React.useEffect(() => {
-    scrollTomBottom();
+    changeNum();
   }, [Chatting.length]);
+
+  React.useEffect(() => {
+    scrollRef.current.scrollTo({ top: ChildTop, left: 0, behavior: 'smooth' });
+  }, [ChildTop]);
+
+  React.useEffect(() => {
+    Emit(scrollRef);
+  }, []);
 
   React.useEffect(() => {
     return () => {
@@ -78,50 +92,25 @@ const ChatForm = props => {
       <ScrollBox
         id="ScrollBox"
         ref={scrollRef}
-        onScroll={InfinitesScrolling}
         className={On ? 'on' : ''}
+        onScroll={InfiniteStairs}
       >
-        <Grid gap="19px" padding="19px 30px">
-          {!Chatting
-            ? ''
-            : Chatting.map((x, idx) => {
-                switch (x.type) {
-                  case 'TALK':
-                    return x.senderName === userInfo.username ? (
-                      <PartyMe key={idx} data={x}>
-                        {x.message}
-                      </PartyMe>
-                    ) : (
-                      <PartyOther key={idx} data={x}>
-                        {x.message}
-                      </PartyOther>
-                    );
-                  case 'ENTER':
-                    return <Alarm key={idx}> {x.message}</Alarm>;
-                  case 'QUIT':
-                    return <Alarm key={idx}> {x.message}</Alarm>;
-                  case 'EMO':
-                    return x.senderName === userInfo.username ? (
-                      <EmoticonImgBox key={idx}>
-                        <Grid row justify="end" align="end" gap="10px">
-                          <Date>{x.date}</Date>
-                          <img src={x.message} alt="이모티콘" />
-                        </Grid>
-                      </EmoticonImgBox>
-                    ) : (
-                      <EmoticonImgBox key={idx}>
-                        <Grid row align="end" gap="10px">
-                          <Image round src={x.senderImg} width="40px" margin="0" />
-                          <img src={x.message} alt="이모티콘" />
-                          <Date>{x.date}</Date>
-                        </Grid>
-                      </EmoticonImgBox>
-                    );
-                  default:
-                    return '';
-                }
-              })}
-        </Grid>
+        <div>
+          {loading
+            ? Chatting.map((item, index) => {
+                return (
+                  <Grid
+                    gap="19px"
+                    padding="19px 30px"
+                    key={index}
+                    _ref={ref => (BoxRef.current[index] = ref)}
+                  >
+                    <ChatListform data={item} username={userInfo.username} />
+                  </Grid>
+                );
+              }).reverse()
+            : ''}
+        </div>
       </ScrollBox>
       <PartyInput
         sendMessage={sendMessage}
@@ -131,6 +120,9 @@ const ChatForm = props => {
       ></PartyInput>
     </PageShadows>
   );
+};
+ChatForm.defaultProps = {
+  Emit: () => {},
 };
 
 const PageShadows = styled.div`
@@ -152,25 +144,28 @@ const ScrollBox = styled.div`
   width: 100%;
   height: 89%;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 30px;
+  }
+  ::-webkit-scrollbar-button:start:decrement,
+  ::-webkit-scrollbar-button:end:increment {
+    display: none;
+    height: 8px;
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: none;
+  }
   &.on {
     height: 54%;
   }
 `;
-const Date = styled.p`
-  font-size: 9px;
-  color: #9b9b9b;
-`;
-const EmoticonImgBox = styled.div`
-  height: 100px;
-  img {
-    height: 100%;
-  }
-`;
 
-const Alarm = styled.p`
-  font-size: 10px;
-  color: #9b9b9b;
-  width: 100%;
-  text-align: center;
-`;
 export default ChatForm;

@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import appicon from '../../../img/appIcon.png';
-import background from '../../../img/webBg.png';
+
 import chemy from '../../../img/chemy.svg';
 import { Grid } from '../../element';
 
 function Bg() {
   return (
     <>
-      <BgImg src={background} alt="background" />
       <BgPoint>
         <Grid gap="56px">
           <Grid row gap="40px" align="center">
@@ -38,7 +37,6 @@ function Bg() {
           </Grid>
         </Grid>
       </BgPoint>
-      <BgImg src={background} alt="background" />
     </>
   );
 }
@@ -103,18 +101,4 @@ const FeedbackBtn = styled.div`
   }
 `;
 
-const BgImg = styled.img`
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%) scale(1.2);
-  @media only screen and (max-width: 1550px) {
-    transform: translateY(-60%) scale(1.2);
-    right: -39%;
-    top: 58%;
-  }
-  @media only screen and (max-width: 1050px) {
-    display: none;
-  }
-`;
 export default Bg;
