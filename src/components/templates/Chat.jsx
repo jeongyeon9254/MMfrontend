@@ -29,10 +29,7 @@ const Chat = () => {
   const [Paging, setPaging] = React.useState(false);
   const [roomNum, setroomNum] = React.useState('');
   const [Data, setData] = React.useState({});
-
-  const env = process.env.NODE_ENV;
-  // const devTarget = env === 'development' ? 'http://13.124.242.158/ws-stomp' : '';
-  // const devTarget = env === 'development' ? 'https://sixzombies.shop/ws-stomp' : '';
+  const [EmitData, SetEmitData] = React.useState({});
   const IP = IPadress();
   const devTarget = `${IP}/ws-stomp`;
   const TOKEN = getCookie('authorization');
@@ -40,6 +37,17 @@ const Chat = () => {
   const ws = Stomp.over(sock);
 
   const date = `${moment().hours()}:${moment().minutes()}`;
+  const Catchdata = data => {
+    SetEmitData(data);
+  };
+
+  //스크롤 엑션
+  const scrollTomBottom = () => {
+    if (EmitData.current) {
+      console.log('스크롤');
+      EmitData.current.scrollTop = EmitData.current.scrollHeight;
+    }
+  };
 
   const wsConnectSubscribe = Id => {
     try {
@@ -48,6 +56,7 @@ const Chat = () => {
         ws.subscribe(`/sub/chat/room/${Id}`, data => {
           let recv = JSON.parse(data.body);
           dispatch(ChatAction.PostChatting(recv));
+          scrollTomBottom();
         });
       });
     } catch (err) {
@@ -133,6 +142,7 @@ const Chat = () => {
     }
   };
 
+  console.log(enter);
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
     if (roomNum) {
@@ -164,7 +174,7 @@ const Chat = () => {
                     //입장한 채팅방 메세지 정보 가져 오기
                     setroomNum(x.roomId);
                     dispatch(ChatAction.getRecentlyMsListDB(x.roomId, 0));
-                    //채팅방 입장 잘때
+                    //채팅방 입장 할때
                     SetEnter(true);
                   }}
                   data={x}
@@ -179,13 +189,16 @@ const Chat = () => {
         sendStop={sendStop}
         sendMessage={sendMessage}
         wsDisConnectUnsubscribe={wsDisConnectUnsubscribe}
+        Emit={Catchdata}
         Boo={Paging}
         data={Data !== {} ? Data : ''}
         _onClick={() => {
           setPaging(!Paging);
           setData({});
           dispatch(ChatAction.DeletMsList());
+          dispatch(ChatAction.ms_resetList());
           setroomNum('');
+          SetEnter(false);
         }}
       ></ChatForm>
       <Footer />

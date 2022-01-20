@@ -45,27 +45,22 @@ const ScrollBox = styled.div`
   overflow-x: hidden;
   padding: 0px 10px 30px 0px;
   ::-webkit-scrollbar {
-    /* 스크롤바 전체 영역 */
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    /* 스크롤이 움직이는 영역  */
     background-color: #fff;
   }
   ::-webkit-scrollbar-thumb {
-    /*  스크롤  */
     background-color: #eee;
     border-radius: 30px;
   }
   ::-webkit-scrollbar-button:start:decrement,
   ::-webkit-scrollbar-button:end:increment {
-    /*  스크롤의 화살표가 포함된 영역   */
-    display: block;
+    display: none;
     height: 8px;
     background-color: #999;
   }
   ::-webkit-scrollbar-corner {
-    /*  상하+좌우 스크롤이 만나는 공간   */
     background-color: none;
   }
 `;

@@ -7,6 +7,7 @@ import Announcement from './Announcement';
 import ChatEmoticon from './ChatEmoticon';
 import ChatPreview from './ChatPreview';
 import ChatRoomLast from './ChatRoomLast';
+import ChatListform from './ChatListform';
 import SkeletonChat from './Skeleton';
 
 export {
@@ -20,4 +21,5 @@ export {
   SkeletonChat,
   ChatPreview,
   ChatRoomLast,
+  ChatListform,
 };

@@ -11,7 +11,7 @@
 
         strategy:
           matrix:
-            node-version: [12.16.x]
+            node-version: [16.13.0]
 
         steps:
           - uses: actions/checkout@v2
@@ -21,11 +21,11 @@
             with:
               node-version: ${{ matrix.node-version }}
 
-          - name: Npm install
-            run: npm install
+          - name: Install dependencies
+            run: npm install -g yarn
 
           - name: Build
-            run: npm run build
+            run: yarn build
 
           - name: Transfer to S3 for serving static
             uses: jakejarvis/s3-sync-action@master

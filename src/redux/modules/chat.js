@@ -14,23 +14,32 @@ const LOAD_CHATTING = 'LOAD_CHATTING';
 const ADD_CHATTING = 'ADD_CHATTING';
 const Delet_CHAT = 'Delet_CHAT';
 const Delet_RoomLIST = 'Delet_RoomLIST';
+const MS_LOADING = 'MS_LOADING';
+const MS_RESET = 'MS_RESET';
 const LOADING_CHAT = 'LOADING_CHAT';
 const RESET_CHAT = 'RESET_CHAT';
+const ToTalNum = 'ToTalNum';
 
 const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
+const total_number = createAction(ToTalNum, num => ({ num }));
+
 const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
 const resetList = createAction(RESET_CHAT, () => ({}));
 const LoadingList = createAction(LOADING_CHAT, () => ({}));
+const ms_loadingList = createAction(MS_LOADING, () => ({}));
+const ms_resetList = createAction(MS_RESET, () => ({}));
 
 const initialState = {
   List: [{}],
   Room: [{}],
   loading: false,
+  listloading: false,
   page: 0,
+  total: 0,
 };
 
 // 채팅방 만들기
@@ -60,12 +69,13 @@ const getChatRoomListDB = () => {
 };
 
 // 첫 채팅 목록 가지고 오기
-const getRecentlyMsListDB = (roomId, page = null) => {
+const getRecentlyMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
       console.log('// 첫 채팅 목록 가지고 오기');
       const res = await getChatMsList(roomId, page);
       dispatch(LoadChatting(res.data, page));
+      dispatch(ms_loadingList());
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +88,10 @@ const getChatMsListDB = (roomId, page) => {
     try {
       console.log('// 채팅 메세지 목록 가져오기');
       const res = await getChatMsList(roomId, page);
+      console.log(res);
       dispatch(AddChatting(res.data, page));
+      dispatch(ms_loadingList());
+      dispatch(total_number(res.data[0].totalnumber));
     } catch (e) {
       console.log(e);
     }
@@ -105,7 +118,7 @@ export default handleActions(
     [PUSH_CHAT]: (state, action) =>
       produce(state, draft => {
         const { ms } = action.payload;
-        draft.List.push(ms);
+        draft.List[0].push(ms);
       }),
     [LOAD_CHATLIST]: (state, action) =>
       produce(state, draft => {
@@ -115,15 +128,19 @@ export default handleActions(
     [LOAD_CHATTING]: (state, action) =>
       produce(state, draft => {
         const { chatting, page } = action.payload;
-        draft.List = chatting;
-        draft.page = 0;
+        draft.List[page] = chatting;
         draft.page = page + 1;
       }),
     [ADD_CHATTING]: (state, action) =>
       produce(state, draft => {
         const { chatting, page } = action.payload;
-        draft.List.unshift(...chatting);
+        draft.List[page] = chatting;
         draft.page = page + 1;
+      }),
+    [ToTalNum]: (state, action) =>
+      produce(state, draft => {
+        const { num } = action.payload;
+        draft.total = num;
       }),
     [Delet_CHAT]: (state, action) =>
       produce(state, draft => {
@@ -140,6 +157,15 @@ export default handleActions(
     [LOADING_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.loading = true;
+      }),
+    [MS_LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft.listloading = true;
+      }),
+    [MS_RESET]: (state, action) =>
+      produce(state, draft => {
+        draft.listloading = false;
+        draft.List = [{}];
       }),
     [RESET_CHAT]: (state, action) =>
       produce(state, draft => {
@@ -160,6 +186,7 @@ const actionCreators = {
   resetList,
   getRecentlyMsListDB,
   deleteChatroomDB,
+  ms_resetList,
 };
 
 export { actionCreators };
