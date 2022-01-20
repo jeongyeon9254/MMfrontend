@@ -30,7 +30,7 @@ const MapCategoryNav = props => {
   const [active, setActive] = useState(0);
 
   // 버튼 클릭시 불러오기
-  const getAllKategori = index => {
+  const getAllCategory = index => {
     if (location === '시-군-구') {
       setCategoryAlt(true);
       return false;
@@ -38,7 +38,7 @@ const MapCategoryNav = props => {
     setActive(index);
     dispatch(mainActions.chemyListDB(bigNum, smallNum));
   };
-  const getKategori = index => {
+  const getCategory = index => {
     if (location === '시-군-구') {
       setCategoryAlt(true);
       return false;
@@ -81,7 +81,7 @@ const MapCategoryNav = props => {
                     state={active === index ? 'active' : false}
                     _onClick={e => {
                       setActive(index);
-                      dispatch(postActions.getKategoriDB(index, 0));
+                      dispatch(postActions.getCategoryDB(index, 0));
                     }}
                   >
                     {list === '전체보기' ? (
@@ -114,7 +114,7 @@ const MapCategoryNav = props => {
                   BtnTag
                   state={active === index ? 'active' : false}
                   _onClick={e => {
-                    getAllKategori(index);
+                    getAllCategory(index);
                   }}
                 >
                   <img alt="MBTI 이미지" src={mbti.image ? mbti.image : null} />
@@ -125,7 +125,7 @@ const MapCategoryNav = props => {
                   BtnTag
                   state={active === index ? 'active' : false}
                   _onClick={e => {
-                    getKategori(index);
+                    getCategory(index);
                   }}
                 >
                   {list === '전체보기' ? (

@@ -14,11 +14,12 @@ const { kakao } = window;
 
 const MapContainer = props => {
   const myInfo = useSelector(state => state.main.myInfo);
+  const result = useSelector(state => state.main.list.result);
   const { onModal, bigLocation, location } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const MyBit = Bit.find(x => {
-    return x.name === userInfo.mbti;
-  });
+  // const MyBit = Bit.find(x => {
+  //   return x.name === userInfo.mbti;
+  // });
 
   // kakao map 함수를 가지고 있음
   const [move, setMove] = useState(null);
@@ -30,7 +31,7 @@ const MapContainer = props => {
   // 원 생성 및 삭제
   const [circles, setCircles] = useState(null);
 
-  // 최초 1회 맵 생성
+  // 최초 1회 맵 생성 ------------------------------------------------------------------------------------
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -79,7 +80,7 @@ const MapContainer = props => {
     circle.setMap(map);
   }, []);
 
-  // 시,도 선택시 지도 축소 후 중심으로 이동
+  // 시,도 선택시 지도 축소 후 중심으로 이동 ------------------------------------------------------------------------------------
   useEffect(() => {
     if (move === null) {
       return;
@@ -105,7 +106,7 @@ const MapContainer = props => {
     makers.setMap(null);
   }, [bigLocation]);
 
-  // 하위 레벨 지역 선택시 지도 확대 후 중심이동
+  // 하위 레벨 지역 선택시 지도 확대 후 중심이동 ------------------------------------------------------------------------------------
   useEffect(() => {
     if (move === null || location === '시-군-구') {
       return;
@@ -119,6 +120,7 @@ const MapContainer = props => {
 
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
+        console.log(result[0].y, result[0].x);
         const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
         move.panTo(moveLatLon);
 
@@ -161,7 +163,7 @@ const MapContainer = props => {
     move.setLevel(7);
   }, [location]);
 
-  // 내 위치 클릭시 위치 이동
+  // 내 위치 클릭시 위치 이동 ------------------------------------------------------------------------------------
   useEffect(() => {
     if (myInfo) {
       maker.setMap(move);
@@ -176,7 +178,7 @@ const MapContainer = props => {
       }
       makers.setMap(null);
     }
-  }, [myInfo]);
+  }, [myInfo, result]);
 
   return (
     <React.Fragment>
