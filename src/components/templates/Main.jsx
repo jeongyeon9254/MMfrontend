@@ -20,20 +20,28 @@ import Spiner from '../../shared/Spiner.jsx';
 import MainModal from '../modules/Main/MainModal.jsx';
 
 // Js
-import { bigGpsList, smallGpsList } from '../modules/Main/gpsList.js';
-const { kakao } = window;
+import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
 
 const Main = () => {
   const dispatch = useDispatch();
 
   // 로컬스토리지에서 내정보를 가져옵니다
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userLocation = bigGpsList.findIndex(x => {
+    return x === userInfo.location;
+  });
+  const userDetailLocation = smallGpsList.findIndex(x => {
+    return x.gps === userInfo.locDetail;
+  });
 
+  // api용 id 값
+  const [bigNum, setBigNum] = useState(userLocation + 1);
+  const [smallNum, setSmallNum] = useState(userDetailLocation + 1);
+
+  // 로케이션 모달창 관리
   const [bigLocationList, setBigLocationList] = useState(false); // 로케이션 모달창 관리
   const [locationList, setLocationList] = useState(false); // 로케이션 모달창 관리
   const [loading, setLoading] = useState(false); // 빠른매칭 스피너 로딩
-
-  // 로케이션 모달창 관리
   const onLocation = () => {
     if (locationList === false) setLocationList(true);
     if (locationList === true) setLocationList(false);
@@ -51,10 +59,11 @@ const Main = () => {
     setBigLocationList(false);
   };
 
+  // 로케이션 정보
+  const [bigLocation, setBigLocation] = useState(userInfo.location);
+  const [location, setLocation] = useState(userInfo.locDetail);
+
   // 맵리스트 모달창 관리
-  const [bigLocation, setBigLocation] = useState('서울특별시'); // 이후 유저인포로 수정 필요
-  const [location, setLocation] = useState(userInfo.location);
-  const [gpsId, setGpsId] = useState('');
   const [modal, setModal] = useState(false);
   const onModal = () => {
     setModal(true);
@@ -70,9 +79,25 @@ const Main = () => {
 
   // 알럿창 관리
   const [Alt, setAlt] = useState(false);
+  const [kategoriAlt, setKategoriAlt] = useState(false);
 
   return (
     <React.Fragment>
+      {kategoriAlt ? (
+        <Alert
+          MyBit
+          check
+          yes={() => {
+            setKategoriAlt(false);
+          }}
+        >
+          <Grid gap="15px" padding="16px 8px 8px 24px">
+            <Grid gap="4px">
+              <p>나머지 지역을 선택해주세요.</p>
+            </Grid>
+          </Grid>
+        </Alert>
+      ) : null}
       <Header main>메인화면</Header>
 
       {/* 지역 선택 버튼 */}
@@ -82,7 +107,13 @@ const Main = () => {
       </LocationBox>
 
       {/* 카테고리 선택 버튼 */}
-      <MapKategorieNav userInfo={userInfo} gpsId={gpsId} />
+      <MapKategorieNav
+        userInfo={userInfo}
+        bigNum={bigNum}
+        smallNum={smallNum}
+        location={location}
+        setKategoriAlt={setKategoriAlt}
+      />
 
       {/* 카카오 맵 컨테이너 */}
       <MapContainer onModal={onModal} bigLocation={bigLocation} location={location} />
@@ -119,19 +150,20 @@ const Main = () => {
       {bigLocationList ? (
         <MainModal
           big
+          setBigNum={setBigNum}
           bigLocation={bigLocation}
           setLocation={setLocation}
           outBigLocation={outBigLocation}
           setBigLocation={setBigLocation}
-          setGpsId={setGpsId}
         ></MainModal>
       ) : null}
       {locationList ? (
         <MainModal
+          bigNum={bigNum}
+          setSmallNum={setSmallNum}
           bigLocation={bigLocation}
           outLocation={outLocation}
           setLocation={setLocation}
-          setGpsId={setGpsId}
         ></MainModal>
       ) : null}
 
@@ -167,7 +199,7 @@ const CenterBtn = styled.div`
 const LocationBox = styled.div`
   position: absolute;
   display: flex;
-  width: 60%;
+  width: auto;
   justify-content: center;
   top: 20%;
   left: 50%;

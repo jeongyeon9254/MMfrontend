@@ -13,7 +13,17 @@ const MainModal = props => {
   const dispatch = useDispatch();
 
   // props
-  const { outLocation, setLocation, bigLocation, setBigLocation, outBigLocation, big } = props;
+  const {
+    outLocation,
+    setLocation,
+    bigLocation,
+    setBigLocation,
+    outBigLocation,
+    big,
+    setSmallNum,
+    setBigNum,
+    bigNum,
+  } = props;
 
   // 모달창 해제
   const outModal = () => {
@@ -27,6 +37,7 @@ const MainModal = props => {
     return x.name === bigLocation;
   });
 
+  // 큰 카테고리 지역 선택
   if (big) {
     return (
       <React.Fragment>
@@ -37,11 +48,9 @@ const MainModal = props => {
                 <Button
                   _onClick={() => {
                     setBigLocation(list);
+                    setBigNum(idx + 1);
                     setLocation('시-군-구');
                     outBigModal();
-                    // dispatch(mainActions.chemyListDB(idx + 1));
-                    // setGpsId(idx + 1);
-                    //지역 get 요청
                   }}
                   key={idx}
                 >
@@ -55,6 +64,7 @@ const MainModal = props => {
     );
   }
 
+  // 작은 카테고리 지역 선택
   return (
     <React.Fragment>
       <Modal>
@@ -68,10 +78,8 @@ const MainModal = props => {
                   const num = smallGpsList.findIndex(x => {
                     return x.gps === list.gps;
                   });
-                  console.log(num + 1);
-                  // dispatch(mainActions.chemyListDB(idx + 1));
-                  // setGpsId(idx + 1);
-                  //지역 get 요청
+                  setSmallNum(num + 1);
+                  dispatch(mainActions.chemyListDB(bigNum, num + 1));
                 }}
                 key={idx}
               >

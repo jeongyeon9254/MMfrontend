@@ -13,7 +13,7 @@ export const getPost = page => {
 export const getKategoriPost = (interestId, page) => {
   return instance({
     method: 'get',
-    url: `/api/post/interest/${interestId}?page=${page}&size=4`,
+    url: `/api/post/interest/${interestId}?page=${page}&size=5`,
   });
 };
 
