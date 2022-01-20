@@ -73,6 +73,7 @@ const getGuestListDB = () => {
   return async function (dispatch, getState, { history }) {
     getGuestDB()
       .then(res => {
+        console.log(res.data);
         dispatch(getGuestList(res.data));
       })
       .catch(err => {
@@ -112,7 +113,7 @@ export default handleActions(
       produce(state, draft => {
         const data = action.payload.data;
 
-        draft.list.result = data.userList;
+        draft.list.result = [...data.userList];
 
         draft.list.gps = data.location;
         draft.list.lat = data.latitude;
