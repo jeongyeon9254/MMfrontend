@@ -7,7 +7,7 @@ import AddInterest from './AddInterest';
 import AddAdress from './AddAdress';
 
 const AddMBTI = props => {
-  const { file, local, show, Control } = props;
+  const { file, data, show, Control } = props;
 
   const [Open, setOpen] = useState(false);
   const [selected, setSelected] = useState('');
@@ -30,7 +30,7 @@ const AddMBTI = props => {
 
   return (
     <ShowPage className={show ? 'open' : ''}>
-      <AddInterest file={file} local={local} mbti={selected} show={Open} Control={PageControl} />
+      <AddInterest file={file} data={data} mbti={selected} show={Open} Control={PageControl} />
       <Header Page point="relative" zIndex="0" _onClick={Control}>
         MBTI 입력하기
       </Header>
