@@ -23,9 +23,13 @@
 
           - name: Install dependencies
             run: yarn install
+            env:
+              CI: ""
 
           - name: Build
             run: yarn build
+            env:
+              CI: ""
 
           - name: Transfer to S3 for serving static
             uses: jakejarvis/s3-sync-action@master
