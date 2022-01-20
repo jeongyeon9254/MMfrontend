@@ -20,6 +20,7 @@ const Grid = props => {
     // 추가 props
     borderTop,
     borderBot,
+    _ref,
     list,
     Btop,
     pad,
@@ -66,7 +67,7 @@ const Grid = props => {
 
   // flex colum grid
   return (
-    <GridStyle {...styles} onClick={_onClick}>
+    <GridStyle ref={_ref} {...styles} onClick={_onClick}>
       {children}
     </GridStyle>
   );
