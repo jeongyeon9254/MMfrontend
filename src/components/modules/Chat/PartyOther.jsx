@@ -24,7 +24,7 @@ function PartyOther(props) {
         <Box width="80%" padding="7px 10px">
           {children}
         </Box>
-        <Date>{diffTime}</Date>
+        <Date>{data.date}</Date>
       </Grid>
     </Grid>
   );
