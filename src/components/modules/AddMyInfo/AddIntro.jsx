@@ -10,7 +10,7 @@ import { actionCreators as userAction } from '../../../redux/modules/user';
 const AddIntro = props => {
   const dispatch = useDispatch();
 
-  const { file, local, mbti, duplicated, show, Control } = props;
+  const { file, data, mbti, duplicated, show, Control } = props;
 
   const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
@@ -19,15 +19,27 @@ const AddIntro = props => {
   const [Alt, setAlt] = useState(false);
   const [Limit, setLimit] = useState(false);
 
+  const location = data.LO;
+  const locDetail = data.De;
+  const longitude = data.X;
+  const latitude = data.Y;
+
+  console.log(location);
+
   const userInfo = {
     nickname: file.nickname,
     gender: file.gender,
     ageRange: file.ageRange,
     intro: comment,
-    location: local.location,
+    location: location,
+    locDetail: locDetail,
     mbti: mbti,
     interestList: duplicated,
+    longitude: longitude,
+    latitude: latitude,
   };
+  console.log(userInfo);
+
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
       return true;
