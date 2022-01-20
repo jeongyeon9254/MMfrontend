@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import Header from '../layout/Header';
-import { Grid } from '../../element';
+import { Grid, Image } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyOther, PartyMe, PartyInput } from './index';
 import { useDispatch } from 'react-redux';
@@ -13,13 +13,13 @@ const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop } = props;
   const { guestNick, guestMbti, roomId } = props.data;
-  const scrollRef = React.useRef();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
   const loading = useSelector(state => state.chat.loading);
-  const high = 60;
-
-  const [Height, SetHeight] = React.useState(1500);
+  const page = useSelector(state => state.chat.page);
+  const [height, setHeight] = React.useState(null);
+  const scrollRef = React.useRef();
+  const [On, SetOn] = React.useState(false);
 
   //스크롤 엑션
   const scrollTomBottom = () => {
@@ -28,13 +28,26 @@ const ChatForm = props => {
     }
   };
 
+  // const scrollRef = React.useCallback(x => {
+  //   if (x !== null) {
+  //     setHeight(x.getBoundingClientRect().height);
+  //   }
+  // });
+
   const InfinitesScrolling = () => {
     if (roomId) {
-      if (scrollRef.current.scrollTop <= Height) {
-        console.log('안녕');
-        console.log(scrollRef.current.scrollTop);
-        SetHeight(Height - 1500);
+      if (scrollRef.current.scrollTop <= 0) {
+        dispatch(ChatAction.getChatMsListDB(roomId, page));
       }
+    }
+  };
+
+  const deleteChatroomAction = () => {
+    try {
+      dispatch(ChatAction.deleteChatroomDB(roomId));
+      _onClick();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -43,9 +56,6 @@ const ChatForm = props => {
   }, [Chatting.length]);
 
   React.useEffect(() => {
-    if (roomId) {
-      dispatch(ChatAction.getChatMsListDB(roomId));
-    }
     return () => {
       if (roomId) {
         wsDisConnectUnsubscribe();
@@ -55,10 +65,22 @@ const ChatForm = props => {
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
-      <Header Page point="absolute" _onClick={_onClick} sendStop={sendStop} chat>
+      <Header
+        Page
+        point="absolute"
+        _onClick={_onClick}
+        sendStop={sendStop}
+        deleteChatroomAction={deleteChatroomAction}
+        chat
+      >
         {guestNick}
       </Header>
-      <ScrollBox ref={scrollRef} onScroll={InfinitesScrolling}>
+      <ScrollBox
+        id="ScrollBox"
+        ref={scrollRef}
+        onScroll={InfinitesScrolling}
+        className={On ? 'on' : ''}
+      >
         <Grid gap="19px" padding="19px 30px">
           {!Chatting
             ? ''
@@ -76,17 +98,22 @@ const ChatForm = props => {
                     );
                   case 'ENTER':
                     return <Alarm key={idx}> {x.message}</Alarm>;
+                  case 'QUIT':
+                    return <Alarm key={idx}> {x.message}</Alarm>;
                   case 'EMO':
                     return x.senderName === userInfo.username ? (
                       <EmoticonImgBox key={idx}>
-                        <Grid row justify="end">
+                        <Grid row justify="end" align="end" gap="10px">
+                          <Date>{x.date}</Date>
                           <img src={x.message} alt="이모티콘" />
                         </Grid>
                       </EmoticonImgBox>
                     ) : (
                       <EmoticonImgBox key={idx}>
-                        <Grid row>
+                        <Grid row align="end" gap="10px">
+                          <Image round src={x.senderImg} width="40px" margin="0" />
                           <img src={x.message} alt="이모티콘" />
+                          <Date>{x.date}</Date>
                         </Grid>
                       </EmoticonImgBox>
                     );
@@ -96,7 +123,12 @@ const ChatForm = props => {
               })}
         </Grid>
       </ScrollBox>
-      <PartyInput sendMessage={sendMessage} roomId={roomId}></PartyInput>
+      <PartyInput
+        sendMessage={sendMessage}
+        roomId={roomId}
+        Emit={SetOn}
+        scrollTomBottom={scrollTomBottom}
+      ></PartyInput>
     </PageShadows>
   );
 };
@@ -115,12 +147,19 @@ const PageShadows = styled.div`
     left: 0px;
   }
 `;
+
 const ScrollBox = styled.div`
   width: 100%;
   height: 89%;
   overflow-y: scroll;
+  &.on {
+    height: 54%;
+  }
 `;
-
+const Date = styled.p`
+  font-size: 9px;
+  color: #9b9b9b;
+`;
 const EmoticonImgBox = styled.div`
   height: 100px;
   img {

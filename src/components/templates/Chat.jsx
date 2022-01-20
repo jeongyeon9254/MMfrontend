@@ -15,6 +15,7 @@ import { actionCreators as ChatAction } from '../../redux/modules/chat';
 import { getCookie } from '../../shared/Cookie';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
+import moment from 'moment';
 
 const Chat = () => {
   // 받은 요청 수
@@ -37,6 +38,8 @@ const Chat = () => {
   const TOKEN = getCookie('authorization');
   const sock = new SockJS(devTarget);
   const ws = Stomp.over(sock);
+
+  const date = `${moment().hours()}:${moment().minutes()}`;
 
   const wsConnectSubscribe = Id => {
     try {
@@ -98,6 +101,7 @@ const Chat = () => {
         type: 'QUIT',
         roomId: roomNum,
         message: '매칭상대가 방을 나갔습니다.',
+        date: date,
       };
       waitForConnection(ws, () => {
         ws.debug = null;
@@ -116,6 +120,7 @@ const Chat = () => {
         type: 'ENTER',
         roomId: roomNum,
         message: '방에 입장 하였습니다.',
+        date: date,
       };
       waitForConnection(ws, () => {
         ws.debug = null;
@@ -158,7 +163,7 @@ const Chat = () => {
                     setData(x);
                     //입장한 채팅방 메세지 정보 가져 오기
                     setroomNum(x.roomId);
-                    dispatch(ChatAction.getChatMsListDB(x.roomId));
+                    dispatch(ChatAction.getRecentlyMsListDB(x.roomId, 0));
                     //채팅방 입장 잘때
                     SetEnter(true);
                   }}

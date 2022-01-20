@@ -4,8 +4,10 @@ import Bit from '../Bit';
 import { Grid, Image } from '../../element';
 import { Announcement } from '../Chat';
 import icon_location_w from '../../../img/Icon/icon_location_w.svg';
+import edit from '../../../img/Icon/edit.svg';
 
 function MyinfoHead(props) {
+  const { OnEvent } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
@@ -19,7 +21,10 @@ function MyinfoHead(props) {
         <Grid row gap="23px">
           <Image round src={userInfo.profileImage} mbti={userInfo.mbti} width="140px" margin="0" />
           <Grid width="auto" gap="13px" padding="21px 0px">
-            <Mename>{userInfo.nickname}</Mename>
+            <Grid row gap="6px" align="center">
+              <Mename>{userInfo.nickname}</Mename>
+              <ImgIcon onClick={OnEvent} src={edit} alt="edit" />
+            </Grid>
             <Local>
               <Grid row gap="6px" align="center">
                 <img src={icon_location_w} alt="" />{' '}
@@ -42,6 +47,9 @@ const NewHeader = styled.div`
   top: 0px;
   padding-top: 20%;
 `;
+const ImgIcon = styled.img`
+  cursor: pointer;
+`;
 const ImgBit = styled.img`
   position: absolute;
   right: -14%;
@@ -59,7 +67,7 @@ const Point = styled.div`
 `;
 
 const Mename = styled.h2`
-  font-size: 35px;
+  font-size: 32px;
   color: #fff;
   font-weight: bold;
 `;

@@ -34,6 +34,7 @@ const Header = props => {
     defaultName,
     Page,
     sendStop,
+    deleteChatroomAction,
   } = props;
 
   const styles = {
@@ -85,15 +86,15 @@ const Header = props => {
         )}
         <TiTle {...styles}>{children}</TiTle>
         {/* {chat ? <Search src={icon_search} /> : ''} */}
-        {chat ? <Exit onClick={sendStop}>방 나가기</Exit> : chat || myinfo ? '' : <Null></Null>}
-        {main ? (
-          <MyLocation
+        {chat ? (
+          <Exit
             onClick={() => {
-              dispatch(mainActions.getListDB());
+              sendStop();
+              deleteChatroomAction();
             }}
           >
-            내 위치
-          </MyLocation>
+            방 나가기
+          </Exit>
         ) : chat || myinfo ? (
           ''
         ) : (
@@ -163,12 +164,6 @@ const Exit = styled.div`
   font-size: 14px;
   color: #4e4e4e;
   cursor: pointer;
-`;
-const MyLocation = styled.div`
-  font-size: 14px;
-  color: #4e4e4e;
-  cursor: pointer;
-  font-weight: 700;
 `;
 const Detail = styled.img`
   height: 24px;
