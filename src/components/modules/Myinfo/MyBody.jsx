@@ -62,5 +62,8 @@ const ScrollBox = styled.div`
   ::-webkit-scrollbar-corner {
     background-color: none;
   }
+  @media only screen and (max-width: 450px) {
+    height: 50vh;
+  }
 `;
 export default MyBody;

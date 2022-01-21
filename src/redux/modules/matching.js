@@ -73,6 +73,7 @@ const deleteMatchingChatDB = hostId => {
     try {
       await deleteMatchingChat(hostId);
       dispatch(PutMatchingList(hostId));
+      history.push('/');
     } catch (e) {
       console.log(e);
     }
