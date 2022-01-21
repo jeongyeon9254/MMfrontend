@@ -24,20 +24,34 @@ function PartyInput(props) {
   const GetEmoticon = data => {
     SetEmoticon(data);
   };
+  function urlify(text) {
+    try {
+      var urlRegex = /(https?:\/\/[^\s]+)/g;
+      console.log(urlRegex);
+      return text.replace(urlRegex, function (url) {
+        return '<a href="' + url + '">' + url + '</a>';
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   // 문자 전송 sendEvent
   const TxtSend = () => {
+    let Cattext = urlify(Chatting);
     if (Chatting !== '') {
-      // send할 데이터
-      const ms = {
-        type: 'TALK',
-        roomId: roomId,
-        message: Chatting,
-        date: date,
-      };
-      sendMessage(ms);
-      // console.log(ms);
-      setChatting('');
+      if (Chatting.length < 250) {
+        // send할 데이터
+        const ms = {
+          type: 'TALK',
+          roomId: roomId,
+          message: Cattext,
+          date: date,
+        };
+        sendMessage(ms);
+        // console.log(ms);
+        setChatting('');
+      }
     }
   };
 
