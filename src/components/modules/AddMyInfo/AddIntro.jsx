@@ -22,6 +22,7 @@ const AddIntro = props => {
   const locDetail = data.De;
   const longitude = data.X;
   const latitude = data.Y;
+  const fulladress = data.full;
 
   console.log(location);
 
@@ -36,6 +37,7 @@ const AddIntro = props => {
     interestList: duplicated,
     longitude: longitude,
     latitude: latitude,
+    locFull: fulladress,
   };
   console.log(userInfo);
 
