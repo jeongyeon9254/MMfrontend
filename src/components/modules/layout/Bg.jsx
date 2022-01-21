@@ -5,7 +5,12 @@ import appicon from '../../../img/appIcon.png';
 import chemy from '../../../img/chemy.svg';
 import { Grid } from '../../element';
 
+import { ClickDownload } from '../../../shared/AppDownload';
 function Bg() {
+  const GoFeedback = () => {
+    window.open('https://forms.gle/ur7WqgKNxfcnQPww9');
+  };
+
   return (
     <>
       <BgPoint>
@@ -27,13 +32,8 @@ function Bg() {
               <NormalTi>BIZ Chemy를 통해 여러분과 잘 맞는 친구를 찾아보세요!</NormalTi>
               <NormalTi>친구와의 소통을 통해 한층 즐거운 스스로를 발견할 수 있을거에요.</NormalTi>
             </Grid>
-            <FeedbackBtn
-              onClick={() => {
-                window.open('https://forms.gle/CMmcrrSgWg66TtCr6');
-              }}
-            >
-              설문조사하고 선물 받기
-            </FeedbackBtn>
+            <FeedbackBtn onClick={GoFeedback}>설문조사하고 선물 받기</FeedbackBtn>
+            {/* <FeedbackBtn onClick={ClickDownload}>앱 다운로드</FeedbackBtn> */}
           </Grid>
         </Grid>
       </BgPoint>
