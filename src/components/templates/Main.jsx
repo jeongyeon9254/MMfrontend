@@ -107,7 +107,7 @@ const Main = props => {
         </Alert>
       ) : null}
       <Header main setMyInfo={setMyInfo}>
-        메인화면2
+        메인화면
       </Header>
 
       {/* 지역 선택 버튼 */}
