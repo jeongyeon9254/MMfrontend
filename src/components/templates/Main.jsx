@@ -78,6 +78,7 @@ const Main = props => {
     dispatch(mainActions.getListDB());
   }, []);
 
+  // 내위치 클릭시 메인화면 초기화
   const setMyInfo = () => {
     setBigNum(userLocation + 1);
     setSmallNum(userDetailLocation + 1);
