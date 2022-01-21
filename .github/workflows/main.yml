@@ -44,5 +44,5 @@
             run: 
               aws s3 cp 
                 --recursive 
-                --region ap-northeast-2 
+                --region us-east-1
                 build s3://bizchemy.com
