@@ -7,9 +7,27 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
+    <meta name="description" content="MBTI 궁합을 기반으로 한 매칭 서비스 Biz Chemy" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.bizchemy.com" />
+    <meta property="og:locale" content="ko" />
+    <meta property="og:title" content="Biz Chemy" />
+    <meta
+      property="og:image"
+      content="https://s3.ap-northeast-2.amazonaws.com/s3.bizchemy/sample.png"
+    />
+    <meta property="og:description" content="MBTI 궁합을 기반으로 한 매칭 서비스 Biz Chemy" />
+    <meta property="og:site_name" content="Biz Chemy" />
+    <!-- 다음의 태그는 필수는 아니지만, 포함하는 것을 추천함 -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Biz Chemy" />
+    <meta name="twitter:description" content="MBTI 궁합을 기반으로 한 매칭 서비스 Biz Chemy" />
+    <meta
+      name="twitter:image"
+      content="https://s3.ap-northeast-2.amazonaws.com/s3.bizchemy/sample.png"
+    />
     <!-- kakao map -->
     <script
       type="text/javascript"
@@ -19,7 +37,7 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -33,12 +51,5 @@
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('service-worker.js')
-          .then(reg => console.log('Service worker registered.', reg));
-      }
-    </script>
   </body>
 </html>

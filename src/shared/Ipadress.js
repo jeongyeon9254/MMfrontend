@@ -4,9 +4,9 @@ export default function IPadress() {
   // 종욱
   // const devTarget = env === 'development' ? 'http://13.124.242.158' : 'https://sixzombies.shop';
   // 영철;
-  const devTarget = env === 'development' ? 'https://sixzombies.shop' : 'https://sixzombies.shop';
+//   const devTarget = env === 'development' ? 'https://sixzombies.shop' : 'https://sixzombies.shop';
   //  무중단 배포
-  // const devTarget = env === 'development' ? 'http://13.125.248.25' : 'https://sixzombies.shop';
+  const devTarget = env === 'development' ? 'http://13.125.248.25' : 'https://sixzombies.shop';
 
   return devTarget;
 }
