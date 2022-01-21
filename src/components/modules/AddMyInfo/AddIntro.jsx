@@ -22,9 +22,7 @@ const AddIntro = props => {
   const locDetail = data.De;
   const longitude = data.X;
   const latitude = data.Y;
-  const fulladress = data.full;
-
-  console.log(location);
+  const fulladress = data.Full;
 
   const userInfo = {
     nickname: file.nickname,
@@ -39,7 +37,6 @@ const AddIntro = props => {
     latitude: latitude,
     locFull: fulladress,
   };
-  console.log(userInfo);
 
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {

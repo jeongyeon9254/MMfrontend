@@ -13,24 +13,32 @@ const Start = props => {
 
   return (
     <Body className="open" onClick={click}>
-      <Grid align="center" padding=" 289px 0px 0px 0px">
-        <Grid width="112px" height="110px">
-          <Image nobackground src={StartLogo}></Image>
+      <Point>
+        <Grid align="center" padding="0px">
+          <Grid width="112px" height="110px">
+            <Image nobackground src={StartLogo}></Image>
+          </Grid>
+          <Grid width="208px" height="35px" margin="20px 0px 0px 0px">
+            <Image nobackground src={StartTitle}></Image>
+          </Grid>
+          <Grid row justify="center" margin="5px 0px">
+            <Thick>MBTI 궁합을 기반</Thick>
+            <Thin>으로 한</Thin>
+            <Thick>매칭 서비스</Thick>
+          </Grid>
+          <ClickTxt className="blink">화면을 터치해주세요</ClickTxt>
         </Grid>
-        <Grid width="208px" height="35px" margin="20px 0px 0px 0px">
-          <Image nobackground src={StartTitle}></Image>
-        </Grid>
-        <Grid row justify="center" margin="5px 0px">
-          <Thick>MBTI 궁합을 기반</Thick>
-          <Thin>으로 한</Thin>
-          <Thick>매칭 서비스</Thick>
-        </Grid>
-        <ClickTxt className="blink">화면을 터치해주세요</ClickTxt>
-      </Grid>
+      </Point>
     </Body>
   );
 };
-
+const Point = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 41%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+`;
 const Body = styled.div`
   width: 100%;
   height: 100%;

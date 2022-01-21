@@ -33,10 +33,7 @@ const Login = props => {
         로그인
       </Header>
       {open ? <Start No={no} /> : null}
-      <Grid align="center" padding="203px 0px 0px 0px">
-        <Grid width="112px" height="110px">
-          <Image nobackground src={Logo}></Image>
-        </Grid>
+      <Point>
         <Grid margin="53px 0px 0px 0px">
           <LoginBox>
             <p>카카오톡으로 간편로그인을 진행해주세요!</p>
@@ -50,11 +47,17 @@ const Login = props => {
             </SampleBtn>
           </LoginBox>
         </Grid>
-      </Grid>
+      </Point>
     </>
   );
 };
-
+const Point = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 41%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+`;
 const KaKaoBtn = styled.button`
   background-color: #fde500;
   padding: 0;
@@ -71,6 +74,7 @@ const KaKaoBtn = styled.button`
     box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
   }
 `;
+
 const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
