@@ -28,7 +28,6 @@ function MyEdit(props) {
   const [De, setDe] = React.useState(userInfo.locDetail); // 도
   const [X, setX] = React.useState(userInfo.longitude); // 경도
   const [Y, setY] = React.useState(userInfo.latitude); // 위도
-
   const [Alt, setAlt] = React.useState(false);
 
   const SetEmit = item => {
@@ -52,8 +51,11 @@ function MyEdit(props) {
     longitude: X,
     latitude: Y,
     mbti: Mbti,
+    locFull: Full,
     interestList: Int,
   };
+
+  console.log(AddInfo);
 
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
