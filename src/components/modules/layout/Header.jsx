@@ -33,8 +33,7 @@ const Header = props => {
     name,
     defaultName,
     Page,
-    sendStop,
-    deleteChatroomAction,
+    DeleteMsRoomOrGoBackRoom,
     setMyInfo,
     login,
   } = props;
@@ -92,8 +91,7 @@ const Header = props => {
         {chat ? (
           <Exit
             onClick={() => {
-              sendStop();
-              deleteChatroomAction();
+              DeleteMsRoomOrGoBackRoom();
             }}
           >
             방 나가기
