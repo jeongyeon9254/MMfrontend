@@ -27,10 +27,15 @@ function MyinfoHead(props) {
             </Grid>
             <Local>
               <Grid row gap="6px" align="center">
-                <img src={icon_location_w} alt="" />
-                <span>
-                  {userInfo.location} {userInfo.locDetail}
-                </span>
+
+                <img src={icon_location_w} alt="" />{' '}
+                {userInfo ? (
+                  <span>
+                    {userInfo.location} {userInfo.locDetail}{' '}
+                  </span>
+                ) : (
+                  ''
+                )}
               </Grid>
             </Local>
           </Grid>
@@ -51,6 +56,7 @@ const NewHeader = styled.div`
 `;
 const ImgIcon = styled.img`
   cursor: pointer;
+  width: 24px;
 `;
 const ImgBit = styled.img`
   position: absolute;

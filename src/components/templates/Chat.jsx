@@ -141,8 +141,6 @@ const Chat = () => {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
-
-  console.log(enter);
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
     if (roomNum) {
@@ -155,7 +153,7 @@ const Chat = () => {
         console.log(e);
       }
     }
-  }, [roomNum]);
+  }, [roomNum, enter]);
 
   return (
     <div>
