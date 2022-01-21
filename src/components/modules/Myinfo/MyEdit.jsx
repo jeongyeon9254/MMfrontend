@@ -97,7 +97,7 @@ function MyEdit(props) {
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>내정보 수정을 완료할까요?</Title>
             <Grid gap="4px">
-              <Commet>확인 시 메인하면으로 이동합니다.</Commet>
+              <Commet>확인 시 메인화면으로 이동합니다.</Commet>
             </Grid>
           </Grid>
         </Alert>
