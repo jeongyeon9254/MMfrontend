@@ -22,7 +22,7 @@ const AddIntro = props => {
   const locDetail = data.De;
   const longitude = data.X;
   const latitude = data.Y;
-  const fulladress = data.full;
+  const fulladress = data.Full;
 
   console.log(location);
 
