@@ -23,7 +23,7 @@ function MyEdit(props) {
   // 도로명 주소
   const [Kakaoadr, setKakaoadr] = React.useState(false);
   // 도로명 주소 데이터
-  const [Full, setFull] = React.useState(''); // 전체 주소
+  const [Full, setFull] = React.useState(userInfo.locFull); // 전체 주소
   const [LO, setLo] = React.useState(userInfo.location); // 시
   const [De, setDe] = React.useState(userInfo.locDetail); // 도
   const [X, setX] = React.useState(userInfo.longitude); // 경도
