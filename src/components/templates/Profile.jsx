@@ -24,11 +24,6 @@ const Profile = () => {
   const pathName = history.location.pathname;
   const name = pathName.split('/');
 
-  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
-  React.useEffect(() => {
-    dispatch(profileActions.getProfileDB(name[name.length - 1]));
-  }, []);
-
   // 빠른 매칭 스피너
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +31,11 @@ const Profile = () => {
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
   const mbti = profile.interestList;
+
+  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
+  React.useEffect(() => {
+    dispatch(profileActions.getProfileDB(name[name.length - 1]));
+  }, [name[3]]);
 
   // 모달창 관리
   const [modal, setModal] = useState(false);
