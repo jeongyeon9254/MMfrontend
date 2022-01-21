@@ -19,7 +19,7 @@ function PartyOther(props) {
       <Image round src={senderImg} width="40px" margin="0" />
       <Grid width="80%" row gap="4px" align="flex-end">
         <Box width="80%" padding="7px 10px">
-          {children}
+          <p dangerouslySetInnerHTML={{ __html: children }}></p>
         </Box>
         <Date>{data.date}</Date>
       </Grid>
