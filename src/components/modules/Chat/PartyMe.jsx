@@ -10,7 +10,7 @@ function PartyMe(props) {
       <Grid width="80%" row gap="4px" align="end" justify="end">
         <Date>{data.date}</Date>
         <Box width="80%" padding="7px 10px" black>
-          {children}
+          <p dangerouslySetInnerHTML={{ __html: children }}></p>
         </Box>
       </Grid>
     </Grid>
