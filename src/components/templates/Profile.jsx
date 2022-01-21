@@ -127,7 +127,9 @@ const Profile = () => {
         </Grid>
         <Grid row width="auto" justify="center" gap="5px">
           <img className="icon" alt="주소" src={icon_location}></img>
-          <p className="location">서울특별시 {profile.location}</p>
+          <p className="location">
+            {profile.location} {profile.locDetail}
+          </p>
         </Grid>
         <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
           {mbti
