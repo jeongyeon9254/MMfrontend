@@ -22,7 +22,7 @@ function MyinfoBit(props) {
       <Button padding="15px 17px" radius="7px" color="#3F3F41" border="0px" _onClick={OpenClick}>
         <Grid row gap="13px" align="center">
           <Icon src={bit ? bit.image : ''} />
-          <Grid width="auto" gap="5px">
+          <Grid width="81%" gap="5px">
             <Title color={bit.color}>
               <Grid row gap="6px">
                 <p>{bit.title}</p> <span>{bit.name}</span>

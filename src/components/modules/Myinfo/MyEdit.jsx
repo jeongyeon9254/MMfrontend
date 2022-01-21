@@ -106,7 +106,7 @@ function MyEdit(props) {
         내 정보 수정하기
       </Header>
       <ScrollContainer>
-        <Grid padding="18px 30px" gap="20px">
+        <Grid gap="20px">
           <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
           <MyPartBox title="나의 이름" num={nickname.length} err={err} max="4" input>
             <Input
@@ -203,6 +203,26 @@ const Body = styled.div`
 const ScrollContainer = styled.div`
   overflow-y: scroll;
   height: 86%;
+  padding: 18px 23px 18px 30px;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6d6d6;
+    border-radius: 30px;
+  }
+  ::-webkit-scrollbar-button:start:decrement,
+  ::-webkit-scrollbar-button:end:increment {
+    display: none;
+    height: 8px;
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #fff;
+  }
 `;
 
 const Title = styled.p`

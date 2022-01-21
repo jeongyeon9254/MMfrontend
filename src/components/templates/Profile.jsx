@@ -55,6 +55,7 @@ const Profile = () => {
 
   const After = () => {
     setDisconnect(true);
+    dispatch(matchingActions.deleteMatchingChatDB(profile.userId));
     setModal(false);
     exit();
   };

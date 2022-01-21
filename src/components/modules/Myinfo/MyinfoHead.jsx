@@ -52,6 +52,10 @@ const NewHeader = styled.div`
   left: 0px;
   top: 0px;
   padding-top: 20%;
+  @media only screen and (max-width: 450px) {
+    height: 37%;
+    padding-top: 12%;
+  }
 `;
 const ImgIcon = styled.img`
   cursor: pointer;
@@ -71,6 +75,9 @@ const Point = styled.div`
   width: 100%;
   transform: translateX(-50%);
   padding: 0px 28px;
+  @media only screen and (max-width: 450px) {
+    bottom: -10%;
+  }
 `;
 
 const Mename = styled.h2`

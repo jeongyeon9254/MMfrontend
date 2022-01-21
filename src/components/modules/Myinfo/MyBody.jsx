@@ -35,14 +35,13 @@ const Body = styled.div`
   position: absolute;
   left: 0px;
   top: 42%;
-  padding: 0px 20px 0px 30px;
   width: 100%;
 `;
 const ScrollBox = styled.div`
   height: 449px;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0px 10px 30px 0px;
+  padding: 0px 30px 30px 30px;
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -61,6 +60,9 @@ const ScrollBox = styled.div`
   }
   ::-webkit-scrollbar-corner {
     background-color: none;
+  }
+  @media only screen and (max-width: 450px) {
+    height: 50vh;
   }
 `;
 export default MyBody;
