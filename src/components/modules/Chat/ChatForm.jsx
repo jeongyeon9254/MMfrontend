@@ -47,17 +47,11 @@ const ChatForm = props => {
 
   const DeleteMsRoomOrGoBackRoom = () => {
     if (loading) {
-      try {
-        if (MsQuit) {
-          dispatch(ChatAction.deleteChatroomDB(roomId));
-          _onClick();
-        } else {
-          dispatch(ChatAction.putChatroomDB(roomId));
-          _onClick();
-          sendStop();
-        }
-      } catch (e) {
-        console.log(e);
+      sendStop();
+      if (MsQuit) {
+        dispatch(ChatAction.deleteChatroomDB(roomId));
+      } else {
+        dispatch(ChatAction.putChatroomDB(roomId));
       }
     }
   };
@@ -72,6 +66,7 @@ const ChatForm = props => {
       }
     }
   };
+
   const changeNum = () => {
     if (loading) {
       if (page > 0) {

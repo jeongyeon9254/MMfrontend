@@ -197,10 +197,9 @@ const Chat = () => {
         _onClick={() => {
           setPaging(!Paging);
           setData({});
-          dispatch(ChatAction.DeletMsList());
-          dispatch(ChatAction.ms_resetList());
           setroomNum('');
           SetEnter(false);
+          dispatch(ChatAction.ms_resetList());
         }}
       ></ChatForm>
       <Footer />
