@@ -52,11 +52,11 @@ const PostMain = () => {
   const allBox = document.getElementById('allBox');
   const scrollBox = document.getElementById('scrollBox');
   const infinityScroll = () => {
-    const recentHeight = allBox.scrollTop;
+    const recentHeight = parseInt(allBox.scrollTop);
     const scrollBoxHeight = scrollBox.offsetHeight;
     const allBoxHeight = allBox.offsetHeight;
 
-    if (recentHeight + allBoxHeight - 17 === scrollBoxHeight) {
+    if (recentHeight + allBoxHeight === scrollBoxHeight) {
       if (category === 0) {
         dispatch(postAcitions.getPostScrollDB(page));
       } else {
@@ -131,9 +131,9 @@ const PostMain = () => {
 };
 
 const PostBox = styled.div`
-  overflow: scroll;
-  height: calc(100% + 105px);
-  padding: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100% + 89px);
   position: relative;
   .postBtnBox {
     position: fixed;
@@ -149,6 +149,25 @@ const PostBox = styled.div`
   #scrollBox {
     padding-top: 60px;
     box-sizing: border-box;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d8d8d8;
+    border-radius: 30px;
+  }
+  ::-webkit-scrollbar-button:start:decrement,
+  ::-webkit-scrollbar-button:end:increment {
+    display: none;
+    height: 8px;
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: none;
   }
 `;
 
