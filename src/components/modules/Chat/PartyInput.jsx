@@ -29,7 +29,7 @@ function PartyInput(props) {
       var urlRegex = /(https?:\/\/[^\s]+)/g;
       console.log(urlRegex);
       return text.replace(urlRegex, function (url) {
-        return '<a href="' + url + '">' + url + '</a>';
+        return '<a target="_blank" href="' + url + '">' + url + '</a>';
       });
     } catch (e) {
       console.log(e);
