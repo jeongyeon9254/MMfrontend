@@ -36,6 +36,7 @@ const Header = props => {
     sendStop,
     deleteChatroomAction,
     setMyInfo,
+    login,
   } = props;
 
   const styles = {
@@ -44,6 +45,7 @@ const Header = props => {
     bg,
     white,
     zIndex,
+    login,
   };
 
   const dispatch = useDispatch();
@@ -116,9 +118,10 @@ const Header = props => {
               setMyInfo();
             }}
           >
-            내 위치
+            {login ? null : <p>내 위치</p>}
           </MyLocation>
         ) : null}
+
         {detail ? (
           name === defaultName ? (
             <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail>

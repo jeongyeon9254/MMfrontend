@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Input, Grid, Button, Image, Alert } from '../../element';
-import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyLocation, MyImgFile } from './index';
+import { Input, Grid, Button, Alert } from '../../element';
+import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyImgFile } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import KakaoAddr from '../AddMyInfo/KakaoAddress';
@@ -19,15 +19,15 @@ function MyEdit(props) {
   const [Mbti, SetMbti] = React.useState(userInfo.mbti);
   const [Int, SetInt] = React.useState([]);
   const [Img, SetImg] = React.useState(userInfo.profileImage);
-  const [Location, SetLocation] = React.useState(userInfo.location);
 
   // 도로명 주소
   const [Kakaoadr, setKakaoadr] = React.useState(false);
-  const [Full, setFull] = React.useState('');
-  const [LO, setLo] = React.useState(userInfo.location);
-  const [De, setDe] = React.useState(userInfo.locDetail);
-  const [X, setX] = React.useState(userInfo.longitude);
-  const [Y, setY] = React.useState(userInfo.latitude);
+  // 도로명 주소 데이터
+  const [Full, setFull] = React.useState(''); // 전체 주소
+  const [LO, setLo] = React.useState(userInfo.location); // 시
+  const [De, setDe] = React.useState(userInfo.locDetail); // 도
+  const [X, setX] = React.useState(userInfo.longitude); // 경도
+  const [Y, setY] = React.useState(userInfo.latitude); // 위도
 
   const [Alt, setAlt] = React.useState(false);
 
@@ -40,9 +40,6 @@ function MyEdit(props) {
   };
   const ImgCheck = item => {
     SetImg(item);
-  };
-  const ActiveLocal = item => {
-    SetLocation(item);
   };
 
   const AddInfo = {
@@ -57,6 +54,7 @@ function MyEdit(props) {
     mbti: Mbti,
     interestList: Int,
   };
+
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
       return true;
@@ -124,7 +122,7 @@ function MyEdit(props) {
             />
           </MyPartBox>
           <MyPartBox title="나의 주소">
-            <Grid wrap="nowrap" row gap="3px" align="flex-end">
+            <Grid wrap="nowrap" row gap="10px" align="flex-end">
               <Input _value={Full || ''} _readOnly _borderColor="#E1E1E1" />
               <Grid width="150px">
                 <Button
@@ -137,7 +135,6 @@ function MyEdit(props) {
                 </Button>
               </Grid>
             </Grid>
-
             {Kakaoadr ? (
               <KakaoAdrBox>
                 <KakaoAddr

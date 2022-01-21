@@ -12,7 +12,6 @@ const AddIntro = props => {
 
   const { file, data, mbti, duplicated, show, Control } = props;
 
-  const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
 
   // 모달창
