@@ -24,6 +24,7 @@ const Chat = () => {
   // 채팅방을 받아서 저장 해 놓고 쓴다.
   // const rooms = useSelector(state => state.chat.room);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const [In, Inset] = React.useState(true);
   const [open, setOpen] = React.useState(true);
   const [enter, SetEnter] = React.useState(false);
   const [Paging, setPaging] = React.useState(false);
@@ -142,7 +143,6 @@ const Chat = () => {
     }
   };
   React.useEffect(() => {
-    dispatch(ChatAction.getChatRoomListDB());
     if (roomNum) {
       try {
         wsConnectSubscribe(roomNum);
@@ -155,6 +155,9 @@ const Chat = () => {
     }
   }, [roomNum, enter]);
 
+  React.useEffect(() => {
+    dispatch(ChatAction.getChatRoomListDB());
+  }, []);
   return (
     <div>
       <Header>채팅</Header>
@@ -174,6 +177,7 @@ const Chat = () => {
                     dispatch(ChatAction.getRecentlyMsListDB(x.roomId, 0));
                     //채팅방 입장 할때
                     SetEnter(true);
+                    Inset(false);
                   }}
                   data={x}
                   key={idx}
