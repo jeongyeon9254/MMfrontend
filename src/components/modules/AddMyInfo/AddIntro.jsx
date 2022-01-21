@@ -12,7 +12,6 @@ const AddIntro = props => {
 
   const { file, data, mbti, duplicated, show, Control } = props;
 
-  const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
 
   // 모달창
@@ -23,6 +22,7 @@ const AddIntro = props => {
   const locDetail = data.De;
   const longitude = data.X;
   const latitude = data.Y;
+  const fulladress = data.Full;
 
   console.log(location);
 
@@ -37,6 +37,7 @@ const AddIntro = props => {
     interestList: duplicated,
     longitude: longitude,
     latitude: latitude,
+    locFull: fulladress,
   };
   console.log(userInfo);
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import { Grid } from '../../element';
 
 const KakaoAddress = props => {
   const [Full, setFull] = React.useState('');
@@ -9,6 +8,7 @@ const KakaoAddress = props => {
   const [X, setX] = React.useState('');
   const [Y, setY] = React.useState('');
 
+  // 도로명 주소 데이터를 부모 컴포넌트로 넘김
   React.useEffect(() => {
     props.setFull(Full);
   }, [Full]);
@@ -42,22 +42,21 @@ const KakaoAddress = props => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-
+    // 주소 -> 좌표 변환
     const { kakao } = window;
     var geocoder = new kakao.maps.services.Geocoder();
-
     geocoder.addressSearch(fullAddress, function (results, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
-        const addressName = results[0].address.address_name;
-        const location = results[0].address.region_1depth_name;
+        const addressName = results[0].address.address_name; // 전체 주소
+        const location = results[0].address.region_1depth_name; // 시
         const locDetail = results[0].address.region_2depth_name;
         const ArrLocDetail = locDetail.split(' ');
-        const ArrLocDetail_1 = ArrLocDetail[0];
-        console.log(ArrLocDetail_1);
-        const x = results[0].address.x;
-        const y = results[0].address.y;
+        const ArrLocDetail_1 = ArrLocDetail[0]; // 도
+        const x = results[0].address.x; // 경도
+        const y = results[0].address.y; // 위도
         console.log(results[0]);
+        // 도로명 주소 데이터를 함수 밖으로 꺼냄
         setFull(addressName);
         setLo(location);
         setDe(ArrLocDetail_1);
@@ -67,19 +66,10 @@ const KakaoAddress = props => {
       }
     });
   };
-  const modalStyle = {
-    position: 'absolute',
-    top: 50,
-    left: '0px',
-    zIndex: '100',
-    border: '1px solid #d4c8c8',
-    overflow: 'hidden',
-    height: '450px',
-  };
 
   return (
-    <div style={{ width: '100%' }}>
-      <DaumPostcode style={modalStyle} onComplete={handleComplete} />;
+    <div>
+      <DaumPostcode onComplete={handleComplete} />
     </div>
   );
 };

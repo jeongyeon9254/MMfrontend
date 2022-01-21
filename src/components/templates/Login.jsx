@@ -14,8 +14,8 @@ const Login = props => {
   const kakaoclick = () => {
     dispatch(userAction.logInDB());
     window.location.href =
-      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
-    // `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
+      // 'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
+      `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
   };
   const [open, setopen] = React.useState(false);
 
@@ -29,26 +29,23 @@ const Login = props => {
 
   return (
     <>
-      <Header main>로그인</Header>
+      <Header main login>
+        로그인
+      </Header>
       {open ? <Start No={no} /> : null}
       <Point>
-        <Grid align="center" padding="0px">
-          <Grid width="112px" height="110px">
-            <Image nobackground src={Logo}></Image>
-          </Grid>
-          <Grid margin="53px 0px 0px 0px">
-            <LoginBox>
-              <p>카카오톡으로 간편로그인을 진행해주세요!</p>
-              <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
-              <SampleBtn
-                onClick={() => {
-                  history.push('/sample');
-                }}
-              >
-                비즈케미 둘러보기
-              </SampleBtn>
-            </LoginBox>
-          </Grid>
+        <Grid margin="53px 0px 0px 0px">
+          <LoginBox>
+            <p>카카오톡으로 간편로그인을 진행해주세요!</p>
+            <KaKaoBtn onClick={kakaoclick}>카카오톡 간편로그인</KaKaoBtn>
+            <SampleBtn
+              onClick={() => {
+                history.push('/sample');
+              }}
+            >
+              비즈케미 둘러보기
+            </SampleBtn>
+          </LoginBox>
         </Grid>
       </Point>
     </>
@@ -62,7 +59,7 @@ const Point = styled.div`
   width: 100%;
 `;
 const KaKaoBtn = styled.button`
-  background-image: url(${imgfile});
+  background-color: #fde500;
   padding: 0;
   margin: 0;
   width: 300px;
