@@ -64,7 +64,9 @@ const MapList = props => {
                     </Grid>
                     <Grid row width="auto">
                       <img className="icon" alt="주소" src={icon_location}></img>
-                      <p className="location">서울특별시 {list.location}</p>
+                      <p className="location">
+                        {list.location} {list.locDetail}
+                      </p>
                     </Grid>
                   </Grid>
                   <Box width="40%" padding="6px 9px">
@@ -91,6 +93,7 @@ const MapListStyle = styled.div`
   animation: list-show 0.5s;
   background: #fff;
   border-radius: 30px 30px 0 0;
+  color: ${props => props.theme.colors.gray_2};
   @keyframes list-show {
     from {
       margin-bottom: -450px;
@@ -130,6 +133,7 @@ const MapListStyle = styled.div`
     font-weight: 700;
     line-height: 1.1;
     margin-top: 1px;
+    color: ${props => props.theme.colors.gray_2};
     font-size: ${props => props.theme.fontSizes.base};
   }
   .card .location {

@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Input, Grid, Button, Image, Alert } from '../../element';
-import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyLocation, MyImgFile } from './index';
+import { Input, Grid, Button, Alert } from '../../element';
+import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyImgFile } from './index';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
+import KakaoAddr from '../AddMyInfo/KakaoAddress';
+
 function MyEdit(props) {
   const dispatch = useDispatch();
   const { Open, _onClick } = props;
@@ -17,8 +19,15 @@ function MyEdit(props) {
   const [Mbti, SetMbti] = React.useState(userInfo.mbti);
   const [Int, SetInt] = React.useState([]);
   const [Img, SetImg] = React.useState(userInfo.profileImage);
-  const [Location, SetLocation] = React.useState(userInfo.location);
 
+  // 도로명 주소
+  const [Kakaoadr, setKakaoadr] = React.useState(false);
+  // 도로명 주소 데이터
+  const [Full, setFull] = React.useState(userInfo.locFull); // 전체 주소
+  const [LO, setLo] = React.useState(userInfo.location); // 시
+  const [De, setDe] = React.useState(userInfo.locDetail); // 도
+  const [X, setX] = React.useState(userInfo.longitude); // 경도
+  const [Y, setY] = React.useState(userInfo.latitude); // 위도
   const [Alt, setAlt] = React.useState(false);
 
   const SetEmit = item => {
@@ -31,19 +40,23 @@ function MyEdit(props) {
   const ImgCheck = item => {
     SetImg(item);
   };
-  const ActiveLocal = item => {
-    SetLocation(item);
-  };
 
   const AddInfo = {
     nickname: nickname,
     gender: userInfo.gender,
     ageRange: userInfo.ageRange,
     intro: textarea,
-    location: Location.location ? Location.location : Location,
+    location: LO,
+    locDetail: De,
+    longitude: X,
+    latitude: Y,
     mbti: Mbti,
+    locFull: Full,
     interestList: Int,
   };
+
+  console.log(AddInfo);
+
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
       return true;
@@ -93,7 +106,7 @@ function MyEdit(props) {
         내 정보 수정하기
       </Header>
       <ScrollContainer>
-        <Grid padding="18px 30px" gap="20px">
+        <Grid gap="20px">
           <MyImgFile Img={Img} mbti={userInfo.mbti} Emit={ImgCheck}></MyImgFile>
           <MyPartBox title="나의 이름" num={nickname.length} err={err} max="4" input>
             <Input
@@ -111,7 +124,31 @@ function MyEdit(props) {
             />
           </MyPartBox>
           <MyPartBox title="나의 주소">
-            <MyLocation Location={Location} Emit={ActiveLocal}></MyLocation>
+            <Grid wrap="nowrap" row gap="10px" align="flex-end">
+              <Input _value={Full || ''} _readOnly _borderColor="#E1E1E1" />
+              <Grid width="150px">
+                <Button
+                  BtnAdd
+                  _onClick={() => {
+                    setKakaoadr(true);
+                  }}
+                >
+                  주소 찾기
+                </Button>
+              </Grid>
+            </Grid>
+            {Kakaoadr ? (
+              <KakaoAdrBox>
+                <KakaoAddr
+                  setFull={setFull}
+                  setLo={setLo}
+                  setDe={setDe}
+                  setX={setX}
+                  setY={setY}
+                  setKakaoadr={setKakaoadr}
+                />
+              </KakaoAdrBox>
+            ) : null}
           </MyPartBox>
           <MyPartBox title="나의 MBTI">
             <Mymbtibtn mbti={userInfo.mbti} Emit={SetEmit}></Mymbtibtn>
@@ -166,6 +203,26 @@ const Body = styled.div`
 const ScrollContainer = styled.div`
   overflow-y: scroll;
   height: 86%;
+  padding: 18px 23px 18px 30px;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6d6d6;
+    border-radius: 30px;
+  }
+  ::-webkit-scrollbar-button:start:decrement,
+  ::-webkit-scrollbar-button:end:increment {
+    display: none;
+    height: 8px;
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #fff;
+  }
 `;
 
 const Title = styled.p`
@@ -175,5 +232,16 @@ const Title = styled.p`
 
 const Commet = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
+`;
+
+const KakaoAdrBox = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 85px;
+  z-index: 100;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
 `;
 export default MyEdit;

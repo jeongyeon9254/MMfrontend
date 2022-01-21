@@ -37,6 +37,7 @@ const SetCategory = props => {
 const Title = styled.h3`
   font-weight: 700;
   margin-bottom: 15px;
+  color: ${props => props.theme.colors.gray_2};
 `;
 
 export default SetCategory;

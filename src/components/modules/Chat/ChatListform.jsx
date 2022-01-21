@@ -5,7 +5,6 @@ import { Grid, Image } from '../../element';
 
 function ChatListform(props) {
   const { data, username } = props;
-  console.log(data);
   return data ? (
     <>
       {data.map((item, idx) => {

@@ -22,7 +22,7 @@ import MainModal from '../modules/Main/MainModal.jsx';
 // Js
 import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
 
-const Main = () => {
+const Main = props => {
   const dispatch = useDispatch();
 
   // 로컬스토리지에서 내정보를 가져옵니다
@@ -61,8 +61,8 @@ const Main = () => {
   };
 
   // 로케이션 정보
-  const [bigLocation, setBigLocation] = useState('지역을');
-  const [location, setLocation] = useState('선택해주세요');
+  const [bigLocation, setBigLocation] = useState('지역을 선택해주세요');
+  const [location, setLocation] = useState('지역선택');
 
   // 맵리스트 모달창 관리
   const [modal, setModal] = useState(false);
@@ -78,11 +78,12 @@ const Main = () => {
     dispatch(mainActions.getListDB());
   }, []);
 
+  // 내위치 클릭시 메인화면 초기화
   const setMyInfo = () => {
     setBigNum(userLocation + 1);
     setSmallNum(userDetailLocation + 1);
-    setBigLocation('지역을');
-    setLocation('선택해주세요');
+    setBigLocation('지역을 선택해주세요');
+    setLocation('지역선택');
   };
 
   // 알럿창 관리
@@ -107,13 +108,15 @@ const Main = () => {
         </Alert>
       ) : null}
       <Header main setMyInfo={setMyInfo}>
-        자동배포 시험3
+        메인화면
       </Header>
 
       {/* 지역 선택 버튼 */}
       <LocationBox>
         <button onClick={onBigLocation}>{bigLocation}</button>
-        <button onClick={onLocation}>{location}</button>
+        {bigLocation !== '지역을 선택해주세요' ? (
+          <button onClick={onLocation}>{location}</button>
+        ) : null}
       </LocationBox>
 
       {/* 카테고리 선택 버튼 */}
@@ -224,7 +227,7 @@ const LocationBox = styled.div`
     border: none;
     background-color: #f9f9f9;
     font-weight: 700;
-    color: #313131;
+    color: ${props => props.theme.colors.gray_2};
     font-size: ${props => (props.size ? props.size : props.theme.fontSizes.small)};
     cursor: pointer;
   }

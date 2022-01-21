@@ -10,7 +10,7 @@ function PartyMe(props) {
       <Grid width="80%" row gap="4px" align="end" justify="end">
         <Date>{data.date}</Date>
         <Box width="80%" padding="7px 10px" black>
-          {children}
+          <Text dangerouslySetInnerHTML={{ __html: children }}></Text>
         </Box>
       </Grid>
     </Grid>
@@ -19,5 +19,12 @@ function PartyMe(props) {
 const Date = styled.p`
   font-size: 9px;
   color: #9b9b9b;
+`;
+const Text = styled.p`
+  a {
+    line-height: 1.5;
+    color: #b9ceff;
+    font-weight: normal;
+  }
 `;
 export default PartyMe;

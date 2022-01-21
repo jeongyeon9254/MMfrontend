@@ -24,11 +24,6 @@ const Profile = () => {
   const pathName = history.location.pathname;
   const name = pathName.split('/');
 
-  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
-  React.useEffect(() => {
-    dispatch(profileActions.getProfileDB(name[name.length - 1]));
-  }, []);
-
   // 빠른 매칭 스피너
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +31,11 @@ const Profile = () => {
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
   const mbti = profile.interestList;
+
+  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
+  React.useEffect(() => {
+    dispatch(profileActions.getProfileDB(name[name.length - 1]));
+  }, [name[3]]);
 
   // 모달창 관리
   const [modal, setModal] = useState(false);
@@ -55,6 +55,7 @@ const Profile = () => {
 
   const After = () => {
     setDisconnect(true);
+    dispatch(matchingActions.deleteMatchingChatDB(profile.userId));
     setModal(false);
     exit();
   };
@@ -127,7 +128,9 @@ const Profile = () => {
         </Grid>
         <Grid row width="auto" justify="center" gap="5px">
           <img className="icon" alt="주소" src={icon_location}></img>
-          <p className="location">서울특별시 {profile.location}</p>
+          <p className="location">
+            {profile.location} {profile.locDetail}
+          </p>
         </Grid>
         <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
           {mbti

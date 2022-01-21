@@ -12,7 +12,6 @@ const AddIntro = props => {
 
   const { file, data, mbti, duplicated, show, Control } = props;
 
-  const [BackInterest, setBackInterest] = useState(false);
   const [comment, setComment] = useState('');
 
   // 모달창
@@ -23,8 +22,7 @@ const AddIntro = props => {
   const locDetail = data.De;
   const longitude = data.X;
   const latitude = data.Y;
-
-  console.log(location);
+  const fulladress = data.Full;
 
   const userInfo = {
     nickname: file.nickname,
@@ -37,8 +35,8 @@ const AddIntro = props => {
     interestList: duplicated,
     longitude: longitude,
     latitude: latitude,
+    locFull: fulladress,
   };
-  console.log(userInfo);
 
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {

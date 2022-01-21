@@ -7,9 +7,6 @@ import { returnTime } from '../../../shared/Time';
 function PartyOther(props) {
   const { children, data } = props;
   const { senderImg, senderId } = props.data;
-
-  const diffTime = returnTime(data.date);
-  console.log(diffTime);
   return (
     <Grid
       row
@@ -22,9 +19,9 @@ function PartyOther(props) {
       <Image round src={senderImg} width="40px" margin="0" />
       <Grid width="80%" row gap="4px" align="flex-end">
         <Box width="80%" padding="7px 10px">
-          {children}
+          <Text dangerouslySetInnerHTML={{ __html: children }}></Text>
         </Box>
-        <Date>{diffTime}</Date>
+        <Date>{data.date}</Date>
       </Grid>
     </Grid>
   );
@@ -32,5 +29,11 @@ function PartyOther(props) {
 const Date = styled.p`
   font-size: 9px;
   color: #9b9b9b;
+`;
+const Text = styled.p`
+  a {
+    line-height: 1.5;
+    font-weight: normal;
+  }
 `;
 export default PartyOther;

@@ -43,13 +43,13 @@ export const ImgBg = styled.div`
 export const ContainerStyle = styled.div`
   box-sizing: border-box;
   width: 100%;
-  max-width: 376px;
-  max-height: 810px;
+  max-width: 372px;
+  max-height: 812px;
   height: 100%;
   padding-top: 82px;
   padding-bottom: 89px;
   background-color: ${props => props.theme.colors.white};
-  border-radius: 32px;
+  border-radius: 43px;
   overflow: hidden;
   position: absolute;
   left: 50%;

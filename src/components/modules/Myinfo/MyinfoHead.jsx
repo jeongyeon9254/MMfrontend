@@ -28,7 +28,13 @@ function MyinfoHead(props) {
             <Local>
               <Grid row gap="6px" align="center">
                 <img src={icon_location_w} alt="" />{' '}
-                <span>서울특별시 {userInfo.location ? userInfo.location : userInfo.location}</span>
+                {userInfo ? (
+                  <span>
+                    {userInfo.location} {userInfo.locDetail}{' '}
+                  </span>
+                ) : (
+                  ''
+                )}
               </Grid>
             </Local>
           </Grid>
@@ -46,9 +52,14 @@ const NewHeader = styled.div`
   left: 0px;
   top: 0px;
   padding-top: 20%;
+  @media only screen and (max-width: 450px) {
+    height: 37%;
+    padding-top: 12%;
+  }
 `;
 const ImgIcon = styled.img`
   cursor: pointer;
+  width: 24px;
 `;
 const ImgBit = styled.img`
   position: absolute;
@@ -64,6 +75,9 @@ const Point = styled.div`
   width: 100%;
   transform: translateX(-50%);
   padding: 0px 28px;
+  @media only screen and (max-width: 450px) {
+    bottom: -10%;
+  }
 `;
 
 const Mename = styled.h2`
