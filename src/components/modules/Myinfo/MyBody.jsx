@@ -37,10 +37,9 @@ const Body = styled.div`
   top: 42%;
   padding: 0px 20px 0px 30px;
   width: 100%;
-  height: 413px;
 `;
 const ScrollBox = styled.div`
-  height: 413px;
+  height: 449px;
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0px 10px 30px 0px;
