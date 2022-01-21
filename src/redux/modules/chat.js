@@ -4,6 +4,7 @@ import {
   getChatRoomList,
   postChatRoomList,
   getChatMsList,
+  putChatroom,
   deleteChatroom,
 } from '../../api/modules/chat';
 import { actionCreators as matchingAction } from './matching';
@@ -111,11 +112,21 @@ const PostChatting = req => {
   };
 };
 
-// 채팅방 삭제
+// 채팅방 나가기
+const putChatroomDB = roomId => {
+  return async function (dispatch, getState, { history }) {
+    await putChatroom(roomId);
+    dispatch(DeletRoomList(roomId));
+    history.push('/chat');
+  };
+};
+
+// 채팅방 나가기
 const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
     dispatch(DeletRoomList(roomId));
+    history.push('/chat');
   };
 };
 
@@ -198,8 +209,9 @@ const actionCreators = {
   DeletMsList,
   resetList,
   getRecentlyMsListDB,
-  deleteChatroomDB,
+  putChatroomDB,
   ms_resetList,
+  deleteChatroomDB,
 };
 
 export { actionCreators };

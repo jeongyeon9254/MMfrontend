@@ -12,6 +12,7 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop, Emit } = props;
+
   const { guestNick, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
@@ -22,6 +23,7 @@ const ChatForm = props => {
   const scrollRef = React.useRef(null);
   const BoxRef = React.useRef({});
   const [On, SetOn] = React.useState(false);
+  const [MsQuit, SetMsQuit] = React.useState(false);
   const [ChildTop, SetChildTop] = React.useState('');
 
   console.log(BoxRef);
@@ -32,14 +34,34 @@ const ChatForm = props => {
     }
   };
 
-  const deleteChatroomAction = () => {
-    try {
-      dispatch(ChatAction.deleteChatroomDB(roomId));
-      _onClick();
-    } catch (e) {
-      console.log(e);
+  const CatchQuit = chat => {
+    chat.forEach(el => {
+      el.forEach(els => {
+        if (els.type === 'QUIT') {
+          console.log(els);
+          SetMsQuit(true);
+        }
+      });
+    });
+  };
+
+  const DeleteMsRoomOrGoBackRoom = () => {
+    if (loading) {
+      try {
+        if (MsQuit) {
+          dispatch(ChatAction.deleteChatroomDB(roomId));
+          _onClick();
+        } else {
+          dispatch(ChatAction.putChatroomDB(roomId));
+          _onClick();
+          sendStop();
+        }
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
+
   const InfiniteStairs = () => {
     if (loading) {
       if (nowNum < total) {
@@ -66,6 +88,12 @@ const ChatForm = props => {
   };
 
   React.useEffect(() => {
+    if (loading) {
+      CatchQuit(Chatting);
+    }
+  }, [loading, Chatting]);
+
+  React.useEffect(() => {
     changeNum();
   }, [Chatting.length]);
 
@@ -90,9 +118,11 @@ const ChatForm = props => {
       <Header
         Page
         point="absolute"
-        _onClick={_onClick}
-        sendStop={sendStop}
-        deleteChatroomAction={deleteChatroomAction}
+        _onClick={() => {
+          _onClick();
+          SetMsQuit(false);
+        }}
+        DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
         chat
       >
         {guestNick}
@@ -121,6 +151,7 @@ const ChatForm = props => {
         </div>
       </ScrollBox>
       <PartyInput
+        MsQuit={MsQuit}
         sendMessage={sendMessage}
         roomId={roomId}
         Emit={SetOn}
