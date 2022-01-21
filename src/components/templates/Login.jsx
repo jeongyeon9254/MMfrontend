@@ -29,7 +29,9 @@ const Login = props => {
 
   return (
     <>
-      <Header main>로그인</Header>
+      <Header main login>
+        로그인
+      </Header>
       {open ? <Start No={no} /> : null}
       <Grid align="center" padding="203px 0px 0px 0px">
         <Grid width="112px" height="110px">
@@ -38,7 +40,7 @@ const Login = props => {
         <Grid margin="53px 0px 0px 0px">
           <LoginBox>
             <p>카카오톡으로 간편로그인을 진행해주세요!</p>
-            <KaKaoBtn onClick={kakaoclick}></KaKaoBtn>
+            <KaKaoBtn onClick={kakaoclick}>카카오톡 간편로그인</KaKaoBtn>
             <SampleBtn
               onClick={() => {
                 history.push('/sample');
@@ -54,7 +56,7 @@ const Login = props => {
 };
 
 const KaKaoBtn = styled.button`
-  background-image: url(${imgfile});
+  background-color: #fde500;
   padding: 0;
   margin: 0;
   width: 300px;

@@ -27,6 +27,7 @@ function MyinfoHead(props) {
             </Grid>
             <Local>
               <Grid row gap="6px" align="center">
+
                 <img src={icon_location_w} alt="" />{' '}
                 {userInfo ? (
                   <span>
