@@ -14,8 +14,8 @@ const Login = props => {
   const kakaoclick = () => {
     dispatch(userAction.logInDB());
     window.location.href =
-      // 'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
-      `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
+      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
+    // `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
   };
   const [open, setopen] = React.useState(false);
 
