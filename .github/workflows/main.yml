@@ -14,24 +14,27 @@ jobs:
         node-version: [16.13.0]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@master
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node modules      # node modules 캐싱
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-yarn-
 
-      - name: install packages
-        run: yarn install
+      - name: Set up Node
+        uses: actions/setup-node@v1.1.0
+        with:
+          node-version: '10.x'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Build                  
         run: yarn build
