@@ -100,6 +100,8 @@ const addPostDB = multipartFile => {
       history.replace('/PostMain');
     } catch (err) {
       console.log(err);
+      alert('이미지 용량 문제');
+      history.push('/');
     }
   };
 };
