@@ -26,7 +26,6 @@ const AddComment = props => {
   // 글 작성 이벤트
   const addComment = () => {
     if (comment === '') {
-      setTextAlt(true);
       return false;
     }
     dispatch(postActions.addCommentsDB(postId, comment));
@@ -42,21 +41,6 @@ const AddComment = props => {
 
   return (
     <CommentBox>
-      {textAlt ? (
-        <Alert
-          MyBit
-          check
-          yes={() => {
-            setTextAlt(false);
-          }}
-        >
-          <Grid gap="15px" padding="16px 8px 8px 24px">
-            <Grid gap="4px">
-              <p>댓글을 작성해 주세요.</p>
-            </Grid>
-          </Grid>
-        </Alert>
-      ) : null}
       <Grid row width="100%" gap="10px">
         <Image src={data.profileImage} round width="37px" margin="0"></Image>
         <input
