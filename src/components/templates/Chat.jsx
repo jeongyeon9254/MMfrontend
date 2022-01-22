@@ -139,6 +139,7 @@ const Chat = () => {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
+
   React.useEffect(() => {
     if (roomNum) {
       try {
@@ -175,6 +176,7 @@ const Chat = () => {
                     dispatch(ChatAction.getRecentlyMsListDB(x.roomId, 0));
                     //채팅방 입장 할때
                     SetEnter(true);
+                    Inset(true);
                   }}
                   data={x}
                   key={idx}
