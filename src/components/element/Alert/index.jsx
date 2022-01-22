@@ -132,7 +132,7 @@ Alert.defaultProps = {
 };
 
 const AlertBox = styled.div`
-  height: 876px;
+  height: 100%;
   width: 441px;
   position: fixed;
   left: 50%;
