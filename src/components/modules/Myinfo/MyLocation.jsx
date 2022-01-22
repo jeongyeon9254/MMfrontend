@@ -8,7 +8,6 @@ function MyLocation(props) {
   const { Location, Emit } = props;
   const [active, SetActive] = React.useState(Location);
   const LocationFuc = item => {
-    // console.log(item);
     SetActive(item);
   };
 
