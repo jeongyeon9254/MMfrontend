@@ -93,7 +93,7 @@ const IsSelect = styled.div`
   border-radius: 7px;
   border: 1px solid #e1e1e1;
   position: relative;
-  z-index: 20;
+  z-index: 10;
   height: ${p => p.high};
 `;
 const Tiactive = styled.p`

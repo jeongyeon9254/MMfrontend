@@ -88,7 +88,7 @@ const Profile = () => {
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>매칭을 신청하시겠습니까?</Title>
             <Grid gap="4px">
-              <Content>{profile.nickname}님께 매치을 신청할까요?</Content>
+              <Content>{profile.nickname}님께 매칭을 신청할까요?</Content>
               <Content>나와 딱 맞는 친구일지 몰라요!</Content>
             </Grid>
           </Grid>

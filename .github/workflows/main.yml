@@ -1,48 +1,47 @@
-    name: Deploy to Production
-    
-    on:
-      push:
-        branches:
-          - master
-    
-    jobs:
-      deploy:
-        name: Build, Deploy to S3 bucket
-        runs-on: [ubuntu-latest]
-    
-        strategy:
-          matrix:
-            node-version: [16.13.0]
-    
-        steps:
-          - uses: actions/checkout@v2
-    
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v1
-            with:
-              node-version: ${{ matrix.node-version }}
-    
-          - name: Cache node modules      # node modules 캐싱
-            uses: actions/cache@v1
-            with:
-              path: node_modules
-              key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-              restore-keys: |
-                ${{ runner.OS }}-build-
-                ${{ runner.OS }}-
+name: Deploy to Production
 
-          - name: Install Dependencies    
-            run: npm install
+on:
+  push:
+    branches: [ main ]
 
-          - name: Build                  
-            run: npm run build
+jobs:
+  deploy:
+    name: Build, Deploy to S3 bucket
+    runs-on: [ubuntu-latest]
 
-          - name: Deploy                 
-            env:
-              AWS_ACCESS_KEY_ID: ${{ secrets. AWS_IAM_MANAGER_KEY_ID }}
-              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
-            run: 
-              aws s3 cp 
-                --recursive 
-                --region us-east-1
-                build s3://bizchemy.com
+    strategy:
+      matrix:
+        node-version: [16.13.0]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules      # node modules 캐싱
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies    
+        run: yarn install
+
+      - name: Build                  
+        run: yarn build
+
+      - name: Deploy                 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets. AWS_IAM_MANAGER_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
+        run: 
+          aws s3 cp 
+            --recursive 
+            --region us-east-1
+            build s3://bizchemy.com
