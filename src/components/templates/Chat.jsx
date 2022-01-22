@@ -157,12 +157,6 @@ const Chat = () => {
     dispatch(ChatAction.getChatRoomListDB());
   }, []);
 
-  // React.useEffect(()=>{
-  //   if(In){
-  //     waitForConnection()
-  //   }
-  // },[In])
-
   return (
     <div>
       <Header>채팅</Header>

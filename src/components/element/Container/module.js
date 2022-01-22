@@ -4,10 +4,12 @@ import Phone from '../../../img/Icon/phone.png';
 // 크롬 ios 주소창까지 포함한 height값
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
+
 export const ImgBg = styled.div`
   background-image: url(${Phone});
   background-repeat: no-repeat;
@@ -21,6 +23,14 @@ export const ImgBg = styled.div`
   margin: -429px 0 0 -213px;
   z-index: 99;
   overflow: hidden;
+  @media only screen and (max-height: 1050px) {
+    background-image: none;
+    height: 100%;
+    width: 372px;
+    top: 0px;
+    left: 67%;
+    margin: 0px 0px 0px -176px;
+  }
   @media only screen and (max-width: 1050px) {
     left: 50%;
     top: 50%;
@@ -55,6 +65,14 @@ export const ContainerStyle = styled.div`
   left: 50%;
   top: 21px;
   transform: translateX(-50%);
+  @media only screen and (max-height: 1050px) {
+    border: 1px solid #999;
+    border-radius: 0px;
+    max-height: 100%;
+    left: 0px;
+    top: 0px;
+    transform: translateX(0px);
+  }
   @media only screen and (max-width: 1050px) {
     height: 100vh;
     max-height: 100%;
