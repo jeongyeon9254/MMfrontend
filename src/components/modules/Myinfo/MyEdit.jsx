@@ -55,8 +55,6 @@ function MyEdit(props) {
     interestList: Int,
   };
 
-  console.log(AddInfo);
-
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
       return true;
@@ -66,19 +64,14 @@ function MyEdit(props) {
   }
 
   const ClickEvent = () => {
-    console.log(AddInfo);
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
     const formData = new FormData();
     const emptyFile = new File([''], 'empty');
     const Check = isString(Img);
-    console.log(`${Check} : ${Img} 는 ${typeof Img}`);
     formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
-    for (let value of formData.values()) {
-      console.log(value);
-    }
     dispatch(userAction.userInfoPut(formData));
   };
 
@@ -97,7 +90,7 @@ function MyEdit(props) {
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>내정보 수정을 완료할까요?</Title>
             <Grid gap="4px">
-              <Commet>확인 시 메인하면으로 이동합니다.</Commet>
+              <Commet>확인 시 메인화면으로 이동합니다.</Commet>
             </Grid>
           </Grid>
         </Alert>

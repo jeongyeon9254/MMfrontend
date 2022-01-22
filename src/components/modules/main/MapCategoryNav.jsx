@@ -24,7 +24,7 @@ const MapCategoryNav = props => {
   const { bigNum, smallNum, location, setCategoryAlt } = props;
 
   // nav 리스트 목록
-  const navList = ['전체보기', '운동', '공부', '대화', '제테크', '게임', '기타'];
+  const navList = ['전체보기', '운동', '공부', '대화', '재테크', '게임', '기타'];
 
   // 버튼 클릭시 active 검은색
   const [active, setActive] = useState(0);

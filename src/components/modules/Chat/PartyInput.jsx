@@ -15,7 +15,7 @@ function PartyInput(props) {
   const [Open, SetOpen] = React.useState(false);
   const [Emoticon, SetEmoticon] = React.useState('');
   const [Preview, SetPreview] = React.useState(false);
-  const { roomId, sendMessage, Emit, scrollTomBottom } = props;
+  const { roomId, sendMessage, Emit, scrollTomBottom, MsQuit } = props;
   const date = `${moment().hours()}:${moment().minutes()}`;
   // 보내는거
   const ChatPost = e => {
@@ -27,7 +27,7 @@ function PartyInput(props) {
   function urlify(text) {
     try {
       var urlRegex = /(https?:\/\/[^\s]+)/g;
-      console.log(urlRegex);
+
       return text.replace(urlRegex, function (url) {
         return '<a target="_blank" href="' + url + '">' + url + '</a>';
       });
@@ -49,7 +49,6 @@ function PartyInput(props) {
           date: date,
         };
         sendMessage(ms);
-        // console.log(ms);
         setChatting('');
       }
     }
@@ -64,7 +63,6 @@ function PartyInput(props) {
       date: date,
     };
     sendMessage(icon);
-    // console.log(icon);
     SetPreview(false);
   };
 
@@ -84,63 +82,75 @@ function PartyInput(props) {
       ClickEvent();
     }
   };
-  return (
-    <BottomInput>
-      {disabled ? (
-        <Grid row justify="space-between" padding="12px 17px">
-          <DisabledBox />
-          <DisabledBtn />
-        </Grid>
-      ) : (
-        <>
+  if (!MsQuit) {
+    return (
+      <BottomInput>
+        {disabled ? (
           <Grid row justify="space-between" padding="12px 17px">
-            <InputBox>
-              <Input
-                _radius="78px"
-                _maxWidth="100%"
-                _padding="9px 36px 9px 16px"
-                _value={Chatting}
-                _onChange={ChatPost}
-                onKeyPress={e => {
-                  Pressevent(e);
-                }}
-              />
-              <EmoticonBtn
-                onClick={() => {
-                  SetOpen(!Open);
-                  Emit(!Open);
-                }}
-              >
-                <img src={mood} alt="이모티콘 버튼" />
-              </EmoticonBtn>
-            </InputBox>
-            <Button
-              BtnAdd
-              shadow="0px"
-              size="14px"
-              padding="9px 16px"
-              radius="30px"
-              _onClick={ClickEvent}
-            >
-              전송
-            </Button>
+            <DisabledBox />
+            <DisabledBtn />
           </Grid>
-          {Preview ? (
-            <ChatPreview On={Preview} click={SetPreview} data={Emoticon}></ChatPreview>
-          ) : (
-            ''
-          )}
-          <ChatEmoticon
-            Open={Open}
-            On={Preview}
-            EmoticonSend={EmoticonSend}
-            click={SetPreview}
-            Emit={GetEmoticon}
-          ></ChatEmoticon>
-        </>
-      )}
-    </BottomInput>
-  );
+        ) : (
+          <>
+            <Grid row justify="space-between" padding="12px 17px">
+              <InputBox>
+                <Input
+                  _radius="78px"
+                  _maxWidth="100%"
+                  _padding="9px 36px 9px 16px"
+                  _value={Chatting}
+                  _onChange={ChatPost}
+                  onKeyPress={e => {
+                    Pressevent(e);
+                  }}
+                />
+                <EmoticonBtn
+                  onClick={() => {
+                    SetOpen(!Open);
+                    Emit(!Open);
+                  }}
+                >
+                  <img src={mood} alt="이모티콘 버튼" />
+                </EmoticonBtn>
+              </InputBox>
+              <Button
+                BtnAdd
+                shadow="0px"
+                size="14px"
+                padding="9px 16px"
+                radius="30px"
+                _onClick={ClickEvent}
+              >
+                전송
+              </Button>
+            </Grid>
+            {Preview ? (
+              <ChatPreview On={Preview} click={SetPreview} data={Emoticon}></ChatPreview>
+            ) : (
+              ''
+            )}
+            <ChatEmoticon
+              Open={Open}
+              On={Preview}
+              EmoticonSend={EmoticonSend}
+              click={SetPreview}
+              Emit={GetEmoticon}
+            ></ChatEmoticon>
+          </>
+        )}
+      </BottomInput>
+    );
+  } else {
+    return (
+      <BottomInput>
+        {' '}
+        <Grid row justify="space-between" padding="12px 17px">
+          <FakeInput></FakeInput>
+          <FakeInBtn></FakeInBtn>
+        </Grid>
+      </BottomInput>
+    );
+  }
 }
 const BottomInput = styled.div`
   position: absolute;
@@ -172,6 +182,21 @@ const EmoticonBtn = styled.div`
   right: 9px;
   top: 6px;
   cursor: pointer;
+`;
+
+const FakeInput = styled.div`
+  width: 80%;
+  border-radius: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
+  height: 30px;
+`;
+const FakeInBtn = styled.div`
+  width: 15%;
+  border-radius: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
+  height: 30px;
 `;
 
 export default PartyInput;

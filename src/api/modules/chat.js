@@ -33,10 +33,18 @@ export const getChatMsList = (roomId, page) => {
   });
 };
 
+//채팅방 나가기
+export const putChatroom = roomId => {
+  return instance({
+    method: 'put',
+    url: `/chat/room/${roomId}`,
+  });
+};
+
 //채팅방 삭제
 export const deleteChatroom = roomId => {
   return instance({
-    method: 'put',
+    method: 'delete',
     url: `/chat/room/${roomId}`,
   });
 };

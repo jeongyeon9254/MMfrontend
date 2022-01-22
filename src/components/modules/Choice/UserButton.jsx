@@ -18,13 +18,11 @@ function UserButton(props) {
   };
 
   const ClickRefusal = () => {
-    console.log(`거절하겠습니다: ${guestId}`);
     dispatch(matchingAction.deleteMatchingChatDB(hostInfo.userId));
     _onClick();
   };
 
   const ClickAccept = () => {
-    console.log(`수락하겠습니다: ${guestId}`);
     dispatch(ChatAction.postChatRoomListDB(guestInfo, hostInfo.userId));
   };
   return (

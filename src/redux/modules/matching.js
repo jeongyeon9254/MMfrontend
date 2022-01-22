@@ -62,7 +62,6 @@ const getMatchingSendCheckDB = () => {
 const getMatchingReceiveCheckDB = () => {
   return async function (dispatch, getState, { history }) {
     const res = await getMatchingReceiveCheck();
-    console.log(res);
     dispatch(ListMatchingReceive(res.data));
   };
 };

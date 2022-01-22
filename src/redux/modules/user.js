@@ -28,8 +28,6 @@ const initialState = {
 const logInDB = code => {
   return async function (dispatch, getState, { history }) {
     const res = await kakaoLogin(code);
-    console.log(res);
-    console.log(res.data);
     const token = res.headers.authorization;
 
     setCookie('authorization ', token);
@@ -80,9 +78,7 @@ const getMyPostBoxDB = (page = 0) => {
 const getMypostScrollDB = (page = null) => {
   return async function (dispatch, getState, { history }) {
     const data = await getMyPost(page);
-    console.log(data);
     dispatch(getMyPost_Scroll(data.data, page));
-    console.log(page);
   };
 };
 

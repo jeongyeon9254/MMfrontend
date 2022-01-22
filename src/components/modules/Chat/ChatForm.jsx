@@ -22,34 +22,47 @@ const ChatForm = props => {
   const scrollRef = React.useRef(null);
   const BoxRef = React.useRef({});
   const [On, SetOn] = React.useState(false);
+  const [MsQuit, SetMsQuit] = React.useState(false);
   const [ChildTop, SetChildTop] = React.useState('');
 
-  console.log(BoxRef);
-  //스크롤 엑션
+  // 메세지를 입력
   const scrollTomBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   };
 
-  const deleteChatroomAction = () => {
-    try {
-      dispatch(ChatAction.deleteChatroomDB(roomId));
-      _onClick();
-    } catch (e) {
-      console.log(e);
+  const CatchQuit = chat => {
+    chat.forEach(el => {
+      el.forEach(els => {
+        if (els.type === 'QUIT') {
+          SetMsQuit(true);
+        }
+      });
+    });
+  };
+
+  const DeleteMsRoomOrGoBackRoom = () => {
+    if (loading) {
+      sendStop();
+      if (MsQuit) {
+        dispatch(ChatAction.deleteChatroomDB(roomId));
+      } else {
+        dispatch(ChatAction.putChatroomDB(roomId));
+      }
     }
   };
+
   const InfiniteStairs = () => {
     if (loading) {
       if (nowNum < total) {
         if (scrollRef.current.scrollTop === 0) {
           dispatch(ChatAction.getChatMsListDB(roomId, page));
-          console.log('By');
         }
       }
     }
   };
+
   const changeNum = () => {
     if (loading) {
       if (page > 0) {
@@ -61,9 +74,14 @@ const ChatForm = props => {
   };
 
   const ScrollAction = top => {
-    console.log(top);
     scrollRef.current.scrollTo({ top: top, left: 0, behavior: 'auto' });
   };
+
+  React.useEffect(() => {
+    if (loading) {
+      CatchQuit(Chatting);
+    }
+  }, [loading, Chatting]);
 
   React.useEffect(() => {
     changeNum();
@@ -90,9 +108,11 @@ const ChatForm = props => {
       <Header
         Page
         point="absolute"
-        _onClick={_onClick}
-        sendStop={sendStop}
-        deleteChatroomAction={deleteChatroomAction}
+        _onClick={() => {
+          _onClick();
+          SetMsQuit(false);
+        }}
+        DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
         chat
       >
         {guestNick}
@@ -121,6 +141,7 @@ const ChatForm = props => {
         </div>
       </ScrollBox>
       <PartyInput
+        MsQuit={MsQuit}
         sendMessage={sendMessage}
         roomId={roomId}
         Emit={SetOn}

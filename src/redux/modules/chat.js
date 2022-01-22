@@ -4,6 +4,7 @@ import {
   getChatRoomList,
   postChatRoomList,
   getChatMsList,
+  putChatroom,
   deleteChatroom,
 } from '../../api/modules/chat';
 import { actionCreators as matchingAction } from './matching';
@@ -12,7 +13,7 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const ADD_CHATTING = 'ADD_CHATTING';
-const Delet_CHAT = 'Delet_CHAT';
+
 const Delet_RoomLIST = 'Delet_RoomLIST';
 const MS_LOADING = 'MS_LOADING';
 const MS_RESET = 'MS_RESET';
@@ -27,8 +28,6 @@ const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
 const total_number = createAction(ToTalNum, num => ({ num }));
 const now_number = createAction(NowNum, num => ({ num }));
-
-const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
 const resetList = createAction(RESET_CHAT, () => ({}));
 const LoadingList = createAction(LOADING_CHAT, () => ({}));
@@ -75,9 +74,7 @@ const getChatRoomListDB = () => {
 const getRecentlyMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('// 첫 채팅 목록 가지고 오기');
       const res = await getChatMsList(roomId, page);
-      console.log(res);
       dispatch(LoadChatting(res.data, page));
       dispatch(ms_loadingList());
       dispatch(total_number(res.data[0].totalMessage));
@@ -92,9 +89,7 @@ const getRecentlyMsListDB = (roomId, page) => {
 const getChatMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('// 채팅 메세지 목록 가져오기');
       const res = await getChatMsList(roomId, page);
-      console.log(res);
       dispatch(AddChatting(res.data, page));
       dispatch(ms_loadingList());
       dispatch(now_number(res.data.length));
@@ -111,11 +106,21 @@ const PostChatting = req => {
   };
 };
 
-// 채팅방 삭제
+// 채팅방 나가기
+const putChatroomDB = roomId => {
+  return async function (dispatch, getState, { history }) {
+    await putChatroom(roomId);
+    dispatch(DeletRoomList(roomId));
+    document.location.href = '/chat';
+  };
+};
+
+// 채팅방 나가기
 const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
     dispatch(DeletRoomList(roomId));
+    document.location.href = '/chat';
   };
 };
 
@@ -153,17 +158,13 @@ export default handleActions(
         const { num } = action.payload;
         draft.now = state.now + num;
       }),
-    [Delet_CHAT]: (state, action) =>
-      produce(state, draft => {
-        draft.List = [];
-      }),
     [Delet_RoomLIST]: (state, action) =>
       produce(state, draft => {
         const { roomId } = action.payload;
         const putList = state.Room.filter(x => {
           return x.roomId !== roomId;
         });
-        draft.Room = putList;
+        draft.Room = putList ? putList : [{}];
       }),
     [LOADING_CHAT]: (state, action) =>
       produce(state, draft => {
@@ -175,16 +176,16 @@ export default handleActions(
       }),
     [MS_RESET]: (state, action) =>
       produce(state, draft => {
-        draft.listloading = false;
         draft.List = [{}];
         draft.now = 0;
         draft.total = 0;
+        draft.listloading = false;
       }),
     [RESET_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.loading = false;
-        draft.List = [];
-        draft.Room = [];
+        draft.List = [{}];
+        draft.Room = [{}];
       }),
   },
   initialState,
@@ -195,11 +196,11 @@ const actionCreators = {
   PostChatting,
   postChatRoomListDB,
   getChatMsListDB,
-  DeletMsList,
   resetList,
   getRecentlyMsListDB,
-  deleteChatroomDB,
+  putChatroomDB,
   ms_resetList,
+  deleteChatroomDB,
 };
 
 export { actionCreators };

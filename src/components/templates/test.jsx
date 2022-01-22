@@ -19,7 +19,7 @@ import MainComment from '../../components/modules/Post/MainComment';
 import Null from '../../shared/Null';
 import Skeleton from '../../shared/Skeleton';
 
-const PostMain = () => {
+const Test = () => {
   const dispatch = useDispatch();
 
   // 유저 정보를 가져옵니다
@@ -36,7 +36,7 @@ const PostMain = () => {
   // 처음 0페이지를 받아오고 스크롤을 최상단으로 위치시킵니다
   React.useEffect(() => {
     dispatch(postAcitions.getPostDB(page));
-    document.getElementById('allBox').scrollTop = 0;
+    scroll_1.current.scrollTop = 0;
   }, []);
 
   // 리스트 id순(생성순)으로 정렬
@@ -51,18 +51,25 @@ const PostMain = () => {
   // 무한스크롤 관리
   const scroll_1 = useRef(null);
   const scroll_2 = useRef(null);
+  const [throttle, setThrottle] = useState(false);
 
   const infinityScroll = () => {
     const recentScrollTop = scroll_1.current.scrollTop;
     const scrollBoxHeight = scroll_2.current.scrollHeight;
     const allBoxHeight = scroll_1.current.clientHeight;
-
-    if (recentScrollTop + allBoxHeight === scrollBoxHeight) {
-      if (category === 0) {
-        dispatch(postAcitions.getPostScrollDB(page));
-      } else {
-        dispatch(postAcitions.getKategorScrolliDB(category, page));
-      }
+    if (throttle) return;
+    if (!throttle) {
+      setThrottle(true);
+      setTimeout(async () => {
+        if (scrollBoxHeight - recentScrollTop - allBoxHeight < 400) {
+          if (category === 0) {
+            dispatch(postAcitions.getPostScrollDB(page));
+          } else {
+            dispatch(postAcitions.getKategorScrolliDB(category, page));
+          }
+        }
+        setThrottle(false);
+      }, 300);
     }
   };
 
@@ -189,4 +196,4 @@ const CommentBox = styled.div`
   padding: 20px 30px;
 `;
 
-export default PostMain;
+export default Test;

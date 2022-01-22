@@ -33,8 +33,7 @@ const Header = props => {
     name,
     defaultName,
     Page,
-    sendStop,
-    deleteChatroomAction,
+    DeleteMsRoomOrGoBackRoom,
     setMyInfo,
     login,
   } = props;
@@ -51,7 +50,6 @@ const Header = props => {
   const dispatch = useDispatch();
 
   const goHome = () => {
-    console.log('home');
     history.push('/');
     dispatch(mainActions.reset());
     dispatch(postActions.reset());
@@ -59,7 +57,6 @@ const Header = props => {
   };
 
   const goBack = () => {
-    console.log('back');
     history.goBack();
     dispatch(mainActions.reset());
     dispatch(postActions.reset());
@@ -92,8 +89,7 @@ const Header = props => {
         {chat ? (
           <Exit
             onClick={() => {
-              sendStop();
-              deleteChatroomAction();
+              DeleteMsRoomOrGoBackRoom();
             }}
           >
             방 나가기
@@ -176,7 +172,7 @@ const Null = styled.div`
 `;
 const Exit = styled.div`
   font-size: 14px;
-  color: #4e4e4e;
+  color: red;
   cursor: pointer;
 `;
 const Detail = styled.img`
