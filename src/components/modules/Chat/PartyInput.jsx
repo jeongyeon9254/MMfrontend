@@ -27,7 +27,7 @@ function PartyInput(props) {
   function urlify(text) {
     try {
       var urlRegex = /(https?:\/\/[^\s]+)/g;
-      console.log(urlRegex);
+
       return text.replace(urlRegex, function (url) {
         return '<a target="_blank" href="' + url + '">' + url + '</a>';
       });
@@ -49,7 +49,6 @@ function PartyInput(props) {
           date: date,
         };
         sendMessage(ms);
-        // console.log(ms);
         setChatting('');
       }
     }
@@ -64,7 +63,6 @@ function PartyInput(props) {
       date: date,
     };
     sendMessage(icon);
-    // console.log(icon);
     SetPreview(false);
   };
 

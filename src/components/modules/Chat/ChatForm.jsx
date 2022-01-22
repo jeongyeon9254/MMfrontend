@@ -26,7 +26,6 @@ const ChatForm = props => {
   const [MsQuit, SetMsQuit] = React.useState(false);
   const [ChildTop, SetChildTop] = React.useState('');
 
-  console.log(BoxRef);
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (scrollRef.current) {
@@ -38,7 +37,6 @@ const ChatForm = props => {
     chat.forEach(el => {
       el.forEach(els => {
         if (els.type === 'QUIT') {
-          console.log(els);
           SetMsQuit(true);
         }
       });
@@ -61,7 +59,6 @@ const ChatForm = props => {
       if (nowNum < total) {
         if (scrollRef.current.scrollTop === 0) {
           dispatch(ChatAction.getChatMsListDB(roomId, page));
-          console.log('By');
         }
       }
     }
@@ -78,7 +75,6 @@ const ChatForm = props => {
   };
 
   const ScrollAction = top => {
-    console.log(top);
     scrollRef.current.scrollTo({ top: top, left: 0, behavior: 'auto' });
   };
 

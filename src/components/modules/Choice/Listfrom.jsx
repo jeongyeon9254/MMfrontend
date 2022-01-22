@@ -8,7 +8,6 @@ const Listfrom = props => {
   const { OnClick } = props;
   const { partnerNick, partnerMbti, partnerImg, roomId, partnerIntro, date } = props.data;
   const Loading = useSelector(state => state.matching.loading);
-  console.log(Loading);
   if (Loading) {
     return (
       <Grid list _onClick={OnClick} Btop="0px" gap="11px">

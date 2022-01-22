@@ -74,9 +74,7 @@ const getChatRoomListDB = () => {
 const getRecentlyMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('// 첫 채팅 목록 가지고 오기');
       const res = await getChatMsList(roomId, page);
-      console.log(res);
       dispatch(LoadChatting(res.data, page));
       dispatch(ms_loadingList());
       dispatch(total_number(res.data[0].totalMessage));
@@ -91,9 +89,7 @@ const getRecentlyMsListDB = (roomId, page) => {
 const getChatMsListDB = (roomId, page) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log('// 채팅 메세지 목록 가져오기');
       const res = await getChatMsList(roomId, page);
-      console.log(res);
       dispatch(AddChatting(res.data, page));
       dispatch(ms_loadingList());
       dispatch(now_number(res.data.length));
