@@ -46,7 +46,6 @@ const getPostDB = (page = null) => {
       dispatch(reset());
       const data = await getPost(page);
       dispatch(getPostList(data.data, page));
-      console.log(page);
       dispatch(loading(false));
     } catch (err) {
       console.log(err);
@@ -174,7 +173,6 @@ const addLikeDB = (postId = null) => {
       const res = await addLike(postId);
       const data = await getDetailPost(postId);
       dispatch(addLikes(data.data));
-      console.log(res);
     } catch (err) {
       console.log(err);
     }

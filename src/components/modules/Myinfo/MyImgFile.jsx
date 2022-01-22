@@ -10,7 +10,6 @@ function MyImgFile(props) {
 
   useEffect(() => {
     Emit(active);
-    console.log(active);
   }, [active]);
 
   const handleFileOnChange = e => {

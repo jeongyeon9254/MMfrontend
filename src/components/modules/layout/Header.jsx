@@ -50,7 +50,6 @@ const Header = props => {
   const dispatch = useDispatch();
 
   const goHome = () => {
-    console.log('home');
     history.push('/');
     dispatch(mainActions.reset());
     dispatch(postActions.reset());
@@ -58,7 +57,6 @@ const Header = props => {
   };
 
   const goBack = () => {
-    console.log('back');
     history.goBack();
     dispatch(mainActions.reset());
     dispatch(postActions.reset());

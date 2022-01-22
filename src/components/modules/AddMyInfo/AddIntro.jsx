@@ -45,7 +45,7 @@ const AddIntro = props => {
       return false;
     }
   }
-  console.log(userInfo);
+
   const ClickEvent = () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });

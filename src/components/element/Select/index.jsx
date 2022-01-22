@@ -70,9 +70,7 @@ Select.defaultProps = {
   fontsize: '16px',
   high: '43px',
   padding: '9px 17px',
-  Emit: e => {
-    console.log(e);
-  },
+  Emit: () => {},
   commend: '',
 };
 const Frame = styled.div`

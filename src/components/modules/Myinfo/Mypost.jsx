@@ -20,7 +20,6 @@ function Mypost() {
   const ClickDetail = postId => {
     history.push(`postMain/${postId}`);
   };
-  console.log(postings.length);
   return (
     <MypostPage>
       {postings.length !== 0 ? (

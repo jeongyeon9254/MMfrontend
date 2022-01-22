@@ -34,7 +34,6 @@ const getListDB = () => {
   return async function (dispatch, getState, { history }) {
     getMyinfoDB()
       .then(res => {
-        console.log(res.data);
         dispatch(getList(res.data));
       })
       .catch(err => {
@@ -47,7 +46,6 @@ const getMyListDB = () => {
   return async function (dispatch, getState, { history }) {
     getMyinfoDB()
       .then(res => {
-        console.log(res.data);
         dispatch(getMyList(res.data));
       })
       .catch(err => {
@@ -60,7 +58,6 @@ const getLocationDB = (locationId, locDetailId, InterestId) => {
   return async function (dispatch, getState, { history }) {
     getLocationChemy(locationId, locDetailId, InterestId)
       .then(res => {
-        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {
@@ -73,7 +70,6 @@ const getGuestListDB = () => {
   return async function (dispatch, getState, { history }) {
     getGuestDB()
       .then(res => {
-        console.log(res.data);
         dispatch(getGuestList(res.data));
       })
       .catch(err => {
@@ -86,7 +82,6 @@ const chemyListDB = (locationId, locDetailId) => {
   return async function (dispatch, getState, { history }) {
     getChemyDB(locationId, locDetailId)
       .then(res => {
-        console.log(res.data);
         dispatch(chemyList(res.data));
       })
       .catch(err => {
