@@ -13,7 +13,7 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const ADD_CHATTING = 'ADD_CHATTING';
-const Delet_CHAT = 'Delet_CHAT';
+
 const Delet_RoomLIST = 'Delet_RoomLIST';
 const MS_LOADING = 'MS_LOADING';
 const MS_RESET = 'MS_RESET';
@@ -28,8 +28,6 @@ const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
 const total_number = createAction(ToTalNum, num => ({ num }));
 const now_number = createAction(NowNum, num => ({ num }));
-
-const DeletMsList = createAction(Delet_CHAT, () => ({}));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
 const resetList = createAction(RESET_CHAT, () => ({}));
 const LoadingList = createAction(LOADING_CHAT, () => ({}));
@@ -113,7 +111,7 @@ const putChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await putChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    history.push('/chat');
+    document.location.href = '/chat';
   };
 };
 
@@ -122,7 +120,7 @@ const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    history.push('/chat');
+    document.location.href = '/chat';
   };
 };
 
@@ -160,17 +158,13 @@ export default handleActions(
         const { num } = action.payload;
         draft.now = state.now + num;
       }),
-    [Delet_CHAT]: (state, action) =>
-      produce(state, draft => {
-        draft.List = [];
-      }),
     [Delet_RoomLIST]: (state, action) =>
       produce(state, draft => {
         const { roomId } = action.payload;
         const putList = state.Room.filter(x => {
           return x.roomId !== roomId;
         });
-        draft.Room = putList;
+        draft.Room = putList ? putList : [{}];
       }),
     [LOADING_CHAT]: (state, action) =>
       produce(state, draft => {
@@ -182,16 +176,16 @@ export default handleActions(
       }),
     [MS_RESET]: (state, action) =>
       produce(state, draft => {
-        draft.listloading = false;
         draft.List = [{}];
         draft.now = 0;
         draft.total = 0;
+        draft.listloading = false;
       }),
     [RESET_CHAT]: (state, action) =>
       produce(state, draft => {
         draft.loading = false;
-        draft.List = [];
-        draft.Room = [];
+        draft.List = [{}];
+        draft.Room = [{}];
       }),
   },
   initialState,
@@ -202,7 +196,6 @@ const actionCreators = {
   PostChatting,
   postChatRoomListDB,
   getChatMsListDB,
-  DeletMsList,
   resetList,
   getRecentlyMsListDB,
   putChatroomDB,

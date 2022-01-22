@@ -172,7 +172,7 @@ const Null = styled.div`
 `;
 const Exit = styled.div`
   font-size: 14px;
-  color: #4e4e4e;
+  color: red;
   cursor: pointer;
 `;
 const Detail = styled.img`
