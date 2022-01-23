@@ -27,20 +27,25 @@ const Profile = () => {
   // 빠른 매칭 스피너
   const [loading, setLoading] = useState(false);
 
-  // 데이터 관리
-  const profile = useSelector(state => state.profile.list);
-  const status = useSelector(state => state.matching.status);
-  const mbti = profile.interestList;
-
   // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
-  React.useEffect(() => {
-    dispatch(profileActions.getProfileDB(name[name.length - 1]));
-  }, [name[3]]);
 
   // 모달창 관리
   const [modal, setModal] = useState(false);
   const [connect, setConnect] = useState(false);
   const [Disconnect, setDisconnect] = useState(false);
+
+  // 데이터 관리
+  const profile = useSelector(state => state.profile.list);
+  const status = useSelector(state => state.matching.status);
+  const MatchingLists = useSelector(state => state.matching.matchingLists);
+
+  const FindId = () => {
+    // console.log(profile.userId);
+    return MatchingLists.includes(profile.userId);
+  };
+
+  console.log(FindId());
+  const mbti = profile.interestList;
 
   const exit = () => {
     setConnect(false);
@@ -80,6 +85,18 @@ const Profile = () => {
   };
 
   const State = status ? status : '';
+
+  React.useEffect(() => {
+    dispatch(profileActions.getProfileDB(name[name.length - 1]));
+  }, [name[3]]);
+
+  React.useEffect(() => {
+    dispatch(matchingActions.getMatchingListCheckDB());
+  }, []);
+
+  // React.useEffect(() => {
+  //   next();
+  // }, [profile.userId]);
 
   return (
     <React.Fragment>

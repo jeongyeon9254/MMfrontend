@@ -12,25 +12,30 @@ const GET_MATCHINGLIST = 'GET_MATCHINGLIST';
 const GET_MATCHINGLISTSEND = 'GET_MATCHINGLISTSEND';
 const Delet_MATCHING = 'Delet_MATCHING';
 const PUT_MATCH = 'PUT_MATCH';
+const FIND_MATCHINGLIST = 'FIND_MATCHINGLIST';
 const THATLOADING = 'THATLOADING';
 const THATRESET = 'THATRESET';
 
 // 매칭 신청
 const postMatching = createAction(POST_MATCHING, status => ({ status }));
 const ListMatchingSend = createAction(GET_MATCHINGLISTSEND, Matching => ({ Matching }));
+
 // 신청 내역 조회
 const ListMatchingReceive = createAction(GET_MATCHINGLIST, Matching => ({ Matching }));
+
 const DeletMatchingList = createAction(Delet_MATCHING, guestId => ({ guestId }));
 const PutMatchingList = createAction(PUT_MATCH, hostId => ({ hostId }));
+const FindMatchingLists = createAction(FIND_MATCHINGLIST, data => ({ data }));
 
 const LoadingAction = createAction(THATLOADING, () => ({}));
 const resetAction = createAction(THATRESET, () => ({}));
 
 const initialState = {
-  ListSend: [{}],
-  ListReceive: [{}],
+  ListSend: [],
+  ListReceive: [],
   status: '',
   loading: false,
+  matchingLists: [],
 };
 
 // 매칭 신청
@@ -45,24 +50,27 @@ const postMatchingDB = guestId => {
   };
 };
 
-// 신청 내역 조회
-const getMatchingSendCheckDB = () => {
+// 신청 받은 내역 조회
+const getMatchingListCheckDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = await getMatchingSendCheck();
+      const receiveRes = await getMatchingReceiveCheck();
+      const Sendres = await getMatchingSendCheck();
+      dispatch(resetAction());
       dispatch(LoadingAction());
-      dispatch(ListMatchingSend(res.data));
+      dispatch(ListMatchingReceive(receiveRes.data));
+      dispatch(ListMatchingSend(Sendres.data));
+      const FindId = data => {
+        const Id = data.map(item => {
+          return { partnerId: item.partnerId };
+        });
+        return Id;
+      };
+      const IdList = [...FindId(Sendres.data), ...FindId(receiveRes.data)];
+      dispatch(FindMatchingLists(IdList));
     } catch (e) {
       console.log(e);
     }
-  };
-};
-
-// 신청 받은 내역 조회
-const getMatchingReceiveCheckDB = () => {
-  return async function (dispatch, getState, { history }) {
-    const res = await getMatchingReceiveCheck();
-    dispatch(ListMatchingReceive(res.data));
   };
 };
 
@@ -113,6 +121,11 @@ export default handleActions(
         });
         draft.ListReceive = rest;
       }),
+    [FIND_MATCHINGLIST]: (state, action) =>
+      produce(state, draft => {
+        const { data } = action.payload;
+        draft.matchingLists = data;
+      }),
     [THATLOADING]: (state, action) =>
       produce(state, draft => {
         draft.loading = true;
@@ -122,16 +135,16 @@ export default handleActions(
         draft.loading = false;
         draft.ListSend = [{}];
         draft.ListReceive = [{}];
+        draft.matchingLists = [];
       }),
   },
   initialState,
 );
 
 const actionCreators = {
-  getMatchingSendCheckDB,
   deleteMatchingChatDB,
   postMatchingDB,
-  getMatchingReceiveCheckDB,
+  getMatchingListCheckDB,
   PutMatchingList,
   resetAction,
 };
