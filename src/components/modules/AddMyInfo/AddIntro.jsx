@@ -6,6 +6,7 @@ import Alert from '../../element/Alert';
 import AddInterest from './AddInterest';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
+import imageCompression from 'browser-image-compression';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const AddIntro = props => {
     }
   }
 
-  const ClickEvent = () => {
+  const ClickEvent = async () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };
@@ -54,7 +55,12 @@ const AddIntro = props => {
 
     const formData = new FormData();
     const Check = isString(file.profileImage);
-    formData.append('multipartFile', Check ? emptyFile : file.profileImage);
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 370,
+    };
+    const reSizeFile = await imageCompression(file.profileImage, options);
+    formData.append('multipartFile', Check ? emptyFile : reSizeFile);
     formData.append('data', jsonFile(userInfo));
 
     dispatch(userAction.userInfoPut(formData));
