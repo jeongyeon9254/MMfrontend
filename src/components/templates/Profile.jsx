@@ -9,6 +9,7 @@ import { history } from '../../redux/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as profileActions } from '../../redux/modules/profile.js';
 import { actionCreators as matchingActions } from '../../redux/modules/matching.js';
+import { actionCreators as ChatAction } from '../../redux/modules/chat';
 import { getMatchingDB } from '../../api/modules/chemy';
 
 // component
@@ -19,32 +20,29 @@ import Spiner from '../../shared/Spiner';
 
 const Profile = () => {
   const dispatch = useDispatch();
-
   // 주소에서 유저 ID를 받아옵니다
   const pathName = history.location.pathname;
   const name = pathName.split('/');
 
+  React.useEffect(() => {
+    dispatch(profileActions.getProfileDB(name[name.length - 1]));
+    dispatch(matchingActions.getMatchingListCheckDB());
+    dispatch(ChatAction.getChatRoomListDB());
+    return () => {
+      dispatch(matchingActions.resetAction());
+      dispatch(profileActions.resetAction());
+      dispatch(ChatAction.resetList());
+    };
+  }, [name[3]]);
+
   // 빠른 매칭 스피너
   const [loading, setLoading] = useState(false);
-
-  // 렌더링시 주소에서 유저 ID를 받아오고 디테일 페이지를 받아옵니다.
-
-  // 모달창 관리
-  const [modal, setModal] = useState(false);
-  const [connect, setConnect] = useState(false);
-  const [Disconnect, setDisconnect] = useState(false);
 
   // 데이터 관리
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
   const MatchingLists = useSelector(state => state.matching.matchingLists);
-
-  const FindId = () => {
-    // console.log(profile.userId);
-    return MatchingLists.includes(profile.userId);
-  };
-
-  console.log(FindId());
+  const RoomListNum = useSelector(state => state.chat.RoomNumbers);
   const mbti = profile.interestList;
 
   const exit = () => {
@@ -52,8 +50,8 @@ const Profile = () => {
     setDisconnect(false);
   };
 
-  const next = () => {
-    dispatch(matchingActions.postMatchingDB(profile.userId));
+  const next = profileId => {
+    dispatch(matchingActions.postMatchingDB(profileId));
     setModal(true);
     exit();
   };
@@ -86,22 +84,52 @@ const Profile = () => {
 
   const State = status ? status : '';
 
+  // 모달창 관리
+  const [modal, setModal] = useState(false);
+  const [connect, setConnect] = useState(false);
+  const [Disconnect, setDisconnect] = useState(false);
+  const [Classification, setClassification] = useState(false);
+  const [roomList, setroomList] = useState(false);
+
+  // 요청 받은 리스트의 patnerId 값에 지금 profile에 userId이 있는지 확인 한다.
   React.useEffect(() => {
-    dispatch(profileActions.getProfileDB(name[name.length - 1]));
-  }, [name[3]]);
+    setClassification(MatchingLists.includes(profile.userId));
+    return () => {
+      setClassification(false);
+    };
+  }, [MatchingLists, profile]);
 
   React.useEffect(() => {
-    dispatch(matchingActions.getMatchingListCheckDB());
-  }, []);
+    setroomList(RoomListNum.includes(profile.userId));
+    return () => {
+      setroomList(false);
+    };
+  }, [RoomListNum, profile]);
 
-  // React.useEffect(() => {
-  //   next();
-  // }, [profile.userId]);
+  React.useEffect(() => {
+    if (profile.userId) {
+      console.log(`Classification : ${Classification}`);
+      if (Classification) {
+        next(profile.userId);
+      }
+      console.log(`roomList : ${roomList}`);
+      if (roomList) {
+        next(profile.userId);
+      }
+    }
+  }, [Classification, roomList, profile.userId]);
 
   return (
     <React.Fragment>
       {connect ? (
-        <Alert MyBit isButton yes={next} no={exit}>
+        <Alert
+          MyBit
+          isButton
+          yes={() => {
+            next(profile.userId);
+          }}
+          no={exit}
+        >
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <Title>매칭을 신청하시겠습니까?</Title>
             <Grid gap="4px">
