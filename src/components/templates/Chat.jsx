@@ -139,6 +139,7 @@ const Chat = () => {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
+
   React.useEffect(() => {
     if (roomNum) {
       try {

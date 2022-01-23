@@ -12,7 +12,6 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 const ChatForm = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick, sendMessage, wsDisConnectUnsubscribe, sendStop, Emit } = props;
-
   const { guestNick, roomId } = props.data;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const Chatting = useSelector(state => state.chat.List);
@@ -26,7 +25,7 @@ const ChatForm = props => {
   const [MsQuit, SetMsQuit] = React.useState(false);
   const [ChildTop, SetChildTop] = React.useState('');
 
-  //스크롤 엑션
+  // 메세지를 입력
   const scrollTomBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
