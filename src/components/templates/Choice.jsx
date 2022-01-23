@@ -11,15 +11,13 @@ import { history } from '../../redux/configureStore';
 
 const Choice = () => {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
-    dispatch(MatchingAction.getMatchingSendCheckDB());
+    dispatch(MatchingAction.getMatchingListCheckDB());
   }, []);
-  React.useEffect(() => {
-    dispatch(MatchingAction.getMatchingReceiveCheckDB());
-  }, []);
+
   const SendList = useSelector(state => state.matching.ListSend);
   const ReceiveList = useSelector(state => state.matching.ListReceive);
-
   const [open, setOpen] = React.useState(true);
   const [open2, setOpen2] = React.useState(true);
   const [Paging, setPaging] = React.useState(false);
@@ -43,19 +41,21 @@ const Choice = () => {
             boo={open}
           />
           <Boad className={open ? 'Open' : ''}>
-            {ReceiveList.map((x, idx) => {
-              return (
-                <Listfrom
-                  OnClick={e => {
-                    //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
-                    setPaging(!Paging);
-                    setData(x);
-                  }}
-                  data={x}
-                  key={idx}
-                ></Listfrom>
-              );
-            })}
+            {ReceiveList
+              ? ReceiveList.map((x, idx) => {
+                  return (
+                    <Listfrom
+                      OnClick={e => {
+                        //api 요청 보내면서 유저 정보를 가지고 온다. redux에 저장 해서 userBox에서 가지고 온다.
+                        setPaging(!Paging);
+                        setData(x);
+                      }}
+                      data={x}
+                      key={idx}
+                    ></Listfrom>
+                  );
+                })
+              : ''}
           </Boad>
           <ListHead
             Text={`내가 보낸 매칭 신청 목록 ${SendList ? SendList.length : '0'} 개`}
@@ -70,7 +70,7 @@ const Choice = () => {
                   return (
                     <Listfrom
                       OnClick={e => {
-                        history.push(`/profile/${x.guestId}`);
+                        history.push(`/profile/${x.partnerId}`);
                       }}
                       key={idx}
                       data={x}
@@ -105,7 +105,7 @@ const Boad = styled.div`
 `;
 const ScrollBox = styled.div`
   overflow-y: scroll;
-  height: 62vh;
+  height: 53vh;
   padding-bottom: 96px;
 `;
 export default Choice;

@@ -6,7 +6,7 @@ import { Skeleton } from './index';
 
 const Listfrom = props => {
   const { OnClick } = props;
-  const { partnerNick, partnerMbti, partnerImg, roomId, partnerIntro, date } = props.data;
+  const { partnerNick, partnerMbti, partnerImg, partnerIntro, date } = props.data;
   const Loading = useSelector(state => state.matching.loading);
   if (Loading) {
     return (

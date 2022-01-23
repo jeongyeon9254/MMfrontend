@@ -223,7 +223,7 @@ const Boad = styled.div`
 `;
 const ScrollBox = styled.div`
   width: 100%;
-  height: 546px;
+  height: 50vh;
   overflow-y: scroll;
 `;
 

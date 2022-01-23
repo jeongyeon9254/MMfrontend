@@ -9,14 +9,14 @@ import { actionCreators as profileAction } from '../../../redux/modules/profile'
 const UserPage = props => {
   const dispatch = useDispatch();
   const { Boo, _onClick } = props;
-  const { hostId, guestId } = props.data;
+  const { partnerId } = props.data;
   const hostInfo = useSelector(state => state.profile.list);
 
   React.useEffect(() => {
-    if (hostId) {
-      dispatch(profileAction.getProfileDB(hostId));
+    if (partnerId) {
+      dispatch(profileAction.getProfileDB(partnerId));
     }
-  }, [hostId]);
+  }, [partnerId]);
 
   return (
     <PageShadows className={Boo ? 'open' : ''}>
@@ -31,7 +31,7 @@ const UserPage = props => {
           mbti={hostInfo.mbti}
         />
       </Grid>
-      <UserButton guestId={guestId} hostInfo={hostInfo} _onClick={_onClick} />
+      <UserButton hostInfo={hostInfo} _onClick={_onClick} />
     </PageShadows>
   );
 };
