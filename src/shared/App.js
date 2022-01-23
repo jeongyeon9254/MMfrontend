@@ -37,7 +37,7 @@ function App() {
         <PrivateRoute exact path="/chat" Component={Chat} />
         <PrivateRoute exact path="/AddMyinfo" Component={AddMyinfo} />
         <PrivateRoute exact path="/myinfo" Component={Myinfo} />
-        <PrivateRoute exact path="/profile/:userId" Component={Profile} />/
+        <PrivateRoute exact path="/profile/:userId/" Component={Profile} />/
         <PrivateRoute exact path="/profile/fast/:userId" Component={Profile} />/
         <PrivateRoute exact path="/postMain" Component={PostMain} />
         <PrivateRoute exact path="/postMain/:postId" Component={PostDetail} />

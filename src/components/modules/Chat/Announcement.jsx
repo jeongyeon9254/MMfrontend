@@ -11,10 +11,7 @@ function Announcement(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(MatAction.getMatchingSendCheckDB());
-  }, []);
-  React.useEffect(() => {
-    dispatch(MatAction.getMatchingReceiveCheckDB());
+    dispatch(MatAction.getMatchingListCheckDB());
   }, []);
 
   const { bg, fontcolor, ws } = props;

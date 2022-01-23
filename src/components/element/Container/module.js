@@ -82,6 +82,7 @@ export const ContainerStyle = styled.div`
     max-width: 100%;
     border-radius: 0px;
     padding: 47px 0 87px 0;
+    border: 0px;
   }
   @media only screen and (max-width: 450px) {
     position: absolute;
