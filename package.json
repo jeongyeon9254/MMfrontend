@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
+    "browser-image-compression": "^1.0.17",
     "clone": "^2.1.2",
     "connected-react-router": "6.8.0",
     "create-react-app": "^4.0.3",
