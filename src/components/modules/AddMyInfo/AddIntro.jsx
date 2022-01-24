@@ -55,12 +55,7 @@ const AddIntro = props => {
 
     const formData = new FormData();
     const Check = isString(file.profileImage);
-    const options = {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 370,
-    };
-    const reSizeFile = await imageCompression(file.profileImage, options);
-    formData.append('multipartFile', Check ? emptyFile : reSizeFile);
+    formData.append('multipartFile', Check ? emptyFile : file.profileImage);
     formData.append('data', jsonFile(userInfo));
 
     dispatch(userAction.userInfoPut(formData));

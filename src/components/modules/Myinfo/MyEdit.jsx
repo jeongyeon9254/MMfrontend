@@ -71,12 +71,7 @@ function MyEdit(props) {
     const formData = new FormData();
     const emptyFile = new File([''], 'empty');
     const Check = isString(Img);
-    const options = {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 370,
-    };
-    const reSizeFile = await imageCompression(Img, options);
-    formData.append('multipartFile', Check ? emptyFile : reSizeFile);
+    formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
     dispatch(userAction.userInfoPut(formData));
   };
