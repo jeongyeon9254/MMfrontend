@@ -15,6 +15,7 @@ import LoginNeed from './LoginNeed';
 import Profile from './Profile';
 import Sample from './Sample';
 import MyPost from './MyPost';
+import Guide from './Guide';
 
 export {
   Main,
@@ -34,4 +35,5 @@ export {
   Profile,
   Sample,
   MyPost,
+  Guide,
 };
