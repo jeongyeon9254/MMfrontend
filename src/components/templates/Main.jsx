@@ -217,7 +217,7 @@ const LocationBox = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  top: 17%;
+  top: 160px;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 1;
