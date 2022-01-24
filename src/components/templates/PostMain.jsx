@@ -4,11 +4,10 @@ import styled from 'styled-components';
 // JS
 import { history } from '../../redux/configureStore';
 import icon_pen from '../../img/Icon/icon_pen.svg';
-import icno_circle from '../../img/Icon/icno_circle.svg';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as postAcitions } from '../../redux/modules/post.js';
+import { actionCreators as postActions } from '../../redux/modules/post.js';
 
 // component
 import { Button, Grid } from '../element/index.js';
@@ -35,7 +34,7 @@ const PostMain = () => {
 
   // 처음 0페이지를 받아오고 스크롤을 최상단으로 위치시킵니다
   React.useEffect(() => {
-    dispatch(postAcitions.getPostDB(page));
+    dispatch(postActions.getPostDB(page));
     document.getElementById('allBox').scrollTop = 0;
   }, []);
 
@@ -59,9 +58,9 @@ const PostMain = () => {
 
     if (recentScrollTop + allBoxHeight === scrollBoxHeight) {
       if (category === 0) {
-        dispatch(postAcitions.getPostScrollDB(page));
+        dispatch(postActions.getPostScrollDB(page));
       } else {
-        dispatch(postAcitions.getKategorScrolliDB(category, page));
+        dispatch(postActions.getCategoryScrollDB(category, page));
       }
     }
   };
@@ -82,13 +81,13 @@ const PostMain = () => {
           {arr.length > 0 ? (
             arr.map((x, idx) => {
               return (
-                <div
-                  key={x.postId}
-                  onClick={() => {
-                    history.push(`/postMain/${x.postId}`);
-                  }}
-                >
-                  <PostCard info={x} />
+                <div key={x.postId}>
+                  <PostCard
+                    info={x}
+                    goDetail={() => {
+                      history.push(`/postMain/${x.postId}`);
+                    }}
+                  />
                   {x.commentList.length > 0 ? (
                     x.commentList.length > 1 ? (
                       <CommentBox>
@@ -100,11 +99,6 @@ const PostMain = () => {
                         <MainComment info={x.commentList[0]} />
                       </CommentBox>
                     )
-                  ) : null}
-                  {x.commentList.length > 2 ? (
-                    <Grid width="20px;" margin="0 auto 20px auto">
-                      <img alt="더보기" src={icno_circle}></img>
-                    </Grid>
                   ) : null}
                 </div>
               );

@@ -6,6 +6,7 @@ import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyImgFile } from './index'
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import KakaoAddr from '../AddMyInfo/KakaoAddress';
+import imageCompression from 'browser-image-compression';
 
 function MyEdit(props) {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function MyEdit(props) {
 
   // 도로명 주소
   const [Kakaoadr, setKakaoadr] = React.useState(false);
+
   // 도로명 주소 데이터
   const [Full, setFull] = React.useState(userInfo.locFull); // 전체 주소
   const [LO, setLo] = React.useState(userInfo.location); // 시
@@ -33,7 +35,6 @@ function MyEdit(props) {
   const SetEmit = item => {
     SetMbti(item);
   };
-
   const Haddit = item => {
     SetInt(item);
   };
@@ -63,7 +64,7 @@ function MyEdit(props) {
     }
   }
 
-  const ClickEvent = () => {
+  const ClickEvent = async () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };

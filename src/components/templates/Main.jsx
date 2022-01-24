@@ -22,7 +22,7 @@ import MainModal from '../modules/Main/MainModal.jsx';
 // Js
 import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
 
-const Main = props => {
+const Main = () => {
   const dispatch = useDispatch();
 
   // 로컬스토리지에서 내정보를 가져옵니다
@@ -75,7 +75,10 @@ const Main = props => {
 
   // 렌더링시 지도 정보를 받아옵니다.
   React.useEffect(() => {
-    dispatch(mainActions.getListDB());
+    dispatch(mainActions.getMyListDB());
+    return () => {
+      dispatch(mainActions.reset());
+    };
   }, []);
 
   // 내위치 클릭시 메인화면 초기화
@@ -214,7 +217,7 @@ const LocationBox = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  top: 20%;
+  top: 17%;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 1;

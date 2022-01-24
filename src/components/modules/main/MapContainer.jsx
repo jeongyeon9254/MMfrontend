@@ -17,9 +17,9 @@ const MapContainer = props => {
   const result = useSelector(state => state.main.list.result);
   const { onModal, bigLocation, location } = props;
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  // const MyBit = Bit.find(x => {
-  //   return x.name === userInfo.mbti;
-  // });
+  const MyBit = Bit.find(x => {
+    return x.name === userInfo.mbti;
+  });
 
   // kakao map 함수를 가지고 있음
   const [move, setMove] = useState(null);
@@ -46,7 +46,7 @@ const MapContainer = props => {
     setMove(map);
 
     // 마커 이미지 및 위치
-    const imageSrc = `${icon_marker_1}`;
+    const imageSrc = MyBit.marker;
     const imageSize = new kakao.maps.Size(64, 69);
     const imageOption = { offset: new kakao.maps.Point(30, 50) };
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -68,10 +68,10 @@ const MapContainer = props => {
       center: new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude),
       radius: 2200,
       strokeWeight: 3,
-      strokeColor: 'rgba(255, 205, 253, 0.8)',
+      strokeColor: MyBit.color,
       strokeOpacity: 1,
       strokeStyle: 'line',
-      fillColor: 'rgba(255, 205, 253, 0.3)',
+      fillColor: MyBit.circleColor,
       fillOpacity: 0.7,
     });
     setCircles(circle);
@@ -120,7 +120,6 @@ const MapContainer = props => {
 
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(result[0].y, result[0].x);
         const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
         move.panTo(moveLatLon);
 

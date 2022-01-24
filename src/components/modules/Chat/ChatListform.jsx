@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { PartyMe, PartyOther } from './index';
 import { Grid, Image } from '../../element';
 
+import close from '../../../img/Icon/close.png';
+import { useState } from 'react';
 function ChatListform(props) {
-  const { data, username } = props;
+  const { data, username, ClickDeleteRoom, OpenClick, Open } = props;
+
   return data ? (
     <>
       {data.map((item, idx) => {
@@ -22,7 +26,22 @@ function ChatListform(props) {
           case 'ENTER':
             return <Alarm key={idx}> {item.message}</Alarm>;
           case 'QUIT':
-            return <Alarm key={idx}> {item.message}</Alarm>;
+            if (Open) {
+              return (
+                <>
+                  <ModalQUIT key={idx}>
+                    <Grid gap="10px">
+                      <ModalClose src={close} onClick={() => OpenClick(false)}></ModalClose>
+                      <p>{item.message}</p>
+                      <ModalBtn onClick={ClickDeleteRoom}>방나가기</ModalBtn>
+                    </Grid>
+                  </ModalQUIT>
+                  <ModalBg onClick={() => OpenClick(false)}></ModalBg>
+                </>
+              );
+            } else {
+              return '';
+            }
           case 'EMO':
             return item.senderName === username ? (
               <EmoticonImgBox key={idx}>
@@ -65,5 +84,49 @@ const Alarm = styled.p`
   color: #9b9b9b;
   width: 100%;
   text-align: center;
+`;
+
+const ModalQUIT = styled.div`
+  position: fixed;
+  z-index: 99999;
+  left: 50%;
+  top: 100px;
+  background: azure;
+  width: 80%;
+  padding: 20px 30px 30px;
+  transform: translateX(-50%);
+`;
+
+const ModalBtn = styled.div`
+  padding: 10px;
+  border: 1px solid #eee;
+  margin-top: 10px;
+  border-radius: 30px;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  z-index: 1000;
+  &:hover {
+    background: #7860b3;
+    color: #fff;
+  }
+`;
+
+const ModalBg = styled.div`
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  cursor: pointer;
+`;
+
+const ModalClose = styled.img`
+  width: 17px;
+  margin-left: auto;
+  cursor: pointer;
 `;
 export default ChatListform;

@@ -28,7 +28,7 @@ const getCategoryList_Scroll = createAction(GET_CATEGORY_SCROLL, (data, page) =>
 const loading = createAction(LOADING, data => ({ data }));
 const getPostDetail = createAction(GET_DETAIL, data => ({ data }));
 const addComments = createAction(ADD_COMMENT, data => ({ data }));
-const addLikes = createAction(ADD_LIKE, data => ({ data }));
+const addLikes = createAction(ADD_LIKE, (data, postId) => ({ data, postId }));
 const reset = createAction(RESET, () => ({}));
 
 const initialState = {
@@ -172,9 +172,9 @@ const deleteCommentsDB = (postId, commentsId) => {
 const addLikeDB = (postId = null) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const res = await addLike(postId);
+      await addLike(postId);
       const data = await getDetailPost(postId);
-      dispatch(addLikes(data.data));
+      dispatch(addLikes(data.data, postId));
     } catch (err) {
       console.log(err);
     }

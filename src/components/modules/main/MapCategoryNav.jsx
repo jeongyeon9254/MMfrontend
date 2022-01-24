@@ -21,7 +21,7 @@ const MapCategoryNav = props => {
 
   // props
   const mbti = Mybit(props.userInfo.mbti);
-  const { bigNum, smallNum, location, setCategoryAlt } = props;
+  const { bigNum, smallNum, location, setCategoryAlt, setCategory } = props;
 
   // nav 리스트 목록
   const navList = ['전체보기', '운동', '공부', '대화', '재테크', '게임', '기타'];
@@ -69,6 +69,7 @@ const MapCategoryNav = props => {
                     state={active === index ? 'active' : false}
                     _onClick={e => {
                       setActive(index);
+                      setCategory(index);
                       dispatch(postActions.getPostDB(0));
                     }}
                   >
@@ -81,6 +82,7 @@ const MapCategoryNav = props => {
                     state={active === index ? 'active' : false}
                     _onClick={e => {
                       setActive(index);
+                      setCategory(index);
                       dispatch(postActions.getCategoryDB(index, 0));
                     }}
                   >

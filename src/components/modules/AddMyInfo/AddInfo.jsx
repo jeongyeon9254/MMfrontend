@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
 import { history } from '../../../redux/configureStore';
 import { delCookie } from '../../../shared/Cookie';
+import icon_photo from '../../../img/Icon/icon_photo.svg';
 
 const AddInfo = props => {
   const [Open, setOpen] = useState(false);
@@ -102,6 +103,9 @@ const AddInfo = props => {
             onChange={handleFileOnChange}
             accept="image/*"
           />
+          <PhotoBtn>
+            <img src={icon_photo} alt="icon_photo" />
+          </PhotoBtn>
         </Grid>
         <Grid row gap="20px">
           <Grid margin="0px 30px">
@@ -178,7 +182,23 @@ const AddText = styled.p`
 const BtnBox = styled.div`
   padding: 0px 9%;
 `;
-
+const PhotoBtn = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 100%;
+  font-size: 12px;
+  overflow: hidden;
+  border: 1px solid #b5b3b3;
+  text-align: center;
+  line-height: 61px;
+  position: absolute;
+  right: 29%;
+  bottom: 0px;
+  img {
+    width: 23px;
+  }
+`;
 const CheckTxt = styled.p`
   position: absolute;
   left: 77px;

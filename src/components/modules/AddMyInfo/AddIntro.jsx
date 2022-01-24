@@ -9,6 +9,7 @@ import TutorialBox from '../Tutorial/TutorialBox';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
+import imageCompression from 'browser-image-compression';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const AddIntro = props => {
     }
   }
 
-  const ClickEvent = () => {
+  const ClickEvent = async () => {
     const jsonFile = datas => {
       return new Blob([JSON.stringify(datas)], { type: 'application/json' });
     };

@@ -14,21 +14,28 @@ import { ReactComponent as OnHeartIcon } from '../../../img/Icon/icon_heart_in.s
 import { ReactComponent as CommentIcon } from '../../../img/Icon/chat_bubble.svg';
 import icon_location from '../../../img/Icon/icon_location.svg';
 
+// Js
+import { history } from '../../../redux/configureStore';
+
 const PostCard = props => {
   // 페이지 네이션 사용
   SwiperCore.use([Pagination]);
 
   // props값 관리
-  const info = props.info;
-  const addlike = props.addlike;
+  const { info, goDetail, addlike } = props;
   const imgList = info.imageList;
   const time = info.createdAt.split(' ')[0].split('-');
 
   return (
-    <Grid>
+    <Grid _onClick={goDetail}>
       {/* 상단 정보창 */}
       <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 30px" gap="10px">
-        <Grid width="auto">
+        <Grid
+          width="auto"
+          _onClick={() => {
+            history.push(`/profile/${info.userId}`);
+          }}
+        >
           <Image src={info.profileImage} photoRound width="50px" margin="0" />
         </Grid>
 
@@ -85,9 +92,9 @@ const PostCard = props => {
         <Text>{info.content}</Text>
         <Grid row padding="16px 0px 0px 0px" align="center">
           {info.likeStatus ? (
-            <OnHeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+            <OnHeartIcon style={{ cursor: 'pointer', zIndex: '99' }} onClick={addlike} />
           ) : (
-            <HeartIcon style={{ cursor: 'pointer' }} onClick={addlike} />
+            <HeartIcon style={{ cursor: 'pointer', zIndex: '99' }} onClick={addlike} />
           )}
           <Count>{info.likesCount}</Count>
           <CommentIcon style={{ margin: '0px 0px 0px 14px' }} />

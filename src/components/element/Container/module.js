@@ -23,6 +23,7 @@ export const ImgBg = styled.div`
   margin: -429px 0 0 -213px;
   z-index: 99;
   overflow: hidden;
+  isolation: isolate;
   @media only screen and (max-height: 1050px) {
     background-image: none;
     height: 100%;
@@ -82,6 +83,7 @@ export const ContainerStyle = styled.div`
     max-width: 100%;
     border-radius: 0px;
     padding: 47px 0 87px 0;
+    border: 0px;
   }
   @media only screen and (max-width: 450px) {
     position: absolute;

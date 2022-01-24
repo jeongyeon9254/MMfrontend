@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Component
-import { Grid, Image, Tag } from '../components/element/index';
+import { Grid, Image } from '../components/element/index';
 
 const Skeleton = () => {
   // 페이지 네이션 사용

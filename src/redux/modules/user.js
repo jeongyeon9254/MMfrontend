@@ -109,6 +109,7 @@ export default handleActions(
       }),
     [RESET_USER]: (state, action) =>
       produce(state, draft => {
+        draft.mbti = {};
         draft.MypostList = [];
         draft.page = 0;
       }),

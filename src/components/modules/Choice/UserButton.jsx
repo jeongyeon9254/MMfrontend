@@ -6,9 +6,8 @@ import { actionCreators as ChatAction } from '../../../redux/modules/chat';
 import { actionCreators as matchingAction } from '../../../redux/modules/matching';
 
 function UserButton(props) {
-  const { guestId, hostInfo, _onClick } = props;
+  const { hostInfo, _onClick } = props;
   const dispatch = useDispatch();
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const guestInfo = {
     guestEmail: hostInfo.username,
