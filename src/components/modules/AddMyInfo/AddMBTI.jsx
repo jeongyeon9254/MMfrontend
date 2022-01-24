@@ -4,7 +4,6 @@ import Header from '../layout/Header';
 import Bit from '../Bit';
 import { Grid, Tag, Button } from '../../element/index';
 import AddInterest from './AddInterest';
-import AddAdress from './AddAdress';
 
 const AddMBTI = props => {
   const { file, data, show, Control } = props;

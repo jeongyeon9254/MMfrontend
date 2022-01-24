@@ -10,12 +10,13 @@ const Alert = props => {
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
   });
-  const { children, isButton, bg, display, color, check, logout } = props;
+  const { children, isButton, bg, display, color, check, logout, skip } = props;
 
   const styles = {
     display,
     bg,
     color,
+    skip,
   };
 
   if (isButton) {
@@ -37,7 +38,7 @@ const Alert = props => {
                   props.no();
                 }}
               >
-                아니요
+                {skip ? '건너뛰기' : '아니요'}
               </No>
               <Yes
                 onClick={() => {
