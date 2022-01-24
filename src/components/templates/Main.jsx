@@ -13,12 +13,11 @@ import { history } from '../../redux/configureStore.js';
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-// import MapList from '../modules/Main/MapList';
-import MapList from '../modules/Main/MapList';
-import MapContainer from '../modules/Main/MapContainer';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
+import MapList from '../../components/modules/Main/MapList';
+import MapContainer from '../../components/modules/Main/MapContainer';
+import MapCategoryNav from '../../components/modules/Main/MapCategoryNav';
 import Spiner from '../../shared/Spiner';
-import MainModal from '../modules/Main/MainModal';
+import MainModal from '../../components/modules/Main/MainModal';
 
 // Js
 import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
