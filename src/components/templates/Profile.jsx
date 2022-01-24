@@ -44,7 +44,6 @@ const Profile = () => {
     return MatchingLists.includes(profile.userId);
   };
 
-  console.log(FindId());
   const mbti = profile.interestList;
 
   const exit = () => {

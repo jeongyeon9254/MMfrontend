@@ -101,7 +101,11 @@ export default handleActions(
     [GET_MYLIST]: (state, action) =>
       produce(state, draft => {
         const data = action.payload.data;
-        draft.list.result = data.userList;
+        if (data.userList === null) {
+          draft.list.result = [];
+        } else {
+          draft.list.result = data.userList;
+        }
         draft.myInfo = true;
       }),
     [GET_GUEST]: (state, action) =>

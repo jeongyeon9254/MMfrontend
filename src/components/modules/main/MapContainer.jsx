@@ -120,7 +120,6 @@ const MapContainer = props => {
 
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(result[0].y, result[0].x);
         const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
         move.panTo(moveLatLon);
 

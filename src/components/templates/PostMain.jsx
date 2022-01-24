@@ -81,13 +81,13 @@ const PostMain = () => {
           {arr.length > 0 ? (
             arr.map((x, idx) => {
               return (
-                <div
-                  key={x.postId}
-                  onClick={() => {
-                    history.push(`/postMain/${x.postId}`);
-                  }}
-                >
-                  <PostCard info={x} />
+                <div key={x.postId}>
+                  <PostCard
+                    info={x}
+                    goDetail={() => {
+                      history.push(`/postMain/${x.postId}`);
+                    }}
+                  />
                   {x.commentList.length > 0 ? (
                     x.commentList.length > 1 ? (
                       <CommentBox>

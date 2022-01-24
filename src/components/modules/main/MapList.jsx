@@ -15,8 +15,9 @@ import { history } from '../../../redux/configureStore';
 
 const MapList = props => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const lists = useSelector(state => state.main.list);
   const { outModal } = props;
+  const lists = useSelector(state => state.main.list);
+  const mapList = lists ? lists : [];
 
   const offModal = () => {
     outModal();
