@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Grid, Box, Button, Select, Input } from '../../element/index';
-import LoSelect from '../addInfo/LoSelct';
+import { Grid, Button, Input } from '../../element/index';
 import AddMBTI from './AddMBTI';
-import AddInfo from './AddInfo';
 import KakaoAddress from './KakaoAddress';
 
 const AddAdress = props => {
   const { file, Control, Show } = props;
   const [Open, setOpen] = useState(false);
-  const [BackAddinfo, BacksetAddinfo] = useState(false);
   const [Kakaoadr, setKakaoadr] = useState(false);
   const [Full, setFull] = useState('');
   const [LO, setLo] = useState('');
