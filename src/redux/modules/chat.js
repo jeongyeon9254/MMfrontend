@@ -117,21 +117,21 @@ const PostChatting = req => {
   };
 };
 
-// 채팅방 목록에서 내 아이디 제거하기
+// 채팅방 나가기
 const putChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await putChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    history.push('/chat');
+    document.location.href = '/chat';
   };
 };
 
-// 채팅방을 완전히 삭제 하기
+// 채팅방 나가기
 const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    history.push('/chat');
+    document.location.href = '/chat';
   };
 };
 

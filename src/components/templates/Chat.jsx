@@ -104,6 +104,7 @@ const Chat = () => {
   // 채팅방 완전히 나가기
   const sendStop = () => {
     try {
+      console.log('sendStop');
       const ms = {
         type: 'QUIT',
         roomId: roomNum,

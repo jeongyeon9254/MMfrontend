@@ -43,26 +43,15 @@ const ChatForm = props => {
     });
   };
 
-  const DeleteMsRoomOrGoBackRoom = () => {
-    if (loading) {
-      sendStop();
-      SetmodalOpen(true);
-      ClickDeleteRoom();
-      ClickPutRoom();
-    }
+  const ClickDeleteRoom = async () => {
+    sendStop();
+    dispatch(ChatAction.deleteChatroomDB(roomId));
+    SetmodalOpen(true);
   };
 
-  const ClickDeleteRoom = () => {
-    if (MsQuit) {
-      dispatch(ChatAction.deleteChatroomDB(roomId));
-      _onClick();
-      SetmodalOpen(true);
-    }
-  };
-
-  const ClickPutRoom = () => {
+  const ClickPutRoom = async () => {
+    sendStop();
     dispatch(ChatAction.putChatroomDB(roomId));
-    _onClick();
     SetmodalOpen(true);
   };
 
@@ -126,7 +115,7 @@ const ChatForm = props => {
           SetMsQuit(false);
           SetmodalOpen(true);
         }}
-        DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
+        DeleteMsRoomOrGoBackRoom={MsQuit ? ClickDeleteRoom : ClickPutRoom}
         chat
       >
         {guestNick}
