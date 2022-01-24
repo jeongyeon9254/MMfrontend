@@ -36,7 +36,7 @@ export const getMatchingDB = () => {
 export const getchemyDB = userId => {
   return instance({
     method: 'get',
-    url: `/api/chemy/${userId}`,
+    url: `/api/chemy/affinity/${userId}`,
   });
 };
 

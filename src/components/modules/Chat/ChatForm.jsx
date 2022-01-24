@@ -19,6 +19,7 @@ const ChatForm = props => {
   const total = useSelector(state => state.chat.total);
   const page = useSelector(state => state.chat.page);
   const nowNum = useSelector(state => state.chat.now);
+  const [modalOpen, SetmodalOpen] = React.useState(true);
   const scrollRef = React.useRef(null);
   const BoxRef = React.useRef({});
   const [On, SetOn] = React.useState(false);
@@ -45,12 +46,24 @@ const ChatForm = props => {
   const DeleteMsRoomOrGoBackRoom = () => {
     if (loading) {
       sendStop();
-      if (MsQuit) {
-        dispatch(ChatAction.deleteChatroomDB(roomId));
-      } else {
-        dispatch(ChatAction.putChatroomDB(roomId));
-      }
+      SetmodalOpen(true);
+      ClickDeleteRoom();
+      ClickPutRoom();
     }
+  };
+
+  const ClickDeleteRoom = () => {
+    if (MsQuit) {
+      dispatch(ChatAction.deleteChatroomDB(roomId));
+      _onClick();
+      SetmodalOpen(true);
+    }
+  };
+
+  const ClickPutRoom = () => {
+    dispatch(ChatAction.putChatroomDB(roomId));
+    _onClick();
+    SetmodalOpen(true);
   };
 
   const InfiniteStairs = () => {
@@ -111,6 +124,7 @@ const ChatForm = props => {
         _onClick={() => {
           _onClick();
           SetMsQuit(false);
+          SetmodalOpen(true);
         }}
         DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
         chat
@@ -123,7 +137,7 @@ const ChatForm = props => {
         className={On ? 'on' : ''}
         onScroll={InfiniteStairs}
       >
-        <div>
+        <Grouplist>
           {loading
             ? Chatting.map((item, index) => {
                 return (
@@ -133,12 +147,18 @@ const ChatForm = props => {
                     key={index}
                     _ref={ref => (BoxRef.current[index] = ref)}
                   >
-                    <ChatListform data={item} username={userInfo.username} />
+                    <ChatListform
+                      data={item}
+                      username={userInfo.username}
+                      ClickDeleteRoom={ClickDeleteRoom}
+                      Open={modalOpen}
+                      OpenClick={SetmodalOpen}
+                    />
                   </Grid>
                 );
               }).reverse()
             : ''}
-        </div>
+        </Grouplist>
       </ScrollBox>
       <PartyInput
         MsQuit={MsQuit}
@@ -167,6 +187,10 @@ const PageShadows = styled.div`
   &.open {
     left: 0px;
   }
+`;
+
+const Grouplist = styled.div`
+  position: relative;
 `;
 
 const ScrollBox = styled.div`
