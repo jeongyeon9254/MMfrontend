@@ -13,6 +13,7 @@ const PUSH_CHAT = 'PUSH_CHAT';
 const LOAD_CHATLIST = 'LOAD_CHATLIST';
 const LOAD_CHATTING = 'LOAD_CHATTING';
 const ADD_CHATTING = 'ADD_CHATTING';
+const ROOMNUMBERS = 'ROOMNUMBERS';
 
 const Delet_RoomLIST = 'Delet_RoomLIST';
 const MS_LOADING = 'MS_LOADING';
@@ -26,6 +27,7 @@ const pushChatting = createAction(PUSH_CHAT, ms => ({ ms }));
 const ListChatRoom = createAction(LOAD_CHATLIST, list => ({ list }));
 const LoadChatting = createAction(LOAD_CHATTING, (chatting, page) => ({ chatting, page }));
 const AddChatting = createAction(ADD_CHATTING, (chatting, page) => ({ chatting, page }));
+const Roomnumbers = createAction(ROOMNUMBERS, data => ({ data }));
 const total_number = createAction(ToTalNum, num => ({ num }));
 const now_number = createAction(NowNum, num => ({ num }));
 const DeletRoomList = createAction(Delet_RoomLIST, roomId => ({ roomId }));
@@ -39,6 +41,7 @@ const initialState = {
   Room: [{}],
   loading: false,
   listloading: false,
+  RoomNumbers: [],
   page: 0,
   total: 0,
   now: 0,
@@ -64,6 +67,14 @@ const getChatRoomListDB = () => {
       const res = await getChatRoomList();
       dispatch(ListChatRoom(res.data));
       dispatch(LoadingList());
+      const FindId = data => {
+        const Id = data.map(item => {
+          return item.guestId;
+        });
+        return Id;
+      };
+      const IdList = [...FindId(res.data)];
+      dispatch(Roomnumbers(IdList));
     } catch (err) {
       console.log(err);
     }
@@ -136,6 +147,11 @@ export default handleActions(
         const { list } = action.payload;
         draft.Room = list;
       }),
+    [ROOMNUMBERS]: (state, action) =>
+      produce(state, draft => {
+        const { data } = action.payload;
+        draft.RoomNumbers = data;
+      }),
     [LOAD_CHATTING]: (state, action) =>
       produce(state, draft => {
         const { chatting, page } = action.payload;
@@ -186,6 +202,7 @@ export default handleActions(
         draft.loading = false;
         draft.List = [{}];
         draft.Room = [{}];
+        draft.RoomNumbers = [];
       }),
   },
   initialState,

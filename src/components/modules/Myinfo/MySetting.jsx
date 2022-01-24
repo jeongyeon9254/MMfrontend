@@ -71,7 +71,7 @@ function MySetting(props) {
         >
           로그아웃
         </TabList>
-        <TabList>버전 정보 1.0.0</TabList>
+        <TabList>버전 정보 1.5.0</TabList>
         <TabList
           onClick={() => {
             setUserAlt(true);

@@ -61,18 +61,6 @@ const Chat = () => {
       console.log(err);
     }
   };
-  // 채팅 보내기
-  const sendMessage = ms => {
-    try {
-      waitForConnection(ws, () => {
-        ws.debug = null;
-        ws.send('/pub/chat/message', { token: TOKEN }, JSON.stringify(ms));
-      });
-    } catch (e) {
-      console.log('message 소켓 함수 에러', e);
-      console.log('메세지보내기 상태', ws.ws.readyState);
-    }
-  };
 
   // 웹소켓이 연결될 때 까지 실행하는 함수
   const waitForConnection = (ws, callback) => {
@@ -91,7 +79,6 @@ const Chat = () => {
       ws.debug = null;
       ws.disconnect(
         () => {
-          console.log('연결 해제');
           ws.unsubscribe('sub-0');
           clearTimeout(waitForConnection);
         },
@@ -102,6 +89,19 @@ const Chat = () => {
     }
   };
 
+  // 채팅 보내기
+  const sendMessage = ms => {
+    try {
+      waitForConnection(ws, () => {
+        ws.debug = null;
+        ws.send('/pub/chat/message', { token: TOKEN }, JSON.stringify(ms));
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // 채팅방 완전히 나가기
   const sendStop = () => {
     try {
       const ms = {
@@ -113,14 +113,13 @@ const Chat = () => {
       waitForConnection(ws, () => {
         ws.debug = null;
         sendMessage(ms);
-        console.log('메세지전송 상태', ws.ws.readyState);
       });
     } catch (e) {
-      console.log('메세지 소켓 함수 에러', e);
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
 
+  // 채팅방 입장하기
   const sendStart = () => {
     try {
       const ms = {
@@ -132,10 +131,8 @@ const Chat = () => {
       waitForConnection(ws, () => {
         ws.debug = null;
         sendMessage(ms);
-        console.log('메세지전송 상태', ws.ws.readyState);
       });
     } catch (e) {
-      console.log('메세지 소켓 함수 에러', e);
       console.log('메세지전송 상태', ws.ws.readyState);
     }
   };
@@ -155,6 +152,10 @@ const Chat = () => {
 
   React.useEffect(() => {
     dispatch(ChatAction.getChatRoomListDB());
+    return () => {
+      dispatch(ChatAction.resetList());
+      dispatch(ChatAction.ms_resetList());
+    };
   }, []);
 
   return (
@@ -179,7 +180,7 @@ const Chat = () => {
                     Inset(true);
                   }}
                   data={x}
-                  key={idx}
+                  key={idx + x.roomId}
                 ></ChatList>
               );
             })}
