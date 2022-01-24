@@ -62,7 +62,7 @@ const getMatchingListCheckDB = () => {
       dispatch(ListMatchingSend(Sendres.data));
       const FindId = data => {
         const Id = data.map(item => {
-          return { partnerId: item.partnerId };
+          return item.partnerId;
         });
         return Id;
       };

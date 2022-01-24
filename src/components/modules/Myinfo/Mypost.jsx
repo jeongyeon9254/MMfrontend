@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators as userAction } from '../../../redux/modules/user';
+import { actionCreators as userActions } from '../../../redux/modules/user';
 import { history } from '../../../redux/configureStore';
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +12,10 @@ function Mypost() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(userAction.getMyPostBoxDB());
+    dispatch(userActions.getMyPostBoxDB());
+    return () => {
+      dispatch(userActions.resetUser());
+    };
   }, []);
 
   const postings = useSelector(state => state.user.MypostList);
