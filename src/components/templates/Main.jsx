@@ -76,6 +76,9 @@ const Main = () => {
   // 렌더링시 지도 정보를 받아옵니다.
   React.useEffect(() => {
     dispatch(mainActions.getMyListDB());
+    return () => {
+      dispatch(mainActions.reset());
+    };
   }, []);
 
   // 내위치 클릭시 메인화면 초기화
