@@ -13,6 +13,7 @@ import { history } from '../../redux/configureStore.js';
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
+// import MapList from '../modules/Main/MapList';
 import MapList from '../modules/Main/MapList';
 import MapContainer from '../modules/Main/MapContainer';
 import MapCategoryNav from '../modules/Main/MapCategoryNav';
