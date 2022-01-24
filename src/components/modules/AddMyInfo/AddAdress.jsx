@@ -20,8 +20,6 @@ const AddAdress = props => {
   };
   const data = { Full, LO, De, X, Y };
 
-  console.log(data);
-
   return (
     <ShowPage className={Show ? 'open' : ''}>
       <AddMBTI file={file} data={data} show={Open} Control={PageControl} />

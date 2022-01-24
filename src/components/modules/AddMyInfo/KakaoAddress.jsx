@@ -55,7 +55,6 @@ const KakaoAddress = props => {
         const ArrLocDetail_1 = ArrLocDetail[0]; // 도
         const x = results[0].address.x; // 경도
         const y = results[0].address.y; // 위도
-        console.log(results[0]);
         // 도로명 주소 데이터를 함수 밖으로 꺼냄
         setFull(addressName);
         setLo(location);

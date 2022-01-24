@@ -10,6 +10,7 @@ import TutorialBox from '../Tutorial/TutorialBox';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import imageCompression from 'browser-image-compression';
+import { history } from '../../../redux/configureStore';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
@@ -76,6 +77,8 @@ const AddIntro = props => {
   // 확인시 버튼 함수
   const next = () => {
     ClickEvent();
+    history.push('/Guide');
+
     setGuide(true);
   };
   // 취소 시 버튼 함수
