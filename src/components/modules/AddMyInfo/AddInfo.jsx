@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Header from '../layout/Header';
-import { Image, Grid, Input, Button, Select, Alert } from '../../element/index';
+import { Image, Grid, Input, Button, Select } from '../../element/index';
 import AddAdress from './AddAdress';
 import styled from 'styled-components';
 import { Gender, Area } from './needData.js';
@@ -47,7 +47,6 @@ const AddInfo = props => {
     const reader = new FileReader();
     // 파일를 datafrom으로 저장할 수 있는 매소드
     // 파이를 fromData에 img라는 key 값으로 저장한다.
-    const arrfile = [file];
 
     setProfileImage(file);
     // 파일를 저장된 위치를 찾는다.
@@ -70,11 +69,7 @@ const AddInfo = props => {
   const PageControl = () => {
     setOpen(!Open);
   };
-  React.useEffect(() => {
-    // if (data.signStatus) {
-    //   history.push('/');
-    // }
-  }, []);
+
   return (
     <Body>
       <AddAdress file={file} Control={PageControl} Show={Open} />
