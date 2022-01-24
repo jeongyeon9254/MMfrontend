@@ -14,24 +14,29 @@ jobs:
         node-version: [16.13.0]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node modules      # node modules 캐싱
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies    
+      - name: Set up Node
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '16.13.0'
+
+      - name: Install dependencies
         run: yarn install
+        env:
+          CI: true
 
       - name: Build                  
         run: yarn build

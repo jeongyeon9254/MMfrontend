@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import imageCompression from 'browser-image-compression';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -76,7 +77,7 @@ const PostWrite = () => {
   };
 
   // 등록!!
-  const addPost = () => {
+  const addPost = async () => {
     // 폼데이터 생성
     let multipartFile = new FormData();
     const emptyFile = new File([''], 'empty');
@@ -86,10 +87,15 @@ const PostWrite = () => {
       multipartFile.append('multipartFile', emptyFile);
     }
 
-    // 이미지가 있을시 차례대로 한개씩 집어넣습니다
+    // 이미지가 있을시 차례대로 한개씩 집어넣습니다 and 이미지 사이즈를 개당 2mb 제한
     if (images.length > 0) {
+      const options = {
+        maxSizeMB: 2,
+        maxWidthOrHeight: 370,
+      };
       for (let i = 0; i < images.length; i++) {
-        multipartFile.append('multipartFile', images[i]);
+        let reSizeFile = await imageCompression(images[i], options);
+        multipartFile.append('multipartFile', reSizeFile);
       }
     }
 
