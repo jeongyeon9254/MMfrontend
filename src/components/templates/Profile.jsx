@@ -20,6 +20,7 @@ import Spiner from '../../shared/Spiner';
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   // 주소에서 유저 ID를 받아옵니다
   const pathName = history.location.pathname;
   const name = pathName.split('/');
@@ -113,11 +114,9 @@ const Profile = () => {
 
   React.useEffect(() => {
     if (profile.userId) {
-      console.log(`Classification : ${Classification}`);
       if (Classification) {
         next(profile.userId);
       }
-      console.log(`roomList : ${roomList}`);
       if (roomList) {
         next(profile.userId);
       }
@@ -171,18 +170,12 @@ const Profile = () => {
           </div>
         </Grid>
         <p className="name">{profile.nickname}</p>
-        <Grid width="15%" margin="15px auto">
-          <Tag mbti={profile ? profile.mbti : 'INFJ'} _type="black" size="14px">
-            {profile.mbti}
-          </Tag>
-        </Grid>
-        <Grid row width="auto" justify="center" gap="5px">
+
+        <Grid row width="auto" justify="center" gap="5px" align="center">
           <img className="icon" alt="주소" src={icon_location}></img>
           <p className="location">
             {profile.location} {profile.locDetail}
           </p>
-        </Grid>
-        <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
           {mbti
             ? mbti.map((x, idx) => {
                 return (
@@ -193,10 +186,16 @@ const Profile = () => {
               })
             : null}
         </Grid>
+
         <Box profile margin="25px 0 0 0">
           {profile.intro}
         </Box>
-
+        <Grid width="100%" margin="10px 0 10px" row justify="space-between">
+          <Tag mbti={profile ? profile.mbti : 'INFJ'} _type="black" size="14px">
+            {profile.mbti}
+          </Tag>
+          <p>{profile.affinity}</p>
+        </Grid>
         {/* 모달창 및 스피너 관리 */}
 
         {!modal ? (
@@ -211,7 +210,7 @@ const Profile = () => {
 };
 
 const ProfileStyle = styled.div`
-  padding: 30px;
+  padding: 0px 30px 30px;
   @media only screen and (max-width: 450px) {
     padding: 10px 30px;
     overflow: scroll;

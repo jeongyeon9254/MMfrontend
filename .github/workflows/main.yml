@@ -16,20 +16,26 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies
+      - name: Set up Node
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '16.13.0'
+
+      - name: Install dependencies
         run: yarn install
+        env:
+          CI: true
 
       - name: Build
         run: yarn build
 
       - name: Deploy
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets. AWS_IAM_MANAGER_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_IAM_MANAGER_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
         run: aws s3 cp
           --recursive

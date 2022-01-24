@@ -1,13 +1,5 @@
 import instance from '../instance';
 
-// 채팅방 입장
-export const getApproveDB = userId => {
-  return instance({
-    method: 'get',
-    url: `/api/chemy/${userId}`,
-  });
-};
-
 //채팅방 목록 가져오기
 export const getChatRoomList = () => {
   return instance({
