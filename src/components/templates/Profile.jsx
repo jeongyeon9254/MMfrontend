@@ -42,6 +42,11 @@ const Profile = () => {
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
   const MatchingLists = useSelector(state => state.matching.matchingLists);
+
+  const FindId = () => {
+    // console.log(profile.userId);
+    return MatchingLists.includes(profile.userId);
+  };
   const RoomListNum = useSelector(state => state.chat.RoomNumbers);
   const mbti = profile.interestList;
 
