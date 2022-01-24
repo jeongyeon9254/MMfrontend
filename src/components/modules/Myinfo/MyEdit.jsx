@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import KakaoAddr from '../AddMyInfo/KakaoAddress';
 import imageCompression from 'browser-image-compression';
+import { history } from '../../../redux/configureStore';
 
 function MyEdit(props) {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ function MyEdit(props) {
 
   const next = () => {
     ClickEvent();
+    history.push('/');
   };
 
   const exit = () => {
