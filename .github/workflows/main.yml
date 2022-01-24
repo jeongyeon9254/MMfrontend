@@ -22,7 +22,7 @@ jobs:
             ${{ runner.OS }}-
             
       - name: Install Dependencies
-        run: yarn
+        run: npm install -g yarn
 
       - name: Build
         run: yarn build
