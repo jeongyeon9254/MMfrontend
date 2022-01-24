@@ -24,6 +24,9 @@ jobs:
       - name: Install Dependencies
         run: npm install -g yarn
 
+      - name: Script
+        run: yarn add global react-scripts
+        
       - name: Build
         run: yarn build
 
