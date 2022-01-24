@@ -202,6 +202,7 @@ export default handleActions(
         draft.loading = false;
         draft.List = [{}];
         draft.Room = [{}];
+        draft.RoomNumbers = [];
       }),
   },
   initialState,

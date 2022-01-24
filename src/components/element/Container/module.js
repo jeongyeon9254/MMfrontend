@@ -23,6 +23,7 @@ export const ImgBg = styled.div`
   margin: -429px 0 0 -213px;
   z-index: 99;
   overflow: hidden;
+  isolation: isolate;
   @media only screen and (max-height: 1050px) {
     background-image: none;
     height: 100%;
