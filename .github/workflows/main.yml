@@ -2,7 +2,7 @@ name: Reactbuild
 
 on:
   push:
-    branches: [jeongyeonjae]
+    branches: [main]
 
 jobs:
   build:
