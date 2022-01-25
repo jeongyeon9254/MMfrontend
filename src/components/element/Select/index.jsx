@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../element';
 import arrow_down_d from '../../../img/Icon/arrow_down_d.svg';
-import { gpsLsit } from '../../modules/Main/gpsList';
+import { gpsLsit } from '../../modules/main/gpsList';
 function Select(props) {
   const { width, Emit, Data, Area, height, padding, high, fontsize, commend } = props;
 

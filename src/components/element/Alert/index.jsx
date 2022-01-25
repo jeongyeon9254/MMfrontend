@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Image } from '../index';
 import styled from 'styled-components';
-import { Yes, No } from '../../element/Alert/module.js';
+import { Yes, No } from './module.js';
 import Bit from '../../modules/Bit';
 import mergeBit from '../../../img/Icon/Logout_modal.svg';
 
