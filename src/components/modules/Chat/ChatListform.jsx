@@ -5,7 +5,6 @@ import { PartyMe, PartyOther } from './index';
 import { Grid, Image } from '../../element';
 
 import close from '../../../img/Icon/close.png';
-import { useState } from 'react';
 function ChatListform(props) {
   const { data, username, ClickDeleteRoom, OpenClick, Open } = props;
 

@@ -20,6 +20,7 @@ import Spiner from '../../shared/Spiner';
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   // 주소에서 유저 ID를 받아옵니다
   const pathName = history.location.pathname;
   const name = pathName.split('/');
@@ -113,11 +114,9 @@ const Profile = () => {
 
   React.useEffect(() => {
     if (profile.userId) {
-      console.log(`Classification : ${Classification}`);
       if (Classification) {
         next(profile.userId);
       }
-      console.log(`roomList : ${roomList}`);
       if (roomList) {
         next(profile.userId);
       }
@@ -166,33 +165,38 @@ const Profile = () => {
         )}
         <Grid margin="30px 0 0 0">
           <Image round width="50%" src={profile.profileImage} mbti={profile.mbti}></Image>
-          <div className="mbti">
+          <MbtiIcon className="mbti">
             <Image round mbti={profile ? profile.mbti : 'INFJ'}></Image>
-          </div>
+          </MbtiIcon>
         </Grid>
-        <p className="name">{profile.nickname}</p>
-        <Grid width="15%" margin="15px auto">
-          <Tag mbti={profile ? profile.mbti : 'INFJ'} _type="black" size="14px">
-            {profile.mbti}
-          </Tag>
+
+        <Grid row width="auto" justify="center" gap="10px" align="center">
+          <Name className="name">{profile.nickname}</Name>
+          <Grid width="100%" margin="0px 0 0px" row justify="center">
+            <Tag mbti={profile ? profile.mbti : 'INFJ'} _type="black" size="14px">
+              {profile.mbti}
+            </Tag>
+            {/* <p>{profile.affinity}</p> */}
+          </Grid>
+          <Grid row justify="center">
+            <LocationIcon className="icon" alt="주소" src={icon_location}></LocationIcon>
+            <Location className="location">
+              {profile.location} {profile.locDetail}
+            </Location>
+          </Grid>
+          <Grid row justify="center" margin="10px 0 0" gap="10px">
+            {mbti
+              ? mbti.map((x, idx) => {
+                  return (
+                    <Tag size="12px" key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
+                      {mbti[idx]}
+                    </Tag>
+                  );
+                })
+              : null}
+          </Grid>
         </Grid>
-        <Grid row width="auto" justify="center" gap="5px">
-          <img className="icon" alt="주소" src={icon_location}></img>
-          <p className="location">
-            {profile.location} {profile.locDetail}
-          </p>
-        </Grid>
-        <Grid row width="auto" justify="center" gap="10px" margin="14px 0 0 0 ">
-          {mbti
-            ? mbti.map((x, idx) => {
-                return (
-                  <Tag size="12px" key={idx} mbti={profile ? profile.mbti : 'INFJ'}>
-                    {mbti[idx]}
-                  </Tag>
-                );
-              })
-            : null}
-        </Grid>
+
         <Box profile margin="25px 0 0 0">
           {profile.intro}
         </Box>
@@ -211,38 +215,38 @@ const Profile = () => {
 };
 
 const ProfileStyle = styled.div`
-  padding: 30px;
+  padding: 0px 30px 30px;
   @media only screen and (max-width: 450px) {
     padding: 10px 30px;
     overflow: scroll;
     height: 97%;
   }
-  .name {
-    margin-top: 28px;
-    font-size: ${props => props.theme.fontSizes.xxxl};
-    text-align: center;
-    font-weight: 700;
-    color: ${props => props.theme.colors.gray_2};
-  }
-  .mbti {
-    position: absolute;
-    width: 20%;
-    bottom: -10%;
-    left: 60%;
-    border-radius: 50%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  .icon {
-    width: 18px;
-  }
-  .location {
-    font-weight: 500;
-    font-size: ${props => props.theme.fontSizes.small};
-    color: #9b9b9b;
-    line-height: 1.3;
-  }
 `;
 
+const MbtiIcon = styled.div`
+  position: absolute;
+  width: 20%;
+  bottom: -10%;
+  left: 60%;
+  border-radius: 50%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+const LocationIcon = styled.img`
+  width: 18px;
+`;
+const Location = styled.p`
+  font-weight: 500;
+  font-size: ${props => props.theme.fontSizes.small};
+  color: #9b9b9b;
+  line-height: 1.3;
+`;
+const Name = styled.p`
+  margin-top: 28px;
+  font-size: ${props => props.theme.fontSizes.xxxl};
+  text-align: center;
+  font-weight: 700;
+  color: ${props => props.theme.colors.gray_2};
+`;
 const Title = styled.p`
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 400;

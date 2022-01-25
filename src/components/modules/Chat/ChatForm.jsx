@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import Header from '../layout/Header';
-import { Grid, Image } from '../../element';
+import { Grid } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyInput, ChatListform } from './index';
 import { useDispatch } from 'react-redux';
@@ -43,26 +42,15 @@ const ChatForm = props => {
     });
   };
 
-  const DeleteMsRoomOrGoBackRoom = () => {
-    if (loading) {
-      sendStop();
-      SetmodalOpen(true);
-      ClickDeleteRoom();
-      ClickPutRoom();
-    }
+  const ClickDeleteRoom = async () => {
+    sendStop();
+    dispatch(ChatAction.deleteChatroomDB(roomId));
+    SetmodalOpen(true);
   };
 
-  const ClickDeleteRoom = () => {
-    if (MsQuit) {
-      dispatch(ChatAction.deleteChatroomDB(roomId));
-      _onClick();
-      SetmodalOpen(true);
-    }
-  };
-
-  const ClickPutRoom = () => {
+  const ClickPutRoom = async () => {
+    sendStop();
     dispatch(ChatAction.putChatroomDB(roomId));
-    _onClick();
     SetmodalOpen(true);
   };
 
@@ -126,7 +114,7 @@ const ChatForm = props => {
           SetMsQuit(false);
           SetmodalOpen(true);
         }}
-        DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
+        DeleteMsRoomOrGoBackRoom={MsQuit ? ClickDeleteRoom : ClickPutRoom}
         chat
       >
         {guestNick}

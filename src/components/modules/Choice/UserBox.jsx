@@ -6,8 +6,7 @@ import fmd_good from '../../../img/Icon/fmd_good.svg';
 import Bit from '../Bit';
 import { Skeleton } from './index';
 function UserBox(props) {
-  const { date, interestList, intro, mbti, nickname, profileImage, roomId, userId, location } =
-    props.data;
+  const { interestList, intro, mbti, nickname, profileImage, location } = props.data;
 
   const myMbti = Bit.find(x => {
     return x.name === mbti;

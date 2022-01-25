@@ -13,14 +13,14 @@ import { history } from '../../redux/configureStore.js';
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import MapList from '../modules/Main/MapList.jsx';
-import MapContainer from '../modules/Main/MapContainer';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
-import Spiner from '../../shared/Spiner.jsx';
-import MainModal from '../modules/Main/MainModal.jsx';
+import MapList from '../../components/modules/main/MapList';
+import MapContainer from '../../components/modules/main/MapContainer';
+import MapCategoryNav from '../../components/modules/main/MapCategoryNav';
+import Spiner from '../../shared/Spiner';
+import MainModal from '../../components/modules/main/MainModal';
 
 // Js
-import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
+import { smallGpsList, bigGpsList } from '../modules/main/gpsList';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -217,7 +217,7 @@ const LocationBox = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  top: 17%;
+  top: 160px;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 1;

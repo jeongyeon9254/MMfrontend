@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { history } from '../../../redux/configureStore';
 import { Grid, Image, Box } from '../../element';
-import { returnTime } from '../../../shared/Time';
 
 function PartyOther(props) {
   const { children, data } = props;

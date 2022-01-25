@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../layout/Header';
-import { Grid, Button } from '../../element';
+import { Grid } from '../../element';
 import { UserBox, UserPre, UserButton } from './index';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as profileAction } from '../../../redux/modules/profile';

@@ -5,7 +5,6 @@ import appicon from '../../../img/appIcon.png';
 import chemy from '../../../img/chemy.svg';
 import { Grid } from '../../element';
 
-import { ClickDownload } from '../../../shared/AppDownload';
 function Bg() {
   const GoFeedback = () => {
     window.open('https://forms.gle/ur7WqgKNxfcnQPww9');

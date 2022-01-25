@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MyPartBox, MyinfoBit, Myinterests, Mypost, MyEdit, MyBottom } from './index';
+import { MyPartBox, MyinfoBit, Myinterests, Mypost } from './index';
 import { Grid, Box } from '../../element';
 
 function MyBody() {
