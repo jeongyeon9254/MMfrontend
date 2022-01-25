@@ -50,7 +50,6 @@ const Sample = () => {
             자동매칭
           </Button>
         </CenterBtn>
-        {/* {modal ? <MapList sample outModal={outModal} /> : null} */}
         <Footer />
       </div>
     </React.Fragment>
