@@ -27,11 +27,11 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-        env:
-          CI: true
 
       - name: Build
         run: yarn build
+        env:
+          CI: ''
 
       - name: Deploy
         env:
