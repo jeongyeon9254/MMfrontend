@@ -53,6 +53,7 @@ const postChatRoomListDB = (guestInfo, hostId) => {
     try {
       await postChatRoomList(guestInfo);
       dispatch(matchingAction.PutMatchingList(hostId));
+      console.log(hostId);
       history.push('/chat');
     } catch (e) {
       console.log(e);

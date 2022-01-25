@@ -24,7 +24,7 @@ import { PrivateRoute, PublicRoute, Bg } from '../components/modules/layout';
 // Redux 불러오기
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 function App() {
   return (
