@@ -10,8 +10,8 @@ import { history } from '../../redux/configureStore.js';
 import { Button } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import SampleMapContainer from '../modules/Main/SampleMapContainer';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
+import SampleMapContainer from '../modules/main/SampleMapContainer';
+import MapCategoryNav from '../modules/main/MapCategoryNav';
 
 const Sample = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Js
 import { useDispatch } from 'react-redux';
-import { bigGpsList, smallGpsList } from '../../modules/Main/gpsList';
+import { bigGpsList, smallGpsList } from '../../modules/main/gpsList';
 import { actionCreators as mainActions } from '../../../redux/modules/main';
 
 // component

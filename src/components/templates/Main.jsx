@@ -13,14 +13,14 @@ import { history } from '../../redux/configureStore.js';
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import MapList from '../../components/modules/Main/MapList';
-import MapContainer from '../../components/modules/Main/MapContainer';
-import MapCategoryNav from '../../components/modules/Main/MapCategoryNav';
+import MapList from '../../components/modules/main/MapList';
+import MapContainer from '../../components/modules/main/MapContainer';
+import MapCategoryNav from '../../components/modules/main/MapCategoryNav';
 import Spiner from '../../shared/Spiner';
-import MainModal from '../../components/modules/Main/MainModal';
+import MainModal from '../../components/modules/main/MainModal';
 
 // Js
-import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
+import { smallGpsList, bigGpsList } from '../modules/main/gpsList';
 
 const Main = () => {
   const dispatch = useDispatch();
