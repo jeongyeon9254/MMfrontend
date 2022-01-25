@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Grid, Alert } from '../../element';
+import { Grid } from '../../element';
 import arrow_left from '../../../img/Icon/arrow_left.svg';
 import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
 import setting from '../../../img/Icon/setting.svg';

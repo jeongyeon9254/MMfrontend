@@ -29,11 +29,9 @@ const Button = props => {
     BtnTag,
     BtnAdd,
     state,
-    main,
     radius,
     border,
     _disabled,
-    Disable,
     opacity,
     bottom,
   } = props;

@@ -3,7 +3,6 @@ import {
   InputTextarea,
   InputNum,
   InputPw,
-  InputDate,
   InputStyle,
   InputPostText,
   ChatInput,
@@ -45,11 +44,6 @@ const Input = props => {
   const MaxNum = el => {
     if (el.target.value.length > 6) {
       el.target.value = el.target.value.substr(0, 6);
-    }
-  };
-  const MaxIntro = e => {
-    if (e.target.value.length > 6) {
-      e.target.value = e.target.value.substr(0, 6);
     }
   };
 

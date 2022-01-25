@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Grid } from '../../element';
 import { useSelector } from 'react-redux';
 function MymbtiTxt(props) {
-  // const { mbti } = props;
   const mbti = useSelector(state => state.user.mbti);
 
   return (

@@ -23,7 +23,6 @@ const ListMatchingSend = createAction(GET_MATCHINGLISTSEND, Matching => ({ Match
 // 신청 내역 조회
 const ListMatchingReceive = createAction(GET_MATCHINGLIST, Matching => ({ Matching }));
 
-const DeletMatchingList = createAction(Delet_MATCHING, guestId => ({ guestId }));
 const PutMatchingList = createAction(PUT_MATCH, hostId => ({ hostId }));
 const FindMatchingLists = createAction(FIND_MATCHINGLIST, data => ({ data }));
 

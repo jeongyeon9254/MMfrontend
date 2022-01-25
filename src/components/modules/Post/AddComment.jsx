@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 // Component
-import { Grid, Image, Alert } from '../../element/index';
+import { Grid, Image } from '../../element/index';
 
 // Redux
 import { useDispatch } from 'react-redux';

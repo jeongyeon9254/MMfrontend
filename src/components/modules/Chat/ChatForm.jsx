@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import Header from '../layout/Header';
-import { Grid, Image } from '../../element';
+import { Grid } from '../../element';
 import { useSelector } from 'react-redux';
 import { PartyInput, ChatListform } from './index';
 import { useDispatch } from 'react-redux';
