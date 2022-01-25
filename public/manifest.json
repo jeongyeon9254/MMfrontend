@@ -3,7 +3,7 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "https://www.bizchemy.com/",
+  "start_url": "https://www.bizchemy.com",
   "short_name": "Biz Chemy",
   "name": "Biz Chemy",
   "prefer_related_applications": true,
