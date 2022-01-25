@@ -35,11 +35,11 @@ const MapList = props => {
           <Grid padding="10px 0 0 0 " align="center" color="#fff">
             <p>
               "<b>{props.sample ? '게스트' : userInfo.nickname}</b> 님과 잘 통하는 사람이{' '}
-              <b>{lists.result.length}</b> 명 있습니다"
+              <b>{mapList.result.length}</b> 명 있습니다"
             </p>
           </Grid>
-          {lists.result.length > 0 ? (
-            lists.result.map((list, idx) => {
+          {mapList.result.length > 0 ? (
+            mapList.result.map((list, idx) => {
               return (
                 <div
                   className="card"
