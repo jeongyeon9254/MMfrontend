@@ -30,14 +30,16 @@ const PostCard = props => {
     <Grid _onClick={goDetail}>
       {/* 상단 정보창 */}
       <Grid borderTop="1px solid #E8E8E8" row wrap="nowrap" padding="18px 30px" gap="10px">
-        <Grid
-          width="auto"
-          _onClick={() => {
-            history.push(`/profile/${info.userId}`);
-          }}
-        >
-          <Image src={info.profileImage} photoRound width="50px" margin="0" />
-        </Grid>
+        <Pointer>
+          <Grid
+            width="auto"
+            _onClick={() => {
+              history.push(`/profile/${info.userId}`);
+            }}
+          >
+            <Image src={info.profileImage} photoRound width="50px" margin="0" />
+          </Grid>
+        </Pointer>
 
         <Grid gap="10px" justify="center">
           <Grid row gap="13px">
@@ -113,7 +115,9 @@ const SwiperBox = styled.div`
     color: #3f3f41;
   }
 `;
-
+const Pointer = styled.div`
+  cursor: pointer;
+`;
 const NameText = styled.p`
   font-weight: 700;
   color: ${props => props.theme.colors.gray_2};

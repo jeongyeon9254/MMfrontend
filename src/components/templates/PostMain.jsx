@@ -65,6 +65,9 @@ const PostMain = () => {
     }
   };
 
+  const goDetail = postId => {
+    history.push(`/postMain/${postId}`);
+  };
   return (
     <PostBox id="allBox">
       <Header _on>커뮤니티</Header>
@@ -81,26 +84,34 @@ const PostMain = () => {
           {arr.length > 0 ? (
             arr.map((x, idx) => {
               return (
-                <div key={x.postId}>
+                <Pointer key={x.postId}>
                   <PostCard
                     info={x}
                     goDetail={() => {
-                      history.push(`/postMain/${x.postId}`);
+                      goDetail(x.postId);
                     }}
                   />
                   {x.commentList.length > 0 ? (
                     x.commentList.length > 1 ? (
-                      <CommentBox>
+                      <CommentBox
+                        onClick={() => {
+                          goDetail(x.postId);
+                        }}
+                      >
                         <MainComment info={x.commentList[0]} />
                         <MainComment info={x.commentList[1]} />
                       </CommentBox>
                     ) : (
-                      <CommentBox>
+                      <CommentBox
+                        onClick={() => {
+                          goDetail(x.postId);
+                        }}
+                      >
                         <MainComment info={x.commentList[0]} />
                       </CommentBox>
                     )
                   ) : null}
-                </div>
+                </Pointer>
               );
             })
           ) : (
@@ -173,6 +184,9 @@ const PostBox = styled.div`
   }
 `;
 
+const Pointer = styled.div`
+  cursor: pointer;
+`;
 const CommentBox = styled.div`
   width: 100%;
   display: flex;
@@ -181,6 +195,7 @@ const CommentBox = styled.div`
   border-top: 1px solid #e8e8e8;
   box-sizing: border-box;
   padding: 20px 30px;
+  cursor: pointer;
 `;
 
 export default PostMain;

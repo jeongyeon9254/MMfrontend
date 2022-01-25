@@ -3,29 +3,29 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/public/index.html",
-  "name": "Biz Chemy",
+  "start_url": "./index.html",
   "short_name": "Biz Chemy",
+  "name": "Biz Chemy",
   "prefer_related_applications": true,
   "icons": [
     {
-      "src": "icon/LOGO192.png",
+      "src": "icons/LOGO192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "icon/LOGO256.png",
+      "src": "icons/LOGO256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "icon/LOGO384.png",
+      "src": "icons/LOGO384.png",
       "type": "image/png",
       "sizes": "384x384"
     },
     {
-      "src": "icon/LOGO512.png",
+      "src": "icons/LOGO512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
