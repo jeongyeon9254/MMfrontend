@@ -12,7 +12,7 @@ import { actionCreators as postAcitions } from '../../redux/modules/post.js';
 
 // component
 import { Button, Grid } from '../element/index.js';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
+import MapCategoryNav from '../modules/main/MapCategoryNav';
 import Header from '../modules/layout/Header';
 import PostCard from '../modules/Post/PostCard';
 import MainComment from '../../components/modules/Post/MainComment';

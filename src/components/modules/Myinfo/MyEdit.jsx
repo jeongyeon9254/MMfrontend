@@ -6,7 +6,7 @@ import { MyPartBox, Mymbtibtn, Myinterests, MyBottom, MyImgFile } from './index'
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import KakaoAddr from '../AddMyInfo/KakaoAddress';
-import imageCompression from 'browser-image-compression';
+import { history } from '../../../redux/configureStore';
 
 function MyEdit(props) {
   const dispatch = useDispatch();
@@ -71,18 +71,14 @@ function MyEdit(props) {
     const formData = new FormData();
     const emptyFile = new File([''], 'empty');
     const Check = isString(Img);
-    const options = {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 370,
-    };
-    const reSizeFile = await imageCompression(Img, options);
-    formData.append('multipartFile', Check ? emptyFile : reSizeFile);
+    formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
     dispatch(userAction.userInfoPut(formData));
   };
 
   const next = () => {
     ClickEvent();
+    history.push('/');
   };
 
   const exit = () => {

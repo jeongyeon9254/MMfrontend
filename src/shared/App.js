@@ -18,12 +18,13 @@ import {
   Profile,
   Sample,
   MyPost,
+  Guide,
 } from '../components/templates';
 import { PrivateRoute, PublicRoute, Bg } from '../components/modules/layout';
 // Redux 불러오기
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Switch>
         <PublicRoute exact restricted={true} path="/login" Component={Login} />
         <PublicRoute exact path="/sample" Component={Sample} />
+        <PublicRoute exact path="/Guide" Component={Guide} />
         <PrivateRoute exact path="/" Component={Main} />
         <PrivateRoute exact path="/choice" Component={Choice} />
         <PrivateRoute exact path="/chat" Component={Chat} />

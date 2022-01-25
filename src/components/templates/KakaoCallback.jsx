@@ -7,9 +7,11 @@ const KakaoCallback = props => {
 
   // 인가코드
   let code = new URL(window.location.href).searchParams.get('code');
-
-  React.useEffect(async () => {
-    await dispatch(useAction.logInDB(code));
+  const KakaoFuc = () => {
+    dispatch(useAction.logInDB(code));
+  };
+  React.useEffect(() => {
+    KakaoFuc();
   }, []);
 
   return (

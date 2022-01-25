@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import arrow_back_ios from '../../../img/Icon/arrow_back_ios_new.svg';
 import arrow_back from '../../../img/Icon/arrow_back.svg';
 import { history } from '../../../redux/configureStore';
-import { Grid, Box, Button } from '../../element';
+import { Grid, Button } from '../../element';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as MatAction } from '../../../redux/modules/matching';
 

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+// 컴포넌트
 import Header from '../layout/Header';
 import { Grid, Input, Button } from '../../element/index';
 import Alert from '../../element/Alert';
-import AddInterest from './AddInterest';
+import TutorialBox from '../Tutorial/TutorialBox';
+
 import { useDispatch } from 'react-redux';
 import { actionCreators as userAction } from '../../../redux/modules/user';
 import imageCompression from 'browser-image-compression';
+import { history } from '../../../redux/configureStore';
 
 const AddIntro = props => {
   const dispatch = useDispatch();
@@ -18,6 +22,7 @@ const AddIntro = props => {
   // 모달창
   const [Alt, setAlt] = useState(false);
   const [Limit, setLimit] = useState(false);
+  const [Guide, setGuide] = useState(false);
 
   const location = data.LO;
   const locDetail = data.De;
@@ -55,14 +60,8 @@ const AddIntro = props => {
 
     const formData = new FormData();
     const Check = isString(file.profileImage);
-    const options = {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 370,
-    };
-    const reSizeFile = await imageCompression(file.profileImage, options);
-    formData.append('multipartFile', Check ? emptyFile : reSizeFile);
+    formData.append('multipartFile', Check ? emptyFile : file.profileImage);
     formData.append('data', jsonFile(userInfo));
-
     dispatch(userAction.userInfoPut(formData));
   };
 
@@ -78,6 +77,9 @@ const AddIntro = props => {
   // 확인시 버튼 함수
   const next = () => {
     ClickEvent();
+    history.push('/Guide');
+
+    setGuide(true);
   };
   // 취소 시 버튼 함수
   const exit = () => {
@@ -94,11 +96,12 @@ const AddIntro = props => {
           <Grid gap="15px" padding="16px 8px 8px 24px">
             <AltTitle>추가입력 작성을 완료할까요?</AltTitle>
             <Grid gap="4px">
-              <AltCommet>확인 시 메인하면으로 이동합니다.</AltCommet>
+              <AltCommet>확인 시 메인화면으로 이동합니다.</AltCommet>
             </Grid>
           </Grid>
         </Alert>
       ) : null}
+      {Guide ? <TutorialBox /> : null}
 
       <Grid padding="122px 30px 0px 30px">
         <Grid gap="10px">

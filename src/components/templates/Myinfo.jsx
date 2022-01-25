@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../modules/layout/Header';
-import Bit from '../modules/Bit';
 
 import { MyinfoHead, MyBody, MySetting, MyEdit } from '../modules/Myinfo';
 const Myinfo = () => {

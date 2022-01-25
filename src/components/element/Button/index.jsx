@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BtnAddStyle, BtnBottomStyle, BtnRoundStyle, BtnTagStyle, ButtonStyle } from './module';
-import { getCookie } from '../../../shared/Cookie.js';
 import Bit from '../../modules/Bit';
 import { Grid, Alert } from '../index';
 
@@ -29,11 +28,9 @@ const Button = props => {
     BtnTag,
     BtnAdd,
     state,
-    main,
     radius,
     border,
     _disabled,
-    Disable,
     opacity,
     bottom,
   } = props;

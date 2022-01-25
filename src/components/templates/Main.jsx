@@ -13,16 +13,16 @@ import { history } from '../../redux/configureStore.js';
 import { Button, Grid, Alert } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import MapList from '../modules/Main/MapList.jsx';
-import MapContainer from '../modules/Main/MapContainer';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
-import Spiner from '../../shared/Spiner.jsx';
-import MainModal from '../modules/Main/MainModal.jsx';
+import MapList from '../../components/modules/main/MapList';
+import MapContainer from '../../components/modules/main/MapContainer';
+import MapCategoryNav from '../../components/modules/main/MapCategoryNav';
+import Spiner from '../../shared/Spiner';
+import MainModal from '../../components/modules/main/MainModal';
 
 // Js
-import { smallGpsList, bigGpsList } from '../modules/Main/gpsList';
+import { smallGpsList, bigGpsList } from '../modules/main/gpsList';
 
-const Main = props => {
+const Main = () => {
   const dispatch = useDispatch();
 
   // 로컬스토리지에서 내정보를 가져옵니다
@@ -75,7 +75,10 @@ const Main = props => {
 
   // 렌더링시 지도 정보를 받아옵니다.
   React.useEffect(() => {
-    dispatch(mainActions.getListDB());
+    dispatch(mainActions.getMyListDB());
+    return () => {
+      dispatch(mainActions.reset());
+    };
   }, []);
 
   // 내위치 클릭시 메인화면 초기화
@@ -214,7 +217,7 @@ const LocationBox = styled.div`
   display: flex;
   width: auto;
   justify-content: center;
-  top: 17%;
+  top: 160px;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 1;

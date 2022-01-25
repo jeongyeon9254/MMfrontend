@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Redux
@@ -10,9 +10,8 @@ import { history } from '../../redux/configureStore.js';
 import { Button } from '../element/index.js';
 import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
-import MapList from '../modules/Main/MapList.jsx';
-import SampleMapContainer from '../modules/Main/SampleMapContainer';
-import MapCategoryNav from '../modules/Main/MapCategoryNav';
+import SampleMapContainer from '../modules/main/SampleMapContainer';
+import MapCategoryNav from '../modules/main/MapCategoryNav';
 
 const Sample = () => {
   const dispatch = useDispatch();
@@ -30,15 +29,6 @@ const Sample = () => {
     history.push(`/LoginNeed`);
   };
 
-  // 모달 관리
-  const [modal, setModal] = useState(false);
-  const onModal = () => {
-    setModal(true);
-  };
-  const outModal = () => {
-    setModal(false);
-  };
-
   // 더미 mbti
   const userInfo = {
     mbti: 'INFJ',
@@ -54,9 +44,7 @@ const Sample = () => {
           </Button>
         </LocationBox>
         <MapCategoryNav sample userInfo={userInfo} />
-      </div>
-      <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
-      <div onClick={needLogin}>
+        <SampleMapContainer locationInfo={locationInfo} />
         <CenterBtn>
           <Button BtnRound width="87px" _onClick={needLogin}>
             자동매칭
