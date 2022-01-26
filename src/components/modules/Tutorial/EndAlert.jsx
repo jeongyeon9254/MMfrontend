@@ -5,7 +5,7 @@ import { Grid } from '../../element/index.js';
 
 const EndAlert = () => {
   return (
-    <Grid align="center">
+    <Grid align="center" padding="10px">
       <Title>Biz Chemy 이용 가이드를 종료할까요?</Title>
       <Content>확인 시 메인메뉴로 이동합니다.</Content>
     </Grid>
@@ -13,7 +13,7 @@ const EndAlert = () => {
 };
 
 const Title = styled.p`
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 3;
 `;
