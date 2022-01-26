@@ -5,29 +5,53 @@ import { Mybit } from '../../modules/Bit';
 import { MymbtiTxt } from './index';
 
 function MymbtiInfo(props) {
-  const { mbti, Open, _onClick } = props;
-  const Myinfo = Mybit(mbti);
-
-  if (Myinfo) {
-    return (
-      <ModalBg className={Open ? 'Open' : 'Close'}>
-        <Point>
-          <ImgPoint src={Myinfo ? Myinfo.image : ''} alt="" />
-          <MbtiBox className={Open ? 'Open' : 'Close'}>
-            <Grid row gap="35px">
-              <Grid width="auto" gap="10px" padding="0px 0px 0px 94px">
-                <MbtiTxt>{Myinfo.title}</MbtiTxt>
-                <MbtiTxt style={{ color: Myinfo ? Myinfo.color : '' }}>{Myinfo.name}</MbtiTxt>
+  const { mbti, Open, _onClick, type } = props;
+  const MyInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const MyMbti = Mybit(MyInfo.mbti);
+  const IsMbti = Mybit(mbti);
+  switch (type) {
+    case 'profile':
+      return (
+        <ModalBg className={Open ? 'Open' : 'Close'}>
+          <Point>
+            <MbtiBox className={Open ? 'Open' : 'Close'}>
+              <Grid row gap="20px">
+                <Grid row width="auto" gap="5px" align="center">
+                  <SmallTitle>{MyMbti.name}</SmallTitle>
+                  <SmallIcon src={MyMbti.image} />
+                  <SmallBar />
+                  <SmallTitle>{IsMbti.name}</SmallTitle>
+                  <SmallIcon src={IsMbti.image} />
+                </Grid>
+                <MymbtiTxt mbti={IsMbti ? IsMbti.name : ''}></MymbtiTxt>
               </Grid>
-              <MymbtiTxt mbti={Myinfo ? Myinfo.name : ''}></MymbtiTxt>
-            </Grid>
-          </MbtiBox>{' '}
-        </Point>
-        <Bg onClick={_onClick}></Bg>
-      </ModalBg>
-    );
-  } else {
-    return <></>;
+            </MbtiBox>{' '}
+          </Point>
+          <Bg onClick={_onClick}></Bg>
+        </ModalBg>
+      );
+    default:
+      if (IsMbti) {
+        return (
+          <ModalBg className={Open ? 'Open' : 'Close'}>
+            <Point>
+              <ImgPoint src={IsMbti ? IsMbti.image : ''} alt="" />
+              <MbtiBox className={Open ? 'Open' : 'Close'}>
+                <Grid row gap="35px">
+                  <Grid width="auto" gap="10px" padding="0px 0px 0px 94px">
+                    <MbtiTxt>{IsMbti.title}</MbtiTxt>
+                    <MbtiTxt style={{ color: IsMbti ? IsMbti.color : '' }}>{IsMbti.name}</MbtiTxt>
+                  </Grid>
+                  <MymbtiTxt mbti={IsMbti ? IsMbti.name : ''}></MymbtiTxt>
+                </Grid>
+              </MbtiBox>{' '}
+            </Point>
+            <Bg onClick={_onClick}></Bg>
+          </ModalBg>
+        );
+      } else {
+        return <></>;
+      }
   }
 }
 
@@ -77,6 +101,21 @@ const Point = styled.div`
   border-radius: 7px;
   transition: all ease 0.3s;
   z-index: 999;
+`;
+
+const SmallIcon = styled.img`
+  width: 24px;
+`;
+const SmallTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+`;
+const SmallBar = styled.div`
+  width: 8px;
+  height: 3px;
+  background-color: #fff;
+  margin: 0px 5px;
 `;
 const ImgPoint = styled.img`
   width: 115px;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../../../redux/modules/user';
 
+import { Skeleton } from './index';
 import { MymbtiInfo } from '../Myinfo/index';
 import { Grid, Tag } from '../../element';
 import { Mybit } from '../Bit';
@@ -11,6 +12,8 @@ function ProfileExplain() {
   const [Open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.list);
+  const IsDataLoading = useSelector(state => state.profile.loading);
+
   const Bit = profile.mbti ? Mybit(profile.mbti) : '';
   const Characteristics = Bit.Characteristics;
 
@@ -21,43 +24,43 @@ function ProfileExplain() {
 
   return (
     <ProfileExplainBox>
-      <Grid row width="100%" align="center" gap="40px">
-        <Grid row justify="space-between">
-          <Title>{profile.affinity}</Title> <BlackIcon src={Bit.ImageWhite} />
-        </Grid>
-        <Grid gap="14px">
-          <Grid row gap="6px">
-            <Tag bg="#fff" size="12px" padding="6px 16px" mbti={profile.mbti} black shadow>
-              <Grid row align="center" gap="4px">
-                <MbtiIcon src={Bit.ImageBlack} /> <Mbtitext>{profile.mbti}</Mbtitext>
-              </Grid>
-            </Tag>
-            {Characteristics
-              ? Characteristics.map((x, idx) => {
-                  return (
-                    <div key={idx}>
-                      <Tag
-                        bg="#fff"
-                        size="12px"
-                        padding="6px 16px"
-                        mbti={profile.mbti}
-                        black
-                        shadow
-                      >
-                        <Mbtitext>{x}</Mbtitext>
-                      </Tag>
-                    </div>
-                  );
-                })
-              : ''}
+      {IsDataLoading ? (
+        <Grid row width="100%" align="center" gap="40px">
+          <Grid row justify="space-between">
+            <Title>{profile.affinity}</Title> <BlackIcon src={Bit.image} />
           </Grid>
-          <Contants>{profile.detail}</Contants>
-          <ClickTxt onClick={OpenClick}>
-            <p>나랑 왜 잘맞을까? MBTI 설명 보러 가기</p>
-          </ClickTxt>
-          <MymbtiInfo mbti={profile.mbti} Open={Open} _onClick={OpenClick}></MymbtiInfo>
+          <Grid gap="14px">
+            <Grid row gap="6px">
+              <MbtiIcon src={Bit.ImageWhite} />
+              {Characteristics
+                ? Characteristics.map((x, idx) => {
+                    return (
+                      <div key={idx}>
+                        <Tag
+                          bg="#fff"
+                          size="12px"
+                          padding="6px 16px"
+                          mbti={profile.mbti}
+                          black
+                          shadow
+                        >
+                          <Mbtitext>{x}</Mbtitext>
+                        </Tag>
+                      </div>
+                    );
+                  })
+                : ''}
+            </Grid>
+            <Contants>{profile.detail}</Contants>
+            <ClickTxt onClick={OpenClick}>
+              <p>나랑 왜 잘맞을까? MBTI 설명 보러 가기</p>
+            </ClickTxt>
+            <MymbtiInfo type="profile" mbti={profile.mbti} Open={Open} _onClick={OpenClick} />
+          </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Skeleton type="head" />
+      )}
     </ProfileExplainBox>
   );
 }
@@ -79,9 +82,7 @@ const Hide = styled.div`
   overflow: hidden;
 `;
 
-const MbtiIcon = styled.img`
-  height: 14px;
-`;
+const MbtiIcon = styled.img``;
 
 const Mbtitext = styled.span`
   font-size: 12px;

@@ -1,39 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Grid } from '../../element';
 import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
 
 function SkeletonFile(props) {
   const { type } = props;
   switch (type) {
     case 'photo':
       return (
-        <List>
-          <Skeleton variant="circular" width="130px" height="130px" animation="wave" />
-        </List>
+        <Grid width="100%" gap="20px">
+          <List>
+            <Grid row gap="20px" align="center" justify="space-between">
+              <Skeleton variant="circular" width="90px" height="90px" animation="wave" />
+              <Skeleton variant="rectangular" width="60%" height={100} animation="wave" />
+            </Grid>
+          </List>
+          <List>
+            <Skeleton variant="rectangular" width="100%" height={100} animation="wave" />
+          </List>
+        </Grid>
       );
-    case 'box':
+
+    case 'head':
       return (
-        <Box>
-          <Stack spacing={3}>
-            <Stack alignItems="center" direction="row" spacing={1} style={{ width: '100%' }}>
-              <Skeleton variant="circular" width={52} height={52} animation="wave" />
-              <Stack spacing={1} style={{ width: '80%' }}>
-                <Skeleton variant="rectangular" width="70%" height={20} animation="wave" />
-                <Skeleton variant="rectangular" width="70%" height={15} animation="wave" />
-                <Skeleton variant="rectangular" width="30%" height={15} animation="wave" />
-              </Stack>
-            </Stack>
-            <Skeleton variant="rectangular" width="100%" height={30} animation="wave" />
-          </Stack>
-        </Box>
-      );
-    case 'chat':
-      return (
-        <Stack alignItems="center" direction="row" spacing={1} style={{ width: '100%' }}>
-          <Skeleton variant="circular" width={52} height={52} animation="wave" />
-          <Skeleton variant="rectangular" width="50%" height={50} animation="wave" />
-        </Stack>
+        <Grid gap="10px">
+          <Grid row gap="10px" align="center" justify="space-between">
+            <Skeleton variant="rectangular" width="65%" height={80} animation="wave" />
+            <Skeleton variant="circular" width={70} height={70} animation="wave" />
+          </Grid>
+          <Grid row gap="10px" align="center">
+            <Skeleton variant="rectangular" width="60px" height={30} animation="wave" />
+            <Skeleton variant="rectangular" width="70px" height={30} animation="wave" />
+            <Skeleton variant="rectangular" width="80px" height={30} animation="wave" />
+          </Grid>
+          <Skeleton variant="rectangular" width="100%" height={100} animation="wave" />
+        </Grid>
       );
     default:
       return <></>;
@@ -43,13 +44,6 @@ const List = styled.div`
   padding: 0px;
   width: 100%;
   margin: 0 auto;
-`;
-
-const Box = styled.div`
-  padding: 15px;
-  width: 100%;
-  background-color: #eee;
-  border-radius: 6px;
 `;
 
 export default SkeletonFile;

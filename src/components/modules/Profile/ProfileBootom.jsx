@@ -7,52 +7,66 @@ import icon_location from '../../../img/Icon/icon_location.svg';
 import { useSelector } from 'react-redux';
 import { Image, Grid, Box, Tag } from '../../element';
 
-import ProfileBar from './ProfileModalBar';
+import { ProfileModalBar, Skeleton } from './index';
 
 function ProfileBootoms(props) {
   const { modal, MadalSet, MadalOn } = props;
   const profile = useSelector(state => state.profile.list);
   const status = useSelector(state => state.matching.status);
+  const IsDataLoading = useSelector(state => state.profile.loading);
   const State = status ? status : '';
   const interrest = profile.interestList;
 
   return (
     <ProfileBottom>
-      <Grid row width="auto" gap="17px" align="center">
-        <Image
-          round
-          width="116.38px"
-          src={profile.profileImage}
-          mbti={profile.mbti}
-          margin="0px"
-        ></Image>
-        <Grid align="flex-start" width="auto" gap="10px">
-          <Name className="name">{profile.nickname}</Name>
-          <Grid row width="auto">
-            <LocationIcon className="icon" alt="주소" src={icon_location}></LocationIcon>
-            <Location className="location">
-              {profile.location} {profile.locDetail}
-            </Location>
+      {IsDataLoading ? (
+        <Grid row width="auto" gap="17px" align="center">
+          <Image
+            round
+            width="116.38px"
+            src={profile.profileImage}
+            mbti={profile.mbti}
+            margin="0px"
+          ></Image>
+          <Grid align="flex-start" width="auto" gap="10px">
+            <Grid row align="center" width="100%" gap="8px">
+              <Name className="name">{profile.nickname}</Name>
+              {profile.mbti ? (
+                <Tag mbti={profile.mbti} _type="black" icon>
+                  {profile.mbti}
+                </Tag>
+              ) : (
+                ''
+              )}
+            </Grid>
+            <Grid row width="auto">
+              <LocationIcon className="icon" alt="주소" src={icon_location}></LocationIcon>
+              <Location className="location">
+                {profile.location} {profile.locDetail}
+              </Location>
+            </Grid>
+            <Grid row justify="space-between" margin="5px 0 0" gap="10px">
+              {interrest
+                ? interrest.map((x, idx) => {
+                    return (
+                      <Tag size="12px" key={idx} mbti={profile.mbti}>
+                        {x}
+                      </Tag>
+                    );
+                  })
+                : null}
+            </Grid>
           </Grid>
-          <Grid row justify="space-between" margin="5px 0 0" gap="10px">
-            {interrest
-              ? interrest.map((x, idx) => {
-                  return (
-                    <Tag size="12px" key={idx} mbti={profile.mbti} black>
-                      {x}
-                    </Tag>
-                  );
-                })
-              : null}
-          </Grid>
+          <Box margin="6px 0 34px">{profile.intro}</Box>
+          {!modal ? (
+            <ProfileModalBar Btn _onClick={MadalSet} />
+          ) : (
+            <ProfileModalBar Btn type={State} _onClick={MadalOn} />
+          )}
         </Grid>
-        <Box margin="6px 0 34px">{profile.intro}</Box>
-        {!modal ? (
-          <ProfileBar Btn _onClick={MadalSet} />
-        ) : (
-          <ProfileBar Btn type={State} _onClick={MadalOn} />
-        )}
-      </Grid>
+      ) : (
+        <Skeleton type="photo" />
+      )}
     </ProfileBottom>
   );
 }
@@ -63,6 +77,7 @@ const ProfileBottom = styled.div`
   padding: 37px 32px;
   background-color: #fff;
   border-radius: 50px 50px 0 0;
+  width: 100%;
 `;
 
 const LocationIcon = styled.img`

@@ -16,6 +16,9 @@ const Hidden = () => {
         <Skeleton type="box"></Skeleton>
         <Skeleton type="chat"></Skeleton>
         <Skeletons type="photo" />
+        <Skeletons type="boad" />
+        <Skeletons type="chat" />
+        {/* <Skeletons type="boad" /> */}
         <Select></Select>
         <Grid gap="20px" align="flex-start">
           <p style={{ fontSize: 30 }}>Input Element</p>
