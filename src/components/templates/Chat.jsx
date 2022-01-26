@@ -105,7 +105,6 @@ const Chat = () => {
   // 채팅방 완전히 나가기
   const sendStop = () => {
     try {
-      console.log('sendStop');
       const ms = {
         type: 'QUIT',
         roomId: roomNum,
@@ -113,6 +112,7 @@ const Chat = () => {
         date: date,
       };
       sendMessage(ms);
+      dispatch(ChatAction.deleteChatroomDB(roomNum));
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
@@ -133,6 +133,14 @@ const Chat = () => {
     }
   };
 
+  const BackHistory = () => {
+    setPaging(!Paging);
+    setData({});
+    setroomNum('');
+    SetEnter(false);
+    dispatch(ChatAction.ms_resetList());
+  };
+
   React.useEffect(() => {
     if (roomNum) {
       try {
@@ -151,6 +159,7 @@ const Chat = () => {
     return () => {
       dispatch(ChatAction.resetList());
       dispatch(ChatAction.ms_resetList());
+      SetEnter(false);
     };
   }, []);
 
@@ -190,13 +199,7 @@ const Chat = () => {
         Emit={Catchdata}
         Boo={Paging}
         data={Data !== {} ? Data : ''}
-        _onClick={() => {
-          setPaging(!Paging);
-          setData({});
-          setroomNum('');
-          SetEnter(false);
-          dispatch(ChatAction.ms_resetList());
-        }}
+        _onClick={BackHistory}
       ></ChatForm>
       <Footer />
     </div>

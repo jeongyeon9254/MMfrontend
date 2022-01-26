@@ -42,14 +42,14 @@ const ChatForm = props => {
     });
   };
 
-  const ClickDeleteRoom = async () => {
+  const ClickDeleteRoom = () => {
     sendStop();
     dispatch(ChatAction.deleteChatroomDB(roomId));
     SetmodalOpen(true);
     _onClick();
   };
 
-  const ClickPutRoom = async () => {
+  const ClickPutRoom = () => {
     sendStop();
     dispatch(ChatAction.putChatroomDB(roomId));
     SetmodalOpen(true);
