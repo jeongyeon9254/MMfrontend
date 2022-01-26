@@ -9,7 +9,6 @@ function MyinfoBit(props) {
   const dispatch = useDispatch();
   const [Open, setOpen] = React.useState(false);
   const { mbti } = props;
-  // const mbti = 'INTP';
   const bit = Mybit(mbti);
   const OpenClick = () => {
     setOpen(!Open);
@@ -30,7 +29,7 @@ function MyinfoBit(props) {
           <Grid width="81%" gap="5px">
             <Title color={bit.color}>
               <Grid row gap="6px">
-                <p>{bit.title}</p> <span>{bit.name}</span>
+                <div>{bit.title}</div> <span>{bit.name}</span>
               </Grid>
             </Title>
             <SubTxt>{bit.virtue}</SubTxt>
@@ -42,7 +41,7 @@ function MyinfoBit(props) {
   );
 }
 MyinfoBit.defaultProps = {
-  mbti: '',
+  mbti: 'ENTJ',
 };
 const Icon = styled.img`
   width: 38px;
@@ -55,7 +54,7 @@ const Title = styled.div`
     color: ${x => x.color};
   }
 `;
-const SubTxt = styled.p`
+const SubTxt = styled.div`
   font-size: ${x => x.theme.fontSizes.maxSmall};
   color: ${x => x.theme.colors.white};
   text-align: left;

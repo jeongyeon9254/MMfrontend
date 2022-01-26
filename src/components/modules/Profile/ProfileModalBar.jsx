@@ -8,6 +8,7 @@ import arrow_right_b from '../../../img/Icon/arrow_back_ios_b.svg';
 
 function ProfileBar(props) {
   const { Btn, Bar, type, nickname, _onClick } = props;
+
   if (Bar) {
     switch (type) {
       case '신청이 완료되었습니다.':
@@ -65,7 +66,9 @@ function ProfileBar(props) {
         return (
           <Button
             BtnBottom
-            width="85%"
+            width="100%"
+            bottom="0px"
+            position="relative"
             color="#646eec"
             _onClick={() => {
               history.push('/choice');
@@ -78,7 +81,9 @@ function ProfileBar(props) {
         return (
           <Button
             BtnBottom
-            width="85%"
+            width="100%"
+            bottom="0px"
+            position="relative"
             color="#ec6464"
             _onClick={() => {
               _onClick();
@@ -91,7 +96,9 @@ function ProfileBar(props) {
         return (
           <Button
             BtnBottom
-            width="85%"
+            width="100%"
+            bottom="0px"
+            position="relative"
             color="#6fe5a4"
             _onClick={() => {
               history.push('/chat');
@@ -106,7 +113,9 @@ function ProfileBar(props) {
         return (
           <Button
             BtnBottom
-            width="85%"
+            width="100%"
+            bottom="0px"
+            position="relative"
             _onClick={() => {
               _onClick();
             }}

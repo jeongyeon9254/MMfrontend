@@ -36,6 +36,7 @@ const Header = props => {
     DeleteMsRoomOrGoBackRoom,
     setMyInfo,
     login,
+    _type,
   } = props;
 
   const styles = {
@@ -147,6 +148,9 @@ const HeaderStyle = styled.header`
     border: none;
     cursor: pointer;
     background-color: transparent;
+  }
+  @media only screen and (max-height: 1050px) {
+    border-radius: 0px;
   }
   @media only screen and (max-width: 1050px) {
     padding: 13px 23px;

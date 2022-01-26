@@ -123,7 +123,7 @@ const putChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await putChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    document.location.href = '/chat';
+    history.push('/chat');
   };
 };
 
@@ -132,7 +132,7 @@ const deleteChatroomDB = roomId => {
   return async function (dispatch, getState, { history }) {
     await deleteChatroom(roomId);
     dispatch(DeletRoomList(roomId));
-    document.location.href = '/chat';
+    history.push('/chat');
   };
 };
 

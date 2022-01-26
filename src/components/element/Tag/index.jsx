@@ -18,15 +18,19 @@ const Tag = props => {
     small,
     padding,
     height,
+    black,
+    shadow,
+    _key,
   } = props;
-  const styles = { color, mbti, bg, state, padding, small, size, height };
+  const styles = { color, mbti, bg, state, padding, small, size, height, shadow };
+
   const MyBit = Bit.find(x => {
     return x.name === mbti;
   });
   switch (_type) {
     case 'black':
       return (
-        <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
+        <TagBlack key={_key} {...styles} color={MyBit ? MyBit.color : null}>
           <Grid
             row
             color="transparent !important"
@@ -41,7 +45,7 @@ const Tag = props => {
       );
     case 'my':
       return (
-        <TagBlack {...styles} color={MyBit ? MyBit.color : null}>
+        <TagBlack key={_key} {...styles} color={MyBit ? MyBit.color : null}>
           <Grid
             row
             color="transparent !important"
@@ -58,7 +62,12 @@ const Tag = props => {
       switch (state) {
         case 'active':
           return (
-            <TagBtn {...styles} onClick={_onClick} style={{ backgroundColor: '#3F3F41' }}>
+            <TagBtn
+              key={_key}
+              {...styles}
+              onClick={_onClick}
+              style={{ backgroundColor: '#3F3F41' }}
+            >
               <div>
                 {small ? (
                   <>
@@ -77,7 +86,7 @@ const Tag = props => {
 
         default:
           return (
-            <TagBtn {...styles} onClick={_onClick}>
+            <TagBtn {...styles} onClick={_onClick} key={_key}>
               <div>
                 {small ? (
                   <>
@@ -97,10 +106,10 @@ const Tag = props => {
 
     default:
       return (
-        <TagStyle {...styles} color={MyBit.color}>
+        <TagStyle key={_key} {...styles} color={black ? '#3F3F41' : MyBit.color}>
           <Grid row gap="5px" color="transparent !important">
             {icon ? <Iconimg src={MyBit.image} /> : ''}
-            <p>{children}</p>
+            <div>{children}</div>
           </Grid>
         </TagStyle>
       );
@@ -113,6 +122,7 @@ Tag.defaultProps = {
   size: null,
   state: '',
   small: false,
+  _key: false,
 };
 const Iconimg = styled.img`
   width: 11px;

@@ -8,23 +8,27 @@ function MymbtiInfo(props) {
   const { mbti, Open, _onClick } = props;
   const Myinfo = Mybit(mbti);
 
-  return (
-    <ModalBg className={Open ? 'Open' : 'Close'}>
-      <Point>
-        <ImgPoint src={Myinfo ? Myinfo.image : ''} alt="" />
-        <MbtiBox className={Open ? 'Open' : 'Close'}>
-          <Grid row gap="35px">
-            <Grid width="auto" gap="10px" padding="0px 0px 0px 94px">
-              <MbtiTxt>{Myinfo.title}</MbtiTxt>
-              <MbtiTxt style={{ color: Myinfo ? Myinfo.color : '' }}>{Myinfo.name}</MbtiTxt>
+  if (Myinfo) {
+    return (
+      <ModalBg className={Open ? 'Open' : 'Close'}>
+        <Point>
+          <ImgPoint src={Myinfo ? Myinfo.image : ''} alt="" />
+          <MbtiBox className={Open ? 'Open' : 'Close'}>
+            <Grid row gap="35px">
+              <Grid width="auto" gap="10px" padding="0px 0px 0px 94px">
+                <MbtiTxt>{Myinfo.title}</MbtiTxt>
+                <MbtiTxt style={{ color: Myinfo ? Myinfo.color : '' }}>{Myinfo.name}</MbtiTxt>
+              </Grid>
+              <MymbtiTxt mbti={Myinfo ? Myinfo.name : ''}></MymbtiTxt>
             </Grid>
-            <MymbtiTxt mbti={Myinfo ? Myinfo.name : ''}></MymbtiTxt>
-          </Grid>
-        </MbtiBox>{' '}
-      </Point>
-      <Bg onClick={_onClick}></Bg>
-    </ModalBg>
-  );
+          </MbtiBox>{' '}
+        </Point>
+        <Bg onClick={_onClick}></Bg>
+      </ModalBg>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 const ModalBg = styled.div`
