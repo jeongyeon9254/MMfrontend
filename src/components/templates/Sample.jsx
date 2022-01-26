@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Redux
@@ -12,6 +12,7 @@ import Header from '../../components/modules/layout/Header';
 import Footer from '../../components/modules/layout/Footer';
 import SampleMapContainer from '../modules/main/SampleMapContainer';
 import MapCategoryNav from '../modules/main/MapCategoryNav';
+import SampleMapList from '../modules/main/SampleMapList';
 
 const Sample = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Sample = () => {
   }, []);
 
   // 샘플 정보를 가져옵니다
-  const locationInfo = useSelector(state => state.main.list);
+  const locationInfo = useSelector(state => state.main.sample);
 
   // 로그인 필요페이지 이동
   const needLogin = () => {
@@ -34,23 +35,34 @@ const Sample = () => {
     mbti: 'INFJ',
   };
 
+  const [modal, setModal] = useState(false);
+
+  const outModal = () => {
+    setModal(false);
+  };
+  const onModal = () => {
+    setModal(true);
+  };
+
   return (
     <React.Fragment>
       <div onClick={needLogin}>
         <Header main>둘러보기</Header>
         <LocationBox>
           <Button BtnTag _onClick={needLogin}>
-            서울 종로구
+            {locationInfo.location} {locationInfo.locDetail}
           </Button>
         </LocationBox>
         <MapCategoryNav sample userInfo={userInfo} />
-        <SampleMapContainer locationInfo={locationInfo} />
-        <CenterBtn>
-          <Button BtnRound width="87px" _onClick={needLogin}>
-            자동매칭
-          </Button>
-        </CenterBtn>
-        {/* {modal ? <MapList sample outModal={outModal} /> : null} */}
+      </div>
+      <SampleMapContainer locationInfo={locationInfo} onModal={onModal} />
+      <CenterBtn>
+        <Button BtnRound width="87px" _onClick={needLogin}>
+          자동매칭
+        </Button>
+      </CenterBtn>
+      {modal ? <SampleMapList sample outModal={outModal} locationInfo={locationInfo} /> : null}
+      <div onClick={needLogin}>
         <Footer />
       </div>
     </React.Fragment>

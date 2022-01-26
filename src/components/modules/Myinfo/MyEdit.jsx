@@ -78,7 +78,7 @@ function MyEdit(props) {
 
   const next = () => {
     ClickEvent();
-    history.push('/');
+    history.push('/myinfo');
   };
 
   const exit = () => {
