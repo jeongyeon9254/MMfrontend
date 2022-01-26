@@ -5,6 +5,7 @@ import { ProfileModalBar, ProfileExplain } from './index';
 
 function ProfileHead(props) {
   const { name, reTry, State, nickname, modal } = props;
+
   return (
     <ProfileHeadBox>
       {' '}
@@ -13,7 +14,7 @@ function ProfileHead(props) {
           프로필
         </Header>
       ) : (
-        <Header white point="relative" bg="#3f3f41">
+        <Header _on white point="relative" bg="#3f3f41">
           프로필
         </Header>
       )}

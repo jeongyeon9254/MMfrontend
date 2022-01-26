@@ -46,7 +46,10 @@ const AddComment = props => {
         <input
           ref={textRef}
           onChange={e => {
-            setComment(e.target.value);
+            const text = e.target.value;
+            if (text.length < 100) {
+              setComment(text);
+            }
           }}
           value={comment || ''}
           placeholder="댓글을 달아보세요!"

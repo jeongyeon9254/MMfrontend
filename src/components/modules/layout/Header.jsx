@@ -20,7 +20,6 @@ const Header = props => {
     children,
     main,
     chat,
-    post,
     point,
     _on,
     bg,
@@ -36,7 +35,6 @@ const Header = props => {
     DeleteMsRoomOrGoBackRoom,
     setMyInfo,
     login,
-    _type,
   } = props;
 
   const styles = {
