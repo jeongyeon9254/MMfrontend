@@ -65,12 +65,13 @@ const Chat = () => {
   // 웹소켓이 연결될 때 까지 실행하는 함수
   const waitForConnection = (ws, callback) => {
     setTimeout(() => {
+      // 통신망이 열려있을때 통신할 준비가 되었을때
       if (ws.ws.readyState === 1) {
         callback();
       } else {
         waitForConnection(ws, callback);
       }
-    }, 0.1);
+    }, 0.001);
   };
 
   // 다른 방을 클릭하거나 뒤로가기 버튼 클릭시 연결해제 및 구독해제
@@ -111,10 +112,7 @@ const Chat = () => {
         message: '매칭상대가 방을 나갔습니다.',
         date: date,
       };
-      waitForConnection(ws, () => {
-        ws.debug = null;
-        sendMessage(ms);
-      });
+      sendMessage(ms);
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
@@ -129,10 +127,7 @@ const Chat = () => {
         message: '방에 입장 하였습니다.',
         date: date,
       };
-      waitForConnection(ws, () => {
-        ws.debug = null;
-        sendMessage(ms);
-      });
+      sendMessage(ms);
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }

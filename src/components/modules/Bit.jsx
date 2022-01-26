@@ -1,19 +1,53 @@
-import INFJ from '../../img/MBTI/INFJ.svg';
-import INFP from '../../img/MBTI/INFP.svg';
-import ENFJ from '../../img/MBTI/ENFJ.svg';
-import ENFP from '../../img/MBTI/ENFP.svg';
-import ISTJ from '../../img/MBTI/ISTJ.svg';
-import ISFJ from '../../img/MBTI/ISFJ.svg';
-import ESTJ from '../../img/MBTI/ESTJ.svg';
-import ESFJ from '../../img/MBTI/ESFJ.svg';
-import ENTJ from '../../img/MBTI/ENTJ.svg';
-import INTP from '../../img/MBTI/INTP.svg';
-import INTJ from '../../img/MBTI/INTJ.svg';
-import ENTP from '../../img/MBTI/ENTP.svg';
-import ESTP from '../../img/MBTI/ESTP.svg';
-import ISFP from '../../img/MBTI/ISFP.svg';
-import ISTP from '../../img/MBTI/ISTP.svg';
-import ESFP from '../../img/MBTI/ESFP.svg';
+import INFJ from '../../img/MBTI/Normal/INFJ.svg';
+import INFP from '../../img/MBTI/Normal/INFP.svg';
+import ENFJ from '../../img/MBTI/Normal/ENFJ.svg';
+import ENFP from '../../img/MBTI/Normal/ENFP.svg';
+import ISTJ from '../../img/MBTI/Normal/ISTJ.svg';
+import ISFJ from '../../img/MBTI/Normal/ISFJ.svg';
+import ESTJ from '../../img/MBTI/Normal/ESTJ.svg';
+import ESFJ from '../../img/MBTI/Normal/ESFJ.svg';
+import ENTJ from '../../img/MBTI/Normal/ENTJ.svg';
+import INTP from '../../img/MBTI/Normal/INTP.svg';
+import INTJ from '../../img/MBTI/Normal/INTJ.svg';
+import ENTP from '../../img/MBTI/Normal/ENTP.svg';
+import ESTP from '../../img/MBTI/Normal/ESTP.svg';
+import ISFP from '../../img/MBTI/Normal/ISFP.svg';
+import ISTP from '../../img/MBTI/Normal/ISTP.svg';
+import ESFP from '../../img/MBTI/Normal/ESFP.svg';
+
+import INFJB from '../../img/MBTI/Black/INFJ.svg';
+import INFPB from '../../img/MBTI/Black/INFP.svg';
+import ENFJB from '../../img/MBTI/Black/ENFJ.svg';
+import ENFPB from '../../img/MBTI/Black/ENFP.svg';
+import ISTJB from '../../img/MBTI/Black/ISTJ.svg';
+import ISFJB from '../../img/MBTI/Black/ISFJ.svg';
+import ESTJB from '../../img/MBTI/Black/ESTJ.svg';
+import ESFJB from '../../img/MBTI/Black/ESFJ.svg';
+import ENTJB from '../../img/MBTI/Black/ENTJ.svg';
+import INTPB from '../../img/MBTI/Black/INTP.svg';
+import INTJB from '../../img/MBTI/Black/INTJ.svg';
+import ENTPB from '../../img/MBTI/Black/ENTP.svg';
+import ESTPB from '../../img/MBTI/Black/ESTP.svg';
+import ISFPB from '../../img/MBTI/Black/ISFP.svg';
+import ISTPB from '../../img/MBTI/Black/ISTP.svg';
+import ESFPB from '../../img/MBTI/Black/ESFP.svg';
+
+import INFJW from '../../img/MBTI/White/INFJ.svg';
+import INFPW from '../../img/MBTI/White/INFP.svg';
+import ENFJW from '../../img/MBTI/White/ENFJ.svg';
+import ENFPW from '../../img/MBTI/White/ENFP.svg';
+import ISTJW from '../../img/MBTI/White/ISTJ.svg';
+import ISFJW from '../../img/MBTI/White/ISFJ.svg';
+import ESTJW from '../../img/MBTI/White/ESTJ.svg';
+import ESFJW from '../../img/MBTI/White/ESFJ.svg';
+import ENTJW from '../../img/MBTI/White/ENTJ.svg';
+import INTPW from '../../img/MBTI/White/INTP.svg';
+import INTJW from '../../img/MBTI/White/INTJ.svg';
+import ENTPW from '../../img/MBTI/White/ENTP.svg';
+import ESTPW from '../../img/MBTI/White/ESTP.svg';
+import ISFPW from '../../img/MBTI/White/ISFP.svg';
+import ISTPW from '../../img/MBTI/White/ISTP.svg';
+import ESFPW from '../../img/MBTI/White/ESFP.svg';
 
 import Marker_enfj from '../../img/marker/Marker_enfj.svg';
 import Marker_enfp from '../../img/marker/Marker_enfp.svg';
@@ -41,6 +75,9 @@ const Bit = [
     circleColor: '#d0ed917f',
     title: '선의의 옹호자',
     virtue: '솔직함. 통찰력있음',
+    Characteristics: ['높은 통찰', '공동체의 이익 중요'],
+    ImageBlack: INFJB,
+    ImageWhite: INFJW,
   },
   {
     name: 'INFP',
@@ -50,6 +87,9 @@ const Bit = [
     circleColor: '#5fcc177c',
     title: '열정적인 중재자',
     virtue: '이상적임',
+    Characteristics: ['성실함', '이해심'],
+    ImageBlack: INFPB,
+    ImageWhite: INFPW,
   },
   {
     name: 'ENFJ',
@@ -59,6 +99,9 @@ const Bit = [
     circleColor: '#83b0697d',
     title: '정의로운 사회운동가 ',
     virtue: '인상적이며 따듯함.',
+    Characteristics: ['사교적', '타인을 존중'],
+    ImageBlack: ENFJB,
+    ImageWhite: ENFJW,
   },
   {
     name: 'ENFP',
@@ -68,6 +111,9 @@ const Bit = [
     circleColor: '#3d840d78',
     title: '재기발랄한 활동가',
     virtue: '창의적',
+    Characteristics: ['상상력 풍부', '뛰어난 순발력'],
+    ImageBlack: ENFPB,
+    ImageWhite: ENFPW,
   },
   {
     name: 'ISTJ',
@@ -77,6 +123,9 @@ const Bit = [
     circleColor: '#a6ddff83',
     title: '청렴결백한 논리주의자',
     virtue: '지혜로움, 근면성실함',
+    Characteristics: ['책임감 강함', '보수적'],
+    ImageBlack: ISTJB,
+    ImageWhite: ISTJW,
   },
   {
     name: 'ISFJ',
@@ -86,6 +135,9 @@ const Bit = [
     circleColor: '#53b4ff7d',
     title: '용감한 수호자',
     virtue: '다정하고 사려깊음. 책임감이 강함',
+    Characteristics: ['인내심이 강함', '차분하고 헌식적'],
+    ImageBlack: ISFJB,
+    ImageWhite: ISFJW,
   },
   {
     name: 'ESTJ',
@@ -95,6 +147,9 @@ const Bit = [
     circleColor: '#0084ff86',
     title: '엄격한 관리자',
     virtue: '품격있음',
+    Characteristics: ['체계적', '규칙준수'],
+    ImageBlack: ESTJB,
+    ImageWhite: ESTJW,
   },
   {
     name: 'ESFJ',
@@ -104,6 +159,9 @@ const Bit = [
     circleColor: '#528ab27a',
     title: '사교적인 외교관',
     virtue: '협조적이고 성실함',
+    Characteristics: ['동정심', '친절함'],
+    ImageBlack: ESFJB,
+    ImageWhite: ESFJW,
   },
   {
     name: 'ENTJ',
@@ -113,6 +171,9 @@ const Bit = [
     circleColor: '#da45ff7a',
     title: '대담한 통솔자',
     virtue: '대체로 솔직하며 결단력 있는 사람',
+    Characteristics: ['철저한 준비', '활동적임'],
+    ImageBlack: ENTJB,
+    ImageWhite: ENTJW,
   },
   {
     name: 'INTP',
@@ -122,6 +183,9 @@ const Bit = [
     circleColor: '#ff83c981',
     title: '논리적인 사색가',
     virtue: '유연적이고 분석적임',
+    Characteristics: ['호기심이 많음', '잠재력과 가능성'],
+    ImageBlack: INTPB,
+    ImageWhite: INTPW,
   },
   {
     name: 'INTJ',
@@ -131,6 +195,9 @@ const Bit = [
     circleColor: '#fb94ff81',
     title: '용의주도한 전략가',
     virtue: '명석하고 창의적임',
+    Characteristics: ['의지가 강함', '독립적'],
+    ImageBlack: INTJB,
+    ImageWhite: INTJW,
   },
   {
     name: 'ENTP',
@@ -140,6 +207,9 @@ const Bit = [
     circleColor: '#9900ff7f',
     title: '뜨거운 논쟁을 즐기는 변론가',
     virtue: '아는 것이 많고 독창적임',
+    Characteristics: ['독창적', '박학다식'],
+    ImageBlack: ENTPB,
+    ImageWhite: ENTPW,
   },
   {
     name: 'ESTP',
@@ -149,6 +219,9 @@ const Bit = [
     circleColor: '#f7ca1681',
     title: '모험을 즐기는 사업가',
     virtue: '매사에 유연함',
+    Characteristics: ['관용적임', '타협적'],
+    ImageBlack: ESTPB,
+    ImageWhite: ESTPW,
   },
   {
     name: 'ISFP',
@@ -158,6 +231,9 @@ const Bit = [
     circleColor: '#f1e68583',
     title: '호기심 많은 예술가',
     virtue: '오픈 마인드',
+    Characteristics: ['온화함', '여유로움'],
+    ImageBlack: ISFPB,
+    ImageWhite: ISFPW,
   },
   {
     name: 'ISTP',
@@ -167,6 +243,9 @@ const Bit = [
     circleColor: '#ffeb0f83',
     title: '만능 재주꾼',
     virtue: '발빠르게 움직이며 관조적임',
+    Characteristics: ['과묵함', '적응력이 강함'],
+    ImageBlack: ISTPB,
+    ImageWhite: ISTPW,
   },
   {
     name: 'ESFP',
@@ -176,9 +255,13 @@ const Bit = [
     circleColor: '#ffff567d',
     title: '자유로운 영혼의 연예인',
     virtue: '사교적이고 긍정적인 타입',
+    Characteristics: ['호기심이 많음', '사실 중시'],
+    ImageBlack: ESFPB,
+    ImageWhite: ESFPW,
   },
 ];
 
+//내 MBTI 속정 가지고 오기
 export const Mybit = mbti => {
   return Bit.find(x => {
     return x.name === mbti;

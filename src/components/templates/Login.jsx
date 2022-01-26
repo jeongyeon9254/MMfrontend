@@ -1,21 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import imgfile from '../../img/kakaologin.png';
-import { Grid, Image } from '../element/index';
+import { Grid } from '../element/index';
 import Header from '../modules/layout/Header';
 import Start from '../modules/Start';
 import { actionCreators as userAction } from '../../redux/modules/user';
-import Logo from '../../img/Icon/Start_logo.svg';
 import { history } from '../../redux/configureStore.js';
-import { set } from 'lodash';
 const Login = props => {
   const dispatch = useDispatch();
   const kakaoclick = () => {
     dispatch(userAction.logInDB());
     window.location.href =
-      // 'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
-      `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
+      'https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code';
+    // `https://kauth.kakao.com/oauth/authorize?client_id=5d14d9239c0dbefee951a1093845427f&redirect_uri=https://www.bizchemy.com/user/kakao/callback&response_type=code`;
   };
   const [open, setopen] = React.useState(false);
 

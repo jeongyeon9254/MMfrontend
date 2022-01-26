@@ -46,12 +46,14 @@ const ChatForm = props => {
     sendStop();
     dispatch(ChatAction.deleteChatroomDB(roomId));
     SetmodalOpen(true);
+    _onClick();
   };
 
   const ClickPutRoom = async () => {
     sendStop();
     dispatch(ChatAction.putChatroomDB(roomId));
     SetmodalOpen(true);
+    _onClick();
   };
 
   const InfiniteStairs = () => {

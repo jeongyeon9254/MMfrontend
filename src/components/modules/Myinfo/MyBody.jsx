@@ -22,10 +22,6 @@ function MyBody() {
           <MyPartBox title="내가 올린 게시물">
             <Mypost />
           </MyPartBox>
-
-          {/* <MyBottom Edit _onClick={ClickEvent}>
-            내 정보 수정하기
-          </MyBottom> */}
         </Grid>
       </ScrollBox>
     </Body>
