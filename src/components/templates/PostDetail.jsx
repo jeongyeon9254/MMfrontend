@@ -13,6 +13,7 @@ import { Grid } from '../element/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import { history } from '../../redux/configureStore';
 
 const PostDetail = props => {
   const dispatch = useDispatch();
@@ -59,16 +60,13 @@ const PostDetail = props => {
     dispatch(postActions.addLikeDB(boardId[2]));
   };
 
+  const GoPost = () => {
+    history.push('/postMain');
+  };
+
   return (
     <DetailBox>
-      <Header
-        defaultName={data.nickname}
-        name={detailInfo.nickname}
-        detail
-        _onClick={() => {
-          setModal(true);
-        }}
-      >
+      <Header Page default _onClick={GoPost} Name={data.nickname} name={detailInfo.nickname} detail>
         게시글 상세보기
       </Header>
 

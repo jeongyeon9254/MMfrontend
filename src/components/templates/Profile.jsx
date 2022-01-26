@@ -85,6 +85,10 @@ const Profile = () => {
     });
   };
 
+  // React.useEffect(() => {
+  //   history.puah('/');
+  // }, [IdName]);
+
   //변경시 요청
   React.useEffect(() => {
     // 요청 받은 리스트의 patnerId 값에 지금 profile에 userId이 있는지 확인 한다.
