@@ -133,6 +133,7 @@ const actionCreators = {
   getMypostScrollDB,
   resetUser,
   getMyPostBoxDB,
+  userInfoPutStart,
 };
 
 export { actionCreators };
