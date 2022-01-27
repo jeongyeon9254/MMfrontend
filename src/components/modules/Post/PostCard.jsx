@@ -22,7 +22,7 @@ const PostCard = props => {
   SwiperCore.use([Pagination]);
 
   // props값 관리
-  const { info, goDetail, addlike } = props;
+  const { info, goDetail, addlike, Me } = props;
   const imgList = info.imageList;
   const time = info.createdAt.split(' ')[0].split('-');
 
@@ -34,7 +34,11 @@ const PostCard = props => {
           <Grid
             width="auto"
             _onClick={() => {
-              history.push(`/profile/${info.userId}`);
+              if (Me) {
+                history.push(`/myinfo`);
+              } else {
+                history.push(`/profile/${info.userId}`);
+              }
             }}
           >
             <Image src={info.profileImage} photoRound width="50px" margin="0" />

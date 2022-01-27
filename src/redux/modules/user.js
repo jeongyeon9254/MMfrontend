@@ -43,6 +43,19 @@ const logInDB = code => {
 };
 const userInfoPut = multipartFile => {
   return async function (dispatch, getState, { history }) {
+    try {
+      const res = await editMyinfoDB(multipartFile);
+      localStorage.removeItem('userInfo');
+      localStorage.setItem('userInfo', JSON.stringify(res.data));
+      document.location.href = '/';
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+const userInfoPutStart = multipartFile => {
+  return async function (dispatch, getState, { history }) {
     const res = await editMyinfoDB(multipartFile);
     localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(res.data));
@@ -124,6 +137,7 @@ const actionCreators = {
   getMypostScrollDB,
   resetUser,
   getMyPostBoxDB,
+  userInfoPutStart,
 };
 
 export { actionCreators };

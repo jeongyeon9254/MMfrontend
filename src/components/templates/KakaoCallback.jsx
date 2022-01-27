@@ -10,8 +10,8 @@ const KakaoCallback = props => {
   const KakaoFuc = () => {
     dispatch(useAction.logInDB(code));
   };
-  React.useEffect(() => {
-    KakaoFuc();
+  React.useEffect(async () => {
+    await KakaoFuc();
   }, []);
 
   return (

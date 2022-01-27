@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie } from '../shared/Cookie';
-import IPAdress from '../shared/Ipadress';
-const IP = IPAdress();
+import { IPadress } from '../shared/Ipadress';
+const IP = IPadress();
 const TOKEN = getCookie('authorization');
 
 const instance = axios.create({

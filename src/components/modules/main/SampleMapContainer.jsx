@@ -15,7 +15,6 @@ const SampleMapContainer = props => {
   const locationInfo = useSelector(state => state.main.sample);
   const address =
     locationInfo.length !== 0 ? `${locationInfo.location} ${locationInfo.locDetail}` : null;
-  console.log(locationInfo);
 
   useEffect(() => {
     if (locationInfo.length !== 0) {

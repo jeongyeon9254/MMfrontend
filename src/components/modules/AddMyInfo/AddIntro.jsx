@@ -62,7 +62,7 @@ const AddIntro = props => {
     const Check = isString(file.profileImage);
     formData.append('multipartFile', Check ? emptyFile : file.profileImage);
     formData.append('data', jsonFile(userInfo));
-    dispatch(userAction.userInfoPut(formData));
+    dispatch(userAction.userInfoPutStart(formData));
   };
 
   const MaxIntro = e => {

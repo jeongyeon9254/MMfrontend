@@ -1,20 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../../element';
-import arrow_left from '../../../img/Icon/arrow_left.svg';
-import arrow_left_w from '../../../img/Icon/arrow_left_w.svg';
-import setting from '../../../img/Icon/setting.svg';
-import icon_replay from '../../../img/Icon/icon_replay.svg';
 import Phone_head from '../../../img/Icon/phone_head.png';
 import Phone_head_w from '../../../img/Icon/phone_head_w.png';
-import icon_detail from '../../../img/Icon/icon_detail.svg';
-// JS
-import { history } from '../../../redux/configureStore';
-import { useDispatch } from 'react-redux';
-import { actionCreators as mainActions } from '../../../redux/modules/main';
-import { actionCreators as postActions } from '../../../redux/modules/post';
-import { actionCreators as imageActions } from '../../../redux/modules/preview';
 
+//컴포넌트
+import { LayoutBackBtn, LayoutBtn } from '.';
 const Header = props => {
   const {
     children,
@@ -29,12 +20,12 @@ const Header = props => {
     detail,
     zIndex,
     _onClick,
-    name,
-    defaultName,
+    Me,
     Page,
     DeleteMsRoomOrGoBackRoom,
     setMyInfo,
     login,
+    setModal,
   } = props;
 
   const styles = {
@@ -44,22 +35,6 @@ const Header = props => {
     white,
     zIndex,
     login,
-  };
-
-  const dispatch = useDispatch();
-
-  const goHome = () => {
-    history.push('/');
-    dispatch(mainActions.reset());
-    dispatch(postActions.reset());
-    dispatch(imageActions.resetPreview());
-  };
-
-  const goBack = () => {
-    history.goBack();
-    dispatch(mainActions.reset());
-    dispatch(postActions.reset());
-    dispatch(imageActions.resetPreview());
   };
 
   return (
@@ -73,55 +48,28 @@ const Header = props => {
         />
       </Grid>
       <Grid row justify="space-between" align="center">
-        {main ? null : (
-          <div
-            className="backBtn"
-            onClick={() => {
-              _on ? goHome() : Page ? _onClick() : goBack();
-            }}
-          >
-            <img alt="뒤로가기 버튼" src={white ? arrow_left_w : arrow_left}></img>
-          </div>
-        )}
+        <LayoutBackBtn
+          main={main}
+          Page={Page}
+          white={white}
+          _onClick={_onClick}
+          _on={_on}
+          detail={detail}
+        />
         <TiTle {...styles}>{children}</TiTle>
-        {/* {chat ? <Search src={icon_search} /> : ''} */}
-        {chat ? (
-          <Exit
-            onClick={() => {
-              DeleteMsRoomOrGoBackRoom();
-            }}
-          >
-            방 나가기
-          </Exit>
-        ) : chat || myinfo ? (
-          ''
-        ) : (
-          <Null></Null>
-        )}
-        {fast ? <Detail alt="재시도" src={icon_replay} onClick={_onClick}></Detail> : null}
-        {myinfo ? (
-          <LogOut onClick={_onClick}>
-            <img src={setting} alt="" />
-          </LogOut>
-        ) : (
-          ''
-        )}
-        {main ? (
-          <MyLocation
-            onClick={() => {
-              dispatch(mainActions.getMyListDB());
-              setMyInfo();
-            }}
-          >
-            {login ? null : <p>내 위치</p>}
-          </MyLocation>
-        ) : null}
-
-        {detail ? (
-          name === defaultName ? (
-            <Detail alt="수정/삭제" src={icon_detail} onClick={_onClick}></Detail>
-          ) : null
-        ) : null}
+        <LayoutBtn
+          main={main}
+          chat={chat}
+          myinfo={myinfo}
+          fast={fast}
+          _onClick={_onClick}
+          DeleteMsRoomOrGoBackRoom={DeleteMsRoomOrGoBackRoom}
+          setMyInfo={setMyInfo}
+          login={login}
+          detail={detail}
+          setModal={setModal}
+          Me={Me}
+        ></LayoutBtn>
       </Grid>
     </HeaderStyle>
   );
@@ -166,33 +114,6 @@ const TiTle = styled.h2`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-`;
-
-const Null = styled.div`
-  height: 24px;
-  width: 24px;
-`;
-const Exit = styled.div`
-  font-size: 14px;
-  color: red;
-  cursor: pointer;
-`;
-const Detail = styled.img`
-  height: 24px;
-  width: 24px;
-  cursor: pointer;
-`;
-const LogOut = styled.div`
-  font-size: 14px;
-  color: #999;
-  cursor: pointer;
-  line-height: 24px;
-`;
-const MyLocation = styled.div`
-  font-size: 14px;
-  color: #4e4e4e;
-  cursor: pointer;
-  font-weight: 700;
 `;
 
 export default Header;
