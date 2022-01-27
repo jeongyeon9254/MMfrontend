@@ -7,13 +7,11 @@ import { Button, Alert } from '../../element/index';
 import EndAlert from '../../modules/Tutorial/EndAlert';
 
 // 이미지
-import main_my from '../../../img/Icon/main_my.svg';
+import main from '../../../img/Icon/main.svg';
 import main_area from '../../../img/Icon/main_area.svg';
-import main_auto from '../../../img/Icon/main_auto.svg';
 import main_list from '../../../img/Icon/main_list.svg';
 import profile from '../../../img/Icon/profile.svg';
-import accept from '../../../img/Icon/accept.svg';
-import request_list from '../../../img/Icon/request_list.svg';
+import request from '../../../img/Icon/request.svg';
 import chat_list from '../../../img/Icon/chat_list.svg';
 import chat_room from '../../../img/Icon/chat_room.svg';
 
@@ -65,17 +63,12 @@ const Tutorial = props => {
       >
         <SwiperSlide>
           <ImageBOX
-            style={{ backgroundImage: `url(${main_my})`, width: '100%', height: '100%' }}
+            style={{ backgroundImage: `url(${main})`, width: '100%', height: '100%' }}
           ></ImageBOX>
         </SwiperSlide>
         <SwiperSlide>
           <ImageBOX
             style={{ backgroundImage: `url(${main_area})`, width: '100%', height: '100%' }}
-          ></ImageBOX>
-        </SwiperSlide>
-        <SwiperSlide>
-          <ImageBOX
-            style={{ backgroundImage: `url(${main_auto})`, width: '100%', height: '100%' }}
           ></ImageBOX>
         </SwiperSlide>
         <SwiperSlide>
@@ -90,12 +83,7 @@ const Tutorial = props => {
         </SwiperSlide>
         <SwiperSlide>
           <ImageBOX
-            style={{ backgroundImage: `url(${accept})`, width: '100%', height: '100%' }}
-          ></ImageBOX>
-        </SwiperSlide>
-        <SwiperSlide>
-          <ImageBOX
-            style={{ backgroundImage: `url(${request_list})`, width: '100%', height: '100%' }}
+            style={{ backgroundImage: `url(${request})`, width: '100%', height: '100%' }}
           ></ImageBOX>
         </SwiperSlide>
         <SwiperSlide>

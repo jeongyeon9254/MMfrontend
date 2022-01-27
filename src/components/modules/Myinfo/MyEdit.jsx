@@ -43,6 +43,8 @@ function MyEdit(props) {
     SetImg(item);
   };
 
+  console.log(LO, De, X, Y);
+
   const AddInfo = {
     nickname: nickname,
     gender: userInfo.gender,
