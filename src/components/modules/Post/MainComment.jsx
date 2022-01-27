@@ -20,7 +20,6 @@ const MainComment = props => {
     set(commenttId);
     out();
   };
-
   return (
     <Grid row wrap="nowrap" gap="12px">
       <Grid width="40px">
@@ -48,7 +47,9 @@ const MainComment = props => {
     </Grid>
   );
 };
-
+const ClickBtn = styled.div`
+  cursor: pointer;
+`;
 const NameText = styled.p`
   font-weight: 700;
   font-size: ${props => props.theme.fontSizes.small};

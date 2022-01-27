@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCookie } from '../shared/Cookie';
-import IPAdress from '../shared/Ipadress';
+import { IPadress } from '../shared/Ipadress';
 const TOKEN = getCookie('authorization');
-const IP = IPAdress();
+const IP = IPadress();
 const multi = axios.create({
   baseURL: `${IP}`,
   timeout: 5000,

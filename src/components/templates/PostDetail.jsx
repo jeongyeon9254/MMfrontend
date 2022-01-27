@@ -13,10 +13,14 @@ import { Grid } from '../element/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../../redux/modules/post';
 import { actionCreators as userAction } from '../../redux/modules/user';
+import { actionCreators as mainActions } from '../../redux/modules/main';
+import { actionCreators as imageActions } from '../../redux/modules/preview';
 import { history } from '../../redux/configureStore';
 
 const PostDetail = props => {
   const dispatch = useDispatch();
+
+  const [Me, setMe] = React.useState(false);
 
   // 포스트 아이디를 가져옵니다.
   const pathName = props.location.pathname;
@@ -40,6 +44,12 @@ const PostDetail = props => {
     dispatch(userAction.getMyPostBoxDB());
   }, []);
 
+  React.useEffect(() => {
+    const TheMakeId = detailInfo.nickname + detailInfo.mbti + detailInfo.locDetail;
+    const meMakeId = data.nickname + data.mbti + data.locDetail;
+    setMe(TheMakeId === meMakeId);
+  }, [detailInfo]);
+
   // 모달창 관리
   const [modal, setModal] = useState(false);
   const outModal = () => {
@@ -62,16 +72,19 @@ const PostDetail = props => {
 
   const GoPost = () => {
     history.push('/postMain');
+    dispatch(mainActions.reset());
+    dispatch(postActions.reset());
+    dispatch(imageActions.resetPreview());
   };
 
   return (
     <DetailBox>
-      <Header Page default _onClick={GoPost} Name={data.nickname} name={detailInfo.nickname} detail>
+      <Header _onClick={GoPost} Me={Me} detail Page setModal={setModal}>
         게시글 상세보기
       </Header>
 
       {/* 포스트 창 */}
-      {detailInfo.length !== 0 ? <PostCard addlike={addlike} info={detailInfo} /> : null}
+      {detailInfo.length !== 0 ? <PostCard Me={Me} addlike={addlike} info={detailInfo} /> : null}
 
       {/* 댓글창 및 댓글 등록 */}
       <Grid padding="20px 30px" gap="12px" borderTop="1px solid #E8E8E8">
