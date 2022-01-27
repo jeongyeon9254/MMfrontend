@@ -82,7 +82,6 @@ function MyEdit(props) {
 
   const next = () => {
     ClickEvent();
-    window.location.href = '/';
   };
 
   const exit = () => {

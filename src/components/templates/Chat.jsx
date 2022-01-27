@@ -112,7 +112,6 @@ const Chat = () => {
         date: date,
       };
       sendMessage(ms);
-      dispatch(ChatAction.deleteChatroomDB(roomNum));
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
