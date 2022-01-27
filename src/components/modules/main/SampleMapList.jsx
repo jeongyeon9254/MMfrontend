@@ -13,11 +13,11 @@ import arrow_bottom from '../../../img/Icon/arrow_bottom.svg';
 import icon_location from '../../../img/Icon/icon_location.svg';
 import { history } from '../../../redux/configureStore';
 
-const MapList = props => {
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const { outModal } = props;
-  const lists = useSelector(state => state.main.list);
-  const mapList = lists ? lists : [];
+const SampleMapList = props => {
+  const { outModal, locationInfo } = props;
+  const mapList = locationInfo ? locationInfo : [];
+
+  const list = mapList.userList;
 
   const offModal = () => {
     outModal();
@@ -34,12 +34,11 @@ const MapList = props => {
         <div className="inner">
           <Grid padding="10px 0 0 0 " align="center" color="#fff">
             <p>
-              "<b>{props.sample ? '게스트' : userInfo.nickname}</b> 님과 잘 통하는 사람이{' '}
-              <b>{mapList.result.length}</b> 명 있습니다"
+              "<b>게스트</b> 님과 잘 통하는 사람이 <b>{list.length}</b> 명 있습니다"
             </p>
           </Grid>
-          {mapList.result.length > 0 ? (
-            mapList.result.map((list, idx) => {
+          {list.length > 0 ? (
+            list.map((list, idx) => {
               return (
                 <div
                   className="card"
@@ -135,7 +134,7 @@ const MapListStyle = styled.div`
     line-height: 1.1;
     margin-top: 1px;
     color: ${props => props.theme.colors.gray_2};
-    font-size: 0.9rem;
+    font-size: ${props => props.theme.fontSizes.base};
   }
   .card .location {
     font-weight: 500;
@@ -160,4 +159,4 @@ const MapListStyle = styled.div`
   }
 `;
 
-export default MapList;
+export default SampleMapList;
