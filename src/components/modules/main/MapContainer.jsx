@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 // Js
 import icon_marker_2 from '../../../img/Icon/icon_marker_2.svg';
-import icon_marker_1 from '../../../img/Icon/icon_marker_1.svg';
 import Bit from '../Bit';
 
 // Redux

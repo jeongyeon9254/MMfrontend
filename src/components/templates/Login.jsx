@@ -1,14 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import imgfile from '../../img/kakaologin.png';
-import { Grid, Image } from '../element/index';
+import { Grid } from '../element/index';
 import Header from '../modules/layout/Header';
 import Start from '../modules/Start';
 import { actionCreators as userAction } from '../../redux/modules/user';
-import Logo from '../../img/Icon/Start_logo.svg';
 import { history } from '../../redux/configureStore.js';
-import { set } from 'lodash';
 const Login = props => {
   const dispatch = useDispatch();
   const kakaoclick = () => {

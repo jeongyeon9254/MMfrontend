@@ -26,6 +26,7 @@ const initialState = {
     lng: null,
     result: [],
   },
+  sample: [],
   Category: null,
   myInfo: false,
 };
@@ -111,12 +112,7 @@ export default handleActions(
     [GET_GUEST]: (state, action) =>
       produce(state, draft => {
         const data = action.payload.data;
-
-        draft.list.result = [...data.userList];
-
-        draft.list.gps = data.location;
-        draft.list.lat = data.latitude;
-        draft.list.lng = data.longitude;
+        draft.sample = data;
       }),
     [CHEMY_LIST]: (state, action) =>
       produce(state, draft => {

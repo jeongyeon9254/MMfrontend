@@ -81,4 +81,5 @@ export const ButtonStyle = styled.button`
   border: ${props => props.border};
   border-radius: ${props => (props.radius ? props.radius : 0)};
   opacity: ${props => (props.opacity ? props.opacity : 1)};
+  cursor: pointer;
 `;

@@ -24,7 +24,7 @@ const SetPreview = props => {
   return (
     <Grid>
       <Title>사진 첨부하기</Title>
-      <Grid wrap="none-wrap" row gap="20px;">
+      <Grid wrap="none-wrap" row gap="20px;" align="center">
         {/* 이미지 선택 라벨 */}
         <Label htmlFor="file">
           <Grid align="center" justify="center" height="100%">
@@ -50,7 +50,9 @@ const SetPreview = props => {
                   ? preview.map((src, idx) => {
                       return (
                         <SwiperSlide className="slide" key={idx}>
-                          <img alt="이미지" src={src} key={idx}></img>{' '}
+                          <ImgBox>
+                            <img alt="이미지" src={src} key={idx}></img>{' '}
+                          </ImgBox>
                         </SwiperSlide>
                       );
                     })
@@ -101,23 +103,32 @@ const Title = styled.h3`
   margin-bottom: 15px;
   color: ${props => props.theme.colors.gray_2};
 `;
-
-const Preview = styled.div`
-  background: #fff;
-  width: 68%;
-  border: 1px solid #a7a7a7;
-  padding: 1px;
-  box-sizing: border-box;
+const ImgBox = styled.div`
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
   border-radius: 10px;
   position: relative;
   img {
     height: ${props => props.theme.fontSizes.base};
-    margin-right: 10px;
     display: inline-block;
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
+`;
+
+const Preview = styled.div`
+  background: #fff;
+  width: auto;
+  max-width: 68%;
+  border: 1px solid #a7a7a7;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  position: relative;
   .scroll-container {
     height: 100%;
     display: flex;

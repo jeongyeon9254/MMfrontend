@@ -27,8 +27,8 @@ function ChatListform(props) {
           case 'QUIT':
             if (Open) {
               return (
-                <>
-                  <ModalQUIT key={idx}>
+                <div key={idx}>
+                  <ModalQUIT>
                     <Grid gap="10px">
                       <ModalClose src={close} onClick={() => OpenClick(false)}></ModalClose>
                       <p>{item.message}</p>
@@ -36,7 +36,7 @@ function ChatListform(props) {
                     </Grid>
                   </ModalQUIT>
                   <ModalBg onClick={() => OpenClick(false)}></ModalBg>
-                </>
+                </div>
               );
             } else {
               return '';

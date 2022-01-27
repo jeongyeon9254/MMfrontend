@@ -43,6 +43,8 @@ function MyEdit(props) {
     SetImg(item);
   };
 
+  console.log(LO, De, X, Y);
+
   const AddInfo = {
     nickname: nickname,
     gender: userInfo.gender,
@@ -80,7 +82,6 @@ function MyEdit(props) {
 
   const next = () => {
     ClickEvent();
-    window.location.href = '/';
   };
 
   const exit = () => {
