@@ -53,7 +53,6 @@ const postChatRoomListDB = (guestInfo, hostId) => {
     try {
       await postChatRoomList(guestInfo);
       dispatch(matchingAction.PutMatchingList(hostId));
-      console.log(hostId);
       history.push('/chat');
     } catch (e) {
       console.log(e);
@@ -88,8 +87,9 @@ const getRecentlyMsListDB = (roomId, page) => {
     try {
       const res = await getChatMsList(roomId, page);
       dispatch(LoadChatting(res.data, page));
+      console.log(res);
       dispatch(ms_loadingList());
-      dispatch(total_number(res.data[0].totalMessage));
+      dispatch(total_number(res.data === [] ? 0 : res.data[0].totalMessage));
       dispatch(now_number(res.data.length));
     } catch (e) {
       console.log(e);

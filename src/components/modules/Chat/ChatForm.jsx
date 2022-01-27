@@ -43,17 +43,31 @@ const ChatForm = props => {
   };
 
   const ClickDeleteRoom = () => {
-    sendStop();
-    dispatch(ChatAction.deleteChatroomDB(roomId));
-    SetmodalOpen(true);
-    _onClick();
+    try {
+      const Id = roomId;
+      sendStop();
+      setTimeout(() => {
+        dispatch(ChatAction.deleteChatroomDB(Id));
+        SetmodalOpen(true);
+        console.log('deleteChatroomDB', Id);
+      }, 0.1);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const ClickPutRoom = () => {
-    sendStop();
-    dispatch(ChatAction.putChatroomDB(roomId));
-    SetmodalOpen(true);
-    _onClick();
+    try {
+      const Id = roomId;
+      sendStop();
+      setTimeout(() => {
+        dispatch(ChatAction.putChatroomDB(Id));
+        SetmodalOpen(true);
+        console.log('putChatroomDB', Id);
+      }, 0.1);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const InfiniteStairs = () => {

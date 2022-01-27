@@ -43,8 +43,6 @@ function MyEdit(props) {
     SetImg(item);
   };
 
-  console.log(LO, De, X, Y);
-
   const AddInfo = {
     nickname: nickname,
     gender: userInfo.gender,
@@ -58,7 +56,6 @@ function MyEdit(props) {
     locFull: Full,
     interestList: Int,
   };
-  console.log(AddInfo);
 
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
@@ -77,7 +74,7 @@ function MyEdit(props) {
     const Check = isString(Img);
     formData.append('multipartFile', Check ? emptyFile : Img);
     formData.append('data', jsonFile(AddInfo));
-    dispatch(userAction.userInfoPut(formData));
+    dispatch(userAction.userInfoPut(formData, AddInfo));
   };
 
   const next = () => {

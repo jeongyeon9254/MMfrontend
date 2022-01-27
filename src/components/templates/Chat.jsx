@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import IPadress from '../../shared/Ipadress';
+import { IPadress } from '../../shared/Ipadress';
 import { useSelector } from 'react-redux';
 import Footer from '../modules/layout/Footer';
 import Header from '../modules/layout/Header';
@@ -39,7 +39,13 @@ const Chat = () => {
   const Catchdata = data => {
     SetEmitData(data);
   };
-
+  const BackHistory = () => {
+    setPaging(!Paging);
+    setData({});
+    setroomNum('');
+    SetEnter(false);
+    dispatch(ChatAction.ms_resetList());
+  };
   //스크롤 엑션
   const scrollTomBottom = () => {
     if (EmitData.current) {
@@ -112,6 +118,7 @@ const Chat = () => {
         date: date,
       };
       sendMessage(ms);
+      BackHistory();
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
@@ -130,14 +137,6 @@ const Chat = () => {
     } catch (e) {
       console.log('메세지전송 상태', ws.ws.readyState);
     }
-  };
-
-  const BackHistory = () => {
-    setPaging(!Paging);
-    setData({});
-    setroomNum('');
-    SetEnter(false);
-    dispatch(ChatAction.ms_resetList());
   };
 
   React.useEffect(() => {
@@ -159,6 +158,7 @@ const Chat = () => {
       dispatch(ChatAction.resetList());
       dispatch(ChatAction.ms_resetList());
       SetEnter(false);
+      BackHistory();
     };
   }, []);
 
