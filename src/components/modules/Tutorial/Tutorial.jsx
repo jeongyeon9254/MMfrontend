@@ -39,6 +39,7 @@ const Tutorial = props => {
     <SwiperBox>
       <ButtonBox>
         <Button
+          size="10px"
           BtnAdd
           _onClick={() => {
             setBye(true);
@@ -107,7 +108,7 @@ const SwiperBox = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(22, 22, 22, 0.9);
+  background-color: rgba(22, 22, 22);
   z-index: 9999;
   transition: all 0.2s;
   .swiper-button-next {
@@ -134,7 +135,7 @@ const ImageBOX = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 5% 10% 0px 0px;
+  padding: 5% 10% 3% 0px;
 `;
 
 export default Tutorial;
