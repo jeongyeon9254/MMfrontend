@@ -46,7 +46,7 @@ const AddAdress = props => {
           <Button
             BtnAdd
             _onClick={() => {
-              setKakaoadr(true);
+              Kakaoadr === false ? setKakaoadr(true) : setKakaoadr(false);
             }}
           >
             주소 찾기

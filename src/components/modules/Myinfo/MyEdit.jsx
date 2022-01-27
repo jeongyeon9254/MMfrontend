@@ -31,6 +31,7 @@ function MyEdit(props) {
   const [X, setX] = React.useState(userInfo.longitude); // 경도
   const [Y, setY] = React.useState(userInfo.latitude); // 위도
   const [Alt, setAlt] = React.useState(false);
+  const [InputText, setInputText] = React.useState(true);
 
   const SetEmit = item => {
     SetMbti(item);
@@ -57,6 +58,7 @@ function MyEdit(props) {
     locFull: Full,
     interestList: Int,
   };
+  console.log(AddInfo);
 
   function isString(inputText) {
     if (typeof inputText === 'string' || inputText instanceof String) {
@@ -84,6 +86,16 @@ function MyEdit(props) {
 
   const exit = () => {
     setAlt(false);
+  };
+
+  const open = () => {
+    setKakaoadr(true);
+    setFull(userInfo.locFull);
+  };
+
+  const close = () => {
+    setKakaoadr(false);
+    setFull(userInfo.locFull);
   };
 
   return (
@@ -126,7 +138,7 @@ function MyEdit(props) {
                 <Button
                   BtnAdd
                   _onClick={() => {
-                    setKakaoadr(true);
+                    Kakaoadr === false ? open() : close();
                   }}
                 >
                   주소 찾기
