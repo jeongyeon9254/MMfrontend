@@ -80,7 +80,6 @@ function MyEdit(props) {
 
   const next = () => {
     ClickEvent();
-    history.push('/');
   };
 
   const exit = () => {

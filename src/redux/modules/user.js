@@ -46,6 +46,15 @@ const userInfoPut = multipartFile => {
     const res = await editMyinfoDB(multipartFile);
     localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(res.data));
+    document.location.href = '/';
+  };
+};
+
+const userInfoPutStart = multipartFile => {
+  return async function (dispatch, getState, { history }) {
+    const res = await editMyinfoDB(multipartFile);
+    localStorage.removeItem('userInfo');
+    localStorage.setItem('userInfo', JSON.stringify(res.data));
   };
 };
 
