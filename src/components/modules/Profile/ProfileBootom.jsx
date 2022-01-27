@@ -57,7 +57,7 @@ function ProfileBootoms(props) {
                 : null}
             </Grid>
           </Grid>
-          <Box margin="6px 0 34px">{profile.intro}</Box>
+          <Box margin="6px 0 0px">{profile.intro}</Box>
           {!modal ? (
             <ProfileModalBar Btn _onClick={MadalSet} />
           ) : (
