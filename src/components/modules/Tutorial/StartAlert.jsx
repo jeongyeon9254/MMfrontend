@@ -7,33 +7,22 @@ const StartAlert = () => {
   return (
     <>
       <Grid padding="3px" align="center">
-        <Title>Biz Chemy에 오신걸 환영해요!!</Title>
-        <Content>
-          새로 가입하신 분들을 위한 <Point>Biz Chemy 이용가이드</Point>를 제공하고 있어요.
-        </Content>
-        <br />
-        <Content>
-          확인 시 <Point>Biz Chemy 이용가이드</Point>로 이동합니다.
-        </Content>
+        <Title>환영합니다! </Title>
+        <Content>Biz chemy 튜토리얼를 이용하실래요?</Content>
       </Grid>
     </>
   );
 };
 
 const Title = styled.p`
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 800;
-  line-height: 3;
+  margin: 20px 0px;
 `;
 const Content = styled.p`
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-size: 15px;
   word-break: keep-all;
-`;
-
-const Point = styled.span`
-  font-weight: 800;
+  margin: 5px 0px;
 `;
 
 export default StartAlert;

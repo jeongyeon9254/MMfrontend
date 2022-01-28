@@ -12,28 +12,31 @@ import { useSelector } from 'react-redux';
 const { kakao } = window;
 
 const MapContainer = props => {
+  // props값 관리
+  const { onModal, bigLocation, location } = props;
+
+  // redux값 관리
   const myInfo = useSelector(state => state.main.myInfo);
   const result = useSelector(state => state.main.list.result);
-  const { onModal, bigLocation, location } = props;
+
+  // 로컬스토리지 값 관리
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const MyBit = Bit.find(x => {
     return x.name === userInfo.mbti;
   });
 
   // kakao map 함수를 가지고 있음
-  const [move, setMove] = useState(null);
+  const [kakaoMap, setKakaoMap] = useState(null);
 
   // 마커 생성 및 삭제용
-  const [maker, setMaker] = useState(null);
-  const [makers, setMakers] = useState(null);
+  const [marker_1, setMarker_1] = useState(null);
+  const [marker_2, setMarker_2] = useState(null);
 
   // 원 생성 및 삭제
-  const [circles, setCircles] = useState(null);
+  const [kakaoCircle, setKakaoCircle] = useState(null);
 
   // 최초 1회 맵 생성 ------------------------------------------------------------------------------------
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
     const container = document.getElementById('map');
 
     const options = {
@@ -42,7 +45,7 @@ const MapContainer = props => {
     };
 
     const map = new window.kakao.maps.Map(container, options);
-    setMove(map);
+    setKakaoMap(map);
 
     // 마커 이미지 및 위치
     const imageSrc = MyBit.marker;
@@ -59,10 +62,10 @@ const MapContainer = props => {
     kakao.maps.event.addListener(marker, 'click', function () {
       onModal();
     });
-    setMaker(marker);
+    setMarker_1(marker);
     marker.setMap(map);
 
-    // 폴리라인 생성
+    // 지역 범위 원 생성
     const circle = new kakao.maps.Circle({
       center: new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude),
       radius: 2200,
@@ -73,7 +76,7 @@ const MapContainer = props => {
       fillColor: MyBit.circleColor,
       fillOpacity: 0.7,
     });
-    setCircles(circle);
+    setKakaoCircle(circle);
 
     // 지도에 원을 표시합니다
     circle.setMap(map);
@@ -81,46 +84,56 @@ const MapContainer = props => {
 
   // 시,도 선택시 지도 축소 후 중심으로 이동 ------------------------------------------------------------------------------------
   useEffect(() => {
-    if (move === null) {
+    // 맵이 없다면 리턴!
+    if (kakaoMap === null) {
       return;
     }
-    maker.setMap(null);
-    circles.setMap(null);
+
+    // 마커와 원을 없애줍니다.
+    marker_1.setMap(null);
+    kakaoCircle.setMap(null);
+
+    // 좌표 값을 기준으로 맵 이동
     const geocoder = new kakao.maps.services.Geocoder();
 
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
-        move.panTo(moveLatLon);
+        kakaoMap.panTo(moveLatLon);
       }
     };
 
     geocoder.addressSearch(`${bigLocation} `, callback);
 
     // 지도 축소
-    move.setLevel(9);
-    if (makers === null) {
+    kakaoMap.setLevel(9);
+
+    // 작은범위 지역 마커가 없다면 리턴
+    if (marker_2 === null) {
       return;
     }
-    makers.setMap(null);
+    // 작은범위 지역 마커가 있다면 리셋
+    marker_2.setMap(null);
   }, [bigLocation]);
 
   // 하위 레벨 지역 선택시 지도 확대 후 중심이동 ------------------------------------------------------------------------------------
   useEffect(() => {
-    if (move === null || location === '시-군-구') {
+    // 맵이 없다면 또는 지역범위 선택 전이라면 리턴
+    if (kakaoMap === null || location === '시-군-구') {
       return;
     }
 
     // 마커 및 원 삭제
-    maker.setMap(null);
-    circles.setMap(null);
+    marker_1.setMap(null);
+    kakaoCircle.setMap(null);
 
+    // 좌표 기준으로 맵 이동
     const geocoder = new kakao.maps.services.Geocoder();
 
     const callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const moveLatLon = new kakao.maps.LatLng(result[0].y, result[0].x);
-        move.panTo(moveLatLon);
+        kakaoMap.panTo(moveLatLon);
 
         // 마커 생성
         const markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -133,20 +146,21 @@ const MapContainer = props => {
           image: markerImage,
         });
 
-        // set
-        setMakers(marker);
+        // 작은 지역범위 마커 셋
+        setMarker_2(marker);
 
-        // 생성
-        if (makers === null) {
-          setMakers(marker);
-          marker.setMap(move);
+        // 마커가 없다면 마커생성
+        if (marker_2 === null) {
+          marker.setMap(kakaoMap);
           kakao.maps.event.addListener(marker, 'click', function () {
             onModal();
           });
           return;
         }
-        makers.setMap(null);
-        marker.setMap(move);
+
+        // 이전 마커는 제거하고 현재마커를 생성
+        marker_2.setMap(null);
+        marker.setMap(kakaoMap);
 
         // 마커 클릭시 리스트업 이벤트
         kakao.maps.event.addListener(marker, 'click', function () {
@@ -158,23 +172,25 @@ const MapContainer = props => {
     geocoder.addressSearch(`${bigLocation} ${location}`, callback);
 
     // 지도 축소
-    move.setLevel(7);
+    kakaoMap.setLevel(7);
   }, [location]);
 
   // 내 위치 클릭시 위치 이동 ------------------------------------------------------------------------------------
   useEffect(() => {
     if (myInfo) {
-      maker.setMap(move);
-      circles.setMap(move);
+      // 마커와 원을 가져옵니다
+      marker_1.setMap(kakaoMap);
+      kakaoCircle.setMap(kakaoMap);
 
-      let moveLatLon = new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude);
-      move.setCenter(moveLatLon);
-      move.setLevel(7);
+      // 내 유저 정보 기반 위치 이동
+      const moveLatLon = new kakao.maps.LatLng(userInfo.latitude, userInfo.longitude);
+      kakaoMap.setCenter(moveLatLon);
+      kakaoMap.setLevel(7);
 
-      if (makers === null) {
+      if (marker_2 === null) {
         return;
       }
-      makers.setMap(null);
+      marker_2.setMap(null);
     }
   }, [myInfo, result]);
 
