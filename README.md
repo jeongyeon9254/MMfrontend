@@ -42,9 +42,9 @@ https://youtu.be/EPN0XdvE8NE<br>
 
 ### Front-end
 
-   <p><a href="https://github.com/cwd3469" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=최주영&color=61dafb&style=for-the-badge&>"/></a></p>
+   <p><a href="https://github.com/cwd3469" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&color=61dafb&style=for-the-badge&>"/>최주영</a></p>
 
-   <p><a href="https://github.com/cwd3469" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=정연재&color=61dafb&style=for-the-badge&>"/></a></p>
+   <p><a href="https://github.com/cwd3469" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&color=61dafb&style=for-the-badge&>"/>정연재</a></p>
 
    <p><a href="https://github.com/seokjun2021" target="_blank"><img width="150"  src="https://img.shields.io/static/v1?label=React&message=윤석준&color=61dafb&style=for-the-badge&>"/></a></p>
    </br>
